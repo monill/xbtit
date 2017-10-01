@@ -900,7 +900,7 @@ CREATE TABLE `{$db_prefix}settings` (
 INSERT INTO `{$db_prefix}settings` (`key`, `value`) VALUES
 ('name', 'BTI-Tracker'),
 ('url', 'http://127.0.0.1/dev'),
-('announce', 'http://localhost/announce.php'),
+('announce', 'YToxOntpOjA7czoyOToiaHR0cDovL2xvY2FsaG9zdC9hbm5vdW5jZS5waHAiO30='),
 ('email', 'admin@localhost'),
 ('torrentdir', 'torrents'),
 ('external', 'true'),
