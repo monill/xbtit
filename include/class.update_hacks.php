@@ -29,6 +29,9 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 ////////////////////////////////////////////////////////////////////////////////////
+require_once 'vendor/autoload.php';
+use splitbrain\PHPArchive\Tar;
+
 class update_hacks
       {
 
@@ -48,10 +51,7 @@ class update_hacks
       var $files_to_backup=array();
 
       function __construct()
-            {
-            
-            include(__DIR__."/class.archive.php");
-
+      {
             // reset all var
             $this->file=array();
             $this->errors=array();
@@ -1129,17 +1129,11 @@ class update_hacks
         if (count($this->files_to_backup)==0)
            return true;
 
-        $archive=new tar_file($this->hack_path."/backup-".date("d-m-Y_H-i-s").".tar");
-        $archive->set_options(array("basedir"=>"$THIS_BASEPATH"));
+        $archive = new Tar();
+		$archive->create($this->hack_path."/backup-".date("d-m-Y_H-i-s").".tar");
         foreach ($this->files_to_backup as $ftb)
-           $archive->add_files($ftb);
-        $archive->create_archive();
-
-        if (count($archive->errors) > 0)
-          {
-          $this->_err_message("Unable to write in $this->hack_path","Folder","Check chmod+chown for $this->hack_path");
-          return false;
-        }
+           $archive->addFile($ftb);
+        $archive->close();
 
         return true;
         
