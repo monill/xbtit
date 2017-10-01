@@ -931,10 +931,11 @@ elseif ($action === 'save_owner') {
     
     $host = empty($_SERVER['HTTP_HOST']) ? $_SERVER['SERVER_NAME'] . (empty($_SERVER['SERVER_PORT']) || $_SERVER['SERVER_PORT'] == '80' ? '' : ':' . $_SERVER['SERVER_PORT']) : $_SERVER['HTTP_HOST'];
     $baseurl = 'http://' . $host . substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/'));
+	$announceUrl = $baseurl.'/announce.php';
     mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}settings` SET `value` = 2 WHERE `variable` = 'latestMember'");
 	mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}settings` SET `value` = '$username' WHERE `variable` = 'latestRealName'");
     mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}settings` SET `value` = UNIX_TIMESTAMP() WHERE `variable` = 'memberlist_updated'");
-    mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = '".$baseurl."/announce.php ' WHERE `key` = 'announce'");
+    mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = '".base64_encode(serialize(array($announceUrl)))."' WHERE `key` = 'announce'");
     mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = 'http://".$host.":2710/announce' WHERE `key` = 'xbtt_url'");
     mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = '".$email."' WHERE `key` = 'email'");
     mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = '".$INSTALLPATH.DIRECTORY_SEPARATOR."include".DIRECTORY_SEPARATOR."logs' WHERE `key` = 'php_log_path'");
