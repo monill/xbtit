@@ -164,7 +164,7 @@ class update_hacks
 
             $realfile=(str_replace("\\","/",$realfile));
 
-            $realfile = str_replace(str_replace("\\","/",$THIS_BASEPATH)."/",$this->ftp_basedir,$realfile);
+            $realfile = str_replace(str_replace("\\","/",$THIS_BASEPATH),$this->ftp_basedir,$realfile);
 
             return $realfile;
 
