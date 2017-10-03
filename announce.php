@@ -412,7 +412,7 @@ function start($info_hash, $ip, $port, $peer_id, $left, $downloaded=0, $uploaded
       $remotedns = 'AA';
       }
 
-    if ($left === 0)
+    if ($left == 0)
         $status = 'seeder';
     else
         $status = 'leecher';
