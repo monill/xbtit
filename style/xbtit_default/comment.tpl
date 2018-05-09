@@ -16,7 +16,7 @@
   </div>
   <div class="panel-body">
 <div align="center">
-  <form enctype="multipart/form-data" name="comment" method="post" action="index.php?page=comment&id=<tag:comment_id />">
+  <form enctype="multipart/form-data" name="comment" method="post" action="index.php?page=comment&amp;id=<tag:comment_id />">
   <input type="hidden" name="info_hash" value="<tag:comment_id />" />
     <table class="lista" border="0" cellpadding="10" width="100%">
       <tr>
