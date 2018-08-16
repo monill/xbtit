@@ -89,22 +89,22 @@ function bbcode($content) {
   $content=preg_replace_callback('/\[noparse\](.+?)\[\/noparse\]/i','noparsed',$content);
 
   // [url=uri]text[/url]
-  $content=preg_replace('(\[(URL|url)\=((http|ftp|https):\/\/[a-zA-Z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*)\](.+?)\[\/(URL|url)\])', '<a href="$2">$4</a>', $content);
+  $content=preg_replace('/\[(url(?:\d|))\=(&quot;|&#(?:0|)39;|"|\'|)(http|https|ftp|ftps|ed2k|irc):\/\/([a-z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*)\2\](.+?)\[\/\1\]/i', '<a href="$3&#58;&#47;&#47;$4" target="_blank">$5</a>', $content);
   // For people too lazy to put http:// on the uri. /Shouldn't/ be XSSable
-  $content=preg_replace('(\[(URL|url)\=([a-zA-Z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*)\](.+?)\[\/(URL|url)\])', '<a href="http://$2">$3</a>', $content);
+  $content=preg_replace('/\[(url(?:\d|))\=(&quot;|&#(?:0|)39;|"|\'|)([a-z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*)\2\](.+?)\[\/\1\]/i', '<a href="http&#58;&#47;&#47;$3" target="_blank">$4</a>', $content);
 
   // [url]uri[/url]
-  $content=preg_replace('(\[url\]((http|ftp|https):\/\/([a-zA-Z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*))\[\/url\])','<a href="$2&#58;&#47;&#47;$3">$2&#58;&#47;&#47;$3</a>',$content);
+  $content=preg_replace('/\[(url(?:\d|))\](http|https|ftp|ftps|ed2k|irc):\/\/([a-z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*)\[\/\1\]/i','<a href="$2&#58;&#47;&#47;$3" target="_blank">$2&#58;&#47;&#47;$3</a>',$content);
   // lazy http:// people...
-  $content=preg_replace('(\[url\]([a-zA-Z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*)\[\/url\])','<a href="http&#58;&#47;&#47;$1">http&#58;&#47;&#47;$1</a>',$content);
+  $content=preg_replace('/\[(url(?:\d|))\]([a-z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*)\[\/\1\]/i','<a href="http&#58;&#47;&#47;$2" target="_blank">http&#58;&#47;&#47;$2</a>',$content);
+
+  // http://www.google.com -> <a href="http://www.google.com">http://www.google.com</a>
+  $content=preg_replace('/(?<![href|src]=[&quot;|&#(?:0|)39;|"|\'])(http|https|ftp|ftps|ed2k|irc):\/\/([a-z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*)/i','<a href="$1://$2" target="_blank">$1://$2</a>',$content);
 
   // Images. They have to have http://. src attributes are XSSable in IE 6.0, Netscape, and Opera. http://ha.ckers.org/xss.html. Even though it's hard to do without () or \, best not to mess around with it.
 
   $content=preg_replace_callback('/\[img\]((http|ftp|https):\/\/([a-zA-Z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*))\[\/img\]/i','parseimage',$content);
   $content=preg_replace_callback('/\[img=((http|ftp|https):\/\/([a-zA-Z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]*))\]/i','parseimage',$content);
-
-  // http://www.google.com -> <a href="http://www.google.com">http://www.google.com</a>
-  $content=preg_replace('/(?<![href|src]=)(["|\']http|ftp|https):\/\/([^(|\s|=|\]|\[|\<|\>)]*["|\'])/i','<a href="$1://$2">$1://$2</a>',$content);
 
   // Email. Do people even use this?
   $content=preg_replace('(\[email\]([a-zA-Z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]+)@([a-zA-Z0-9\/\-\+\?\&\.\=\_\~\#\'\%\;]+)\[\/email\])','<a href="mailto:$1@$2">$1@$2</a>',$content);
