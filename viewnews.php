@@ -76,7 +76,7 @@ foreach ($res as $rows)
       $viewnews[$i]["delete_news"] = "&nbsp;&nbsp;&nbsp;<a onclick=\"return confirm('". str_replace("'","\'",$language["DELETE_CONFIRM"])."')\" href=\"index.php?page=news&amp;act=del&amp;id=".$rows["id"]."\">".$language["DELETE"]."</a>";
       $viewnews[$i]["user_posted"] = unesc($rows["username"]);
       $viewnews[$i]["posted_date"] = date("d/m/Y H:i",$rows["news_date"]-$offset);
-      $viewnews[$i]["news_title"] = unesc($rows["title"]);
+      $viewnews[$i]["news_title"] = htmlentities($rows["title"], ENT_QUOTES);
       $viewnews[$i]["news"] = format_comment($rows["news"]);
     
       $i++;
