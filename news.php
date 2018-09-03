@@ -105,8 +105,8 @@ global $language, $newstpl;
     $tplnews=array();
     $tplnews["action"]="index.php?page=news&amp;act=confirm";
     $tplnews["hidden_action"]=$action;
-    $tplnews["hidden_id"]=$_GET["id"];
-    $tplnews["news_title"]=$title;
+    $tplnews["hidden_id"] = htmlentities($_GET["id"], ENT_QUOTES);
+    $tplnews["news_title"] = htmlentities($title, ENT_QUOTES);
     $tplnews["bbcode"]=textbbcode("news","news",$news);
     $newstpl->set("news",$tplnews);
 
@@ -125,8 +125,8 @@ global $news, $title, $CURUSER, $language, $newstpl;
     $tplnews=array();
     $tplnews["action"]="index.php?page=news&amp;act=confirm";
     $tplnews["hidden_action"]=$action;
-    $tplnews["hidden_id"]=$_GET["id"];
-    $tplnews["news_title"]=$title;
+    $tplnews["hidden_id"] = htmlentities($_GET["id"], ENT_QUOTES);
+    $tplnews["news_title"] = htmlentities($title, ENT_QUOTES);
     $tplnews["bbcode"]=textbbcode("news","news",$news);
     $newstpl->set("news",$tplnews);
 

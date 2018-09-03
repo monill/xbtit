@@ -99,7 +99,7 @@ if ($keywords != "")
 else
     $forumtpl->set("results",false, true);
 
-$forumtpl->set("search_keywords",$keywords);
+$forumtpl->set("search_keywords", htmlentities($keywords, ENT_QUOTES));
 
 
 ?>

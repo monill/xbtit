@@ -212,7 +212,7 @@ function tabella($action,$dati=array()) {
    $language["DIF_EMAIL"]=AddSlashes($language["DIF_EMAIL"]);
 
    $tpl_account->set("language",$language);
-   $tpl_account->set("account_action",$action);
+   $tpl_account->set("account_action", htmlentities($action, ENT_QUOTES));
    $tpl_account->set("account_form_actionlink",htmlspecialchars("index.php?page=signup&act=$action&returnto=$link"));
    $tpl_account->set("account_uid",$dati["id"]);
    $tpl_account->set("account_returnto",urlencode($link));
