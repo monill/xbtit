@@ -37,6 +37,8 @@ $style = isset($_GET['style']) ? ((int)$_GET['style']) : 0;
 $url = isset($_GET['returnto']) ? urldecode($_GET['returnto']) : 'index.php';
 $langue = isset($_GET['langue']) ? ((int)$_GET['langue']) : 0;
 
+$url = $BASEURL.'/'.$url;
+
 dbconn();
 session_name('xbtit');
 session_start();

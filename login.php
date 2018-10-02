@@ -156,7 +156,7 @@ if (!$CURUSER || $CURUSER["uid"]==1)
                         set_ipb_cookie($row["ipb_fid"]);
                 }
                 if (isset($_GET["returnto"]))
-                    $url=urldecode($_GET["returnto"]);
+                    $url=$BASEURL.'/'.urldecode($_GET["returnto"]);
                 else
                     $url="index.php";
                 redirect($url);
@@ -182,7 +182,7 @@ if (!$CURUSER || $CURUSER["uid"]==1)
 else
 {
     if (isset($_GET["returnto"]))
-        $url=urldecode($_GET["returnto"]);
+        $url=$BASEURL.'/'.urldecode($_GET["returnto"]);
     else
         $url="index.php";
     redirect($url);
