@@ -17,5 +17,3 @@ $language['EDIT']            = 'تعديل';
 $language['DELETE']          = 'الغاء';
 $language['NO_USERS_FOUND']  = 'لم يتم ايجاد اي اعضاء';
 $language['UNKNOWN']         = 'غير معروف';
-
-?>

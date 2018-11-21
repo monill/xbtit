@@ -17,4 +17,3 @@ $language['ERR_HASH']='Hash-ul TREBUIE să fie exact de 40 biţi hex.';
 $language['ERR_EXTERNAL_NOT_ALLOWED']='Torrent-ele Externe nu sunt permise';
 $language['ERR_MOVING_TORR']='Eroare mutare torrent...';
 $language['ERR_ALREADY_EXIST']='Acest torrent s-ar putea să existe deja in Baza de Date.';
-?>

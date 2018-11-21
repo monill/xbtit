@@ -22,5 +22,3 @@ $language["WEEK"]="y&#7871;u";
 $language["MEDIUM"]="b&#236;nh th&#432;&#7901;ng";
 $language["SAFE"]="an to&#224;n";
 $language["STRONG"]="m&#7841;nh";
-
-?>

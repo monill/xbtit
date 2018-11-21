@@ -294,4 +294,3 @@ $language['MHI_IT'] = 'هي';
 $language['MHI_REPLACE'] = 'استبدلها بـ';
 $language['MHI_COPY'] = 'نسخ';
 $language['MHI_AS'] = 'كا';
-?>

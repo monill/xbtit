@@ -48,4 +48,3 @@ $language["HOURS"]="órák";
 $language["MINUTES"]="percek";
 $language["SECONDS"]="másodpercek";
 //AJAX Poll System Hack Stop
-?>

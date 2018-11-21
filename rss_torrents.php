@@ -36,25 +36,21 @@
 require_once("include/functions.php");
 require_once("include/config.php");
 
-if ($XBTT_USE)
-   {
+if ($XBTT_USE) {
     $tseeds="f.seeds+ifnull(x.seeders,0)";
     $tleechs="f.leechers+ifnull(x.leechers,0)";
     $ttables="{$TABLE_PREFIX}files f INNER JOIN xbt_files x ON x.info_hash=f.bin_hash";
-   }
-else
-    {
+} else {
     $tseeds="f.seeds";
     $tleechs="f.leechers";
     $ttables="{$TABLE_PREFIX}files f";
-    }
+}
 
 dbconn(true);
 
-if ($CURUSER["view_torrents"]!="yes")
-   {
-   header(ERR_500);
-   die;
+if ($CURUSER["view_torrents"]!="yes") {
+    header(ERR_500);
+    die;
 }
 
 header("Content-type: text/xml");
@@ -68,18 +64,17 @@ print("<?xml version=\"1.0\" encoding=\"".$GLOBALS["charset"]."\"?>");
 <description>rss feed script designed and coded by beeman (modified by Lupin and VisiGod)</description>
 <link><?php print $BASEURL;?></link>
 <lastBuildDate><?php print date("D, d M Y H:i:s O");?></lastBuildDate>
-<copyright><?php print "(c) ". date("Y",time())." " .$SITENAME;?></copyright>
+<copyright><?php print "(c) ". date("Y", time())." " .$SITENAME;?></copyright>
 
 <?php
 
   $getItems = "SELECT f.info_hash as id, f.comment as description, f.filename, $tseeds AS seeders, $tleechs as leechers, UNIX_TIMESTAMP( f.data ) as added, c.name as cname, f.size FROM $ttables LEFT JOIN {$TABLE_PREFIX}categories c ON c.id = f.category ORDER BY data DESC LIMIT 20";
-  $doGet=get_result($getItems,true,$btit_settings['cache_duration']);
+  $doGet=get_result($getItems, true, $btit_settings['cache_duration']);
 
-  foreach($doGet as $id=>$item)
-   {
+foreach ($doGet as $id => $item) {
     $id=$item['id'];
     $filename=($item['filename']);
-    $added=strip_tags(date("D, d M Y H:i:s O",$item['added']));
+    $added=strip_tags(date("D, d M Y H:i:s O", $item['added']));
     $cat=strip_tags($item['cname']);
     $seeders=strip_tags($item['seeders']);
     $leechers=strip_tags($item['leechers']);
@@ -89,14 +84,14 @@ print("<?xml version=\"1.0\" encoding=\"".$GLOBALS["charset"]."\"?>");
 
 ?>
 
-  <item>
-  <title><![CDATA[<?php print htmlspecialchars("[$cat] $filename [".SEEDERS." ($seeders)/".LEECHERS." ($leechers)]");?>]]></title>
-  <description><![CDATA[<?php print $desc; ?>]]></description>
-  <link><?php print "$BASEURL";?>/index.php?page=torrent-details&amp;id=<?php print "$id";?></link>
-  <guid><?php print "$BASEURL";?>/index.php?page=torrent-details&amp;id=<?php print "$id";?></guid>
-  <enclosure url="<?php print("$BASEURL/download.php?id=$id&amp;f=$f.torrent");?>" length="<?php print $item["size"] ?>" type="application/x-bittorrent" />
-  <pubDate><?php print $added;?></pubDate>
-  </item>
+<item>
+<title><![CDATA[<?php print htmlspecialchars("[$cat] $filename [".SEEDERS." ($seeders)/".LEECHERS." ($leechers)]");?>]]></title>
+<description><![CDATA[<?php print $desc; ?>]]></description>
+<link><?php print "$BASEURL";?>/index.php?page=torrent-details&amp;id=<?php print "$id";?></link>
+<guid><?php print "$BASEURL";?>/index.php?page=torrent-details&amp;id=<?php print "$id";?></guid>
+<enclosure url="<?php print("$BASEURL/download.php?id=$id&amp;f=$f.torrent");?>" length="<?php print $item["size"] ?>" type="application/x-bittorrent" />
+<pubDate><?php print $added;?></pubDate>
+</item>
 
 <?php
 }

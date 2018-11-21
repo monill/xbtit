@@ -19,5 +19,3 @@ $language["WEEK"]="Slaba";
 $language["MEDIUM"]="Srednja";
 $language["SAFE"]="Sigurna";
 $language["STRONG"]="Jaka #";
-
-?>

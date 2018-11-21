@@ -17,5 +17,3 @@ $language['EDIT']            = '编辑';
 $language['DELETE']          = '删除';
 $language['NO_USERS_FOUND']  = '没有符合条件的用户!';
 $language['UNKNOWN']         = '未知';
-
-?>

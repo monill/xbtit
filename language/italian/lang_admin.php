@@ -294,6 +294,3 @@ $language['MHI_IT'] = 'esso';
 $language['MHI_REPLACE'] = 'Sostituire con';
 $language['MHI_COPY'] = 'Copia';
 $language['MHI_AS'] = 'come';
-
-
-?>

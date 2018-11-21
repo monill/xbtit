@@ -44,4 +44,3 @@ $lang[35]="</body>\n</html>\n";
 $lang[36]="<center>kh&#244;ng th&#7875; vi&#7871;t v&#224;o:<br /><br /><b>";
 $lang[37]="</b><br /><br />Xin ch&#7855;c ch&#7855;n t&#224;i li&#7879;u n&#224;y c&#243; th&#7875; vi&#7871;t &#273;&#432;&#7907;c r&#7891;i cho ho&#7841;t &#273;&#7897;ng l&#7841;i l&#7847;n n&#7919;a.</center>";
 $lang[38]="<center><br /><font color=red size=4><b>t&#7915; ch&#7889;i gia nh&#7853;p</b></font></center>";
-?>

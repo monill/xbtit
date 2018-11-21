@@ -13,4 +13,3 @@ $language['ERR_NO_EMAIL']='Adresa de e-mail specificată trebuie să fie validă
 $language['USER_EMAIL_AGAIN']='Repetă e-mail';
 $language['ERR_NO_EMAIL_AGAIN']='Repetă e-mail';
 $language['DIF_EMAIL']='Adresele de e-mail nu se potrivesc!';
-?>

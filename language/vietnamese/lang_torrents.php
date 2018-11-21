@@ -36,4 +36,3 @@ $language["RATING"]="s&#7921; &#273;&#225;nh gi&#225;";
 $language["ERR_NO_VOTE"]="b&#7841;n ph&#7843;i g&#7903;i phi&#7871;u &#273;&#7875; &#273;&#225;nh gi&#225;.";
 $language["VOTES"]="nh&#7919;ng phi&#7871;u";
 $language["SHOW_HIDE"]="t&#224;i li&#7879;u hi&#7879;n/&#7849;n h&#236;nh";
-?>

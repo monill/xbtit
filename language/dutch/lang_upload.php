@@ -25,5 +25,3 @@ $language["ERR_MOVING_TORR"]="Fout tijdens verplaatsen van torrent...";
 $language["ERR_ALREADY_EXIST"]="Deze torrent bestaat al in onze database.";
 $language["MSG_DOWNLOAD_PID"]="PID systeem is actief, download de torrent opnieuw met uw PID";
 $language["MSG_UP_SUCCESS"]="De upload is gelukt! De torrent is toegevoegd.";
-
-?>

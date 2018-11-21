@@ -33,4 +33,3 @@ $language["DELETE"]             = "Изтрий";
 $language["PM"]                 = "ЛС";
 $language["BACK"]               = "Назад";
 $language["NO_HISTORY"]         = "Няма история...";
-?>

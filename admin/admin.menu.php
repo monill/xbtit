@@ -30,14 +30,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-if (!defined("IN_BTIT"))
+if (!defined("IN_BTIT")) {
       die("non direct access!");
+}
 
-if (!defined("IN_ACP"))
+if (!defined("IN_ACP")) {
       die("non direct access!");
+}
 
-if ($moderate_user)
-  {
+if ($moderate_user) {
     $admin_menu=array(
     0=>array(
             "title"=>$language["ACP_USERS_TOOLS"],
@@ -53,10 +54,7 @@ if ($moderate_user)
                     )
             ),
     );
-
-}
-else
-  {
+} else {
     $admin_menu=array(
     0=>array(
             "title"=>$language["ACP_TRACKER_SETTINGS"],
@@ -76,7 +74,7 @@ else
                           4=>array(
                     "url"=>"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=security_suite" ,
                     "description"=>$language["ACP_SECSUI_SET"]),
-					      5=>array(
+                          5=>array(
                     "url"=>"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=php_log" ,
                     "description"=>$language["LOGS_PHP"])
                                  )),
@@ -160,4 +158,3 @@ else
 
     );
 }
-?>

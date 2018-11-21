@@ -20,4 +20,3 @@ $language["BLOCK_MAINUSERTOOLBAR"]="Main User Toolbar";
 $language["WELCOME_LASTUSER"]=" Добро пожаловать на трекер ";
 $language["BLOCK_MINCLASSVIEW"]="Минимальный ранк для просмотра";
 $language["BLOCK_MAXCLASSVIEW"]="Максимальный ранк для просмотра";
-?>

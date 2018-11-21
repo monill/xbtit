@@ -41,4 +41,3 @@ $morescript='
 ';
 
 $morecss='';
-?>

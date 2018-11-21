@@ -1,5 +1,5 @@
 <?php
-	/* 	Torrent Scraper Base Class
+    /* 	Torrent Scraper Base Class
 		v1.0
 		
 		2010 by Johannes Zinnau
@@ -15,25 +15,28 @@
 		See udptscraper.php or httptscraper.php
 	*/
 
-	class ScraperException extends Exception {
-		private $connectionerror;
-		
-		public function __construct($message,$code=0,$connectionerror=false){
-			$this->connectionerror = $connectionerror;
-			parent::__construct($message, $code);
-		}
-		
-		public function isConnectionError(){
-			return($this->connectionerror);
-		}
-	}
-	
-	abstract class tscraper {
-		protected $timeout;
-		
-		public function __construct($timeout=2){
-			$this->timeout = $timeout;
-		}
-	}
-
-?>
+class ScraperException extends Exception
+{
+    private $connectionerror;
+        
+    public function __construct($message, $code = 0, $connectionerror = false)
+    {
+        $this->connectionerror = $connectionerror;
+        parent::__construct($message, $code);
+    }
+        
+    public function isConnectionError()
+    {
+        return($this->connectionerror);
+    }
+}
+    
+abstract class tscraper
+{
+    protected $timeout;
+        
+    public function __construct($timeout = 2)
+    {
+        $this->timeout = $timeout;
+    }
+}

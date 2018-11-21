@@ -33,5 +33,3 @@ $language["POST"]="Postaus";
 $language["SEARCH_AGAIN"]="Etsi uudestaan";
 $language["SEARCH_HELP"]="Sy&ouml;t&auml; yksi tai useampi sana etsint&auml;&auml; varten.<br />Yleisimm&auml;t sanat sek&auml; sanat joissa on alle 3 kirjainta j&auml;tet&auml;&auml;n huomioimatta.";
 $language["SEARCHED_FOR"]="Etsittiin";
-
-?>

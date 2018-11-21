@@ -22,5 +22,3 @@ $language["WEEK"]="Debole";
 $language["MEDIUM"]="Medio";
 $language["SAFE"]="Sicuro";
 $language["STRONG"]="Forte";
-
-?>

@@ -41,20 +41,22 @@ class phpmailerTest extends TestCase
      * @private
      * @type string array
      */
-    var $NoteLog = array();   
+    var $NoteLog = array();
 
     /**
      * Class constuctor.
      */
-    function phpmailerTest($name) {
+    function phpmailerTest($name)
+    {
         /* must define this constructor */
-        $this->TestCase( $name );
+        $this->TestCase($name);
     }
     
     /**
      * Run before each test is started.
      */
-    function setUp() {
+    function setUp()
+    {
         global $global_vars;
         global $INCLUDE_DIR;
 
@@ -77,29 +79,30 @@ class phpmailerTest extends TestCase
         $this->Mail->Username = "";
         $this->Mail->Password = "";
         $this->Mail->PluginDir = $INCLUDE_DIR;
-		$this->Mail->AddReplyTo("no_reply@phpmailer.sf.net", "Reply Guy");
+        $this->Mail->AddReplyTo("no_reply@phpmailer.sf.net", "Reply Guy");
         $this->Mail->Sender = "unit_test@phpmailer.sf.net";
 
-        if(strlen($this->Mail->Host) > 0)
+        if (strlen($this->Mail->Host) > 0) {
             $this->Mail->Mailer = "smtp";
-        else
-        {
+        } else {
             $this->Mail->Mailer = "mail";
             $this->Sender = "unit_test@phpmailer.sf.net";
         }
         
         global $global_vars;
         $this->SetAddress($global_vars["mail_to"], "Test User");
-        if(strlen($global_vars["mail_cc"]) > 0)
+        if (strlen($global_vars["mail_cc"]) > 0) {
             $this->SetAddress($global_vars["mail_cc"], "Carbon User", "cc");
-    }     
+        }
+    }
 
     /**
      * Run after each test is completed.
      */
-    function tearDown() {
+    function tearDown()
+    {
         // Clean global variables
-        $this->Mail = NULL;
+        $this->Mail = null;
         $this->ChangeLog = array();
         $this->NoteLog = array();
     }
@@ -110,19 +113,17 @@ class phpmailerTest extends TestCase
      * @private
      * @returns void
      */
-    function BuildBody() {
+    function BuildBody()
+    {
         $this->CheckChanges();
         
-        // Determine line endings for message        
-        if($this->Mail->ContentType == "text/html" || strlen($this->Mail->AltBody) > 0)
-        {
+        // Determine line endings for message
+        if ($this->Mail->ContentType == "text/html" || strlen($this->Mail->AltBody) > 0) {
             $eol = "<br/>";
             $bullet = "<li>";
             $bullet_start = "<ul>";
             $bullet_end = "</ul>";
-        }
-        else
-        {
+        } else {
             $eol = "\n";
             $bullet = " - ";
             $bullet_start = "";
@@ -137,16 +138,15 @@ class phpmailerTest extends TestCase
         $ReportBody .= "phpmailer version: " . $this->Mail->Version . $eol;
         $ReportBody .= "Content Type: " . $this->Mail->ContentType . $eol;
         
-        if(strlen($this->Mail->Host) > 0)
+        if (strlen($this->Mail->Host) > 0) {
             $ReportBody .= "Host: " . $this->Mail->Host . $eol;
+        }
         
         // If attachments then create an attachment list
-        if(count($this->Mail->attachment) > 0)
-        {
+        if (count($this->Mail->attachment) > 0) {
             $ReportBody .= "Attachments:" . $eol;
             $ReportBody .= $bullet_start;
-            for($i = 0; $i < count($this->Mail->attachment); $i++)
-            {
+            for ($i = 0; $i < count($this->Mail->attachment); $i++) {
                 $ReportBody .= $bullet . "Name: " . $this->Mail->attachment[$i][1] . ", ";
                 $ReportBody .= "Encoding: " . $this->Mail->attachment[$i][3] . ", ";
                 $ReportBody .= "Type: " . $this->Mail->attachment[$i][4] . $eol;
@@ -155,29 +155,25 @@ class phpmailerTest extends TestCase
         }
         
         // If there are changes then list them
-        if(count($this->ChangeLog) > 0)
-        {
+        if (count($this->ChangeLog) > 0) {
             $ReportBody .= "Changes" . $eol;
             $ReportBody .= "-------" . $eol;
 
             $ReportBody .= $bullet_start;
-            for($i = 0; $i < count($this->ChangeLog); $i++)
-            {
-                $ReportBody .= $bullet . $this->ChangeLog[$i][0] . " was changed to [" . 
+            for ($i = 0; $i < count($this->ChangeLog); $i++) {
+                $ReportBody .= $bullet . $this->ChangeLog[$i][0] . " was changed to [" .
                                $this->ChangeLog[$i][1] . "]" . $eol;
             }
             $ReportBody .= $bullet_end . $eol . $eol;
         }
         
         // If there are notes then list them
-        if(count($this->NoteLog) > 0)
-        {
+        if (count($this->NoteLog) > 0) {
             $ReportBody .= "Notes" . $eol;
             $ReportBody .= "-----" . $eol;
 
             $ReportBody .= $bullet_start;
-            for($i = 0; $i < count($this->NoteLog); $i++)
-            {
+            for ($i = 0; $i < count($this->NoteLog); $i++) {
                 $ReportBody .= $bullet . $this->NoteLog[$i] . $eol;
             }
             $ReportBody .= $bullet_end;
@@ -192,25 +188,35 @@ class phpmailerTest extends TestCase
      * @private
      * @returns void
      */
-    function CheckChanges() {
-        if($this->Mail->Priority != 3)
+    function CheckChanges()
+    {
+        if ($this->Mail->Priority != 3) {
             $this->AddChange("Priority", $this->Mail->Priority);
-        if($this->Mail->Encoding != "8bit")
+        }
+        if ($this->Mail->Encoding != "8bit") {
             $this->AddChange("Encoding", $this->Mail->Encoding);
-        if($this->Mail->CharSet != "iso-8859-1")
+        }
+        if ($this->Mail->CharSet != "iso-8859-1") {
             $this->AddChange("CharSet", $this->Mail->CharSet);
-        if($this->Mail->Sender != "")
+        }
+        if ($this->Mail->Sender != "") {
             $this->AddChange("Sender", $this->Mail->Sender);
-        if($this->Mail->WordWrap != 0)
+        }
+        if ($this->Mail->WordWrap != 0) {
             $this->AddChange("WordWrap", $this->Mail->WordWrap);
-        if($this->Mail->Mailer != "mail")
+        }
+        if ($this->Mail->Mailer != "mail") {
             $this->AddChange("Mailer", $this->Mail->Mailer);
-        if($this->Mail->Port != 25)
+        }
+        if ($this->Mail->Port != 25) {
             $this->AddChange("Port", $this->Mail->Port);
-        if($this->Mail->Helo != "localhost.localdomain")
+        }
+        if ($this->Mail->Helo != "localhost.localdomain") {
             $this->AddChange("Helo", $this->Mail->Helo);
-        if($this->Mail->SMTPAuth)
+        }
+        if ($this->Mail->SMTPAuth) {
             $this->AddChange("SMTPAuth", "true");
+        }
     }
     
     /**
@@ -218,7 +224,8 @@ class phpmailerTest extends TestCase
      * @private
      * @returns void
      */
-    function AddChange($sName, $sNewValue) {
+    function AddChange($sName, $sNewValue)
+    {
         $cur = count($this->ChangeLog);
         $this->ChangeLog[$cur][0] = $sName;
         $this->ChangeLog[$cur][1] = $sNewValue;
@@ -229,7 +236,8 @@ class phpmailerTest extends TestCase
      * @public
      * @returns void
      */
-    function AddNote($sValue) {
+    function AddNote($sValue)
+    {
         $this->NoteLog[] = $sValue;
     }
 
@@ -238,9 +246,9 @@ class phpmailerTest extends TestCase
      * @public
      * @returns void
      */
-    function SetAddress($sAddress, $sName = "", $sType = "to") {
-        switch($sType)
-        {
+    function SetAddress($sAddress, $sName = "", $sType = "to")
+    {
+        switch ($sType) {
             case "to":
                 $this->Mail->AddAddress($sAddress, $sName);
                 break;
@@ -260,7 +268,8 @@ class phpmailerTest extends TestCase
     /**
      * Try a plain message.
      */
-    function test_WordWrap() {
+    function test_WordWrap()
+    {
 
         $this->Mail->WordWrap = 40;
         $my_body = "Here is the main body of this message.  It should " .
@@ -279,7 +288,8 @@ class phpmailerTest extends TestCase
     /**
      * Try a plain message.
      */
-    function test_Low_Priority() {
+    function test_Low_Priority()
+    {
     
         $this->Mail->Priority = 5;
         $this->Mail->Body = "Here is the main body.  There should be " .
@@ -294,19 +304,18 @@ class phpmailerTest extends TestCase
     /**
      * Simple plain file attachment test.
      */
-    function test_Multiple_Plain_FileAttachment() {
+    function test_Multiple_Plain_FileAttachment()
+    {
 
         $this->Mail->Body = "Here is the text body";
         $this->Mail->Subject .= ": Plain + Multiple FileAttachments";
 
-        if(!$this->Mail->AddAttachment("test.png"))
-        {
+        if (!$this->Mail->AddAttachment("test.png")) {
             $this->assert(false, $this->Mail->ErrorInfo);
             return;
         }
 
-        if(!$this->Mail->AddAttachment("phpmailer_test.php", "test.txt"))
-        {
+        if (!$this->Mail->AddAttachment("phpmailer_test.php", "test.txt")) {
             $this->assert(false, $this->Mail->ErrorInfo);
             return;
         }
@@ -318,7 +327,8 @@ class phpmailerTest extends TestCase
     /**
      * Simple plain string attachment test.
      */
-    function test_Plain_StringAttachment() {
+    function test_Plain_StringAttachment()
+    {
 
         $this->Mail->Body = "Here is the text body";
         $this->Mail->Subject .= ": Plain + StringAttachment";
@@ -336,7 +346,8 @@ class phpmailerTest extends TestCase
     /**
      * Plain quoted-printable message.
      */
-    function test_Quoted_Printable() {
+    function test_Quoted_Printable()
+    {
 
         $this->Mail->Body = "Here is the main body";
         $this->Mail->Subject .= ": Plain + Quoted-printable";
@@ -349,7 +360,8 @@ class phpmailerTest extends TestCase
     /**
      * Try a plain message.
      */
-    function test_Html() {
+    function test_Html()
+    {
     
         $this->Mail->IsHTML(true);
         $this->Mail->Subject .= ": HTML only";
@@ -366,14 +378,14 @@ class phpmailerTest extends TestCase
     /**
      * Simple HTML and attachment test
      */
-    function test_HTML_Attachment() {
+    function test_HTML_Attachment()
+    {
 
         $this->Mail->Body = "This is the <b>HTML</b> part of the email.";
         $this->Mail->Subject .= ": HTML + Attachment";
         $this->Mail->IsHTML(true);
         
-        if(!$this->Mail->AddAttachment("phpmailer_test.php", "test_attach.txt"))
-        {
+        if (!$this->Mail->AddAttachment("phpmailer_test.php", "test_attach.txt")) {
             $this->assert(false, $this->Mail->ErrorInfo);
             return;
         }
@@ -385,16 +397,21 @@ class phpmailerTest extends TestCase
     /**
      * An embedded attachment test.
      */
-    function test_Embedded_Image() {
+    function test_Embedded_Image()
+    {
 
         $this->Mail->Body = "Embedded Image: <img alt=\"phpmailer\" src=\"cid:my-attach\">" .
                      "Here is an image!</a>";
         $this->Mail->Subject .= ": Embedded Image";
         $this->Mail->IsHTML(true);
         
-        if(!$this->Mail->AddEmbeddedImage("test.png", "my-attach", "test.png",
-                                          "base64", "image/png"))
-        {
+        if (!$this->Mail->AddEmbeddedImage(
+            "test.png",
+            "my-attach",
+            "test.png",
+            "base64",
+            "image/png"
+        )) {
             $this->assert(false, $this->Mail->ErrorInfo);
             return;
         }
@@ -406,22 +423,26 @@ class phpmailerTest extends TestCase
     /**
      * An embedded attachment test.
      */
-    function test_Multi_Embedded_Image() {
+    function test_Multi_Embedded_Image()
+    {
 
         $this->Mail->Body = "Embedded Image: <img alt=\"phpmailer\" src=\"cid:my-attach\">" .
                      "Here is an image!</a>";
         $this->Mail->Subject .= ": Embedded Image + Attachment";
         $this->Mail->IsHTML(true);
         
-        if(!$this->Mail->AddEmbeddedImage("test.png", "my-attach", "test.png",
-                                          "base64", "image/png"))
-        {
+        if (!$this->Mail->AddEmbeddedImage(
+            "test.png",
+            "my-attach",
+            "test.png",
+            "base64",
+            "image/png"
+        )) {
             $this->assert(false, $this->Mail->ErrorInfo);
             return;
         }
 
-        if(!$this->Mail->AddAttachment("phpmailer_test.php", "test.txt"))
-        {
+        if (!$this->Mail->AddAttachment("phpmailer_test.php", "test.txt")) {
             $this->assert(false, $this->Mail->ErrorInfo);
             return;
         }
@@ -433,7 +454,8 @@ class phpmailerTest extends TestCase
     /**
      * Simple multipart/alternative test.
      */
-    function test_AltBody() {
+    function test_AltBody()
+    {
 
         $this->Mail->Body = "This is the <b>HTML</b> part of the email.";
         $this->Mail->AltBody = "Here is the text body of this message.  " .
@@ -450,15 +472,15 @@ class phpmailerTest extends TestCase
     /**
      * Simple HTML and attachment test
      */
-    function test_AltBody_Attachment() {
+    function test_AltBody_Attachment()
+    {
 
         $this->Mail->Body = "This is the <b>HTML</b> part of the email.";
         $this->Mail->AltBody = "This is the text part of the email.";
         $this->Mail->Subject .= ": AltBody + Attachment";
         $this->Mail->IsHTML(true);
         
-        if(!$this->Mail->AddAttachment("phpmailer_test.php", "test_attach.txt"))
-        {
+        if (!$this->Mail->AddAttachment("phpmailer_test.php", "test_attach.txt")) {
             $this->assert(false, $this->Mail->ErrorInfo);
             return;
         }
@@ -469,9 +491,10 @@ class phpmailerTest extends TestCase
         $fp = fopen("message.txt", "w");
         fwrite($fp, $this->Mail->CreateHeader() . $this->Mail->CreateBody());
         fclose($fp);
-    }    
+    }
 
-    function test_MultipleSend() {
+    function test_MultipleSend()
+    {
         $this->Mail->Body = "Sending two messages without keepalive";
         $this->BuildBody();
         $subject = $this->Mail->Subject;
@@ -483,7 +506,8 @@ class phpmailerTest extends TestCase
         $this->assert($this->Mail->Send(), $this->Mail->ErrorInfo);
     }
 
-    function test_SmtpKeepAlive() {
+    function test_SmtpKeepAlive()
+    {
         $this->Mail->Body = "This was done using the SMTP keep-alive.";
         $this->BuildBody();
         $subject = $this->Mail->Subject;
@@ -498,10 +522,11 @@ class phpmailerTest extends TestCase
     }
     
     /**
-     * Tests this denial of service attack: 
+     * Tests this denial of service attack:
      *    http://www.cybsec.com/vuln/PHPMailer-DOS.pdf
      */
-    function test_DenialOfServiceAttack() {
+    function test_DenialOfServiceAttack()
+    {
         $this->Mail->Body = "This should no longer cause a denial of service.";
         $this->BuildBody();
        
@@ -509,8 +534,9 @@ class phpmailerTest extends TestCase
         $this->assert($this->Mail->Send(), $this->Mail->ErrorInfo);
     }
     
-    function test_Error() {
-        $this->Mail->Subject .= ": This should be sent"; 
+    function test_Error()
+    {
+        $this->Mail->Subject .= ": This should be sent";
         $this->BuildBody();
         $this->Mail->ClearAllRecipients(); // no addresses should cause an error
         $this->assert($this->Mail->IsError() == false, "Error found");
@@ -521,33 +547,35 @@ class phpmailerTest extends TestCase
         $this->Mail->AddAddress(get("mail_to"));
         $this->assert($this->Mail->Send(), "Send failed");
     }
-}  
+}
  
 /**
  * Create and run test instance.
  */
  
-if(isset($HTTP_GET_VARS))
+if (isset($HTTP_GET_VARS)) {
     $global_vars = $HTTP_GET_VARS;
-else
+} else {
     $global_vars = $_REQUEST;
+}
 
-if(isset($global_vars["submitted"]))
-{
+if (isset($global_vars["submitted"])) {
     echo "Test results:<br>";
-    $suite = new TestSuite( "phpmailerTest" );
+    $suite = new TestSuite("phpmailerTest");
     
     $testRunner = new TestRunner;
     $testRunner->run($suite);
     echo "<hr noshade/>";
 }
 
-function get($sName) {
+function get($sName)
+{
     global $global_vars;
-    if(isset($global_vars[$sName]))
+    if (isset($global_vars[$sName])) {
         return $global_vars[$sName];
-    else
+    } else {
         return "";
+    }
 }
 
 ?>

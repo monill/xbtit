@@ -33,4 +33,3 @@ $language['RATING']='تقييم';
 $language['ERR_NO_VOTE']='عليك اختيار قيمة للتصويت';
 $language['VOTES']='الاصوات';
 $language['SHOW_HIDE']='إظهار/اخفاء الملفات';
-?>

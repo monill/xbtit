@@ -41,4 +41,3 @@ $language["PM"]                 = "PM";
 $language["BACK"]               = "Wstecz";
 $language["NO_HISTORY"]         = "Brak historii do wyświetlenia...";
 $language["GUEST_DETAILS"]      = "Nie można przeglądać danych niezarejestrowanych użytkowników!";
-?>

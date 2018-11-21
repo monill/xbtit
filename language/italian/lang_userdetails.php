@@ -33,4 +33,3 @@ $language["DELETE"]             = "Elimina";
 $language["PM"]                 = "PM";
 $language["BACK"]               = "Indietro";
 $language["NO_HISTORY"]         = "Nessuna cronologia da visualizzare...";
-?>

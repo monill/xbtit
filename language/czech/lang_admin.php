@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
-GLOBAL $XBTT_USE;
+global $XBTT_USE;
 $language['ACP_BAN_IP']='Ban IP';
 $language['ACP_FORUM']='Nastavení fóra';
 $language['ACP_USER_GROUP']='Uživatelských skupin';
@@ -391,9 +391,7 @@ $language["IPB_MIRROR"] = "IPB Mirror";
 $language["GROUP_IPB_MIRROR"] = "Zrcadlení hodnosti na IPB fóru při změně hodnosti atp.";
 $language["IPB_LIST"] = "<b><u>Současný list IPB skupin z databáze</u></b><br />";
 
-$language["STYLE_TYPE"]="Typ stylu"; 
-$language["CLA_STYLE"]="xbtit classic style system"; 
-$language["ATM_STYLE"]="atmoner's style system"; 
+$language["STYLE_TYPE"]="Typ stylu";
+$language["CLA_STYLE"]="xbtit classic style system";
+$language["ATM_STYLE"]="atmoner's style system";
 $language["PET_STYLE"]="Petr1fied's style system";
-
-?>

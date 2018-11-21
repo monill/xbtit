@@ -33,5 +33,3 @@ $language["POST"]="Post";
 $language["SEARCH_AGAIN"]="Trazi ponovo";
 $language["SEARCH_HELP"]="Unesite jednu ili vise rijeci za pretragu.<br />Veznici i rijeci sa manje od 3 karaktera su zanemareni.";
 $language["SEARCHED_FOR"]="Pretraga za";
-
-?>

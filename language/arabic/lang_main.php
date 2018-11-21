@@ -412,5 +412,3 @@ $language['ADMIN_ACCESS']='دخول المشرف';
 $language['STAFF_ACCESS']='الادارة';
 $language['UPLOAD_LINK']='رفع التورينت';
 # End
-
-?>

@@ -20,4 +20,3 @@ $language["BLOCK_MAINUSERTOOLBAR"]="	Barra de ferramentas principal do utilizado
 $language["WELCOME_LASTUSER"]=" Bem-vindo ao nosso tracker ";
 $language["BLOCK_MINCLASSVIEW"]="Rank mínimo que pode visualizar";
 $language["BLOCK_MAXCLASSVIEW"]="Rank máximo que pode visualizar";
-?>

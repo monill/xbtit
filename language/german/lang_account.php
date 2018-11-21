@@ -21,5 +21,3 @@ $language["WEEK"]="Mies";
 $language["MEDIUM"]="Schlecht";
 $language["SAFE"]="Gut";
 $language["STRONG"]="Sehr gut";
-
-?>

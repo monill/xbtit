@@ -33,4 +33,3 @@ $language['POST']='مشاركة';
 $language['SEARCH_AGAIN']='ابحث مجدداً';
 $language['SEARCH_HELP']='ادخل كلمات للبحث على الكلمة ان تكون اكثر من ثلاثة احرف.';
 $language['SEARCHED_FOR']='ابحث عن';
-?>

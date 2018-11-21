@@ -30,8 +30,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-if (!defined("IN_BTIT"))
+if (!defined("IN_BTIT")) {
       die("non direct access!");
+}
 
 
 $usercp_menu=array(
@@ -52,7 +53,7 @@ $usercp_menu=array(
 
                       2=>array(
                 "url"=>"index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid=".$uid."&amp;what=new" ,
-                "description"=>$language["MNU_UCP_NEWPM"]), 
+                "description"=>$language["MNU_UCP_NEWPM"]),
                              )),
 2=>array(
         "title"=>$language["MNU_UCP_INFO"],
@@ -64,7 +65,6 @@ $usercp_menu=array(
                 "description"=>$language["MNU_UCP_CHANGEPWD"]),
                       2=>array(
                 "url"=>"index.php?page=usercp&amp;do=pid_c&amp;action=change&amp;uid=".$uid."" ,
-                "description"=>$language["CHANGE_PID"]), 
+                "description"=>$language["CHANGE_PID"]),
                              )),
 );
-?>

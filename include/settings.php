@@ -6,5 +6,3 @@ $dbpass = '';
 $database = '';
 $TABLE_PREFIX = '';
 $mySecret  = '';
-
-?>

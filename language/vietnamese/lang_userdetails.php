@@ -27,11 +27,9 @@ $language["NO_TORR_UP_USER"]    = "th&#224;nh vi&#234;n n&#224;y ch&#432;a t&#78
 $language["ACTIVE_TORRENT"]     = "torrents &#273;ang ho&#7841;t &#273;&#7897;ng";
 $language["PEER_STATUS"]        = "t&#236;nh tr&#7841;ng hi&#7879;n t&#7841;i";
 $language["NO_ACTIVE_TORR"]     = "kh&#244;ng c&#243; torrent &#273;ang ho&#7841;t &#273;&#7897;ng";
-$language["PEER_CLIENT"]        = "client";     
+$language["PEER_CLIENT"]        = "client";
 $language["EDIT"]               = "thay &#273;&#7893;i";
 $language["DELETE"]             = "x&#243;a b&#7887;";
 $language["PM"]                 = "g&#7917;i th&#432;";
 $language["BACK"]               = "tr&#7903; l&#7841;i";
 $language["NO_HISTORY"]         = "kh&#244;ng c&#243; l&#7883;ch s&#7917;";
-
-?>

@@ -173,4 +173,3 @@ $privatesmilies = array(
   ':Boozer:' => 'alcoholic.gif',
   ':spank:' => 'spank.gif',
 );
-?>

@@ -33,4 +33,3 @@ $language["RATING"]="Ocena";
 $language["ERR_NO_VOTE"]="Musisz wybrać wartość, aby zagłosować.";
 $language["VOTES"]="Głosów";
 $language["SHOW_HIDE"]="Pokaż/Ukryj pliki";
-?>

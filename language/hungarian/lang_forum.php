@@ -33,5 +33,3 @@ $language["POST"]="Üzenet";
 $language["SEARCH_AGAIN"]="Keresés újból";
 $language["SEARCH_HELP"]="Adj meg egy szót a kereséshez.<br />A szónak minimum 3 karakterből kell állnia";
 $language["SEARCHED_FOR"]="A keresés eredménye";
-
-?>

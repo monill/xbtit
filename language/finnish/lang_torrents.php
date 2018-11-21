@@ -33,4 +33,3 @@ $language["RATING"]="Arvio";
 $language["ERR_NO_VOTE"]="Sinun t&auml;ytyy valita arvo &auml;&auml;nest&auml;&auml;ksesi.";
 $language["VOTES"]="&Auml;&auml;net";
 $language["SHOW_HIDE"]="Tiedostolistaus";
-?>

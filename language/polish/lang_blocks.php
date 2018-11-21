@@ -5,7 +5,7 @@ $language["BLOCK_MAINMENU"]="";
 # We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber 
 $language["BLOCK_DDMENU"]="";
 $language["BLOCK_MENU"]="Menu Główne"; # block menu needs the name
-$language["BLOCK_CALENDAR"]="Kalendarz"; 
+$language["BLOCK_CALENDAR"]="Kalendarz";
 $language["BLOCK_CLOCK"]="Zegar";
 $language["BLOCK_FORUM"]="Forum";
 $language["BLOCK_LASTMEMBER"]="Ostatnio dodany użytkownik";
@@ -24,4 +24,3 @@ $language["BLOCK_MAINUSERTOOLBAR"]="Główny pasek narzędzi użytkownika";
 $language["WELCOME_LASTUSER"]=" Witamy na naszym trackerze ";
 $language["BLOCK_MINCLASSVIEW"]="Minimalna ranga do przeglądania";
 $language["BLOCK_MAXCLASSVIEW"]="Maksymalna ranga do przeglądania";
-?>
