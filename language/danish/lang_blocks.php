@@ -4,7 +4,7 @@ $language['BLOCK_INFO']='Tracker info';
 $language['BLOCK_MENU']='Hoved menu';
 /* We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber */
 $language['BLOCK_DDMENU']='';
-$language['BLOCK_CALENDAR']='Kalender'; 
+$language['BLOCK_CALENDAR']='Kalender';
 $language['BLOCK_CLOCK']='Lokal tid';
 $language['BLOCK_FORUM']='Forum';
 $language['BLOCK_LASTMEMBER']='Nyeste medlem';
@@ -23,4 +23,4 @@ $language['BLOCK_MAINUSERTOOLBAR']='Bruger værktøjslinie';
 $language['WELCOME_LASTUSER']='Velkommen til';
 $language['BLOCK_MINCLASSVIEW']='Minimum rank der kan se';
 $language['BLOCK_MAXCLASSVIEW']='Maximum rank der kan se';
-$language["BLOCK_CAT"]="Kategorier";?>
+$language["BLOCK_CAT"]="Kategorier";

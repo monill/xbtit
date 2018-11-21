@@ -6,5 +6,3 @@ $language['POSTED_BY']   = '发布者:';
 $language['POSTED_DATE'] = '发布时间:';
 $language['TITLE']       = '标题';
 $language['ADD']         = '新公告';
-
-?>

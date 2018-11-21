@@ -29,7 +29,7 @@ $language['AUTHOR'] = 'Skapare';
 $language['AVATAR_URL'] = 'Avatar (url): ';
 $language['AVERAGE'] = 'Average';
 $language['BACK'] = 'Tillbaka';
-$language['BAD_ID'] = 'Dåligt ID!'; 
+$language['BAD_ID'] = 'Dåligt ID!';
 $language['BCK_USERCP'] = 'Tillbaka till kontrollpanelen';
 $language['BLOCK'] = 'Block';
 $language['BODY'] = 'Kropp';
@@ -430,4 +430,3 @@ $language['MODULE_UNACTIVE'] = 'Modulen är inte aktiverad!';
 $language['MODULE_NOT_PRESENT'] = 'Modulen är inte installerad!';
 $language['MODULE_LOAD_ERROR'] = 'den modul som begärdes verkar ha ett fel i sig!';
 $language['SIGNATURE'] = 'Forum Signatur';
-?>

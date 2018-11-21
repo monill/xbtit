@@ -30,11 +30,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-if (!defined('IN_BTIT'))
-  die('non direct access!');
+if (!defined('IN_BTIT')) {
+    die('non direct access!');
+}
 
-if (!defined('IN_ACP'))
-  die('non direct access!');
+if (!defined('IN_ACP')) {
+    die('non direct access!');
+}
 
 # MASSPM SETTINGS
 
@@ -76,8 +78,8 @@ $masspm=array();
 $masspm_post=false;
 $ratio_d='';
 switch ($action) {
-  case 'post':
-      if (isset($_POST['masspm'])) {
+    case 'post':
+        if (isset($_POST['masspm'])) {
             #init vars
             $ratio=(isset($_POST['ratio'])?$_POST['ratio']:0);
             $pick=(isset($_POST['pick'])?$_POST['pick']:0);
@@ -92,13 +94,14 @@ switch ($action) {
                 $error='return';
             } else {
                 # append footer
-                if($footer)
+                if ($footer) {
                     $msg.=$footer;
+                }
                 $original_msg=$msg;
                 $msg=sqlesc($msg);
                 # get ratio
-                if ($ratio)
-                    switch($pick) {
+                if ($ratio) {
+                    switch ($pick) {
                         case 0:
                             $pick='='.$ratio;
                             $ratio_d='with a '.$language['RATIO'].' of <b>('.$ratio.')</b>';
@@ -113,13 +116,14 @@ switch ($action) {
                             $ratio_d='with a '.$language['RATIO'].' of <b>('.$ratio.')</b> and below';
                             break;
                     }
+                }
                 # get level
                 if ($flevel==0||$tlevel==0) {
                     # selected all
                     $where='WHERE u.id>1';
-                    $rank_details='in all '.$language['USER_LEVEL'].'s';
+                        $rank_details='in all '.$language['USER_LEVEL'].'s';
                 } else {
-                    # get id_level names
+                  # get id_level names
                     $where='id_level='.$flevel;
                     if ($flevel==$tlevel) {
                         $limit=1;
@@ -133,8 +137,9 @@ switch ($action) {
                         }
                     }
                     $levelsRes=get_result('SELECT id_level, level FROM '.$TABLE_PREFIX.'users_level WHERE '.$where.' LIMIT '.$limit);
-                    foreach ($levelsRes as $level)
+                    foreach ($levelsRes as $level) {
                         $levels[$level['id_level']]= $level['level'];
+                    }
                     # create query for actual user listing
                     if ($limit==2) {
                         $where='WHERE u.id_level BETWEEN '.$flevel.' AND '.$tlevel.' AND u.id>1';
@@ -144,47 +149,52 @@ switch ($action) {
                         $rank_details='in '.$language['USER_LEVEL'].' <b>('.$levels[$flevel].')</b>';
                     }
                 }
-                # correct ratio value
+                  # correct ratio value
                 if ($XBTT_USE) {
                     $tables=$TABLE_PREFIX.'users u LEFT JOIN xbt_users x ON x.uid=u.id';
-                    if ($ratio)
+                    if ($ratio) {
                         $where.=' AND ((u.uploaded+IFNULL(x.uploaded,0))/(u.downloaded+IFNULL(x.downloaded,0.1)))'.$pick;
+                    }
                 } else {
                     $tables=$TABLE_PREFIX.'users u';
-                    if ($ratio)
+                    if ($ratio) {
                         $where.=' AND ((u.uploaded)/(u.downloaded=0))'.$pick;
+                    }
                 }
-                # get data
-                $pm_users=get_result('SELECT u.id, u.username FROM '.$tables.' '.$where,true);
-                $i=0;
-                # revamp data
+                  # get data
+                    $pm_users=get_result('SELECT u.id, u.username FROM '.$tables.' '.$where, true);
+                    $i=0;
+                  # revamp data
                 foreach ($pm_users as $cur) {
-                    if ( (!$pm_sender) && $cur['id']==$CURUSER['uid'])
+                    if ((!$pm_sender) && $cur['id']==$CURUSER['uid']) {
                         continue;
+                    }
                     $i++;
-                    if ($pm)
-                        send_pm($sender,$cur['id'],$subject,$msg);
-                    if ($list_users)
+                    if ($pm) {
+                        send_pm($sender, $cur['id'], $subject, $msg);
+                    }
+                    if ($list_users) {
                         $l_users[] ='<a href="'.$BASEURL.'/index.php?page=userdetails&amp;id='.$cur['id'].'">'.$cur['username'].'</a>';
+                    }
                 }
-                # set output vars
-                $block_title=$language['MASS_SENT'];
-                $masspm_post=true;
-                $masspm['subject']=$original_subject;
-                $masspm['body']=format_comment($original_msg);
-                $masspm['info']='<b>'.$i.'</b> '.$language['USERS_FOUND'].' '.$rank_details.' '.$ratio_d.' !! '.((!$pm)?' [ DEBUG MODE ] ':'').'<br /><br />'.$language['USERS_PMED'].'<br />'.implode(' - ',$l_users);
-                break;
-            }           
+                  # set output vars
+                    $block_title=$language['MASS_SENT'];
+                    $masspm_post=true;
+                    $masspm['subject']=$original_subject;
+                    $masspm['body']=format_comment($original_msg);
+                    $masspm['info']='<b>'.$i.'</b> '.$language['USERS_FOUND'].' '.$rank_details.' '.$ratio_d.' !! '.((!$pm)?' [ DEBUG MODE ] ':'').'<br /><br />'.$language['USERS_PMED'].'<br />'.implode(' - ', $l_users);
+                    break;
+            }
         }
 
     case 'write':
         switch ($error) {
-          case 'return':
+            case 'return':
                 $error_msg=$language['MASS_PM_ERROR'];
                 $error=true;
                 break;
 
-          default:
+            default:
                 $error=false;
         }
         # init options
@@ -203,7 +213,7 @@ switch ($action) {
         $masspm['combo_to_group']=get_combo($ranks, $opts);
         # get ratios
         $combo="\n".'<select name="ratio"><option value="0"'.($ratio==0?' selected="selected" ':'').'>'.$language['ANY'].'</option>';
-        for ($value=0;$value <= ($cutoff*10);$value++) {
+        for ($value=0; $value <= ($cutoff*10); $value++) {
             $cur=($value/10);
             $combo.="\n".'<option value="'.$cur.'"'.($ratio==$cur?' selected="selected" ':'').'>'.$cur.'</option>';
         }
@@ -216,7 +226,7 @@ switch ($action) {
         $combo.="\n".'<option value="2"'.($pick==2?' selected="selected" ':'').'>'.$language['RATIO_LOW'].'</option>';
         $combo.="\n".'</select>';
         $masspm['combo_pick_ratio']=$combo;
-        $masspm['body']=textbbcode('masspm','msg',$msg);
+        $masspm['body']=textbbcode('masspm', 'msg', $msg);
         $block_title=$language['ACP_MASSPM'];
         break;
 
@@ -225,10 +235,9 @@ switch ($action) {
         redirect('index.php?page=admin&user='.$CURUSER['uid'].'&code='.$CURUSER['random']);
 }
 
-$admintpl->set('frm_error',$error,true);
+$admintpl->set('frm_error', $error, true);
 $admintpl->set('frm_message', $error_msg);
-$admintpl->set('language',$language);
-$admintpl->set('frm_action','index.php?page=admin&amp;user='.$CURUSER['uid'].'&amp;code='.$CURUSER['random'].'&amp;do=masspm&amp;action=post');
-$admintpl->set('masspm',$masspm);
-$admintpl->set('masspm_post',$masspm_post,true);
-?>
+$admintpl->set('language', $language);
+$admintpl->set('frm_action', 'index.php?page=admin&amp;user='.$CURUSER['uid'].'&amp;code='.$CURUSER['random'].'&amp;do=masspm&amp;action=post');
+$admintpl->set('masspm', $masspm);
+$admintpl->set('masspm_post', $masspm_post, true);

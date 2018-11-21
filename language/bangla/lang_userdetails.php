@@ -34,4 +34,3 @@ $language['PM']                 = 'চিঠি';
 $language['BACK']               = 'আগের অবস্থান';
 $language['NO_HISTORY']         = 'বর্তমান কোন তথ্য নেই...';
 $language['GUEST_DETAILS']      = 'You can\'t view the details for the Guest account!';
-?>

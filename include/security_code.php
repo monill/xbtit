@@ -34,11 +34,11 @@ $security_code=array(
   array(
     'question'=>'1+3',
     'answer'=>'4'
-	),
-	array(
+    ),
+    array(
     'question'=>'2+3',
     'answer'=>'5'
-	),
+    ),
   array(
     'question'=>'3+3=',
     'answer'=>'6'
@@ -112,4 +112,3 @@ $security_code=array(
     'answer'=>'14'
   ),
 );
-?>

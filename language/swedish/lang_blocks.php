@@ -23,4 +23,3 @@ $language['BLOCK_MAXCLASSVIEW'] = 'Högsta rank som Kan Visa detta';
 $language["BLOCK_CAT"]="Kategori";
 
 $language["BLOCK_FEATURED"]="Favorit Torrent";
-?>

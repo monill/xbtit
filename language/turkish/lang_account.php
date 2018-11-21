@@ -20,4 +20,3 @@ $language['MEDIUM']='Orta';
 $language['SAFE']='Güvenli';
 $language['STRONG']='Güçlü';
 $language["ERR_GENERIC"]='Genel Hata: '.((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
-?>

@@ -1,5 +1,5 @@
 <?php
-GLOBAL $XBTT_USE;
+global $XBTT_USE;
 $language["ACP_BAN_IP"]="Ban na IP";
 $language["ACP_FORUM"]="Ustawienia forum";
 $language["ACP_USER_GROUP"]="Ustawienia rang użytkowników";
@@ -390,9 +390,7 @@ $language["IPB_MIRROR"] = "IPB Mirror";
 $language["GROUP_IPB_MIRROR"] = "Mirroring rang na forum IPB dla zmian rang etc.";
 $language["IPB_LIST"] = "<b><u>Aktualna lista użytkowników IPB w bazie danych</u></b><br />";
 
-$language["STYLE_TYPE"]="Typ stylu"; 
-$language["CLA_STYLE"]="System styli xbtit classic"; 
-$language["ATM_STYLE"]="System styli atmoner'a"; 
+$language["STYLE_TYPE"]="Typ stylu";
+$language["CLA_STYLE"]="System styli xbtit classic";
+$language["ATM_STYLE"]="System styli atmoner'a";
 $language["PET_STYLE"]="System styli Petr1fied";
-
-?>

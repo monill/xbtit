@@ -48,4 +48,3 @@ $language["HOURS"]="Ωρες";
 $language["MINUTES"]="λεπτά";
 $language["SECONDS"]="Δευτερόλεπτα";
 //Τέλος του συστήματος ψηφοφορίας
-?>

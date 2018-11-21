@@ -168,7 +168,8 @@ $language['FRM_RESET']='Reset';
 $language['FRM_SEND']='Send';
 $language['FRM_CONFIRM']='Bekræft';
 $language['FRM_CANCEL']='Fortryd';
-$language['FRM_CLEAN']='Clean';$language['GENRE']='Genre';
+$language['FRM_CLEAN']='Clean';
+$language['GENRE']='Genre';
 $language['GLOBAL_SERVER_LOAD']='Global Server Load (Alle websites på denne server)';
 $language['GO']='Go';
 $language['GROUP']='Gruppe';
@@ -543,4 +544,3 @@ $language["IMDB_DETAILS"] = "Details";
 $language["IMDB_PERF_SEARCH"] = "Performing IMDB search for";
 $language["IMDB_NAME"] = "Name";
 $language["VISITS"]="Visitors";
-	?>

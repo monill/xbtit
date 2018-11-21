@@ -20,4 +20,3 @@ $language['MEDIUM']='كلمة سر متوسطه';
 $language['SAFE']='كلمة سر آمنة';
 $language['STRONG']='كلمة سر قوية';
 $language["ERR_GENERIC"]='خطاء عام '.((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
-?>

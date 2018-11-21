@@ -17,5 +17,3 @@ $language["EDIT"]            = "Muokkaa";
 $language["DELETE"]          = "Poista";
 $language["NO_USERS_FOUND"]  = "K&auml;ytt&auml;ji&auml; ei l&ouml;ytynyt!";
 $language["UNKNOWN"]         = "Tuntematon";
-
-?>

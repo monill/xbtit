@@ -427,4 +427,3 @@ $language["FIRST_UNREAD"]="Hypp&auml;&auml; ensimm&auml;iseen lukemattomaan post
 $language["MODULE_UNACTIVE"]="Vaadittu Moduuli ei ole aktiivinen!";
 $language["MODULE_NOT_PRESENT"]="Vaadittua Moduulia ei ole olemassa!";
 $language["MODULE_LOAD_ERROR"]="Vaadittu Moduuli on v&auml;&auml;r&auml;!";
-?>

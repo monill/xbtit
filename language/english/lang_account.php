@@ -20,4 +20,3 @@ $language['MEDIUM']='Medium';
 $language['SAFE']='Safe';
 $language['STRONG']='Strong';
 $language["ERR_GENERIC"]='Generic Error: '.((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
-?>

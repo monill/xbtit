@@ -33,4 +33,3 @@ $language["RATING"]="Рейтинг";
 $language["ERR_NO_VOTE"]="трябва да изберете рейтинг, за да гласувате.";
 $language["VOTES"]="Гласове";
 $language["SHOW_HIDE"]="Покажи/Скрий файловете";
-?>

@@ -19,5 +19,3 @@ $language["WEEK"]="Αδύναμος";
 $language["MEDIUM"]="Μεσαίος";
 $language["SAFE"]="Ασφαλής";
 $language["STRONG"]="Ισχυρός";
-
-?>

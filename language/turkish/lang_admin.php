@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
-GLOBAL $XBTT_USE;
+global $XBTT_USE;
 $language['ACP_BAN_IP']='IP Yasaklama';
 $language['ACP_FORUM']='Forum Ayarları';
 $language['ACP_USER_GROUP']='Kullanıcı Grubu Ayarları';
@@ -391,12 +391,10 @@ $language["IPB_MIRROR"] = "IPB Mirror";
 $language["GROUP_IPB_MIRROR"] = "Mirroring rank on the IPB forum for rank changes etc.";
 $language["IPB_LIST"] = "<b><u>Current IPB Group List from the database</u></b><br />";
 
-$language["STYLE_TYPE"]="Tema Tipi"; 
-$language["CLA_STYLE"]="xbtit classic tema sistemi"; 
-$language["ATM_STYLE"]="atmoner'in tema sistemi"; 
+$language["STYLE_TYPE"]="Tema Tipi";
+$language["CLA_STYLE"]="xbtit classic tema sistemi";
+$language["ATM_STYLE"]="atmoner'in tema sistemi";
 $language["PET_STYLE"]="Petr1fied'ın tema sistemi";
 
 $language["SECURITY_SUITE"]="Güvenlik Katmanı";
 $language["IF_CHECKED"]="Seçilileri";
-
-?>

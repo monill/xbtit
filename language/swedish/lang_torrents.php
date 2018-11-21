@@ -34,4 +34,3 @@ $language['RATING']='Betyg';
 $language['ERR_NO_VOTE']='Du måste välja hur många stjärnor den ska få för att röst.';
 $language['VOTES']='Röster';
 $language['SHOW_HIDE']='Visa/göm filer';
-?>

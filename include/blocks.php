@@ -33,48 +33,56 @@
 global $USERLANG;
 require_once(load_language('lang_blocks.php'));
 
-function get_menu($pos) {
-  global $TABLE_PREFIX, $CURUSER, $FORUMLINK, $CACHE_DURATION, $language;
-  $blocks=get_result('SELECT title, content, cache FROM '.$TABLE_PREFIX.'blocks WHERE position="'.$pos.'" AND status=1 AND '.$CURUSER['id_level'].'>=minclassview  AND '.$CURUSER['id_level'].'<=maxclassview '.(($FORUMLINK==''||$FORUMLINK=='internal'||substr($FORUMLINK,0,3)=='smf'||$FORUMLINK=='ipb')?'':' AND content!="forum"').' ORDER BY sortid',true, $CACHE_DURATION);
-  $return='';
-  foreach ($blocks as $entry)
-                $return.=get_block($language[$entry['title']],'justify',$entry['content'],$entry['cache']==='yes');
-  return $return;
+function get_menu($pos)
+{
+    global $TABLE_PREFIX, $CURUSER, $FORUMLINK, $CACHE_DURATION, $language;
+    $blocks=get_result('SELECT title, content, cache FROM '.$TABLE_PREFIX.'blocks WHERE position="'.$pos.'" AND status=1 AND '.$CURUSER['id_level'].'>=minclassview  AND '.$CURUSER['id_level'].'<=maxclassview '.(($FORUMLINK==''||$FORUMLINK=='internal'||substr($FORUMLINK, 0, 3)=='smf'||$FORUMLINK=='ipb')?'':' AND content!="forum"').' ORDER BY sortid', true, $CACHE_DURATION);
+    $return='';
+    foreach ($blocks as $entry) {
+                $return.=get_block($language[$entry['title']], 'justify', $entry['content'], $entry['cache']==='yes');
+    }
+    return $return;
 }
 
-function main_menu() {
-  global $TABLE_PREFIX, $CURUSER, $tpl, $CACHE_DURATION, $FORUMLINK;
+function main_menu()
+{
+    global $TABLE_PREFIX, $CURUSER, $tpl, $CACHE_DURATION, $FORUMLINK;
 
-  $blocks=get_result('SELECT content FROM '.$TABLE_PREFIX.'blocks WHERE position="t" AND status=1 AND '.$CURUSER['id_level'].'>=minclassview  AND '.$CURUSER['id_level'].'<=maxclassview '.(($FORUMLINK==''||$FORUMLINK=='internal'||substr($FORUMLINK,0,3)=='smf'||$FORUMLINK=='ipb')?'':' AND content!="forum"').' ORDER BY sortid',true, $CACHE_DURATION);
-  $return='';
-  foreach ($blocks as $entry)
-    $return.=get_content(realpath(__DIR__.'/..').'/blocks/'.$entry['content'].'_block.php');
+    $blocks=get_result('SELECT content FROM '.$TABLE_PREFIX.'blocks WHERE position="t" AND status=1 AND '.$CURUSER['id_level'].'>=minclassview  AND '.$CURUSER['id_level'].'<=maxclassview '.(($FORUMLINK==''||$FORUMLINK=='internal'||substr($FORUMLINK, 0, 3)=='smf'||$FORUMLINK=='ipb')?'':' AND content!="forum"').' ORDER BY sortid', true, $CACHE_DURATION);
+    $return='';
+    foreach ($blocks as $entry) {
+        $return.=get_content(realpath(__DIR__.'/..').'/blocks/'.$entry['content'].'_block.php');
+    }
 
-  return set_block('','justify',$return);
+    return set_block('', 'justify', $return);
 }
 
-function dropdown_menu() {
-  return get_menu('d');
+function dropdown_menu()
+{
+    return get_menu('d');
 }
 
-function extra_menu() {
-  return get_menu('e');
+function extra_menu()
+{
+    return get_menu('e');
 }
 
-function center_menu() {
-  return get_menu('c');
+function center_menu()
+{
+    return get_menu('c');
 }
 
-function side_menu() {
-  return get_menu('l');
+function side_menu()
+{
+    return get_menu('l');
 }
 
-function right_menu() {
-  return get_menu('r');
+function right_menu()
+{
+    return get_menu('r');
 }
 
-function bottom_menu() {
-  return get_menu('b');
+function bottom_menu()
+{
+    return get_menu('b');
 }
-
-?>

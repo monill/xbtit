@@ -15,4 +15,3 @@ $language['EDIT'] = 'Editera';
 $language['DELETE'] = 'Radera';
 $language['NO_USERS_FOUND'] = 'Inga användare hittades!';
 $language['UNKNOWN'] = 'Okänd';
-?>

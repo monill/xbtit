@@ -46,92 +46,92 @@ ob_start();
 
 
 
-  if ($CURUSER["uid"] > 1)
-    {
+if ($CURUSER["uid"] > 1) {
     require_once("$THIS_BASEPATH/include/smilies.php");
-  if (!isset($CURUSER)) global $CURUSER;
+    if (!isset($CURUSER)) {
+        global $CURUSER;
+    }
 
- global $tpl;
+    global $tpl;
 
-  print "<script src='ajaxchat/scripts.js' language='JavaScript' type='text/javascript'></script>";
+    print "<script src='ajaxchat/scripts.js' language='JavaScript' type='text/javascript'></script>";
 
-function smile() {
+    function smile()
+    {
 
-  print "<div align='center'><table cellpadding='1' cellspacing='1'><tr>";
+          print "<div align='center'><table cellpadding='1' cellspacing='1'><tr>";
 
-  global $smilies, $count;
-  reset($smilies);
+          global $smilies, $count;
+          reset($smilies);
 
-  while ((list($code, $url) = each($smilies)) && $count<16) {
-        print("\n<td><a href=\"javascript: SmileIT('".str_replace("'","\'",$code)."')\">
+        while ((list($code, $url) = each($smilies)) && $count<16) {
+            print("\n<td><a href=\"javascript: SmileIT('".str_replace("'", "\'", $code)."')\">
                <img border=\"0\" src=\"images/smilies/$url\" alt=\"$code\" /></a></td>");
                
-        $count++;
-  }
+                $count++;
+        }
   
-  print "</tr></table></div>";
-
-}
+          print "</tr></table></div>";
+    }
 
 ?>
 
 <center>
 
- <div id="chat" style="height:400px">
+<div id="chat" style="height:400px">
  
-  <div id="chatoutput">
+<div id="chatoutput">
 
-      <ul id="outputList">
+  <ul id="outputList">
 
-        <li>
-          <span class="name">BTIT SHOUT:</span><h2 style='padding-left:20px;'><?php echo $language["WELCOME"] ?></h2>
+    <li>
+      <span class="name">BTIT SHOUT:</span><h2 style='padding-left:20px;'><?php echo $language["WELCOME"] ?></h2>
           
-            <center><div class="loader"></div></center>
+        <center><div class="loader"></div></center>
 
-          </li>
+      </li>
 
-      </ul>
+  </ul>
 
-  </div>
+</div>
     
 </div>
 
 
- <div id="shoutheader">
+<div id="shoutheader">
      
-    <form id="chatForm" name="chatForm" onsubmit="return false;" action="">
+<form id="chatForm" name="chatForm" onsubmit="return false;" action="">
     
-      <input type="hidden" name="name" id="name" value="<?php echo $CURUSER["username"] ?>" />
-      <input type="hidden" name="uid" id="uid" value="<?php echo $CURUSER["uid"] ?>" />
-      <input type="text" size="45" maxlength="500" name="chatbarText" id="chatbarText" onblur="checkStatus('');" onfocus="checkStatus('active');" /> 
-      <input onclick="sendComment();" type="submit" id="submit" name="submit" value="<?php echo $language["FRM_CONFIRM"]; ?>" />
-      &nbsp;
-      <a href="javascript: PopMoreSmiles('chatForm','chatbarText');">
-      <img src="images/smile.gif" border="0" class="form" title="<?php echo $language['MORE_SMILES']; ?>" align="top" alt="" /></a>
+  <input type="hidden" name="name" id="name" value="<?php echo $CURUSER["username"] ?>" />
+  <input type="hidden" name="uid" id="uid" value="<?php echo $CURUSER["uid"] ?>" />
+  <input type="text" size="45" maxlength="500" name="chatbarText" id="chatbarText" onblur="checkStatus('');" onfocus="checkStatus('active');" /> 
+  <input onclick="sendComment();" type="submit" id="submit" name="submit" value="<?php echo $language["FRM_CONFIRM"]; ?>" />
+  &nbsp;
+  <a href="javascript: PopMoreSmiles('chatForm','chatbarText');">
+  <img src="images/smile.gif" border="0" class="form" title="<?php echo $language['MORE_SMILES']; ?>" align="top" alt="" /></a>
   
-      <a href="javascript: Pophistory()">
-      <img src="images/quote.gif" border="0" class="form" title="<?php echo $language['HISTORY']; ?>/Moderate" align="top" alt="" /></a>
+  <a href="javascript: Pophistory()">
+  <img src="images/quote.gif" border="0" class="form" title="<?php echo $language['HISTORY']; ?>/Moderate" align="top" alt="" /></a>
 
 <!--      
-       &nbsp;&nbsp;
-      <a href="javascript: PopMoreSmiles('chatForm','chatbarText')">Admin!</a>
+   &nbsp;&nbsp;
+  <a href="javascript: PopMoreSmiles('chatForm','chatbarText')">Admin!</a>
 -->
-      <br />
+  <br />
       
-      <?php smile(); ?>
+    <?php smile(); ?>
       
-    </form>
+</form>
 
- </div>
+</div>
 
 </center>
 
 <?php
-  }
-  
-else
+} else {
     print("<div align=\"center\">\n
            <br />".$language["ERR_MUST_BE_LOGGED_SHOUT"]."</div>");
+}
 
     block_end();
 

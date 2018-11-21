@@ -267,4 +267,3 @@ $language["HACK_UNINSTALLED_OK"]="Hack eltávolítása sikeres!<br />\nGyerünk 
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="Nem törölheted a vendég felhasználót vagy önmagad, mégse vagy mágus!";
 $language["USER_NOT_EDIT"]="Nem törölheted a vendég felhasználót vagy önmagad, mégse vagy mágus!";
-?>

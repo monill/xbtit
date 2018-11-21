@@ -269,4 +269,3 @@ $language["HACK_SOLUTION"]="Ratkaisu";
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="Et voi poistaa vierasta tai itse&auml;si!";
 $language["USER_NOT_EDIT"]="Et voi muokata itse&auml;si tai vierasta!";
-?>

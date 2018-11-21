@@ -4,7 +4,7 @@
 
 global $users, $torrents, $seeds, $leechers, $percent;
 // $language['rtl']='rtl'; // 如果你的阅读习惯是从右到左, 请去掉此行首部的两个'/'使此行生效
-$language['charset']='UTF-8'; 
+$language['charset']='UTF-8';
 $language['ACCOUNT_CONFIRM']=' '.$SITENAME.'账号验证.';
 $language['ACCOUNT_CONGRATULATIONS']='恭喜! 你的帐号以通过验证!<br />现在你可以 <a href="index.php?page=login">登录</a> 并开始使用此帐号.';
 $language['ACCOUNT_CREATE']='注册帐号';
@@ -448,5 +448,3 @@ $language['UPLOAD_LINK']='上传种子';
 # 追加语言定义 (HACKS)
 $language["SIGNATURE"]="论坛签名";//HACK:Signature on (Internal) Forum
 # 追加结束
-
-?>

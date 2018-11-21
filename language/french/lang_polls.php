@@ -48,4 +48,3 @@ $language["HOURS"]="heures";
 $language["MINUTES"]="minutes";
 $language["SECONDS"]="secondes";
 //AJAX Poll System Hack Stop
-?>

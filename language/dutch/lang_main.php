@@ -427,4 +427,3 @@ $language["FIRST_UNREAD"]="Ga naar de eerste ongelezen post";
 $language["MODULE_UNACTIVE"]="De benodigde module is niet actief!";
 $language["MODULE_NOT_PRESENT"]="De benodigde module bestaat niet!";
 $language["MODULE_LOAD_ERROR"]="De benodigde module schijnt verkeerd te zijn!";
-?>

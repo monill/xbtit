@@ -36,5 +36,3 @@ $language["POST"]="Messaggi";
 $language["SEARCH_AGAIN"]="Cerca di nuovo";
 $language["SEARCH_HELP"]="Inserisci una o piu parole da cercare.<br />Parole molto comuni e parole con meno di 3 caratteri sono ignorate.";
 $language["SEARCHED_FOR"]="Cerca per";
-
-?>

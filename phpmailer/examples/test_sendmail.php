@@ -4,7 +4,7 @@ include_once('class.phpmailer.php');
 
 $mail             = new PHPMailer();
 $body             = $mail->getFile('contents.html');
-$body             = eregi_replace("[\]",'',$body);
+$body             = eregi_replace("[\]", '', $body);
 
 $mail->IsSendmail(); // telling the class to use SendMail transport
 
@@ -21,10 +21,8 @@ $mail->AddAddress("whoto@otherdomain.com", "John Doe");
 
 $mail->AddAttachment("images/phpmailer.gif");             // attachment
 
-if(!$mail->Send()) {
-  echo "Mailer Error: " . $mail->ErrorInfo;
+if (!$mail->Send()) {
+    echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-  echo "Message sent!";
+    echo "Message sent!";
 }
-
-?>

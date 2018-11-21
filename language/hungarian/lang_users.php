@@ -17,5 +17,3 @@ $language["EDIT"]            = "Szerkeszt";
 $language["DELETE"]          = "Töröl";
 $language["NO_USERS_FOUND"]  = "Nem találtam ilyen felhasználót!";
 $language["UNKNOWN"]         = "Ismeretlen";
-
-?>

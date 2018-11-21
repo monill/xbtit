@@ -33,7 +33,7 @@
 // english installation file //
 
 $install_lang["charset"]                = "utf-8";
-$install_lang["lang_rtl"]               = FALSE;
+$install_lang["lang_rtl"]               = false;
 $install_lang["step"]                   = "KROK:";
 $install_lang["welcome_header"]         = "Vítejte";
 $install_lang["welcome"]                = "Vítejte v instalaci nového xbtit.";
@@ -146,4 +146,3 @@ $install_lang["ipb_err_4a"]             = "IPB English jazykový soubor (<b>";
 $install_lang["ipb_err_4b"]             = "</b>) neexistuje, nelze pokračovat.<br /><br />Klikněte <a href=\"javascript: history.go(-1);\">zde</a> pro návrat na předchozí stránku.";
 $install_lang["ipb_err_5"]             = "Nelze zapisovat do souboru IPB Config (<b>";
 $install_lang["ipb_err_6"]             = "Nelze zapisovat do souboru Tracker Config (<b>";
-?>

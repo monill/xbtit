@@ -33,4 +33,3 @@ $language["RATING"]="Értékelés";
 $language["ERR_NO_VOTE"]="Választanál egy értéket.";
 $language["VOTES"]="Szavazatok";
 $language["SHOW_HIDE"]="Fájlt mutat/elrejt";
-?>

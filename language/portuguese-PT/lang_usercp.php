@@ -11,4 +11,3 @@ $language["MUST_ENTER_PASSWORD"]="<br /><font color='#FF0000'><strong>É necess�
 $language["ERR_PASS_WRONG"]="Senha incorrecta ou vazia, impossivel actualizar perfil.";
 $language["MSG_DEL_ALL_PM"]="Se seleccionares PMs que não foram lidas, estas não serão apagadas";
 $language["ERR_PM_GUEST"]="Não podes enviar PM a um guest ou para ti mesmo.";
-?>

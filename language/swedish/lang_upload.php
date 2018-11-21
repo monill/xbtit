@@ -25,4 +25,3 @@ $language['ERR_MOVING_TORR'] = 'fel när torrent flyttas...';
 $language['ERR_ALREADY_EXIST'] = 'Denna torrent kanse redan finns i vårat data system.';
 $language['MSG_DOWNLOAD_PID'] = 'PID systemet är aktiverat, ladda hem torrenten med dit PID nummer';
 $language['MSG_UP_SUCCESS'] = 'Uppladdning lyckades! Torrenten har blivit uppladdad.';
-?>

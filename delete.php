@@ -31,26 +31,28 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 
-if (!defined("IN_BTIT"))
+if (!defined("IN_BTIT")) {
       die("non direct access!");
+}
 
 
-$id = mysqli_real_escape_string($GLOBALS['conn'],$_GET["info_hash"]);
+$id = mysqli_real_escape_string($GLOBALS['conn'], $_GET["info_hash"]);
 
-if (!isset($id) || !$id)
+if (!isset($id) || !$id) {
     die("Error ID");
+}
 
-if ($XBTT_USE)
-    $res = do_sqlquery("SELECT ".$query1_select." f.info_hash, f.uploader, f.filename, f.url, UNIX_TIMESTAMP(f.data) as data, f.size, f.comment, c.name as cat_name, f.seeds+ ifnull(x.seeders,0) as seeds, f.leechers+ ifnull(x.leechers,0) as leechers, f.finished+ ifnull(x.completed,0) as finished, f.speed FROM {$TABLE_PREFIX}files f LEFT JOIN xbt_files x ON x.info_hash=f.bin_hash LEFT JOIN {$TABLE_PREFIX}categories c ON c.id=f.category WHERE f.info_hash ='" . $id . "'",true);
-else
-    $res = do_sqlquery("SELECT ".$query1_select." f.info_hash, f.uploader, f.filename, f.url, UNIX_TIMESTAMP(f.data) as data, f.size, f.comment, c.name as cat_name, f.seeds, f.leechers, f.finished, f.speed FROM {$TABLE_PREFIX}files f LEFT JOIN {$TABLE_PREFIX}categories c ON c.id=f.category WHERE f.info_hash ='" . $id . "'",true);
+if ($XBTT_USE) {
+    $res = do_sqlquery("SELECT ".$query1_select." f.info_hash, f.uploader, f.filename, f.url, UNIX_TIMESTAMP(f.data) as data, f.size, f.comment, c.name as cat_name, f.seeds+ ifnull(x.seeders,0) as seeds, f.leechers+ ifnull(x.leechers,0) as leechers, f.finished+ ifnull(x.completed,0) as finished, f.speed FROM {$TABLE_PREFIX}files f LEFT JOIN xbt_files x ON x.info_hash=f.bin_hash LEFT JOIN {$TABLE_PREFIX}categories c ON c.id=f.category WHERE f.info_hash ='" . $id . "'", true);
+} else {
+    $res = do_sqlquery("SELECT ".$query1_select." f.info_hash, f.uploader, f.filename, f.url, UNIX_TIMESTAMP(f.data) as data, f.size, f.comment, c.name as cat_name, f.seeds, f.leechers, f.finished, f.speed FROM {$TABLE_PREFIX}files f LEFT JOIN {$TABLE_PREFIX}categories c ON c.id=f.category WHERE f.info_hash ='" . $id . "'", true);
+}
 
 $row = mysqli_fetch_assoc($res);
 
 
-if (!$CURUSER || $CURUSER["uid"]<2 || ($CURUSER["delete_torrents"]!="yes" && $CURUSER["uid"]!=$row["uploader"]))
-   {
-   stderr($language["SORRY"],$language["CANT_DELETE_TORRENT"]);
+if (!$CURUSER || $CURUSER["uid"]<2 || ($CURUSER["delete_torrents"]!="yes" && $CURUSER["uid"]!=$row["uploader"])) {
+    stderr($language["SORRY"], $language["CANT_DELETE_TORRENT"]);
 }
 
 $scriptname = htmlspecialchars($_SERVER["PHP_SELF"]);
@@ -58,54 +60,45 @@ $scriptname = htmlspecialchars($_SERVER["PHP_SELF"]);
 $link = urldecode($_GET["returnto"]);
 $hash = AddSlashes($_GET["info_hash"]);
 
-if ($link=="")
-   $link="index.php?page=torrents";
+if ($link=="") {
+    $link="index.php?page=torrents";
+}
 
 if (isset($_POST["action"])) {
-
-   if ($_POST["action"]==$language["FRM_DELETE"]) {
-
-       $ris = do_sqlquery("SELECT f.info_hash, f.filename, f.url, f.uploader, u.username FROM {$TABLE_PREFIX}files f , {$TABLE_PREFIX}users u WHERE f.uploader=u.id AND info_hash=\"$hash\"") or die(mysqli_error($GLOBALS['conn']));
-      if (mysqli_num_rows($ris)==0)
-            {
+    if ($_POST["action"]==$language["FRM_DELETE"]) {
+        $ris = do_sqlquery("SELECT f.info_hash, f.filename, f.url, f.uploader, u.username FROM {$TABLE_PREFIX}files f , {$TABLE_PREFIX}users u WHERE f.uploader=u.id AND info_hash=\"$hash\"") or die(mysqli_error($GLOBALS['conn']));
+        if (mysqli_num_rows($ris)==0) {
             stderr("Sorry!", "torrent $hash not found.");
-            }
-      else
-            {
+        } else {
             list($torhash,$torname,$torurl)=mysqli_fetch_array($ris);
-            }
-      write_log("Deleted torrent $torname ($torhash)","delete");
+        }
+        write_log("Deleted torrent $torname ($torhash)", "delete");
 
-       @do_sqlquery("DELETE FROM {$TABLE_PREFIX}files WHERE info_hash=\"$hash\"");
-       @do_sqlquery("DELETE FROM {$TABLE_PREFIX}timestamps WHERE info_hash=\"$hash\"");
-       @do_sqlquery("DELETE FROM {$TABLE_PREFIX}comments WHERE info_hash=\"$hash\"");
-       @do_sqlquery("DELETE FROM {$TABLE_PREFIX}ratings WHERE infohash=\"$hash\"");
-       @do_sqlquery("DELETE FROM {$TABLE_PREFIX}peers WHERE infohash=\"$hash\"");
-       @do_sqlquery("DELETE FROM {$TABLE_PREFIX}history WHERE infohash=\"$hash\"");
+        @do_sqlquery("DELETE FROM {$TABLE_PREFIX}files WHERE info_hash=\"$hash\"");
+        @do_sqlquery("DELETE FROM {$TABLE_PREFIX}timestamps WHERE info_hash=\"$hash\"");
+        @do_sqlquery("DELETE FROM {$TABLE_PREFIX}comments WHERE info_hash=\"$hash\"");
+        @do_sqlquery("DELETE FROM {$TABLE_PREFIX}ratings WHERE infohash=\"$hash\"");
+        @do_sqlquery("DELETE FROM {$TABLE_PREFIX}peers WHERE infohash=\"$hash\"");
+        @do_sqlquery("DELETE FROM {$TABLE_PREFIX}history WHERE infohash=\"$hash\"");
 
-       IF ($XBTT_USE)
-           do_sqlquery("UPDATE xbt_files SET flags=1 WHERE info_hash=UNHEX('$hash')") or die(mysqli_error($GLOBALS['conn']));
+        if ($XBTT_USE) {
+            do_sqlquery("UPDATE xbt_files SET flags=1 WHERE info_hash=UNHEX('$hash')") or die(mysqli_error($GLOBALS['conn']));
+        }
 
-       unlink($TORRENTSDIR."/$hash.btf");
+        unlink($TORRENTSDIR."/$hash.btf");
 
 
-       redirect($link);
-      exit();
-
-   }
-
-   else {
-
-   redirect($link);
-   exit();
-
-   }
-
+        redirect($link);
+        exit();
+    } else {
+        redirect($link);
+        exit();
+    }
 }
 
 
 $torrenttpl=new bTemplate();
-$torrenttpl->set("language",$language);
+$torrenttpl->set("language", $language);
 
 $torrent=array();
 $torrent["filename"]=$row["filename"];
@@ -114,22 +107,19 @@ $torrent["description"]=format_comment($row["comment"]);
 $torrent["catname"]=$row["cat_name"];
 $torrent["size"]=makesize($row["size"]);
 include(__DIR__."/include/offset.php");
-$torrent["date"]=date("d/m/Y",$row["data"]-$offset);
-if (!$XBTT_USE)
-{
-   if ($row["speed"] < 0) {
-     $speed = "N/D";
-   }
-   else if ($row["speed"] > 2097152) {
-     $speed = round($row["speed"]/1048576,2) . " MB/sec";
-   }
-   else {
-     $speed = round($row["speed"] / 1024, 2) . " KB/sec";
-   }
-   $torrenttpl->set("NO_XBBT",true,true);
+$torrent["date"]=date("d/m/Y", $row["data"]-$offset);
+if (!$XBTT_USE) {
+    if ($row["speed"] < 0) {
+        $speed = "N/D";
+    } else if ($row["speed"] > 2097152) {
+        $speed = round($row["speed"]/1048576, 2) . " MB/sec";
+    } else {
+        $speed = round($row["speed"] / 1024, 2) . " KB/sec";
+    }
+    $torrenttpl->set("NO_XBBT", true, true);
+} else {
+    $torrenttpl->set("NO_XBBT", false, true);
 }
-else
-   $torrenttpl->set("NO_XBBT",false,true);
 
 $torrent["speed"]=$speed;
 $torrent["complete"]=$row["finished"];
@@ -139,6 +129,4 @@ $torrent["return"]=urlencode($link);
 unset($row);
 ((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
 
-$torrenttpl->set("torrent",$torrent);
-
-?>
+$torrenttpl->set("torrent", $torrent);

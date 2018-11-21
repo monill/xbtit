@@ -25,4 +25,3 @@ $language['ERR_MOVING_TORR']='Error moving torrent...';
 $language['ERR_ALREADY_EXIST']='This torrent may already exist in our database.';
 $language['MSG_DOWNLOAD_PID']='PID system active get your torrent with your PID';
 $language['MSG_UP_SUCCESS']='Upload successful! The torrent has been added.';
-?>

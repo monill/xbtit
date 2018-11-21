@@ -973,7 +973,9 @@ EOT;
         $this->Mail->isHTML(true);
 
         if (!$this->Mail->addAttachment(
-            realpath(self::INCLUDE_DIR . 'examples/images/phpmailer_mini.png'), 'phpmailer_mini.png')
+            realpath(self::INCLUDE_DIR . 'examples/images/phpmailer_mini.png'),
+            'phpmailer_mini.png'
+        )
         ) {
             $this->assertTrue(false, $this->Mail->ErrorInfo);
             return;
@@ -1001,7 +1003,8 @@ EOT;
             '', //intentionally empty name
             'base64',
             'image/png',
-            'inline')
+            'inline'
+        )
         ) {
             $this->assertTrue(false, $this->Mail->ErrorInfo);
             return;
@@ -1913,7 +1916,8 @@ EOT;
         $this->assertEquals(
             'test@example.com',
             $this->Mail->ConfirmReadingTo,
-            'Unexpected read receipt address');
+            'Unexpected read receipt address'
+        );
 
         $this->Mail->ConfirmReadingTo = 'test@françois.ch';  //Address with IDN
         if ($this->Mail->idnSupported()) {
@@ -1921,7 +1925,8 @@ EOT;
             $this->assertEquals(
                 'test@xn--franois-xxa.ch',
                 $this->Mail->ConfirmReadingTo,
-                'IDN address not converted to punycode');
+                'IDN address not converted to punycode'
+            );
         } else {
             $this->assertFalse($this->Mail->send(), $this->Mail->ErrorInfo);
         }
@@ -1963,16 +1968,19 @@ EOT;
         $this->assertEquals(
             array(array('test' . $domain, '')),
             $this->Mail->getToAddresses(),
-            'Bad "to" recipients');
+            'Bad "to" recipients'
+        );
         $this->assertEquals(
             array(array('test+cc' . $domain, '')),
             $this->Mail->getCcAddresses(),
-            'Bad "cc" recipients');
+            'Bad "cc" recipients'
+        );
         $this->assertEmpty($this->Mail->getBccAddresses(), 'Bad "bcc" recipients');
         $this->assertEquals(
             array('test+replyto' . $domain => array('test+replyto' . $domain, '')),
             $this->Mail->getReplyToAddresses(),
-            'Bad "reply-to" addresses');
+            'Bad "reply-to" addresses'
+        );
     }
 
     /**
@@ -2012,11 +2020,13 @@ EOT;
         $this->assertEquals(
             1,
             count($this->Mail->getToAddresses()),
-            'Bad count of "to" recipients');
+            'Bad count of "to" recipients'
+        );
         $this->assertEquals(
             1,
             count($this->Mail->getReplyToAddresses()),
-            'Bad count of "reply-to" addresses');
+            'Bad count of "reply-to" addresses'
+        );
     }
 
     /**

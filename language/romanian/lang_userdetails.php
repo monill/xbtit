@@ -31,4 +31,3 @@ $language['DELETE']='Şterge';
 $language['PM']='Mesaj Privat';
 $language['BACK']='Înapoi';
 $language['NO_HISTORY']='Nu exista istorie...';
-?>

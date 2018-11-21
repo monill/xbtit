@@ -8,4 +8,3 @@ $language["PEER_PORT"]="Porta";
 $language["PEER_STATUS"]="Stato";
 $language["PEER_CLIENT"]="Client";
 $language["NO_HISTORY"]="Nessuna storia da visualizzare";
-?>

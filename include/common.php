@@ -33,28 +33,30 @@
 require_once(__DIR__.'/config.php');
 
 if (!function_exists('bcsub')) {
-    function bcsub($first_num, $second_num) {
+    function bcsub($first_num, $second_num)
+    {
         return ((int)$first_num)-((int)$second_num);
     }
 }
 
-function send_pm($sender,$recepient,$subject,$msg) {
+function send_pm($sender, $recepient, $subject, $msg)
+{
     global $FORUMLINK, $TABLE_PREFIX, $db_prefix, $CACHE_DURATION, $ipb_prefix;
 
-    if($FORUMLINK==='ipb')
-    {
-        ipb_send_pm($sender,$recepient,$subject,$msg);
-    }
-    elseif (substr($FORUMLINK,0,3)=='smf') {
+    if ($FORUMLINK==='ipb') {
+        ipb_send_pm($sender, $recepient, $subject, $msg);
+    } elseif (substr($FORUMLINK, 0, 3)=='smf') {
         # smf forum
         # get smf_fid of recepient
         $recepient=get_result('SELECT smf_fid FROM '.$TABLE_PREFIX.'users WHERE id='.$recepient.' LIMIT 1;', true, $CACHE_DURATION);
-        if (!isset($recepient[0]))
+        if (!isset($recepient[0])) {
             return false;
+        }
         # valid user
         $recepient=$recepient[0]['smf_fid'];
-        if ($recepient==0)
+        if ($recepient==0) {
             return false;
+        }
         # valid smf_fid
         # get smf_fid of sender
         # if sender id is invalid or 0, use System
@@ -63,7 +65,9 @@ function send_pm($sender,$recepient,$subject,$msg) {
             $sender=array();
             $sender['smf_fid']=0;
             $sender['username']='System';
-        } else $sender=$sender[0];
+        } else {
+            $sender=$sender[0];
+        }
         # insert message
         quickQuery("INSERT INTO `{$db_prefix}personal_messages` (".(($FORUMLINK=="smf")?"`ID_MEMBER_FROM`, `fromName`":"`id_member_from`, `from_name`").", `msgtime`, `subject`, `body`) VALUES (".$sender['smf_fid'].", ".sqlesc($sender['username']).", UNIX_TIMESTAMP(), ".$subject.", ".$msg.")");
         # get id of message
@@ -71,10 +75,11 @@ function send_pm($sender,$recepient,$subject,$msg) {
         # insert recepient for message
         quickQuery("INSERT INTO `{$db_prefix}pm_recipients` (".(($FORUMLINK=="smf")?"`ID_PM`, `ID_MEMBER`":"`id_pm`, `id_member`").") VALUES (".$pm_id.", ".$recepient.")");
         # notify recepient
-        if($FORUMLINK=="smf")
+        if ($FORUMLINK=="smf") {
             quickQuery("UPDATE `{$db_prefix}members` SET `instantMessages`=`instantMessages`+1, `unreadMessages`=`unreadMessages`+1 WHERE `ID_MEMBER`=".$recepient." LIMIT 1");
-        else
+        } else {
             quickQuery("UPDATE `{$db_prefix}members` SET `instant_messages`=`instant_messages`+1, `unread_messages`=`unread_messages`+1 WHERE `id_member`=".$recepient." LIMIT 1");
+        }
         return true;
     } else {
         # internal PM system
@@ -85,28 +90,33 @@ function send_pm($sender,$recepient,$subject,$msg) {
     return false;
 }
 
-function write_file($file, $content) {
-    if ($fp=@fopen($file,'w')) {
-        @fputs($fp,$content);
+function write_file($file, $content)
+{
+    if ($fp=@fopen($file, 'w')) {
+        @fputs($fp, $content);
         @fclose($fp);
         return true;
     }
     return false;
 }
 
-function send_mail($rec_email,$subject,$message, $IsHtml=false, $cc=array(), $bcc=array()) {
+function send_mail($rec_email, $subject, $message, $IsHtml = false, $cc = array(), $bcc = array())
+{
     global $THIS_BASEPATH, $btit_settings;
 
-    if (!method_exists('PHPMailer','IsMail'))
+    if (!method_exists('PHPMailer', 'IsMail')) {
         include($THIS_BASEPATH.'/phpmailer/class.phpmailer.php');
+    }
     $mail=new PHPMailer();
 
     if ($btit_settings['mail_type']=='php') {
         $mail->IsMail();                                   # send via mail
-        if (!empty($cc))
-            $mail->AddCustomHeader('Cc: '.implode(',',$cc));
-        if (!empty($bcc))
-            $mail->AddCustomHeader('Bcc: '.implode(',',$bcc));
+        if (!empty($cc)) {
+            $mail->AddCustomHeader('Cc: '.implode(',', $cc));
+        }
+        if (!empty($bcc)) {
+            $mail->AddCustomHeader('Bcc: '.implode(',', $bcc));
+        }
     } else {
         $mail->IsSMTP();                                   # send via SMTP
         $mail->Host     = $btit_settings['smtp_server'];   # SMTP servers
@@ -114,13 +124,17 @@ function send_mail($rec_email,$subject,$message, $IsHtml=false, $cc=array(), $bc
         $mail->SMTPAuth = true;                            # turn on SMTP authentication
         $mail->Username = $btit_settings['smtp_username']; # SMTP username
         $mail->Password = $btit_settings['smtp_password']; # SMTP password
-        if (!empty($cc))
-            foreach($cc as $carbon_copy)
-                $mail->AddCC($carbon_copy[0],$carbon_copy[0]);
+        if (!empty($cc)) {
+            foreach ($cc as $carbon_copy) {
+                $mail->AddCC($carbon_copy[0], $carbon_copy[0]);
+            }
+        }
 
-        if (!empty($bcc))
-            foreach($bcc as $blind_carbon_copy)
-                $mail->AddBCC($blind_carbon_copy[0],$blind_carbon_copy[0]);
+        if (!empty($bcc)) {
+            foreach ($bcc as $blind_carbon_copy) {
+                $mail->AddBCC($blind_carbon_copy[0], $blind_carbon_copy[0]);
+            }
+        }
     }
 
     $mail->From     = $btit_settings['email'];
@@ -128,14 +142,15 @@ function send_mail($rec_email,$subject,$message, $IsHtml=false, $cc=array(), $bc
     $mail->CharSet  = $btit_settings['default_charset'];
     $mail->IsHTML($IsHtml);
     $mail->AddAddress($rec_email);
-    $mail->AddReplyTo($btit_settings['email'],$btit_settings['name']);
+    $mail->AddReplyTo($btit_settings['email'], $btit_settings['name']);
     $mail->Subject  =  $subject;
     $mail->Body     =  $message;
 
     return ($mail->Send())?true:$mail->ErrorInfo;
 }
 
-function get_remote_file($http_url,$mode='r') {
+function get_remote_file($http_url, $mode = 'r')
+{
     # for first thing we will try with cURL
     if (function_exists('curl_init')) {
         $fp=curl_init();
@@ -143,8 +158,9 @@ function get_remote_file($http_url,$mode='r') {
         curl_setopt($fp, CURLOPT_RETURNTRANSFER, true);
         $stream=curl_exec($fp);
         curl_close($fp);
-        if (substr($stream,9,3)!='404')
+        if (substr($stream, 9, 3)!='404') {
             return $stream;
+        }
     }
 
     # then with fsockopen
@@ -153,24 +169,27 @@ function get_remote_file($http_url,$mode='r') {
     $path=isset($purl['path'])?$purl['path']:'/scrape.php';
     $an=($purl['scheme']!='http'?$purl['scheme'].'://':'').$purl['host'];
     $query=isset($purl['query'])?'?'.$purl['query']:'';
-    $fp=@fsockopen($an,$port,$errno,$errstr, 60);
+    $fp=@fsockopen($an, $port, $errno, $errstr, 60);
 
     if ($fp) {
-        fputs($fp,"GET $path"."$query HTTP/1.0\r\nHost: www.google.com\r\nConnection: close\r\n\r\n");
+        fputs($fp, "GET $path"."$query HTTP/1.0\r\nHost: www.google.com\r\nConnection: close\r\n\r\n");
         $stream='';
-        while (!feof($fp))
+        while (!feof($fp)) {
             $stream.=fgets($fp, 4096);
+        }
         @fclose($fp);
 
-        if (substr($stream,9,3)=='404') {
+        if (substr($stream, 9, 3)=='404') {
             $stream='';
             # last chance we try slowest fopen
-            $fp=@fopen($http_url,$mode);
-            if (!$fp)
+            $fp=@fopen($http_url, $mode);
+            if (!$fp) {
                 return false;
+            }
 
-            while (!feof($fp))
-                $stream.=fread($fp,4096);
+            while (!feof($fp)) {
+                $stream.=fread($fp, 4096);
+            }
             @fclose($fp);
             #if (substr($stream,9,3)=="404")
                 #return false;
@@ -180,20 +199,22 @@ function get_remote_file($http_url,$mode='r') {
     return false;
 }
 
-function get_fresh_config($qrystr) {
+function get_fresh_config($qrystr)
+{
     global $mySecret;
     $cache_file=realpath(__DIR__.'/..').'/cache/'.md5($qrystr." -- ".$mySecret).'.txt';
 
-    $mr=do_sqlquery($qrystr." -- ".$mySecret,true);
+    $mr=do_sqlquery($qrystr." -- ".$mySecret, true);
     while ($mz=mysqli_fetch_assoc($mr)) {
-        if ($mz['value']=='true')
+        if ($mz['value']=='true') {
             $return[$mz['key']]= true;
-        elseif ($mz['value']=='false')
+        } elseif ($mz['value']=='false') {
             $return[$mz['key']]= false;
-        elseif (is_numeric($mz['value']))
-            $return[$mz['key']]= max(0,$mz['value']);
-        else
+        } elseif (is_numeric($mz['value'])) {
+            $return[$mz['key']]= max(0, $mz['value']);
+        } else {
             $return[$mz['key']]= StripSlashes($mz['value']);
+        }
     }
     unset($mz);
     ((mysqli_free_result($mr) || (is_object($mr) && (get_class($mr) == "mysqli_result"))) ? true : false);
@@ -204,93 +225,110 @@ function get_fresh_config($qrystr) {
 }
 
 
-function do_sqlquery($qrystr,$display_error=false) {
+function do_sqlquery($qrystr, $display_error = false)
+{
     global $num_queries;
 
     $num_queries++;
     $ret=mysqli_query($GLOBALS['conn'], $qrystr);
-    if ($display_error && mysqli_errno($GLOBALS['conn'])!=0)
-        stderr('MySQL query error!',"<br />\nError: ".mysqli_error($GLOBALS['conn'])."<br />\nQuery: $qrystr<br />\n");
+    if ($display_error && mysqli_errno($GLOBALS['conn'])!=0) {
+        stderr('MySQL query error!', "<br />\nError: ".mysqli_error($GLOBALS['conn'])."<br />\nQuery: $qrystr<br />\n");
+    }
     return $ret;
 }
 
-function write_cached_version($page, $content='') {
+function write_cached_version($page, $content = '')
+{
     global $CACHE_DURATION;
 
-    if ($CACHE_DURATION==0)
+    if ($CACHE_DURATION==0) {
         return false;
+    }
 
     $cache_file=realpath(__DIR__.'/..').'/cache/'.md5($page).'.txt';
-    if ($content=='')
+    if ($content=='') {
         $content=ob_get_contents();
+    }
 
     # write cache file
     write_file($cache_file, $content);
     ob_end_flush();
 }
 
-function get_cached_version($page) {
+function get_cached_version($page)
+{
     global $CACHE_DURATION;
 
-    if ($CACHE_DURATION==0)
+    if ($CACHE_DURATION==0) {
         return false;
+    }
 
     $cache_file=realpath(__DIR__.'/..').'/cache/'.md5($page).'.txt';
 
-    if (file_exists($cache_file) && (time()-$CACHE_DURATION) < filemtime($cache_file))
+    if (file_exists($cache_file) && (time()-$CACHE_DURATION) < filemtime($cache_file)) {
         return file_get_contents($cache_file);
+    }
 
     ob_start();
     return false;
 }
 
 
-function get_result($qrystr,$display_error=false,$cachetime=0) { 
+function get_result($qrystr, $display_error = false, $cachetime = 0)
+{
     global $num_queries, $cached_querys;
 
     $cache_file=realpath(__DIR__.'/..').'/cache/'.md5($qrystr).'.txt';
 
-    if ($cachetime>0)
+    if ($cachetime>0) {
         if (file_exists($cache_file) && (time()-$cachetime) < filemtime($cache_file)) {
             $num_queries++;
             $cached_querys++;
             return unserialize(file_get_contents($cache_file));
-                }
+        }
+    }
 
     $return=array();
-    $mr=do_sqlquery($qrystr,$display_error);
-    while ($mz=mysqli_fetch_assoc($mr))
+    $mr=do_sqlquery($qrystr, $display_error);
+    while ($mz=mysqli_fetch_assoc($mr)) {
         $return[]=$mz;
+    }
 
     unset($mz);
     ((mysqli_free_result($mr) || (is_object($mr) && (get_class($mr) == "mysqli_result"))) ? true : false);
 
-    if ($cachetime>0)
+    if ($cachetime>0) {
         write_file($cache_file, serialize($return));
+    }
 
     return $return;
 }
 
 # Reports an error to the client in $message.
 # Any other output will confuse the client, so please don't do that.
-function show_error($message, $log=false) {
-    if ($log)
+function show_error($message, $log = false)
+{
+    if ($log) {
         error_log("BtiTracker: ERROR ($message)");
+    }
 
     echo 'd14:failure reason'.strlen($message).":$message".'e';
     die();
 }
 
 
-function verifyHash($input) {
-    if (strlen($input)==40&&preg_match('/^[0-9a-f]+$/', $input))
+function verifyHash($input)
+{
+    if (strlen($input)==40&&preg_match('/^[0-9a-f]+$/', $input)) {
         return true;
+    }
     return false;
 }
 
 # validip/getip courtesy of manolete <manolete@myway.com>
 # IP Validation
-function validip($ip) {
+function validip($ip)
+{
     if (!empty($ip) && $ip==long2ip(ip2long($ip))) {
         # reserved IANA IPv4 addresses
         # http://www.iana.org/assignments/ipv4-address-space
@@ -305,30 +343,38 @@ function validip($ip) {
             array('255.255.255.0','255.255.255.255')
         );
 
-        foreach ($reserved_ips as $r)
-            if ((ip2long($ip) >= ip2long($r[0])) && (ip2long($ip) <= ip2long($r[1])))
-                return false; 
+        foreach ($reserved_ips as $r) {
+            if ((ip2long($ip) >= ip2long($r[0])) && (ip2long($ip) <= ip2long($r[1]))) {
+                return false;
+            }
+        }
         return true;
     }
     return false;
 }
 
 /* Patched function to detect REAL IP address if it's valid */
-function getip() {
-    if (getenv('HTTP_CLIENT_IP') && long2ip(ip2long(getenv('HTTP_CLIENT_IP')))==getenv('HTTP_CLIENT_IP') && validip(getenv('HTTP_CLIENT_IP')))
+function getip()
+{
+    if (getenv('HTTP_CLIENT_IP') && long2ip(ip2long(getenv('HTTP_CLIENT_IP')))==getenv('HTTP_CLIENT_IP') && validip(getenv('HTTP_CLIENT_IP'))) {
         return getenv('HTTP_CLIENT_IP');
+    }
 
-    if (getenv('HTTP_X_FORWARDED_FOR') && long2ip(ip2long(getenv('HTTP_X_FORWARDED_FOR')))==getenv('HTTP_X_FORWARDED_FOR') && validip(getenv('HTTP_X_FORWARDED_FOR')))
+    if (getenv('HTTP_X_FORWARDED_FOR') && long2ip(ip2long(getenv('HTTP_X_FORWARDED_FOR')))==getenv('HTTP_X_FORWARDED_FOR') && validip(getenv('HTTP_X_FORWARDED_FOR'))) {
         return getenv('HTTP_X_FORWARDED_FOR');
+    }
 
-    if (getenv('HTTP_X_FORWARDED') && long2ip(ip2long(getenv('HTTP_X_FORWARDED')))==getenv('HTTP_X_FORWARDED') && validip(getenv('HTTP_X_FORWARDED')))
+    if (getenv('HTTP_X_FORWARDED') && long2ip(ip2long(getenv('HTTP_X_FORWARDED')))==getenv('HTTP_X_FORWARDED') && validip(getenv('HTTP_X_FORWARDED'))) {
         return getenv('HTTP_X_FORWARDED');
+    }
 
-    if (getenv('HTTP_FORWARDED_FOR') && long2ip(ip2long(getenv('HTTP_FORWARDED_FOR')))==getenv('HTTP_FORWARDED_FOR') && validip(getenv('HTTP_FORWARDED_FOR')))
+    if (getenv('HTTP_FORWARDED_FOR') && long2ip(ip2long(getenv('HTTP_FORWARDED_FOR')))==getenv('HTTP_FORWARDED_FOR') && validip(getenv('HTTP_FORWARDED_FOR'))) {
         return getenv('HTTP_FORWARDED_FOR');
+    }
 
-    if (getenv('HTTP_FORWARDED') && long2ip(ip2long(getenv('HTTP_FORWARDED')))==getenv('HTTP_FORWARDED') && validip(getenv('HTTP_FORWARDED')))
+    if (getenv('HTTP_FORWARDED') && long2ip(ip2long(getenv('HTTP_FORWARDED')))==getenv('HTTP_FORWARDED') && validip(getenv('HTTP_FORWARDED'))) {
         return getenv('HTTP_FORWARDED');
+    }
 
     $ip = htmlspecialchars($_SERVER['REMOTE_ADDR']);
     /* Added support for IPv6 connections. otherwise ip returns null */
@@ -336,74 +382,83 @@ function getip() {
         $ip = substr($ip, strrpos($ip, ':')+1);
     }
     
-   return long2ip(ip2long($ip));
+    return long2ip(ip2long($ip));
 }
 
-if(!function_exists("hex2bin"))
-{
-    function hex2bin ($input, $assume_safe=true)
+if (!function_exists("hex2bin")) {
+    function hex2bin($input, $assume_safe = true)
     {
-        if ($assume_safe !== true && ! ((strlen($input)%2) == 0 || preg_match ('/^[0-9a-f]+$/i', $input)))
+        if ($assume_safe !== true && ! ((strlen($input)%2) == 0 || preg_match('/^[0-9a-f]+$/i', $input))) {
             return '';
+        }
         return pack('H*', $input);
     }
 }
 # Runs a query with no regard for the result
-function quickQuery($query) {
+function quickQuery($query)
+{
     $results = do_sqlquery($query);
-    if (!is_bool($results))
+    if (!is_bool($results)) {
         ((mysqli_free_result($results) || (is_object($results) && (get_class($results) == "mysqli_result"))) ? true : false);
-    else
+    } else {
         return $results;
+    }
     return true;
 }
 
 #========================================
 # getAgent function by deliopoulos
 #========================================
-function StdDecodePeerId($id_data, $id_name) {
+function StdDecodePeerId($id_data, $id_name)
+{
     $version_str='';
-    for ($i=0; $i<=strlen($id_data); $i++){
+    for ($i=0; $i<=strlen($id_data); $i++) {
         $c = $id_data[$i];
         if ($id_name=='BitTornado' || $id_name=='ABC') {
-            if ($c!='-' && ctype_digit($c))
+            if ($c!='-' && ctype_digit($c)) {
                 $version_str.=$c.'.';
-            elseif ($c!='-' && ctype_alpha($c))
+            } elseif ($c!='-' && ctype_alpha($c)) {
                 $version_str.=(ord($c)-55).'.';
-            else
+            } else {
                 break;
-        } elseif($id_name=='BitComet'||$id_name=='BitBuddy'||$id_name=='Lphant'||$id_name=='BitPump'||$id_name=='BitTorrent Plus! v2') {
+            }
+        } elseif ($id_name=='BitComet'||$id_name=='BitBuddy'||$id_name=='Lphant'||$id_name=='BitPump'||$id_name=='BitTorrent Plus! v2') {
             if ($c!='-' && ctype_alnum($c)) {
                 $version_str .= $c;
-                if($i==0)
-                    $version_str = (int)$version_str.'.'; 
-            } else{
+                if ($i==0) {
+                    $version_str = (int)$version_str.'.';
+                }
+            } else {
                 $version_str .= '.';
                 break;
             }
         } else {
-            if ($c!='-' && ctype_alnum($c))
+            if ($c!='-' && ctype_alnum($c)) {
                 $version_str .= $c.'.';
-            else
+            } else {
                 break;
+            }
         }
     }
-    $version_str=substr($version_str,0,strlen($version_str)-1);
+    $version_str=substr($version_str, 0, strlen($version_str)-1);
     return $id_name.' '.$version_str;
 }
 
-function MainlineDecodePeerId($id_data, $id_name) {
+function MainlineDecodePeerId($id_data, $id_name)
+{
     $version_str='';
     for ($i=0,$len=strlen($id_data); $i<=$len; $i++) {
         $c=$id_data[$i];
-        if ($c!='-' && ctype_alnum($c))
+        if ($c!='-' && ctype_alnum($c)) {
             $version_str.=$c.'.';
+        }
     }
-    $version_str=substr($version_str,0,strlen($version_str)-1);
+    $version_str=substr($version_str, 0, strlen($version_str)-1);
     return $id_name.' '.$version_str;
 }
 
-function DecodeVersionString ($ver_data, $id_name) {
+function DecodeVersionString($ver_data, $id_name)
+{
     $version_str='';
     $version_str.=((int)ord($ver_data[0]) + 0).'.';
     $version_str.=((int)ord($ver_data[1])/10 + 0);
@@ -416,287 +471,394 @@ function DecodeVersionString ($ver_data, $id_name) {
  * @param string $peer_id
  * @return string
  */
-function getagent($httpagent, $peer_id='') {
-    if($peer_id!='')
+function getagent($httpagent, $peer_id = '')
+{
+    if ($peer_id!='') {
         $peer_id=hex2bin($peer_id);
-    if(substr($peer_id,0,3)=='-AX')
-        return StdDecodePeerId(substr($peer_id,4,4),'BitPump'); # AnalogX BitPump
-    if(substr($peer_id,0,3)=='-BB')
-        return StdDecodePeerId(substr($peer_id,3,5),'BitBuddy'); # BitBuddy
-    if(substr($peer_id,0,3)=='-BC')
-        return StdDecodePeerId(substr($peer_id,4,4),'BitComet'); # BitComet
-    if(substr($peer_id,0,3)=='-BS')
-        return StdDecodePeerId(substr($peer_id,3,7),'BTSlave'); # BTSlave
-    if(substr($peer_id,0,3)=='-BX')
-        return StdDecodePeerId(substr($peer_id,3,7),'BittorrentX'); # BittorrentX
-    if(substr($peer_id,0,3)=='-CT')
+    }
+    if (substr($peer_id, 0, 3)=='-AX') {
+        return StdDecodePeerId(substr($peer_id, 4, 4), 'BitPump'); # AnalogX BitPump
+    }
+    if (substr($peer_id, 0, 3)=='-BB') {
+        return StdDecodePeerId(substr($peer_id, 3, 5), 'BitBuddy'); # BitBuddy
+    }
+    if (substr($peer_id, 0, 3)=='-BC') {
+        return StdDecodePeerId(substr($peer_id, 4, 4), 'BitComet'); # BitComet
+    }
+    if (substr($peer_id, 0, 3)=='-BS') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'BTSlave'); # BTSlave
+    }
+    if (substr($peer_id, 0, 3)=='-BX') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'BittorrentX'); # BittorrentX
+    }
+    if (substr($peer_id, 0, 3)=='-CT') {
         return "Ctorrent $peer_id[3].$peer_id[4].$peer_id[6]"; # CTorrent
-    if(substr($peer_id,0,3)=='-KT')
-        return StdDecodePeerId(substr($peer_id,3,7),'KTorrent'); # KTorrent
-    if(substr($peer_id,0,3)=='-LT')
-        return StdDecodePeerId(substr($peer_id,3,7),'libtorrent'); # libtorrent
-    if(substr($peer_id,0,3)=='-LP')
-        return StdDecodePeerId(substr($peer_id,4,4),'Lphant'); # Lphant
-    if(substr($peer_id,0,3)=='-MP')
-        return StdDecodePeerId(substr($peer_id,3,7),'MooPolice'); # MooPolice
-    if(substr($peer_id,0,3)=='-MT')
-        return StdDecodePeerId(substr($peer_id,3,7),'Moonlight'); # MoonlightTorrent
-    if(substr($peer_id,0,3)=='-PO')
-        return StdDecodePeerId(substr($peer_id,3,7),'PO Client'); # PO Client
-    if(substr($peer_id,0,3)=='-QT')
-        return StdDecodePeerId(substr($peer_id,3,7),'Qt 4 Torrent'); # Qt 4 Torrent
-    if(substr($peer_id,0,3)=='-RT')
-        return StdDecodePeerId(substr($peer_id,3,7),'Retriever'); # Retriever
-    if(substr($peer_id,0,3)=='-S2')
-        return StdDecodePeerId(substr($peer_id,3,7),'S2 Client'); # S2 Client
-    if(substr($peer_id,0,3)=='-SB')
-        return StdDecodePeerId(substr($peer_id,3,7),'Swiftbit'); # Swiftbit
-    if(substr($peer_id,0,3)=='-SN')
-        return StdDecodePeerId(substr($peer_id,3,7),'ShareNet'); # ShareNet
-    if(substr($peer_id,0,3)=='-SS')
-        return StdDecodePeerId(substr($peer_id,3,7),'SwarmScope'); # SwarmScope
-    if(substr($peer_id,0,3)=='-SZ')
-        return StdDecodePeerId(substr($peer_id,3,7),'Shareaza'); # Shareaza
-    if(preg_match('/^RAZA ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/', $httpagent, $matches))
+    }
+    if (substr($peer_id, 0, 3)=='-KT') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'KTorrent'); # KTorrent
+    }
+    if (substr($peer_id, 0, 3)=='-LT') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'libtorrent'); # libtorrent
+    }
+    if (substr($peer_id, 0, 3)=='-LP') {
+        return StdDecodePeerId(substr($peer_id, 4, 4), 'Lphant'); # Lphant
+    }
+    if (substr($peer_id, 0, 3)=='-MP') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'MooPolice'); # MooPolice
+    }
+    if (substr($peer_id, 0, 3)=='-MT') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'Moonlight'); # MoonlightTorrent
+    }
+    if (substr($peer_id, 0, 3)=='-PO') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'PO Client'); # PO Client
+    }
+    if (substr($peer_id, 0, 3)=='-QT') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'Qt 4 Torrent'); # Qt 4 Torrent
+    }
+    if (substr($peer_id, 0, 3)=='-RT') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'Retriever'); # Retriever
+    }
+    if (substr($peer_id, 0, 3)=='-S2') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'S2 Client'); # S2 Client
+    }
+    if (substr($peer_id, 0, 3)=='-SB') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'Swiftbit'); # Swiftbit
+    }
+    if (substr($peer_id, 0, 3)=='-SN') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'ShareNet'); # ShareNet
+    }
+    if (substr($peer_id, 0, 3)=='-SS') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'SwarmScope'); # SwarmScope
+    }
+    if (substr($peer_id, 0, 3)=='-SZ') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'Shareaza'); # Shareaza
+    }
+    if (preg_match('/^RAZA ([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/', $httpagent, $matches)) {
         return "Shareaza $matches[1]";
-    if(substr($peer_id,0,3)=='-TN')
-        return StdDecodePeerId(substr($peer_id,3,7),'Torrent.NET'); # Torrent.NET
-    if(substr($peer_id,0,3)=='-TR')
-        return StdDecodePeerId(substr($peer_id,3,7),'Transmission'); # Transmission
-    if(substr($peer_id,0,3)=='-TS')
-        return StdDecodePeerId(substr($peer_id,3,7),'TorrentStorm'); # Torrentstorm
-    if(substr($peer_id,0,3)=='-UR')
-        return StdDecodePeerId(substr($peer_id,3,7),'UR Client'); # unidentified clients with versions
-    if(substr($peer_id,0,3)=='-UT')
-        return StdDecodePeerId(substr($peer_id,3,7),'uTorrent'); # uTorrent
-    if(substr($peer_id,0,3)=='-XT')
-        return StdDecodePeerId(substr($peer_id,3,7),'XanTorrent'); # XanTorrent
-    if(substr($peer_id,0,3)=='-ZT')
-        return StdDecodePeerId(substr($peer_id,3,7),'ZipTorrent'); # ZipTorrent
-    if(substr($peer_id,0,3)=='-bk')
-        return StdDecodePeerId(substr($peer_id,3,7),'BitKitten'); # BitKitten
-    if(substr($peer_id,0,3)=='-lt')
-        return StdDecodePeerId(substr($peer_id,3,7),'libTorrent'); # libTorrent
-    if(substr($peer_id,0,3)=='-pX')
-        return StdDecodePeerId(substr($peer_id,3,7),'pHoeniX'); # pHoeniX
-    if(substr($peer_id,0,2)=='BG')
-        return StdDecodePeerId(substr($peer_id,2,4),'BTGetit'); # BTGetit
-    if(substr($peer_id,2,2)=='BM')
-        return DecodeVersionString(substr($peer_id,0,2),'BitMagnet'); # BitMagnet
-    if(substr($peer_id,0,2)=='OP')
-        return StdDecodePeerId(substr($peer_id,2,4),'Opera'); # Opera
-    if(substr($peer_id,0,4)=='270-')
+    }
+    if (substr($peer_id, 0, 3)=='-TN') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'Torrent.NET'); # Torrent.NET
+    }
+    if (substr($peer_id, 0, 3)=='-TR') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'Transmission'); # Transmission
+    }
+    if (substr($peer_id, 0, 3)=='-TS') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'TorrentStorm'); # Torrentstorm
+    }
+    if (substr($peer_id, 0, 3)=='-UR') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'UR Client'); # unidentified clients with versions
+    }
+    if (substr($peer_id, 0, 3)=='-UT') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'uTorrent'); # uTorrent
+    }
+    if (substr($peer_id, 0, 3)=='-XT') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'XanTorrent'); # XanTorrent
+    }
+    if (substr($peer_id, 0, 3)=='-ZT') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'ZipTorrent'); # ZipTorrent
+    }
+    if (substr($peer_id, 0, 3)=='-bk') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'BitKitten'); # BitKitten
+    }
+    if (substr($peer_id, 0, 3)=='-lt') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'libTorrent'); # libTorrent
+    }
+    if (substr($peer_id, 0, 3)=='-pX') {
+        return StdDecodePeerId(substr($peer_id, 3, 7), 'pHoeniX'); # pHoeniX
+    }
+    if (substr($peer_id, 0, 2)=='BG') {
+        return StdDecodePeerId(substr($peer_id, 2, 4), 'BTGetit'); # BTGetit
+    }
+    if (substr($peer_id, 2, 2)=='BM') {
+        return DecodeVersionString(substr($peer_id, 0, 2), 'BitMagnet'); # BitMagnet
+    }
+    if (substr($peer_id, 0, 2)=='OP') {
+        return StdDecodePeerId(substr($peer_id, 2, 4), 'Opera'); # Opera
+    }
+    if (substr($peer_id, 0, 4)=='270-') {
         return 'GreedBT 2.7.0'; # GreedBT
-    if(substr($peer_id,0,4)=='271-')
+    }
+    if (substr($peer_id, 0, 4)=='271-') {
         return 'GreedBT 2.7.1'; # GreedBT 2.7.1
-    if(substr($peer_id,0,4)=='346-')
+    }
+    if (substr($peer_id, 0, 4)=='346-') {
         return 'TorrentTopia'; # TorrentTopia
-    if(substr($peer_id,0,3)=='-AR')
+    }
+    if (substr($peer_id, 0, 3)=='-AR') {
         return 'Arctic Torrent'; # Arctic (no way to know the version)
-    if(substr($peer_id,0,3)=='-G3')
+    }
+    if (substr($peer_id, 0, 3)=='-G3') {
         return 'G3 Torrent'; # G3 Torrent
-    if(substr($peer_id,0,6)=='BTDWV-')
+    }
+    if (substr($peer_id, 0, 6)=='BTDWV-') {
         return 'Deadman Walking'; # Deadman Walking
-    if(substr($peer_id,5,7)=='Azureus')
+    }
+    if (substr($peer_id, 5, 7)=='Azureus') {
         return 'Azureus 2.0.3.2'; # Azureus 2.0.3.2
-    if(substr($peer_id,0,8)=='PRC.P---')
+    }
+    if (substr($peer_id, 0, 8)=='PRC.P---') {
         return 'BitTorrent Plus! II'; # BitTorrent Plus! II
-    if(substr($peer_id,0,8)=='P87.P---')
+    }
+    if (substr($peer_id, 0, 8)=='P87.P---') {
         return 'BitTorrent Plus!'; # BitTorrent Plus!
-    if(substr($peer_id,0,4)=='Plus')
-        return StdDecodePeerId(substr($peer_id,4,5),'BitTorrent Plus! v2'); # BitTorrent Plus! v2 (not 100% sure on this one)
-    if(substr($peer_id,0,8)=='S587Plus')
+    }
+    if (substr($peer_id, 0, 4)=='Plus') {
+        return StdDecodePeerId(substr($peer_id, 4, 5), 'BitTorrent Plus! v2'); # BitTorrent Plus! v2 (not 100% sure on this one)
+    }
+    if (substr($peer_id, 0, 8)=='S587Plus') {
         return 'BitTorrent Plus!'; # BitTorrent Plus!
-    if(substr($peer_id,0,7)=='martini')
+    }
+    if (substr($peer_id, 0, 7)=='martini') {
         return 'Martini Man'; # Martini Man
-    if(substr($peer_id,4,6)=='btfans')
+    }
+    if (substr($peer_id, 4, 6)=='btfans') {
         return 'SimpleBT'; # SimpleBT
-    if(substr($peer_id,3,9)=='SimpleBT?')
+    }
+    if (substr($peer_id, 3, 9)=='SimpleBT?') {
         return 'SimpleBT'; # SimpleBT
-    if(preg_match('/^MFC_Tear_Sample/', $httpagent))
+    }
+    if (preg_match('/^MFC_Tear_Sample/', $httpagent)) {
         return 'SimpleBT';
-    if(substr($peer_id,0,5)=='btuga')
+    }
+    if (substr($peer_id, 0, 5)=='btuga') {
         return 'BTugaXP'; # BTugaXP
-    if(substr($peer_id,0,5)=='BTuga')
+    }
+    if (substr($peer_id, 0, 5)=='BTuga') {
         return 'BTuga'; # BTugaXP
-    if(substr($peer_id,0,5)=='oernu')
+    }
+    if (substr($peer_id, 0, 5)=='oernu') {
         return 'BTugaXP'; # BTugaXP
-    if(substr($peer_id,0,10)=='DansClient')
+    }
+    if (substr($peer_id, 0, 10)=='DansClient') {
         return 'XanTorrent'; # XanTorrent
-    if(substr($peer_id,0,16)=='Deadman Walking-')
+    }
+    if (substr($peer_id, 0, 16)=='Deadman Walking-') {
         return 'Deadman'; # Deadman client
-    if(substr($peer_id,0,8)=='XTORR302')
+    }
+    if (substr($peer_id, 0, 8)=='XTORR302') {
         return 'TorrenTres 0.0.2'; # TorrenTres
-    if(substr($peer_id,0,7)=='turbobt')
-        return 'TurboBT '.(substr($peer_id,7,5)); # TurboBT
-    if(substr($peer_id,0,7)=='a00---0')
+    }
+    if (substr($peer_id, 0, 7)=='turbobt') {
+        return 'TurboBT '.(substr($peer_id, 7, 5)); # TurboBT
+    }
+    if (substr($peer_id, 0, 7)=='a00---0') {
         return 'Swarmy'; # Swarmy
-    if(substr($peer_id,0,7)=='a02---0')
+    }
+    if (substr($peer_id, 0, 7)=='a02---0') {
         return 'Swarmy'; # Swarmy
-    if(substr($peer_id,0,7)=='T00---0')
+    }
+    if (substr($peer_id, 0, 7)=='T00---0') {
         return 'Teeweety'; # Teeweety
-    if(substr($peer_id,0,7)=='rubytor')
+    }
+    if (substr($peer_id, 0, 7)=='rubytor') {
         return 'Ruby Torrent v'.ord($peer_id[7]); # Ruby Torrent
-    if(substr($peer_id,0,5)=='Mbrst')
-        return MainlineDecodePeerId(substr($peer_id,5,5),'burst!'); # burst!
-    if(substr($peer_id,0,4)=='btpd')
-        return 'BT Protocol Daemon '.(substr($peer_id,5,3)); # BT Protocol Daemon
-    if(substr($peer_id,0,8)=='XBT022--')
+    }
+    if (substr($peer_id, 0, 5)=='Mbrst') {
+        return MainlineDecodePeerId(substr($peer_id, 5, 5), 'burst!'); # burst!
+    }
+    if (substr($peer_id, 0, 4)=='btpd') {
+        return 'BT Protocol Daemon '.(substr($peer_id, 5, 3)); # BT Protocol Daemon
+    }
+    if (substr($peer_id, 0, 8)=='XBT022--') {
         return 'BitTorrent Lite'; # BitTorrent Lite based on XBT code
-    if(substr($peer_id,0,3)=='XBT')
-        return StdDecodePeerId(substr($peer_id,3,3), 'XBT'); # XBT Client
-    if(substr($peer_id,0,4)=='-BOW')
-        return StdDecodePeerId(substr($peer_id,4,5),'Bits on Wheels'); # Bits on Wheels
-    if(substr($peer_id,1,2)=='ML')
-        return MainlineDecodePeerId(substr($peer_id,3,5),'MLDonkey'); # MLDonkey
-    if($peer_id[0]=='A')
-    {
-        if(substr($peer_id,0,8)=="AZ2500BT")
+    }
+    if (substr($peer_id, 0, 3)=='XBT') {
+        return StdDecodePeerId(substr($peer_id, 3, 3), 'XBT'); # XBT Client
+    }
+    if (substr($peer_id, 0, 4)=='-BOW') {
+        return StdDecodePeerId(substr($peer_id, 4, 5), 'Bits on Wheels'); # Bits on Wheels
+    }
+    if (substr($peer_id, 1, 2)=='ML') {
+        return MainlineDecodePeerId(substr($peer_id, 3, 5), 'MLDonkey'); # MLDonkey
+    }
+    if ($peer_id[0]=='A') {
+        if (substr($peer_id, 0, 8)=="AZ2500BT") {
             return "BitTyrant";
-        return StdDecodePeerId(substr($peer_id,1,9),'ABC'); # ABC
+        }
+        return StdDecodePeerId(substr($peer_id, 1, 9), 'ABC'); # ABC
     }
-    if($peer_id[0]=='R')
-        return StdDecodePeerId(substr($peer_id,1,5),'Tribler'); # Tribler
-    if($peer_id[0]=='M') {
-        if(preg_match('/^Python/', $httpagent, $matches))
+    if ($peer_id[0]=='R') {
+        return StdDecodePeerId(substr($peer_id, 1, 5), 'Tribler'); # Tribler
+    }
+    if ($peer_id[0]=='M') {
+        if (preg_match('/^Python/', $httpagent, $matches)) {
             return 'Spoofing BT Client'; # Spoofing BT Client
-        return MainlineDecodePeerId(substr($peer_id,1,7),'Mainline'); # Mainline BitTorrent with version
+        }
+        return MainlineDecodePeerId(substr($peer_id, 1, 7), 'Mainline'); # Mainline BitTorrent with version
     }
-    if($peer_id[0]=='O')
-        return StdDecodePeerId(substr($peer_id,1,9),'Osprey Permaseed'); # Osprey Permaseed
-    if($peer_id[0]=='S'){
-        if(preg_match('/^BitTorrent\/3.4.2/', $httpagent, $matches))
+    if ($peer_id[0]=='O') {
+        return StdDecodePeerId(substr($peer_id, 1, 9), 'Osprey Permaseed'); # Osprey Permaseed
+    }
+    if ($peer_id[0]=='S') {
+        if (preg_match('/^BitTorrent\/3.4.2/', $httpagent, $matches)) {
             return 'Spoofing BT Client'; # Spoofing BT Client
-        return StdDecodePeerId(substr($peer_id,1,9),'Shad0w'); # Shadow's client
+        }
+        return StdDecodePeerId(substr($peer_id, 1, 9), 'Shad0w'); # Shadow's client
     }
-    if($peer_id[0]=='T'){
-        if(preg_match('/^Python/', $httpagent, $matches))
+    if ($peer_id[0]=='T') {
+        if (preg_match('/^Python/', $httpagent, $matches)) {
             return 'Spoofing BT Client'; # Spoofing BT Client
-        return StdDecodePeerId(substr($peer_id,1,9),'BitTornado'); # BitTornado
+        }
+        return StdDecodePeerId(substr($peer_id, 1, 9), 'BitTornado'); # BitTornado
     }
-    if($peer_id[0]=='U')
-        return StdDecodePeerId(substr($peer_id,1,9),'UPnP'); # UPnP NAT Bit Torrent
+    if ($peer_id[0]=='U') {
+        return StdDecodePeerId(substr($peer_id, 1, 9), 'UPnP'); # UPnP NAT Bit Torrent
+    }
     # Azureus / Localhost
-    if(substr($peer_id,0,3)=='-AZ') {
-        if(preg_match('/^Localhost ([0-9]+\.[0-9]+\.[0-9]+)/', $httpagent, $matches))
+    if (substr($peer_id, 0, 3)=='-AZ') {
+        if (preg_match('/^Localhost ([0-9]+\.[0-9]+\.[0-9]+)/', $httpagent, $matches)) {
             return "Localhost $matches[1]";
-        if(preg_match('/^BitTorrent\/3.4.2/', $httpagent, $matches))
+        }
+        if (preg_match('/^BitTorrent\/3.4.2/', $httpagent, $matches)) {
             return 'Spoofing BT Client'; # Spoofing BT Client
-        if(preg_match('/^Python/', $httpagent, $matches))
+        }
+        if (preg_match('/^Python/', $httpagent, $matches)) {
             return 'Spoofing BT Client'; # Spoofing BT Client
-        return StdDecodePeerId(substr($peer_id,3,7),((substr($peer_id, 3, 2)>=31)?'Vuze':'Azureus'));
+        }
+        return StdDecodePeerId(substr($peer_id, 3, 7), ((substr($peer_id, 3, 2)>=31)?'Vuze':'Azureus'));
     }
-    if(preg_match('/^Azureus/', $peer_id))
+    if (preg_match('/^Azureus/', $peer_id)) {
         return 'Azureus 2.0.3.2';
+    }
     # BitComet/BitLord/BitVampire/Modded FUTB BitComet
-    if(substr($peer_id,0,4)=='exbc' || substr($peer_id,1,3)=='UTB'){
-        if(substr($peer_id,0,4)=='FUTB')
-            return DecodeVersionString(substr($peer_id,4,2),'BitComet Mod1');
-        if(substr($peer_id,0,4)=='xUTB')
-            return DecodeVersionString(substr($peer_id,4,2),'BitComet Mod2');
-        if(substr($peer_id,6,4)=='LORD')
-            return DecodeVersionString(substr($peer_id,4,2),'BitLord');
-        if(substr($peer_id,6,3)=='---' && DecodeVersionString(substr($peer_id,4,2),'BitComet')=='BitComet 0.54')
+    if (substr($peer_id, 0, 4)=='exbc' || substr($peer_id, 1, 3)=='UTB') {
+        if (substr($peer_id, 0, 4)=='FUTB') {
+            return DecodeVersionString(substr($peer_id, 4, 2), 'BitComet Mod1');
+        }
+        if (substr($peer_id, 0, 4)=='xUTB') {
+            return DecodeVersionString(substr($peer_id, 4, 2), 'BitComet Mod2');
+        }
+        if (substr($peer_id, 6, 4)=='LORD') {
+            return DecodeVersionString(substr($peer_id, 4, 2), 'BitLord');
+        }
+        if (substr($peer_id, 6, 3)=='---' && DecodeVersionString(substr($peer_id, 4, 2), 'BitComet')=='BitComet 0.54') {
             return 'BitVampire';
-        return DecodeVersionString(substr($peer_id,4,2),'BitComet');
+        }
+        return DecodeVersionString(substr($peer_id, 4, 2), 'BitComet');
     }
     # Rufus
-    if(substr($peer_id,2,2)=='RS'){
-        for ($i=0; $i<=strlen(substr($peer_id,4,9)); $i++){
+    if (substr($peer_id, 2, 2)=='RS') {
+        for ($i=0; $i<=strlen(substr($peer_id, 4, 9)); $i++) {
             $c = $peer_id[$i+4];
-            if (ctype_alnum($c) || $c == chr(0))
+            if (ctype_alnum($c) || $c == chr(0)) {
                             $rufus_chk = true;
-            else break;
+            } else {
+                break;
+            }
         }
-        if (isset($rufus_chk))
-            return DecodeVersionString(substr($peer_id,0,2),'Rufus');
+        if (isset($rufus_chk)) {
+            return DecodeVersionString(substr($peer_id, 0, 2), 'Rufus');
+        }
     }
     # BitSpirit
-    if(substr($peer_id,14,6)=='HTTPBT' || substr($peer_id,16,4)=='UDP0') {
-        if(substr($peer_id,2,2)=='BS') {
-            if($peer_id[1]==chr(0))
+    if (substr($peer_id, 14, 6)=='HTTPBT' || substr($peer_id, 16, 4)=='UDP0') {
+        if (substr($peer_id, 2, 2)=='BS') {
+            if ($peer_id[1]==chr(0)) {
                 return 'BitSpirit v1';
-            if($peer_id[1]== chr(2))
+            }
+            if ($peer_id[1]== chr(2)) {
                 return 'BitSpirit v2';
+            }
         }
         return 'BitSpirit';
     }
     #BitSpirit
-    if(substr($peer_id,2,2)=='BS') {
-        if($peer_id[1]==chr(0))
+    if (substr($peer_id, 2, 2)=='BS') {
+        if ($peer_id[1]==chr(0)) {
             return 'BitSpirit v1';
-        if($peer_id[1]==chr(2))
+        }
+        if ($peer_id[1]==chr(2)) {
             return 'BitSpirit v2';
+        }
         return 'BitSpirit';
     }
-    if(substr($peer_id,1,2)=="SP")
-        return StdDecodePeerId(substr($peer_id,3,4),"BitSpirit");
+    if (substr($peer_id, 1, 2)=="SP") {
+        return StdDecodePeerId(substr($peer_id, 3, 4), "BitSpirit");
+    }
 
     # eXeem beta
-    if(substr($peer_id,0,3)=='-eX') {
+    if (substr($peer_id, 0, 3)=='-eX') {
         $version_str = '';
         $version_str .= ((int)$peer_id[3]).'.';
         $version_str .= ((int)$peer_id[4]);
         return "eXeem $version_str";
     }
-    if(substr($peer_id,0,2)=='eX')
+    if (substr($peer_id, 0, 2)=='eX') {
         return 'eXeem'; # eXeem beta .21
-    if(substr($peer_id,0,12)==(chr(0)*12) && $peer_id[12]==chr(97) && $peer_id[13]==chr(97))
+    }
+    if (substr($peer_id, 0, 12)==(chr(0)*12) && $peer_id[12]==chr(97) && $peer_id[13]==chr(97)) {
         return 'Experimental 3.2.1b2'; # Experimental 3.2.1b2
-    if(substr($peer_id,0,12)==(chr(0)*12) && $peer_id[12]==chr(0) && $peer_id[13]==chr(0))
+    }
+    if (substr($peer_id, 0, 12)==(chr(0)*12) && $peer_id[12]==chr(0) && $peer_id[13]==chr(0)) {
         return 'Experimental 3.1'; # Experimental 3.1
+    }
 
-    if(substr($peer_id,1,2)=="UM")
-        return StdDecodePeerId(substr($peer_id,3,4),"uTorrent for Mac");
-    if(substr($peer_id,1,2)=="SD")
+    if (substr($peer_id, 1, 2)=="UM") {
+        return StdDecodePeerId(substr($peer_id, 3, 4), "uTorrent for Mac");
+    }
+    if (substr($peer_id, 1, 2)=="SD") {
         return "Thunder";
-    if(substr($peer_id,1,2)=="XL")
+    }
+    if (substr($peer_id, 1, 2)=="XL") {
         return "XunLei";
-    if(substr($peer_id,1,2)=="CD")
-        return "Enhanced CTorrent " . substr($peer_id,4,1) . "." . substr($peer_id,6,1);
-    if(substr($peer_id,1,2)=="qB")
-        return StdDecodePeerId(substr($peer_id,3,4),"qBittorrent");
-    if(substr($peer_id,1,2)=="AG")
-        return StdDecodePeerId(substr($peer_id,3,4),"Ares");
-    if(substr($peer_id, 1, 2) == "BF")
-    {
-        if(substr($peer_id, 3, 4) == "6110")
+    }
+    if (substr($peer_id, 1, 2)=="CD") {
+        return "Enhanced CTorrent " . substr($peer_id, 4, 1) . "." . substr($peer_id, 6, 1);
+    }
+    if (substr($peer_id, 1, 2)=="qB") {
+        return StdDecodePeerId(substr($peer_id, 3, 4), "qBittorrent");
+    }
+    if (substr($peer_id, 1, 2)=="AG") {
+        return StdDecodePeerId(substr($peer_id, 3, 4), "Ares");
+    }
+    if (substr($peer_id, 1, 2) == "BF") {
+        if (substr($peer_id, 3, 4) == "6110") {
             $ver="0.10";
-        elseif(substr($peer_id, 3, 4) == "6C05")
+        } elseif (substr($peer_id, 3, 4) == "6C05") {
             $ver="0.20";
-        elseif(substr($peer_id, 3, 4) == "6C0F")
+        } elseif (substr($peer_id, 3, 4) == "6C0F") {
             $ver="0.21";
-        elseif(substr($peer_id, 3, 4) == "7114")
+        } elseif (substr($peer_id, 3, 4) == "7114") {
             $ver="0.22";
-        elseif(substr($peer_id, 3, 4) == "7127")
+        } elseif (substr($peer_id, 3, 4) == "7127") {
             $ver="0.30";
-        elseif(substr($peer_id, 3, 4) == "7128")
+        } elseif (substr($peer_id, 3, 4) == "7128") {
             $ver="0.31";
-        elseif(substr($peer_id, 3, 4) == "7224")
+        } elseif (substr($peer_id, 3, 4) == "7224") {
             $ver="0.32";
-        else $ver="";
+        } else {
+            $ver="";
+        }
 
-    return "BitFlu ".$ver;
-}
-    if(substr($peer_id,1,2)=="DE")
-        return StdDecodePeerId(substr($peer_id,3,3),"Deluge");
-    if(substr($peer_id,1,2)=="HL")
-        return StdDecodePeerId(substr($peer_id,3,4),"Halite");
-    if(substr($peer_id,1,2)=="TT")
-        return StdDecodePeerId(substr($peer_id,3,3),"TuoTu");
-    if(substr($peer_id,1,2)=="BE")
-        return StdDecodePeerId(substr($peer_id,3,2),"BitTorrent SDK");
-    if(substr($peer_id,1,2)=="LH")
-        return StdDecodePeerId(substr($peer_id,3,4),"LH-ABC");
-    if(substr($peer_id,1,2)=="FC")
-        return StdDecodePeerId(substr($peer_id,3,2),"File Croc");
-    if(substr($peer_id,1,2)=="OS")
-        return StdDecodePeerId(substr($peer_id,3,3),"OneSwarm");
+        return "BitFlu ".$ver;
+    }
+    if (substr($peer_id, 1, 2)=="DE") {
+        return StdDecodePeerId(substr($peer_id, 3, 3), "Deluge");
+    }
+    if (substr($peer_id, 1, 2)=="HL") {
+        return StdDecodePeerId(substr($peer_id, 3, 4), "Halite");
+    }
+    if (substr($peer_id, 1, 2)=="TT") {
+        return StdDecodePeerId(substr($peer_id, 3, 3), "TuoTu");
+    }
+    if (substr($peer_id, 1, 2)=="BE") {
+        return StdDecodePeerId(substr($peer_id, 3, 2), "BitTorrent SDK");
+    }
+    if (substr($peer_id, 1, 2)=="LH") {
+        return StdDecodePeerId(substr($peer_id, 3, 4), "LH-ABC");
+    }
+    if (substr($peer_id, 1, 2)=="FC") {
+        return StdDecodePeerId(substr($peer_id, 3, 2), "File Croc");
+    }
+    if (substr($peer_id, 1, 2)=="OS") {
+        return StdDecodePeerId(substr($peer_id, 3, 3), "OneSwarm");
+    }
 
     // Unknown Client - If HTTP Agent is empty
     // (mainly for the benefit of the customised version of the XBT backend so that it displays useful information to update missing clients)
-    if($httpagent=="")
-        return "Unknown Client (".substr($peer_id,0,8).")";
+    if ($httpagent=="") {
+        return "Unknown Client (".substr($peer_id, 0, 8).")";
+    }
 
     // Unknown Client - If HTTP Agent is NOT empty
     return $httpagent;
@@ -706,33 +868,27 @@ function getagent($httpagent, $peer_id='') {
 #========================================
 
 
-if(!function_exists('stripos'))
-{
-   function stripos($haystack,$needle,$offset = 0)
-   {
-     return(strpos(strtolower($haystack),strtolower($needle),$offset));
-   }
+if (!function_exists('stripos')) {
+    function stripos($haystack, $needle, $offset = 0)
+    {
+        return(strpos(strtolower($haystack), strtolower($needle), $offset));
+    }
 }
 
 function test_my_cookie()
 {
     global $btit_settings, $TABLE_PREFIX;
 
-    if($btit_settings["secsui_cookie_type"]==1)
-    {
+    if ($btit_settings["secsui_cookie_type"]==1) {
         $cookie_id=(isset($_COOKIE["uid"])?(int)0+$_COOKIE["uid"]:1);
         $cookie_hash=(isset($_COOKIE["pass"])?$_COOKIE["pass"]:"");
-    }
-    elseif($btit_settings["secsui_cookie_type"]==2)
-    {
+    } elseif ($btit_settings["secsui_cookie_type"]==2) {
         $cookie_name=((isset($btit_settings["secsui_cookie_name"]) && !empty($btit_settings["secsui_cookie_name"]))?$btit_settings["secsui_cookie_name"]:"xbtitLoginCookie");
         $cookie_array=unserialize($_COOKIE[$cookie_name]);
         $cookie_id=(isset($cookie_array["id"])?(int)0+$cookie_array["id"]:1);
         $cookie_hash=(isset($cookie_array["hash"])?$cookie_array["hash"]:"");
         unset($cookie_array);
-    }
-    elseif($btit_settings["secsui_cookie_type"]==3)
-    {
+    } elseif ($btit_settings["secsui_cookie_type"]==3) {
         session_name("xbtit");
         session_start();
         $cookie_array=unserialize($_SESSION["login_cookie"]);
@@ -740,93 +896,91 @@ function test_my_cookie()
         $cookie_hash=(isset($cookie_array["hash"])?$cookie_array["hash"]:"");
         unset($cookie_array);
     }
-    if($cookie_id<=1)
+    if ($cookie_id<=1) {
         return array("is_valid" => false, "id" => 1);
-    else
-    {
+    } else {
         $res=get_result("SELECT `username`, `password`, `random`, `salt` FROM `{$TABLE_PREFIX}users` WHERE `id`=".$cookie_id);
-        if(count($res)==1)
+        if (count($res)==1) {
             $row=$res[0];
-        else
+        } else {
             return array("is_valid" => false, "id" => 1);
-
-        if($btit_settings["secsui_cookie_type"]==1)
-        {
-            $user_hash=md5($row["random"].$row["password"].$row["random"]);
         }
-        elseif($btit_settings["secsui_cookie_type"]==2  || $btit_settings["secsui_cookie_type"]==3)
-        {
+
+        if ($btit_settings["secsui_cookie_type"]==1) {
+            $user_hash=md5($row["random"].$row["password"].$row["random"]);
+        } elseif ($btit_settings["secsui_cookie_type"]==2  || $btit_settings["secsui_cookie_type"]==3) {
             $cookie_items=explode(",", $btit_settings["secsui_cookie_items"]);
             $cookie_string="";
 
-            foreach($cookie_items as $ci_value)
-            {
-                $ci_exp=explode("-",$ci_value);
-                if($ci_exp[0]==8)
-                {
+            foreach ($cookie_items as $ci_value) {
+                $ci_exp=explode("-", $ci_value);
+                if ($ci_exp[0]==8) {
                     $ci_exp2=explode("[+]", $ci_exp[1]);
-                    if($ci_exp2[0]==1)
-                    {
+                    if ($ci_exp2[0]==1) {
                         $ip_parts=explode(".", getip());
 
-                        if($ci_exp2[1]==1)
+                        if ($ci_exp2[1]==1) {
                             $cookie_string.=$ip_parts[0]."-";
-                        if($ci_exp2[1]==2)
+                        }
+                        if ($ci_exp2[1]==2) {
                             $cookie_string.=$ip_parts[1]."-";
-                        if($ci_exp2[1]==3)
+                        }
+                        if ($ci_exp2[1]==3) {
                             $cookie_string.=$ip_parts[2]."-";
-                        if($ci_exp2[1]==4)
+                        }
+                        if ($ci_exp2[1]==4) {
                             $cookie_string.=$ip_parts[3]."-";
-                        if($ci_exp2[1]==5)
+                        }
+                        if ($ci_exp2[1]==5) {
                             $cookie_string.=$ip_parts[0].".".$ip_parts[1]."-";
-                        if($ci_exp2[1]==6)
+                        }
+                        if ($ci_exp2[1]==6) {
                             $cookie_string.=$ip_parts[1].".".$ip_parts[2]."-";
-                        if($ci_exp2[1]==7)
+                        }
+                        if ($ci_exp2[1]==7) {
                             $cookie_string.=$ip_parts[2].".".$ip_parts[3]."-";
-                        if($ci_exp2[1]==8)
+                        }
+                        if ($ci_exp2[1]==8) {
                             $cookie_string.=$ip_parts[0].".".$ip_parts[2]."-";
-                        if($ci_exp2[1]==9)
+                        }
+                        if ($ci_exp2[1]==9) {
                             $cookie_string.=$ip_parts[0].".".$ip_parts[3]."-";
-                        if($ci_exp2[1]==10)
+                        }
+                        if ($ci_exp2[1]==10) {
                             $cookie_string.=$ip_parts[1].".".$ip_parts[3]."-";
-                        if($ci_exp2[1]==11)
+                        }
+                        if ($ci_exp2[1]==11) {
                             $cookie_string.=$ip_parts[0].".".$ip_parts[1].".".$ip_parts[2]."-";
-                        if($ci_exp2[1]==12)
+                        }
+                        if ($ci_exp2[1]==12) {
                             $cookie_string.=$ip_parts[1].".".$ip_parts[2].".".$ip_parts[3]."-";
-                        if($ci_exp2[1]==13)
+                        }
+                        if ($ci_exp2[1]==13) {
                             $cookie_string.=$ip_parts[0].".".$ip_parts[1].".".$ip_parts[2].".".$ip_parts[3]."-";
+                        }
 
                         unset($ci_exp2);
                     }
-                }
-                else
-                {
-                    if($ci_exp[0]==1 && $ci_exp[1]==1)
-                    {
+                } else {
+                    if ($ci_exp[0]==1 && $ci_exp[1]==1) {
                         $cookie_string.=$cookie_id."-";
                     }
-                    if($ci_exp[0]==2 && $ci_exp[1]==1)
-                    {
+                    if ($ci_exp[0]==2 && $ci_exp[1]==1) {
                         $cookie_string.=$row["password"]."-";
                     }
-                    if($ci_exp[0]==3 && $ci_exp[1]==1)
-                    {
+                    if ($ci_exp[0]==3 && $ci_exp[1]==1) {
                         $cookie_string.=$row["random"]."-";
                     }
-                    if($ci_exp[0]==4 && $ci_exp[1]==1)
-                    {
+                    if ($ci_exp[0]==4 && $ci_exp[1]==1) {
                         $cookie_string.=strtolower($row["username"])."-";
                     }
-                    if($ci_exp[0]==5 && $ci_exp[1]==1)
-                    {
+                    if ($ci_exp[0]==5 && $ci_exp[1]==1) {
                         $cookie_string.=$row["salt"]."-";
                     }
-                    if($ci_exp[0]==6 && $ci_exp[1]==1)
-                    {
+                    if ($ci_exp[0]==6 && $ci_exp[1]==1) {
                         $cookie_string.=$_SERVER["HTTP_USER_AGENT"]."-";
                     }
-                    if($ci_exp[0]==7 && $ci_exp[1]==1)
-                    {
+                    if ($ci_exp[0]==7 && $ci_exp[1]==1) {
                         $cookie_string.=$_SERVER["HTTP_ACCEPT_LANGUAGE"]."-";
                     }
                 }
@@ -834,15 +988,15 @@ function test_my_cookie()
             }
             $user_hash=sha1(trim($cookie_string, "-"));
         }
-        if($user_hash==$cookie_hash)
+        if ($user_hash==$cookie_hash) {
             return array("is_valid" => true, "id" => $cookie_id);
-        else
+        } else {
             return array("is_valid" => false, "id" => 1);
+        }
     }
 }
 
-function sqlesc($x) {
- return '\''.mysqli_real_escape_string($GLOBALS['conn'],$x).'\'';
+function sqlesc($x)
+{
+    return '\''.mysqli_real_escape_string($GLOBALS['conn'], $x).'\'';
 }
-
-?>

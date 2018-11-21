@@ -30,11 +30,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-if (!defined("IN_BTIT"))
+if (!defined("IN_BTIT")) {
       die("non direct access!");
+}
 
-if (!defined("IN_ACP"))
+if (!defined("IN_ACP")) {
       die("non direct access!");
+}
 
 
 
@@ -66,29 +68,29 @@ $timespanfmt = '%s days, %s hours, %s minutes and %s seconds';
      * @author   staybyte
      * @version  1.0 - 20 July 2005
      */
-    function formatByteDown($value, $limes = 6, $comma = 0)
-    {
-        $dh           = pow(10, $comma);
-        $li           = pow(10, $limes);
-        $return_value = $value;
-        $unit         = $GLOBALS['byteUnits'][0];
+function formatByteDown($value, $limes = 6, $comma = 0)
+{
+    $dh           = pow(10, $comma);
+    $li           = pow(10, $limes);
+    $return_value = $value;
+    $unit         = $GLOBALS['byteUnits'][0];
 
-        for ( $d = 6, $ex = 15; $d >= 1; $d--, $ex-=3 ) {
-            if (isset($GLOBALS['byteUnits'][$d]) && $value >= $li * pow(10, $ex)) {
-                $value = round($value / ( pow(1024, $d) / $dh) ) /$dh;
-                $unit = $GLOBALS['byteUnits'][$d];
-                break 1;
-            } // end if
-        } // end for
+    for ($d = 6, $ex = 15; $d >= 1; $d--, $ex-=3) {
+        if (isset($GLOBALS['byteUnits'][$d]) && $value >= $li * pow(10, $ex)) {
+            $value = round($value / ( pow(1024, $d) / $dh)) /$dh;
+            $unit = $GLOBALS['byteUnits'][$d];
+            break 1;
+        } // end if
+    } // end for
 
-        if ($unit != $GLOBALS['byteUnits'][0]) {
-            $return_value = number_format($value, $comma, '.', ',');
-        } else {
-            $return_value = number_format($value, 0, '.', ',');
-        }
+    if ($unit != $GLOBALS['byteUnits'][0]) {
+        $return_value = number_format($value, $comma, '.', ',');
+    } else {
+        $return_value = number_format($value, 0, '.', ',');
+    }
 
-        return array($return_value, $unit);
-    } // end of the 'formatByteDown' function
+    return array($return_value, $unit);
+} // end of the 'formatByteDown' function
 
     /**
      * Returns a given timespan value in a readable format.
@@ -97,23 +99,23 @@ $timespanfmt = '%s days, %s hours, %s minutes and %s seconds';
      *
      * @return string  the formatted value
      */
-    function timespanFormat($seconds)
-    {
-        $return_string = '';
-        $days = floor($seconds / 86400);
-        if ($days > 0) {
-            $seconds -= $days * 86400;
-        }
-        $hours = floor($seconds / 3600);
-        if ($days > 0 || $hours > 0) {
-            $seconds -= $hours * 3600;
-        }
-        $minutes = floor($seconds / 60);
-        if ($days > 0 || $hours > 0 || $minutes > 0) {
-            $seconds -= $minutes * 60;
-        }
-        return (string)$days." Days ". (string)$hours." Hours ". (string)$minutes." Minutes ". (string)$seconds." Seconds ";
+function timespanFormat($seconds)
+{
+    $return_string = '';
+    $days = floor($seconds / 86400);
+    if ($days > 0) {
+        $seconds -= $days * 86400;
     }
+    $hours = floor($seconds / 3600);
+    if ($days > 0 || $hours > 0) {
+        $seconds -= $hours * 3600;
+    }
+    $minutes = floor($seconds / 60);
+    if ($days > 0 || $hours > 0 || $minutes > 0) {
+        $seconds -= $minutes * 60;
+    }
+    return (string)$days." Days ". (string)$hours." Hours ". (string)$minutes." Minutes ". (string)$seconds." Seconds ";
+}
 
 
    /**
@@ -125,23 +127,23 @@ $timespanfmt = '%s days, %s hours, %s minutes and %s seconds';
      *
      * @access  public
      */
-    function localisedDate($timestamp = -1, $format = '')
-    {
-        global $datefmt, $month, $day_of_week;
+function localisedDate($timestamp = -1, $format = '')
+{
+    global $datefmt, $month, $day_of_week;
 
-        if ($format == '') {
-            $format = $datefmt;
-        }
+    if ($format == '') {
+        $format = $datefmt;
+    }
 
-        if ($timestamp == -1) {
-            $timestamp = time();
-        }
+    if ($timestamp == -1) {
+        $timestamp = time();
+    }
 
-        $date = preg_replace('@%[aA]@', $day_of_week[(int)strftime('%w', $timestamp)], $format);
-        $date = preg_replace('@%[bB]@', $month[(int)strftime('%m', $timestamp)-1], $date);
+    $date = preg_replace('@%[aA]@', $day_of_week[(int)strftime('%w', $timestamp)], $format);
+    $date = preg_replace('@%[bB]@', $month[(int)strftime('%m', $timestamp)-1], $date);
 
-        return strftime($date, $timestamp);
-    } // end of the 'localisedDate()' function
+    return strftime($date, $timestamp);
+} // end of the 'localisedDate()' function
 
 ////////////////////// END FUNCTION LIST /////////////////////////////////////
 
@@ -150,10 +152,10 @@ $timespanfmt = '%s days, %s hours, %s minutes and %s seconds';
 /**
  * Sends the query and buffers the result
  */
-$res = @mysqli_query($GLOBALS['conn'], 'SHOW STATUS') or Die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-    while ($row = mysqli_fetch_row($res)) {
-        $serverStatus[$row[0]] = $row[1];
-    }
+$res = @mysqli_query($GLOBALS['conn'], 'SHOW STATUS') or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+while ($row = mysqli_fetch_row($res)) {
+    $serverStatus[$row[0]] = $row[1];
+}
 @((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
 unset($res);
 unset($row);
@@ -187,12 +189,12 @@ unset($row);
 //Get query statistics
 $queryStats = array();
 $tmp_array = $serverStatus;
-    foreach($tmp_array AS $name => $value) {
-        if (substr($name, 0, 4) == 'Com_') {
-            $queryStats[str_replace('_', ' ', substr($name, 4))] = $value;
-            unset($serverStatus[$name]);
-        }
+foreach ($tmp_array as $name => $value) {
+    if (substr($name, 0, 4) == 'Com_') {
+        $queryStats[str_replace('_', ' ', substr($name, 4))] = $value;
+        unset($serverStatus[$name]);
     }
+}
 unset($tmp_array);
 ?>
 <table align="center" width="96%" class="lista" border="0" cellpadding="4" cellspacing="1">
@@ -250,7 +252,7 @@ unset($tmp_array);
                             <td class="lista">&nbsp;Aborted Clients&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format($serverStatus['Aborted_clients'], 0, '.', ','); ?>&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format(($serverStatus['Aborted_clients'] * 3600 / $serverStatus['Uptime']), 2, '.', ','); ?>&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0 ) ? number_format(($serverStatus['Aborted_clients'] * 100 / $serverStatus['Connections']), 2 , '.', ',') . '&nbsp;%' : '---'; ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0 ) ? number_format(($serverStatus['Aborted_clients'] * 100 / $serverStatus['Connections']), 2, '.', ',') . '&nbsp;%' : '---'; ?>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="lista">&nbsp;Total&nbsp;</td>
@@ -305,10 +307,9 @@ unset($tmp_array);
                         </tr>
 <?php
 
-$useBgcolorOne = TRUE;
+$useBgcolorOne = true;
 $countRows = 0;
 foreach ($queryStats as $name => $value) {
-
 // For the percentage column, use Questions - Connections, because
 // the number of connections is not an item of the Query types
 // but is included in Questions. Then the total of the percentages is 100.
@@ -321,20 +322,20 @@ foreach ($queryStats as $name => $value) {
                         </tr>
 <?php
     $useBgcolorOne = !$useBgcolorOne;
-    if (++$countRows == ceil(count($queryStats) / 2)) {
-        $useBgcolorOne = TRUE;
+if (++$countRows == ceil(count($queryStats) / 2)) {
+    $useBgcolorOne = true;
 ?>
-                    </table>
-                </td>
-                <td valign="top">
-                    <table border="0" class="lista" align="center" width="100%">
-                        <tr>
-                            <td colspan="2" class="header" >&nbsp;Query&nbsp;Type&nbsp;</td>
-                            <td class="header">&nbsp;&oslash;&nbsp;Per&nbsp;Hour&nbsp;</td>
-                            <td class="header">&nbsp;%&nbsp;</td>
-                        </tr>
+            </table>
+        </td>
+        <td valign="top">
+            <table border="0" class="lista" align="center" width="100%">
+                <tr>
+                    <td colspan="2" class="header" >&nbsp;Query&nbsp;Type&nbsp;</td>
+                    <td class="header">&nbsp;&oslash;&nbsp;Per&nbsp;Hour&nbsp;</td>
+                    <td class="header">&nbsp;%&nbsp;</td>
+                </tr>
 <?php
-    }
+}
 }
 unset($countRows);
 unset($useBgcolorOne);
@@ -379,30 +380,30 @@ if (!empty($serverStatus)) {
                             <td class="header">&nbsp;Value&nbsp;</td>
                         </tr>
 <?php
-    $useBgcolorOne = TRUE;
+    $useBgcolorOne = true;
     $countRows = 0;
-    foreach($serverStatus AS $name => $value) {
+foreach ($serverStatus as $name => $value) {
 ?>
-                        <tr>
-                            <td class="lista">&nbsp;<?php echo htmlspecialchars(str_replace('_', ' ', $name)); ?>&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo htmlspecialchars($value); ?>&nbsp;</td>
-                        </tr>
+                <tr>
+                    <td class="lista">&nbsp;<?php echo htmlspecialchars(str_replace('_', ' ', $name)); ?>&nbsp;</td>
+                    <td class="lista" align="right">&nbsp;<?php echo htmlspecialchars($value); ?>&nbsp;</td>
+                </tr>
 <?php
-        $useBgcolorOne = !$useBgcolorOne;
-        if (++$countRows == ceil(count($serverStatus) / 3) || $countRows == ceil(count($serverStatus) * 2 / 3)) {
-            $useBgcolorOne = TRUE;
+$useBgcolorOne = !$useBgcolorOne;
+if (++$countRows == ceil(count($serverStatus) / 3) || $countRows == ceil(count($serverStatus) * 2 / 3)) {
+    $useBgcolorOne = true;
 ?>
-                    </table>
-                </td>
-                <td valign="top">
-                    <table border="0" class="lista" align="center" width="100%">
-                        <tr>
-                            <td class="header">&nbsp;Variable&nbsp;</td>
-                            <td class="header">&nbsp;Value&nbsp;</td>
-                        </tr>
+        </table>
+    </td>
+    <td valign="top">
+        <table border="0" class="lista" align="center" width="100%">
+            <tr>
+                <td class="header">&nbsp;Variable&nbsp;</td>
+                <td class="header">&nbsp;Value&nbsp;</td>
+            </tr>
 <?php
-        }
-    }
+}
+}
     unset($useBgcolorOne);
 ?>
                     </table>

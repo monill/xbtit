@@ -33,4 +33,3 @@ $language['RATING']='মূল্যায়ন';
 $language['ERR_NO_VOTE']='আপনার অবশ্যই নির্বাচন করে ভোট করতে হবে.';
 $language['VOTES']='ভোট';
 $language['SHOW_HIDE']='Show/Hide Files';
-?>

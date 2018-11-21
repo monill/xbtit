@@ -4,7 +4,7 @@ $language['BLOCK_INFO']='معلومات المتتبع';
 $language['BLOCK_MENU']='القائمة الرئيسية';
 /* We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber */
 $language['BLOCK_DDMENU']='';
-$language['BLOCK_CALENDAR']='التقويم'; 
+$language['BLOCK_CALENDAR']='التقويم';
 $language['BLOCK_CLOCK']='الساعة';
 $language['BLOCK_FORUM']='المنتدى';
 $language['BLOCK_LASTMEMBER']='آخر عضو مسجل';
@@ -23,4 +23,3 @@ $language['BLOCK_MAINUSERTOOLBAR']='شريط المستخدم الرسمي';
 $language['WELCOME_LASTUSER']=' مرحبا بك الى المتتبع ';
 $language['BLOCK_MINCLASSVIEW']='ادنى رتبه من الاعضاء يمكنها مشاهدة البلوك';
 $language['BLOCK_MAXCLASSVIEW']='اعلى رتبه من الاعضاء يمكنها مشاهدة البلوك';
-?>
