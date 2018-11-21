@@ -1516,8 +1516,8 @@ function sqlerr($file = '', $line = '')
 ?>
   <table border="0" bgcolor="" align=left cellspacing=0 cellpadding=10 style="background: blue">
     <tr>
-          <td class=embedded><font color="#FFFFFF"><h1><?php echo ERR_SQL_ERR; ?></h1>
-            <b><?php echo ((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)).$file;?></b></font></td>
+          <td class=embedded><span style="color: #FFFFFF; "><h1><?php echo ERR_SQL_ERR; ?></h1>
+            <b><?php echo ((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)).$file;?></b></span></td>
         </tr>
     </table>
 <?php

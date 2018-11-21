@@ -344,7 +344,7 @@
 
 <br />
 
-<center><tag:userdetail_back /></center>
+<div style="text-align: center;"><tag:userdetail_back /></div>
 
 <br />
     </div>

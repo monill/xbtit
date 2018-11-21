@@ -76,7 +76,7 @@ if ($CURUSER["uid"] > 1) {
 
 ?>
 
-<center>
+<div style="text-align: center;">
 
 <div id="chat" style="height:400px">
  
@@ -87,7 +87,7 @@ if ($CURUSER["uid"] > 1) {
     <li>
       <span class="name">BTIT SHOUT:</span><h2 style='padding-left:20px;'><?php echo $language["WELCOME"] ?></h2>
           
-        <center><div class="loader"></div></center>
+        <div style="text-align: center;"><div class="loader"></div></div>
 
       </li>
 
@@ -125,7 +125,7 @@ if ($CURUSER["uid"] > 1) {
 
 </div>
 
-</center>
+</div>
 
 <?php
 } else {
