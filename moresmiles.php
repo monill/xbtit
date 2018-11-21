@@ -45,7 +45,7 @@ $i=0;
 reset($smilies);
 reset($privatesmilies);
 
-$all_smiles=array();
+$all_smiles= [];
 
 foreach ($smilies as $code => $url) {
     switch ($i) {

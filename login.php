@@ -36,7 +36,7 @@ if (!defined("IN_BTIT")) {
 
 session_name("xbtit");
 session_start();
-$_SESSION=array();
+$_SESSION= [];
 setcookie("xbtit", "", time()-3600, "/");
 session_destroy();
 
@@ -50,7 +50,7 @@ function xbtit_login()
     $language["INSERT_USERNAME"]=AddSlashes($language["INSERT_USERNAME"]);
     $language["INSERT_PASSWORD"]=AddSlashes($language["INSERT_PASSWORD"]);
 
-    $login=array();
+    $login= [];
     $login["action"]="index.php?page=login&amp;returnto=".urlencode("index.php")."";
     $login["username"]=$user;
     $login["create"]="index.php?page=signup";
@@ -141,7 +141,7 @@ if (!$CURUSER || $CURUSER["uid"]==1) {
                         $salt=pass_the_salt(5);
                         $rehash=md5(md5($salt).md5($password));
 
-                        IPSMember::save($row["ipb_fid"], array("members" => array("member_login_key" => "", "member_login_key_expire" => "0", "members_pass_hash" => "$rehash", "members_pass_salt" => "$salt")));
+                        IPSMember::save($row["ipb_fid"], ["members" => ["member_login_key" => "", "member_login_key_expire" => "0", "members_pass_hash" => "$rehash", "members_pass_salt" => "$salt"]]);
                         set_ipb_cookie($row["ipb_fid"]);
                     } else {
                         set_ipb_cookie($row["ipb_fid"]);

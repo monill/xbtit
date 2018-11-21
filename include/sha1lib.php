@@ -66,7 +66,7 @@ class Sha1Lib
         $x[$len >> 5] |= 0x80 << (24 - $len % 32);
         $x[(($len + 64 >> 9) << 4) + 15] = $len;
 
-        $w = array();
+        $w = [];
         $a =  1732584193;
         $b = -271733879;
         $c = -1732584194;
@@ -98,7 +98,7 @@ class Sha1Lib
             $e = $this->safe_add($e, $olde);
         }
 
-        return array($a, $b, $c, $d, $e);
+        return [$a, $b, $c, $d, $e];
     }
 
     /*
@@ -189,7 +189,7 @@ class Sha1Lib
 	 */
     function str2binb($str)
     {
-        $bin = array();
+        $bin = [];
         $mask = (1 << $this->chrsz) - 1;
         for ($i=0, $len=strlen($str) * $this->chrsz; $i < $len; $i += $this->chrsz) {
             $bin[$i >> 5] |= (ord($str{$i / $this->chrsz}) & $mask) << (24 - $i%32);

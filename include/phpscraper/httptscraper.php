@@ -46,7 +46,7 @@ class httptscraper extends tscraper
     public function scrape($url, $infohash)
     {
         if (!is_array($infohash)) {
-            $infohash = array($infohash);
+            $infohash = [$infohash];
         }
         foreach ($infohash as $hash) {
             if (!preg_match('#^[a-f0-9]{40}$#i', $hash)) {
@@ -87,15 +87,15 @@ class httptscraper extends tscraper
         }
         $arr_scrape_data = lightbenc::bdecode($return);
             
-        $torrents = array();
+        $torrents = [];
         foreach ($infohash as $hash) {
             $ehash = pack('H*', $hash);
             if (isset($arr_scrape_data['files'][$ehash])) {
-                $torrents[$hash] = array(   'infohash'=>$hash,
+                $torrents[$hash] = ['infohash'=>$hash,
                                             'seeders'=>(int) $arr_scrape_data['files'][$ehash]['complete'],
                                             'completed'=>(int) $arr_scrape_data['files'][$ehash]['downloaded'],
                                             'leechers'=>(int) $arr_scrape_data['files'][$ehash]['incomplete']
-                                            );
+                ];
             } else {
                 $torrents[$hash] = false;
             }

@@ -99,7 +99,7 @@ switch ($action) {
         $block_title=$language["PRUNE_TORRENTS"];
 
         $count=0;
-        $tor=array();
+        $tor= [];
         include("$THIS_BASEPATH/include/offset.php");
         foreach ($res as $ID => $rtorrent) {
              $tor[$count]["filename"]=unesc($rtorrent["filename"]);

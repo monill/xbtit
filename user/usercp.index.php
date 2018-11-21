@@ -164,7 +164,7 @@ if ($CURUSER["uid"]!=$uid || $CURUSER["uid"]==1) {
                 $language=$language2;
                 do_sqlquery("UPDATE `{$db_prefix}members` SET `email".(($GLOBALS["FORUMLINK"]=="smf")?"A":"_a")."ddress`='".((isset($GLOBALS['conn']) && is_object($GLOBALS['conn'])) ? mysqli_real_escape_string($GLOBALS['conn'], $newmail) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))."' WHERE ".(($GLOBALS["FORUMLINK"]=="smf")?"`ID_MEMBER`":"`id_member`")."=".$getacc["smf_fid"], true);
             } elseif ($GLOBALS["FORUMLINK"]=="ipb") {
-                IPSMember::save($getacc["ipb_fid"], array("members" => array("email" => "$newmail")));
+                IPSMember::save($getacc["ipb_fid"], ["members" => ["email" => "$newmail"]]);
             }
 
             // Print a message stating that their email has been successfully changed
@@ -178,7 +178,7 @@ if ($CURUSER["uid"]!=$uid || $CURUSER["uid"]==1) {
                     do_sqlquery("UPDATE {$db_prefix}members SET ".(($GLOBALS["FORUMLINK"]=="smf")?"`ID_GROUP`":"`id_group`")."=".(($getacc["smf_group_mirror"]>0)?$getacc["smf_group_mirror"]:"13")." WHERE ".(($GLOBALS["FORUMLINK"]=="smf")?"`ID_MEMBER`":"`id_member`")."=".$getacc["smf_fid"]);
                 } elseif ($GLOBALS["FORUMLINK"]=="ipb") {
                     $ipblev=(($getacc["ipb_group_mirror"]>0)?$getacc["ipb_group_mirror"]:"3");
-                    IPSMember::save($getacc["ipb_fid"], array("members" => array("member_group_id" => "$ipblev")));
+                    IPSMember::save($getacc["ipb_fid"], ["members" => ["member_group_id" => "$ipblev"]]);
                 }
             }
         } // If the random number in the url is incorrect print an error message

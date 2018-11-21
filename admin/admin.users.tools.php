@@ -110,7 +110,7 @@ if (isset($_GET['returnto'])) {
     $ret_url='index.php';
 }
 $edit=true;
-$profile=array();
+$profile= [];
 $newname='';
 
 switch ($action) {
@@ -266,7 +266,7 @@ switch ($action) {
                 $level=0;
             }
             # check avatar image extension if someone have better idea ;)
-            if ($avatar && $avatar!='' && !in_array(substr($avatar, strlen($avatar)-4), array('.gif','.jpg','.bmp','.png'))) {
+            if ($avatar && $avatar!='' && !in_array(substr($avatar, strlen($avatar)-4), ['.gif','.jpg','.bmp','.png'])) {
                 stderr($language['ERROR'], $language['ERR_AVATAR_EXT']);
             }
             if ($idlangue>0 && $idlangue != $curu['language']) {
@@ -308,7 +308,7 @@ switch ($action) {
                             $ipb_group[0]["perm_id"]=$reslev["ipb_group_mirror"];
                         }
                         $ipblevel=$ipb_group[0]["perm_id"];
-                        IPSMember::save($ipb_fid, array("members" => array("member_group_id" => "$ipblevel")));
+                        IPSMember::save($ipb_fid, ["members" => ["member_group_id" => "$ipblevel"]]);
                     } else {
                         $note.=' Group not found in IPB.';
                     }
@@ -323,7 +323,7 @@ switch ($action) {
                 if (substr($FORUMLINK, 0, 3)=="smf") {
                     $smfset[]="email".(($FORUMLINK=="smf")?"A":"_a")."ddress=".sqlesc($email);
                 } elseif ($FORUMLINK=="ipb") {
-                    IPSMember::save($ipb_fid, array("members" => array("email" => "$email")));
+                    IPSMember::save($ipb_fid, ["members" => ["email" => "$email"]]);
                 }
             }
             if ($avatar != $curu['avatar']) {
@@ -354,7 +354,7 @@ switch ($action) {
                         $new_username=trim($username, "'");
                         $new_l_username=strtolower($new_username);
                         $new_seoname=IPSText::makeSeoTitle($new_username);
-                        IPSMember::save($ipb_fid, array("members" => array("name" => "$new_username", "members_display_name" => "$new_username", "members_l_display_name" => "$new_l_username", "members_l_username" => "$new_l_username", "members_seo_name" => "$new_seoname")));
+                        IPSMember::save($ipb_fid, ["members" => ["name" => "$new_username", "members_display_name" => "$new_username", "members_l_display_name" => "$new_l_username", "members_l_username" => "$new_l_username", "members_seo_name" => "$new_seoname"]]);
                     }
                     $newname.=' )';
                 } else {
@@ -403,7 +403,7 @@ switch ($action) {
                 $pattern1='#[a-z]#';
                 $pattern2='#[A-Z]#';
                 $pattern3='#[0-9]#';
-                $pattern4='/[¬!"£$%^&*()`{}\[\]:@~;\'#<>?,.\/\\-=_+\|]/';
+                $pattern4='/[ï¿½!"ï¿½$%^&*()`{}\[\]:@~;\'#<>?,.\/\\-=_+\|]/';
 
                 for ($pass_position=0; $pass_position<=$pass_end; $pass_position++) {
                     if (preg_match($pattern1, substr($pass, $pass_position, 1), $matches)) {
@@ -422,7 +422,7 @@ switch ($action) {
                 }
 
                 $un=((!empty($new_username) && $new_username!=$curu["username"])?$new_username:$curu["username"]);
-                $multipass=hash_generate(array("salt" => ""), $pass, $un);
+                $multipass=hash_generate(["salt" => ""], $pass, $un);
                 $j=$btit_settings["secsui_pass_type"];
                 $set[]="`password`=".sqlesc($multipass[$j]["rehash"]);
                 $set[]="`salt`=".sqlesc($multipass[$j]["salt"]);
@@ -433,7 +433,7 @@ switch ($action) {
                 $smfset[]='`password'.(($FORUMLINK=="smf")?"S":"_s").'alt`='.sqlesc($passhash[1]);
                 if ($FORUMLINK=="ipb") {
                     $ipbhash=ipb_passgen($pass);
-                    IPSMember::save($ipb_fid, array("members" => array("member_login_key" => "", "member_login_key_expire" => "0", "members_pass_hash" => "$ipbhash[0]", "members_pass_salt" => "$ipbhash[1]")));
+                    IPSMember::save($ipb_fid, ["members" => ["member_login_key" => "", "member_login_key_expire" => "0", "members_pass_hash" => "$ipbhash[0]", "members_pass_salt" => "$ipbhash[1]"]]);
                 }
             }
 

@@ -57,7 +57,7 @@ if (!$CURUSER || $CURUSER["admin_access"]!="yes") {
     $admintpl->set("pager_bottom", $pagerbottom);
 
     $logres=do_sqlquery("SELECT * FROM {$TABLE_PREFIX}logs ORDER BY added DESC $limit");
-    $log=array();
+    $log= [];
     $i=0;
 
     include("$THIS_BASEPATH/include/offset.php");

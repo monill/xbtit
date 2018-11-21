@@ -94,7 +94,7 @@ if ($resmail && count($resmail)>0) {
     if (!isset($_SESSION)) {
         session_start();
     }
-    $_SESSION=array();
+    $_SESSION= [];
     setcookie("xbtit", "", time()-3600, "/");
     session_destroy();
 

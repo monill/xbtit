@@ -138,7 +138,7 @@ if ($act=="confirm") {
 
             $get=get_result("SELECT `u`.`ipb_fid`, `ul`.`ipb_group_mirror` FROM `{$TABLE_PREFIX}users` `u` LEFT JOIN `{$TABLE_PREFIX}users_level` `ul` ON `u`.`id_level`=`ul`.`id` WHERE `u`.`id_level`=3 AND `u`.`random`=$random2", true, $btit_settings['cache_duration']);
             $forum_level=(($get[0]["ipb_group_mirror"]>0)?$get[0]["ipb_group_mirror"]:3);
-            IPSMember::save($get[0]["ipb_fid"], array("members" => array("member_group_id" => "$forum_level")));
+            IPSMember::save($get[0]["ipb_fid"], ["members" => ["member_group_id" => "$forum_level"]]);
         }
         success_msg($language["ACCOUNT_CREATED"], $language["ACCOUNT_CONGRATULATIONS"]);
         stdfoot();
@@ -192,7 +192,7 @@ if ($_POST["conferma"]) {
 
 
 
-function tabella($action, $dati = array())
+function tabella($action, $dati = [])
 {
 
     global $idflag,$link, $idlangue, $idstyle, $CURUSER,$USE_IMAGECODE, $TABLE_PREFIX, $language, $tpl_account,$THIS_BASEPATH, $btit_settings;
@@ -481,7 +481,7 @@ function aggiungiutente()
         }
     }
 
-    $bannedchar=array("\\", "/", ":", "*", "?", "\"", "@", "$", "'", "`", ",", ";", ".", "<", ">", "!", "�", "%", "^", "&", "(", ")", "+", "=", "#", "~");
+    $bannedchar= ["\\", "/", ":", "*", "?", "\"", "@", "$", "'", "`", ",", ";", ".", "<", ">", "!", "�", "%", "^", "&", "(", ")", "+", "=", "#", "~"];
     if (straipos(mysqli_real_escape_string($GLOBALS['conn'], $utente), $bannedchar)==true) {
            return -8;
            exit;
@@ -523,7 +523,7 @@ function aggiungiutente()
     }
 
     $mtpp=$btit_settings["max_torrents_per_page"];
-    $multipass=hash_generate(array("salt" => ""), $_POST["pwd"], $_POST["user"]);
+    $multipass=hash_generate(["salt" => ""], $_POST["pwd"], $_POST["user"]);
     $i=$btit_settings["secsui_pass_type"];
 
     $pid=md5(uniqid(rand(), true));

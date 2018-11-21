@@ -62,10 +62,10 @@ class poll
   /* This method returns poller options as an associative array */
     function getOptionsAsArray()
     {
-        $retArray = array();
+        $retArray = [];
         $res = do_sqlquery("select * from ".$this->table_prefix."poller_option where pollerID='".$this->ID."' order by pollerOrder");
         while ($inf = mysqli_fetch_array($res)) {
-            $retArray[$inf['ID']] = array($inf['optionText'],$inf['pollerOrder']);
+            $retArray[$inf['ID']] = [$inf['optionText'],$inf['pollerOrder']];
         }
         return $retArray;
     }
@@ -73,7 +73,7 @@ class poll
   /* This method returns number of votes as an associative array */
     function getVotesAsArray()
     {
-        $retArray = array();
+        $retArray = [];
         $res = do_sqlquery("select v.optionID,count(v.ID) as countVotes from ".$this->table_prefix."poller_vote v,".$this->table_prefix."poller_option o where v.optionID = o.ID and o.pollerID = '".$this->ID."' group by v.optionID");
         while ($inf = mysqli_fetch_array($res)) {
             $retArray[$inf['optionID']] = $inf['countVotes'];

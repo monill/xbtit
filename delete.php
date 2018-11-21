@@ -100,7 +100,7 @@ if (isset($_POST["action"])) {
 $torrenttpl=new bTemplate();
 $torrenttpl->set("language", $language);
 
-$torrent=array();
+$torrent= [];
 $torrent["filename"]=$row["filename"];
 $torrent["info_hash"]=$row["info_hash"];
 $torrent["description"]=format_comment($row["comment"]);

@@ -211,7 +211,7 @@ if (substr($btit_settings["forum"], 0, 3)=="smf") {
 
 
 
-    function forum_pager($rpp, $count, $href, $opts = array())
+    function forum_pager($rpp, $count, $href, $opts = [])
     {
 
         global $language;
@@ -299,7 +299,7 @@ if (substr($btit_settings["forum"], 0, 3)=="smf") {
             $pagertop="";
             $pagerbottom="";
         }
-        return array($pagertop, $pagerbottom, "LIMIT $start,$rpp");
+        return [$pagertop, $pagerbottom, "LIMIT $start,$rpp"];
     }
 
 

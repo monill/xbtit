@@ -67,7 +67,7 @@ switch ($action) {
                         break;
                             */
                 }
-                 $t=array();
+                 $t= [];
                 while ($tstatus=mysqli_fetch_array($dbres)) {
                        $t[$i]["table"]=$tstatus['Table'];
                        $t[$i]["operation"]=$tstatus['Op'];
@@ -95,7 +95,7 @@ switch ($action) {
               $bytes=0;
               $records=0;
               $overhead=0;
-              $tables=array();
+              $tables= [];
               // display current status for tables
             while ($tstatus=mysqli_fetch_array($dbstatus)) {
                 $tables[$i]["name"]=$tstatus['Name'];

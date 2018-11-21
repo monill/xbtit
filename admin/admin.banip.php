@@ -75,7 +75,7 @@ switch ($action) {
     case '':
     case 'read':
     default:
-        $banned=array();
+        $banned= [];
         $getbanned = do_sqlquery("SELECT b.*, u.username FROM {$TABLE_PREFIX}bannedip b LEFT JOIN {$TABLE_PREFIX}users u ON u.id=b.addedby ORDER BY b.added DESC", true);
         $rowsbanned = @mysqli_num_rows($getbanned);
         $admintpl->set('frm_action', 'index.php?page=admin&amp;user='.$CURUSER['uid'].'&amp;code='.$CURUSER['random'].'&amp;do=banip&amp;action=write');

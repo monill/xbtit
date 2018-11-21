@@ -169,7 +169,7 @@ unset($vrow);
 unset($vres);
 
 if ($row["username"]!=$CURUSER["username"] && $CURUSER["uid"]>1) {
-    $ratings = array(5 => $language["FIVE_STAR"] ,4 =>$language["FOUR_STAR"] ,3 =>$language["THREE_STAR"] ,2 =>$language["TWO_STAR"] ,1 =>$language["ONE_STAR"] );
+    $ratings = [5 => $language["FIVE_STAR"] ,4 =>$language["FOUR_STAR"] ,3 =>$language["THREE_STAR"] ,2 =>$language["TWO_STAR"] ,1 =>$language["ONE_STAR"]];
     $xres = do_sqlquery("SELECT rating, added FROM {$TABLE_PREFIX}ratings WHERE infohash = '$id' AND userid = " . $CURUSER["uid"], true);
     $xrow = @mysqli_fetch_array($xres);
     if ($xrow) {
@@ -292,7 +292,7 @@ if (!$subres || count($subres)===0) {
     } else {
         $torrenttpl->set('INSERT_COMMENT', false, true);
     }
-     $comments=array();
+     $comments= [];
      $count=0;
     foreach ($subres as $subrow) {
         $comments[$count]['user']="<a href=\"index.php?page=userdetails&amp;id=".$subrow["uid"]."\">" . unesc($subrow['user']);

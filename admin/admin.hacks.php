@@ -54,45 +54,45 @@ switch ($action) {
         fclose($fd);
         $get=new update_hacks();
         $result=$get->hack_to_array($xml);
-        $admintpl->set("title", str_replace(array("'", "\""), array("",""), $result[0]["title"]));
-        $admintpl->set("version", str_replace(array("'", "\""), array("",""), $result[0]["version"]));
-        $admintpl->set("author", str_replace(array("'", "\""), array("",""), $result[0]["author"]));
+        $admintpl->set("title", str_replace(["'", "\""], ["",""], $result[0]["title"]));
+        $admintpl->set("version", str_replace(["'", "\""], ["",""], $result[0]["version"]));
+        $admintpl->set("author", str_replace(["'", "\""], ["",""], $result[0]["author"]));
         $HTMLOUT="\n\n";
 
         foreach ($result[0]["file"] as $k => $v) {
-            $name=str_replace(array("'","\""), array("", ""), $v["name"]);
+            $name=str_replace(["'","\""], ["", ""], $v["name"]);
             if ($name=="database") {
                 foreach ($v["operations"] as $key => $value) {
-                    $action=str_replace(array("'","\""), array("", ""), $value["action"]);
+                    $action=str_replace(["'","\""], ["", ""], $value["action"]);
                     if ($action=="sql") {
                         $lines=count(explode("\n", $value["data"]));
                         $HTMLOUT.="<br /><span style='font-family:arial; font-size:12pt; color:#000000;'>".$language["MHI_RUN_QUERY"].":</span><br />\n";
-                        $HTMLOUT.="<textarea rows='$lines' cols='98'>".str_replace(array("{\$db_prefix}","<",">"), array($TABLE_PREFIX,"&lt;","&gt;"), $value["data"])."</textarea><br />\n";
+                        $HTMLOUT.="<textarea rows='$lines' cols='98'>".str_replace(["{\$db_prefix}","<",">"], [$TABLE_PREFIX,"&lt;","&gt;"], $value["data"])."</textarea><br />\n";
                     }
                 }
                 $HTMLOUT.="<br />";
             } else {
                 $firstpass=0;
                 foreach ($v["operations"] as $key => $value) {
-                    $action=str_replace(array("'","\""), array("", ""), $value["action"]);
-                    $where=str_replace(array("\$DEFAULT_ROOT","'", "\$DEFAULT_LANGUAGE_PATH", "\$DEFAULT_STYLE_PATH", "\$CURRENT_FOLDER"), (array("","","","")), str_replace(array("\$DEFAULT_ROOT/","'", "\"", "\$DEFAULT_LANGUAGE_PATH/", "\$DEFAULT_STYLE_PATH/", "\$CURRENT_FOLDER/"), array("","","","language/english/", "style/xbtit_default/", ""), $value["where"]));
-                    $name=str_replace(array("\$DEFAULT_ROOT","'", "\$DEFAULT_LANGUAGE_PATH", "\$DEFAULT_STYLE_PATH", "\$CURRENT_FOLDER"), (array("","","","")), str_replace(array("\$DEFAULT_ROOT/","'", "\"", "\$DEFAULT_LANGUAGE_PATH/", "\$DEFAULT_STYLE_PATH/", "\$CURRENT_FOLDER/"), array("","","","language/english/", "style/xbtit_default/", ""), $v["name"]));
+                    $action=str_replace(["'","\""], ["", ""], $value["action"]);
+                    $where=str_replace(["\$DEFAULT_ROOT","'", "\$DEFAULT_LANGUAGE_PATH", "\$DEFAULT_STYLE_PATH", "\$CURRENT_FOLDER"], (["","","",""]), str_replace(["\$DEFAULT_ROOT/","'", "\"", "\$DEFAULT_LANGUAGE_PATH/", "\$DEFAULT_STYLE_PATH/", "\$CURRENT_FOLDER/"], ["","","","language/english/", "style/xbtit_default/", ""], $value["where"]));
+                    $name=str_replace(["\$DEFAULT_ROOT","'", "\$DEFAULT_LANGUAGE_PATH", "\$DEFAULT_STYLE_PATH", "\$CURRENT_FOLDER"], (["","","",""]), str_replace(["\$DEFAULT_ROOT/","'", "\"", "\$DEFAULT_LANGUAGE_PATH/", "\$DEFAULT_STYLE_PATH/", "\$CURRENT_FOLDER/"], ["","","","language/english/", "style/xbtit_default/", ""], $v["name"]));
                     $data=$value["data"];
                     $lines=count(explode("\n", $value["search"]));
                     $lines2=count(explode("\n", $value["data"]));
                     if ($action=="add" || $action=="replace") {
                         $HTMLOUT.="\n<span style='font-family:arial; font-size:14pt; color:#000000;'>".(($firstpass==0)?$language["MHI_IN"]:$language["MHI_ALSO_IN"])." <span style='color:#0000FF'>".$name . "</span> ".$language["MHI_FIND_THIS"].":</span>";
-                        $HTMLOUT.="\n<br /><textarea rows='$lines' cols='98'>".str_replace(array("<",">"), array("&lt;","&gt;"), $value["search"])."</textarea><br /><br />";
+                        $HTMLOUT.="\n<br /><textarea rows='$lines' cols='98'>".str_replace(["<",">"], ["&lt;","&gt;"], $value["search"])."</textarea><br /><br />";
                         if ($action=="add") {
                             $HTMLOUT.="\n<span style='font-family:arial; font-size:14pt; color:#000000;'>".$language["MHI_ADD_THIS"]." " . $where . " ".$language["MHI_IT"].":</span>";
                         } elseif ($action=="replace") {
                             $HTMLOUT.="\n<span style='font-family:arial; font-size:14pt; color:#000000;'>".$language["MHI_REPLACE"].":</span>";
                         }
-                        $HTMLOUT.="\n<br /><textarea rows='$lines2' cols='98'>".str_replace(array("<",">"), array("&lt;","&gt;"), $data)."</textarea><br /><br />";
+                        $HTMLOUT.="\n<br /><textarea rows='$lines2' cols='98'>".str_replace(["<",">"], ["&lt;","&gt;"], $data)."</textarea><br /><br />";
                         $firstpass=1;
                     } elseif ($action=="copy") {
-                        $where=str_replace(array("'","\"","\$DEFAULT_ROOT/", "\$DEFAULT_LANGUAGE_PATH", "\$DEFAULT_STYLE_PATH", "\$CURRENT_FOLDER/"), array("","","","language/english", "style/xbtit_default",""), $value["where"]);
-                        $data=str_replace(array("'","\""), array("",""), $value["data"]);
+                        $where=str_replace(["'","\"","\$DEFAULT_ROOT/", "\$DEFAULT_LANGUAGE_PATH", "\$DEFAULT_STYLE_PATH", "\$CURRENT_FOLDER/"], ["","","","language/english", "style/xbtit_default",""], $value["where"]);
+                        $data=str_replace(["'","\""], ["",""], $value["data"]);
                         $HTMLOUT.="\n<span style='font-family:arial; font-size:14pt; color:#000000;'>".$language["MHI_COPY"]." <span style='font-family:arial; font-size:14pt; color:#0000FF;'>$name</span> ".$language["MHI_AS"]." <span style='font-family:arial; font-size:14pt; color:#0000FF;'> ". $where . (($where!="")?"/":"")."$data</span></span><br />";
                     }
                 }
@@ -208,7 +208,7 @@ switch ($action) {
         }
 
         if (isset($_POST["confirm"]) && $_POST["confirm"]==$language["FRM_CONFIRM"]) {
-            $ftp_data=array();
+            $ftp_data= [];
             $ftp_data["server"]=$_POST["ftp_server"];
             $ftp_data["port"]=$_POST["ftp_port"];
             $ftp_data["username"]=$_POST["ftp_user"];
@@ -335,7 +335,7 @@ switch ($action) {
     default:
         $admintpl->set("language", $language);
         $hacks = get_result("SELECT * FROM {$TABLE_PREFIX}hacks ORDER BY id", true);
-        $installed=array();
+        $installed= [];
         $i=0;
         //die(print_r($hacks));
         foreach ($hacks as $id => $hack) {

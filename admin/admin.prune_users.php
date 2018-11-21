@@ -47,7 +47,7 @@ if ($action=="prune") {
           die();
     }
      $count=0;
-     $del_id=array();
+     $del_id= [];
      
     foreach ($_POST["id"] as $id => $uid) {
         if ($uid==1) {
@@ -58,7 +58,7 @@ if ($action=="prune") {
      do_sqlquery("DELETE FROM {$TABLE_PREFIX}users WHERE id IN ('".implode("','", $del_id)."')", true);
      
     if (substr($GLOBALS["FORUMLINK"], 0, 3)=="smf") {
-        $smf_fid=array();
+        $smf_fid= [];
         foreach ($_POST["smf_fid"] as $v) {
             $smf_fid[]=((int)$v);
         }
@@ -66,7 +66,7 @@ if ($action=="prune") {
             do_sqlquery("DELETE FROM `{$db_prefix}members` WHERE ".(($GLOBALS["FORUMLINK"]=="smf")?"`ID_MEMBER`":"`id_member`")." IN ('".implode(",", $smf_fid)."')", true);
         }
     } elseif ($GLOBALS["FORUMLINK"]=="ipb") {
-        $ipb_fid=array();
+        $ipb_fid= [];
         $ipb_counter=0;
         foreach ($_POST["ipb_fid"] as $v) {
             $ipb_counter++;
@@ -103,7 +103,7 @@ if ($action=="prune") {
 
        include("$THIS_BASEPATH/include/offset.php");
 
-       $ru=array();
+       $ru= [];
        $i=0;
     foreach ($res as $id => $rusers) {
         $ru[$i]["username"]=unesc($rusers["username"]);

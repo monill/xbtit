@@ -8,7 +8,7 @@ class TestCase extends Assert /* implements Test */
      that specializes the runTest() method. */
     var $fName;
     var $fResult;
-    var $fExceptions = array();
+    var $fExceptions = [];
 
     function TestCase($name)
     {

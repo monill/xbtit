@@ -2,7 +2,7 @@
 class TestResult
 {
   /* Collect the results of running a set of TestCases. */
-    var $fFailures = array();
+    var $fFailures = [];
     var $fRunTests = 0;
     var $fStop = false;
 

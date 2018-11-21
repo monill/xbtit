@@ -73,7 +73,7 @@ if ($keywords != "") {
                         " WHERE IFNULL(f.minclassread,999)<=".$CURUSER["id_level"]." AND MATCH (p.body) AGAINST ($ekeywords IN BOOLEAN MODE)".
                         " ORDER BY score, added DESC  $limit", true);
 
-        $search=array();
+        $search= [];
         $i=0;
         foreach ($res as $id => $sr) {
             if ($sr["forumname"] == "") {

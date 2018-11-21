@@ -81,7 +81,7 @@ switch ($action) {
 
     case '':
     default;
-          $new=array();
+          $new= [];
           $j=0;
           $num_lines=$btit_settings["php_log_lines"];
           $log=$btit_settings["php_log_path"]."/".$btit_settings["php_log_name"]."_".date("d.m.y")."_.log";
@@ -102,7 +102,7 @@ switch ($action) {
         // Figure out the first key based upon the value set for the number of lines to display
             $first_key=$last_key-($num_lines-1);
         // Start a new array to store the last X lines in
-            $final_array=array();
+            $final_array= [];
         // Work through the array and only add the last X lines to it.
             foreach ($data_array as $key => $value) {
                 if ($key >= $first_key && $key <= $last_key) {
@@ -131,7 +131,7 @@ switch ($action) {
           $admintpl->set("frm_action", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=php_log&amp;action=save");
           $admintpl->set("config", $loglist);
           $today=date("d.m.y");
-          $list=array();
+          $list= [];
           $i=0;
         foreach (glob($btit_settings["php_log_path"]."/".$btit_settings["php_log_name"]."*.log") as $logname) {
             $logname=str_replace($btit_settings["php_log_path"]."/", "", $logname);

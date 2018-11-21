@@ -58,7 +58,7 @@ print("<?xml version=\"1.0\" encoding=\"".$GLOBALS["charset"]."\"?>");
 
 function safehtml($string)
 {
-    $validcharset=array(
+    $validcharset= [
     "ISO-8859-1",
     "ISO-8859-15",
     "UTF-8",
@@ -70,7 +70,7 @@ function safehtml($string)
     "GB2312",
     "BIG5-HKSCS",
     "Shift_JIS",
-    "EUC-JP");
+    "EUC-JP"];
 
     if (in_array($GLOBALS["charset"], $validcharset)) {
         return htmlentities($string, ENT_COMPAT, $GLOBALS["charset"]);

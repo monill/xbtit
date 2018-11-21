@@ -135,7 +135,7 @@ function format_shout($text)
     return $s;
 }
 
-$msg = array();
+$msg = [];
 
 include(__DIR__."/chat.php");
 

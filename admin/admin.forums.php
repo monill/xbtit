@@ -44,7 +44,7 @@ if (!defined("IN_ACP")) {
 switch ($action) {
     case "read":
         $resf=get_result("SELECT f.*,uread.level as readlevel,uwrite.level as writelevel, ucreate.level as createlevel FROM {$TABLE_PREFIX}forums f INNER JOIN {$TABLE_PREFIX}users_level  as uread on uread.id_level=minclassread INNER JOIN {$TABLE_PREFIX}users_level as uwrite on uwrite.id_level=minclasswrite INNER JOIN {$TABLE_PREFIX}users_level as ucreate on ucreate.id_level=minclasscreate WHERE id_parent=0 AND uread.can_be_deleted='no' AND uwrite.can_be_deleted='no' AND ucreate.can_be_deleted='no' ORDER BY f.sort,f.id", true);
-        $forums=array();
+        $forums= [];
         $i=0;
         foreach ($resf as $id => $result) {
               $forums[$i]["td_padding"]="";
@@ -108,7 +108,7 @@ switch ($action) {
             exit();
         }
         $rlevel=mysqli_query($GLOBALS['conn'], "SELECT DISTINCT id_level, predef_level, level FROM {$TABLE_PREFIX}users_level ORDER BY id_level");
-        $alevel=array();
+        $alevel= [];
         while ($reslevel=mysqli_fetch_assoc($rlevel)) {
             $alevel[]=$reslevel;
         }
@@ -123,7 +123,7 @@ switch ($action) {
         $admintpl->set("read", false, true);
         $admintpl->set("frm_action", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=forum&amp;action=save&amp;id=$id&amp;what=$what");
 
-        $forum=array();
+        $forum= [];
         $forum["name"]=($what == "new" ? "" : unesc($result["name"]));
         $forum["description"]=($what == "new" ? "" : unesc($result["description"]));
         $forum["combo_parent"]="\n<select name=\"parent\" size=\"1\" ".($result["i_am_parent"]?"disabled=\"disabled\"":"").">";

@@ -194,7 +194,7 @@ function smile()
 
 function safehtml($string)
 {
-    $validcharset=array(
+    $validcharset= [
     "ISO-8859-1",
     "ISO-8859-15",
     "UTF-8",
@@ -206,7 +206,7 @@ function safehtml($string)
     "GB2312",
     "BIG5-HKSCS",
     "Shift_JIS",
-    "EUC-JP");
+    "EUC-JP"];
 
     if (in_array($GLOBALS["charset"], $validcharset)) {
         return htmlentities($string, ENT_COMPAT, $GLOBALS["charset"]);
@@ -217,7 +217,7 @@ function safehtml($string)
 
 block_begin(SHOUTBOX);
 echo "";
-$msg = array();
+$msg = [];
 function file_save($filename, $content, $flags = 0)
 {
     if (!($file = fopen($filename, 'w'))) {

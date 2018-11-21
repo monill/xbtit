@@ -119,7 +119,7 @@ if (isset($_POST['save'])) {
 $admintpl->set("frm_action", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=poller");
 $admintpl->set("language", $language);
 $admintpl->set("poll_script", "<script type=\"text/javascript\" src=\"$BASEURL/jscript/ajax-poller-admin.js\"></script>");
-$polls=array();
+$polls= [];
 
 // Show a list of all the polls
 if (!isset($_POST['new']) && empty($id) && !isset($votes)) {
@@ -219,8 +219,8 @@ if (isset($_POST['new']) || !empty($id)) {
             $check2 = "";
         }
     } else {
-        $pollerOptions = array();
-        $votes = array();
+        $pollerOptions = [];
+        $votes = [];
         $title = unesc($language["POLL_START_NEW"]);
         $check1 = "checked=\"checked\"";
         $check2 = "";
@@ -253,7 +253,7 @@ if (isset($_POST['new']) || !empty($id)) {
         $countInputs = 3;
     }
 
-    $newpolls=array();
+    $newpolls= [];
     for ($no=0; $no<$countInputs; $no++) {
         $newpolls[$no]["no"]=$no;
     }

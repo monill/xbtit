@@ -82,15 +82,15 @@ if ($files_present==$lang[0]) {
         $data=fread($fd, filesize($filename));
         ftruncate($fd, 0);
         rewind($fd);
-        $search=array("\$INFO['banned_group']\t\t\t=\t'5';", "\$INFO['admin_group']\t\t\t=\t'4';", "\$INFO['guest_group']\t\t\t=\t'2';", "\$INFO['auth_group']\t\t\t=\t'1';");
-        $replace=array("\$INFO['banned_group']\t\t\t=\t'0';", "\$INFO['admin_group']\t\t\t=\t'8';", "\$INFO['guest_group']\t\t\t=\t'1';", "\$INFO['auth_group']\t\t\t=\t'2';");
+        $search= ["\$INFO['banned_group']\t\t\t=\t'5';", "\$INFO['admin_group']\t\t\t=\t'4';", "\$INFO['guest_group']\t\t\t=\t'2';", "\$INFO['auth_group']\t\t\t=\t'1';"];
+        $replace= ["\$INFO['banned_group']\t\t\t=\t'0';", "\$INFO['admin_group']\t\t\t=\t'8';", "\$INFO['guest_group']\t\t\t=\t'1';", "\$INFO['auth_group']\t\t\t=\t'2';"];
         $data=str_replace($search, $replace, $data);
         $start=strpos($data, "\$INFO['sql_tbl_prefix']");
         $end=strpos(substr($data, $start), ";")+1;
         $data2=substr($data, $start, $end);
         fwrite($fd, $data);
         fclose($fd);
-        $data=str_replace(array("\$INFO['sql_tbl_prefix']", "\t","'"), array("\$ipb_prefix","","\""), $data2);
+        $data=str_replace(["\$INFO['sql_tbl_prefix']", "\t","'"], ["\$ipb_prefix","","\""], $data2);
         $data=str_replace("x=\"", "x = \"", $data);
 
         $filename=__DIR__."/include/settings.php";
@@ -300,7 +300,7 @@ if ($act=="") {
             if ($account["pass_type"]==1) {
                 $passhash=ipb_md5_passgen($account["password"]);
             } else {
-                $passhash=array("ffffffffffffffffffffffffffffffff", "fffff");
+                $passhash= ["ffffffffffffffffffffffffffffffff", "fffff"];
             }
             // Try a username check
             $res=mysqli_query($GLOBALS['conn'], "SELECT `member_id` FROM `{$ipb_prefix}members` WHERE `name`='". mysqli_query($GLOBALS['conn'], $account["username"])."'");

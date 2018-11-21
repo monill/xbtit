@@ -36,7 +36,7 @@ class udptscraper extends tscraper
     public function scrape($url, $infohash)
     {
         if (!is_array($infohash)) {
-            $infohash = array($infohash);
+            $infohash = [$infohash];
         }
         foreach ($infohash as $hash) {
             if (!preg_match('#^[a-f0-9]{40}$#i', $hash)) {
@@ -104,7 +104,7 @@ class udptscraper extends tscraper
         if (strlen($ret) < $readlength) {
             throw new ScraperException('Too short scrape response.');
         }
-        $torrents = array();
+        $torrents = [];
         $index = 8;
         foreach ($infohash as $hash) {
             $retd = unpack("Nseeders/Ncompleted/Nleechers", substr($ret, $index, 12));

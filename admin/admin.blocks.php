@@ -49,7 +49,7 @@ function blocks_combo($current_block = "")
       $ret="\n<select name=\"block_name\" size=\"1\">\n<option value=\"\" ".($current_block==""?"selected=\"selected\"":"").">".$language["SELECT"]."</option>";
     while ($file = @readdir($dir)) {
         if (@is_file("$THIS_BASEPATH/blocks/" . $file) && $file!="index.php") {
-            $content=str_replace(array("_block",".php"), "", $file);
+            $content=str_replace(["_block",".php"], "", $file);
             $ret.="\n<option value=\"$content\" ".($current_block==$content?"selected=\"selected\"":"").">$file</option>";
         }
     }
@@ -66,13 +66,13 @@ function read_blocks()
     require_once(load_language("lang_blocks.php"));
 
       $br=get_result("SELECT * FROM {$TABLE_PREFIX}blocks ORDER BY sortid", true);
-      $tops=array();
-        $dropdown=array();
-        $extras=array();
-      $lefts=array();
-      $centers=array();
-      $rights=array();
-      $bottom=array();
+      $tops= [];
+        $dropdown= [];
+        $extras= [];
+      $lefts= [];
+      $centers= [];
+      $rights= [];
+      $bottom= [];
       $t=0;
         $d=0;
         $e=0;
@@ -82,7 +82,7 @@ function read_blocks()
       $b=0;
 
       $rlevel=mysqli_query($GLOBALS['conn'], "SELECT DISTINCT id_level, predef_level, level FROM {$TABLE_PREFIX}users_level ORDER BY id_level");
-      $alevel=array();
+      $alevel= [];
     while ($reslevel=mysqli_fetch_assoc($rlevel)) {
         $alevel[]=$reslevel;
     }
@@ -408,7 +408,7 @@ switch ($action) {
 
     case 'edit':
         $rlevel=mysqli_query($GLOBALS['conn'], "SELECT DISTINCT id_level, predef_level, level FROM {$TABLE_PREFIX}users_level ORDER BY id_level");
-        $alevel=array();
+        $alevel= [];
         while ($reslevel=mysqli_fetch_assoc($rlevel)) {
             $alevel[]=$reslevel;
         }

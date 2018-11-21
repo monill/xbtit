@@ -212,7 +212,7 @@ if ($GLOBALS["ajax_poller"]) {
               $voteid=$_POST['poll_vote'];
               $memberid=$CURUSER["uid"];
               $ip= $_SERVER['REMOTE_ADDR'];
-              $new_poll_array=array();
+              $new_poll_array= [];
               mysqli_query($GLOBALS['conn'], "INSERT INTO poll_voters SET ip='$ip', votedate='".time()."', pid='$pid', memberid='$memberid'");
               $poll_answers = unserialize(stripslashes($result["choices"]));
               reset($poll_answers);
@@ -224,7 +224,7 @@ if ($GLOBALS["ajax_poller"]) {
                 if ($id==$voteid) {
                     $votes++;
                 }
-                $new_poll_array[] = array( $id, $choice, $votes);
+                $new_poll_array[] = [$id, $choice, $votes];
             }
               $votings= addslashes(serialize($new_poll_array));
               $uvotes=$result["votes"]+1;

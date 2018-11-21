@@ -34,14 +34,14 @@ class phpmailerTest extends TestCase
      * @private
      * @type string array
      */
-    var $ChangeLog = array();
+    var $ChangeLog = [];
     
      /**
      * Holds the note log.
      * @private
      * @type string array
      */
-    var $NoteLog = array();
+    var $NoteLog = [];
 
     /**
      * Class constuctor.
@@ -103,8 +103,8 @@ class phpmailerTest extends TestCase
     {
         // Clean global variables
         $this->Mail = null;
-        $this->ChangeLog = array();
-        $this->NoteLog = array();
+        $this->ChangeLog = [];
+        $this->NoteLog = [];
     }
 
 

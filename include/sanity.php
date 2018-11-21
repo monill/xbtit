@@ -74,7 +74,7 @@ function do_sanity()
         quickQuery("UPDATE {$TABLE_PREFIX}files SET lastcycle='".time()."' WHERE info_hash='$hash'");
 
         $results2 = do_sqlquery("SELECT status, COUNT(status) from {$TABLE_PREFIX}peers WHERE infohash='$hash' GROUP BY status");
-        $counts = array();
+        $counts = [];
         while ($row = mysqli_fetch_row($results2)) {
             $counts[$row[0]] = 0+$row[1];
         }

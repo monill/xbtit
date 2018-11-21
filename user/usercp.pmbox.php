@@ -64,12 +64,12 @@ switch ($action) {
                     $subject=$language["NO_SUBJECT"];
                 }
 
-                $pmpreviewtpl=array();
+                $pmpreviewtpl= [];
                 $pmpreviewtpl["subject"]=$subject;
                 $pmpreviewtpl["body"]=  format_comment(unesc($_POST["msg"]));
                 $usercptpl->set("pmpreview", $pmpreviewtpl);
 
-                $pmedittpl=array();
+                $pmedittpl= [];
                 $pmedittpl["frm_action"]="index.php?page=usercp&amp;do=".$do."&amp;action=post&amp;uid=".$uid."&amp;what=".htmlspecialchars($what)."";
                 $pmedittpl["receiver"]=$receiver;
                 $pmedittpl["readonly"]=($what!="new" ? " readonly=\"readonly\"" : "");
@@ -147,7 +147,7 @@ switch ($action) {
     default:
         if ($what=="outbox" && $action=="list") {
             $usercptpl->set("MSG_LIST", true, true);
-            $pmoutboxtpl=array();
+            $pmoutboxtpl= [];
             $pmoutboxtpl["frm_action"]="index.php?page=usercp&amp;do=pm&amp;action=deleteall&amp;uid=".$uid."&amp;type=out";
             $usercptpl->set("pmbox", $pmoutboxtpl);
 
@@ -165,7 +165,7 @@ switch ($action) {
             if (!$res || mysqli_num_rows($res)==0) {
                 $usercptpl->set("NO_MESSAGES", true, true);
             } else {
-                $pmouttpl=array();
+                $pmouttpl= [];
                 $i=0;
                 $usercptpl->set("NO_MESSAGES", false, true);
                 while ($result=mysqli_fetch_array($res)) {
@@ -182,7 +182,7 @@ switch ($action) {
             }
         } elseif ($what=="inbox" && $action=="list") {
             $usercptpl->set("MSG_LIST", true, true);
-            $pminboxtpl=array();
+            $pminboxtpl= [];
             $pminboxtpl["frm_action"]="index.php?page=usercp&amp;do=pm&amp;action=deleteall&amp;uid=".$uid."&amp;type=in";
             $usercptpl->set("pmbox", $pminboxtpl);
 
@@ -200,7 +200,7 @@ switch ($action) {
             if (!$res || mysqli_num_rows($res)==0) {
                 $usercptpl->set("NO_MESSAGES", true, true);
             } else {
-                $pmintpl=array();
+                $pmintpl= [];
                 $i=0;
                 $usercptpl->set("NO_MESSAGES", false, true);
                 while ($result=mysqli_fetch_array($res)) {
@@ -247,7 +247,7 @@ switch ($action) {
                 exit;
             } else {
                 $result=mysqli_fetch_array($res);
-                $pmedittpl=array();
+                $pmedittpl= [];
                 $pmedittpl["frm_action"]="index.php?page=usercp&amp;do=".$do."&amp;action=post&amp;uid=".$uid."&amp;what=".htmlspecialchars($what)."";
                 $pmedittpl["receiver"]=($what!="new" ? unesc($result["sendername"]):htmlspecialchars(urldecode($_GET["to"])));
                 $pmedittpl["readonly"]=($what!="new" ? " readonly=\"readonly\"" : "");
@@ -274,7 +274,7 @@ switch ($action) {
                 exit;
             } else {
                 $result=mysqli_fetch_array($res);
-                $pmreadtpl=array();
+                $pmreadtpl= [];
                 $pmreadtpl["sender_link"]="index.php?page=userdetails&amp;id=".$result["sender"]."";
                 $pmreadtpl["sender_name"]=unesc($result["sendername"]);
                 $pmreadtpl["added"]=get_date_time($result["added"]);

@@ -153,7 +153,7 @@ switch ($action) {
                  unset($rfields);
             } else {
                 $gid=max(0, $_GET["id"]);
-                $update=array();
+                $update= [];
                 $update[]="level=".sqlesc($_POST["gname"]);
                 $update[]="view_torrents=".sqlesc(isset($_POST["vtorrents"])?"yes":"no");
                 $update[]="edit_torrents=".sqlesc(isset($_POST["etorrents"])?"yes":"no");
@@ -195,7 +195,7 @@ switch ($action) {
         $admintpl->set("group_add_new", "<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=groups&amp;action=add\">".$language["INSERT_USER_GROUP"]."</a>");
         $admintpl->set("language", $language);
         $rlevel=do_sqlquery("SELECT * from {$TABLE_PREFIX}users_level ORDER BY id_level", true);
-        $groups=array();
+        $groups= [];
         $i=0;
         while ($level=mysqli_fetch_array($rlevel)) {
               $groups[$i]["user"]="<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=groups&amp;action=edit&amp;id=".$level["id"]."\">".unesc($level["prefixcolor"]).unesc($level["level"]).unesc($level["suffixcolor"])."</a>";

@@ -45,10 +45,10 @@ if (!defined("IN_ACP")) {
 
 ob_start();
 
-$GLOBALS["byteUnits"] = array('Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB');
+$GLOBALS["byteUnits"] = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB'];
 
-$day_of_week = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
-$month = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+$day_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+$month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 // See http://www.php.net/manual/en/function.strftime.php to define the
 // variable below
 $datefmt = '%B %d, %Y at %I:%M %p';
@@ -89,7 +89,7 @@ function formatByteDown($value, $limes = 6, $comma = 0)
         $return_value = number_format($value, 0, '.', ',');
     }
 
-    return array($return_value, $unit);
+    return [$return_value, $unit];
 } // end of the 'formatByteDown' function
 
     /**
@@ -187,7 +187,7 @@ print("\tThis MySQL server has been running for ". timespanFormat($serverStatus[
 unset($res);
 unset($row);
 //Get query statistics
-$queryStats = array();
+$queryStats = [];
 $tmp_array = $serverStatus;
 foreach ($tmp_array as $name => $value) {
     if (substr($name, 0, 4) == 'Com_') {

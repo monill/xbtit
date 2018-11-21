@@ -3,7 +3,7 @@ class TestSuite /* implements Test */
 {
   /* Compose a set of Tests (instances of TestCase or TestSuite), and
      run them all. */
-    var $fTests = array();
+    var $fTests = [];
 
     function TestSuite($classname = false)
     {

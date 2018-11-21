@@ -43,7 +43,7 @@ switch ($action) {
     case 'manage':
         $admintpl->set("language", $language);
         $res = do_sqlquery("SELECT * FROM {$TABLE_PREFIX}modules ORDER BY id");
-        $modules=array();
+        $modules= [];
         $i=0;
 
         while ($row_modules=mysqli_fetch_array($res)) {

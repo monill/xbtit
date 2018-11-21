@@ -74,7 +74,7 @@ $tlevel=0;
 # Actual Code Start
 $error=(isset($_GET['error']))?$_GET['error']:'';
 $error_msg='';
-$masspm=array();
+$masspm= [];
 $masspm_post=false;
 $ratio_d='';
 switch ($action) {
@@ -205,7 +205,7 @@ switch ($action) {
         $opts['default']=$flevel;
         # get from rank group
         $ranks=rank_list();
-        $ranks[]=array('id'=>0, 'level'=>$language['ALL']);
+        $ranks[]= ['id'=>0, 'level'=>$language['ALL']];
         $masspm['combo_from_group']=get_combo($ranks, $opts);
         # get to rank group
         $opts['name']='levell';

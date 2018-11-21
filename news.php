@@ -91,7 +91,7 @@ if ($action=="del") {
 
     $newstpl->set("ADD_EDIT", true, true);
 
-    $tplnews=array();
+    $tplnews= [];
     $tplnews["action"]="index.php?page=news&amp;act=confirm";
     $tplnews["hidden_action"]=$action;
     $tplnews["hidden_id"] = htmlentities($_GET["id"], ENT_QUOTES);
@@ -106,7 +106,7 @@ if ($action=="del") {
 
     $newstpl->set("ADD_EDIT", true, true);
 
-    $tplnews=array();
+    $tplnews= [];
     $tplnews["action"]="index.php?page=news&amp;act=confirm";
     $tplnews["hidden_action"]=$action;
     $tplnews["hidden_id"] = htmlentities($_GET["id"], ENT_QUOTES);

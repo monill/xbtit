@@ -61,7 +61,7 @@ $viewnewstpl -> set("can_edit_news", $CURUSER["edit_news"]=="yes", true);
 $viewnewstpl -> set("can_edit_news_1", $CURUSER["edit_news"]=="yes", true);
 $viewnewstpl -> set("can_delete_news", $CURUSER["delete_news"]=="yes", true);
 
-$viewnews=array();
+$viewnews= [];
 $i=0;
 
 $viewnewstpl -> set("news_exists", (count($res) > 0), true);

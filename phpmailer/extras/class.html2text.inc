@@ -142,7 +142,7 @@ class html2text
      *  @access public
      *  @see $replace
      */
-    var $search = array(
+    var $search = [
         "/\r/",                                  // Non-legal carriage return
         "/[\n\t]+/",                             // Newlines and tabs
         '/[ ]{2,}/',                             // Runs of spaces, pre-handling
@@ -185,7 +185,7 @@ class html2text
         '/&(euro|#8364);/i',                     // Euro sign
         '/&[^&;]+;/i',                           // Unknown/unhandled entities
         '/[ ]{2,}/'                              // Runs of spaces, post-handling
-    );
+    ];
 
     /**
      *  List of pattern replacements corresponding to patterns searched.
@@ -194,7 +194,7 @@ class html2text
      *  @access public
      *  @see $search
      */
-    var $replace = array(
+    var $replace = [
         '',                                     // Non-legal carriage return
         ' ',                                    // Newlines and tabs
         ' ',                                    // Runs of spaces, pre-handling
@@ -232,11 +232,11 @@ class html2text
         '--',
         '-',
         '*',
-        '£',
-        'EUR',                                  // Euro sign. € ?
+        'ï¿½',
+        'EUR',                                  // Euro sign. ï¿½ ?
         '',                                     // Unknown/unhandled entities
         ' '                                     // Runs of spaces, post-handling
-    );
+    ];
 
     /**
      *  Contains a list of HTML tags to allow in the resulting text.

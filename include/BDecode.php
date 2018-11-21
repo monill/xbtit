@@ -47,13 +47,13 @@ class BDecode
         if ($wholefile[$offset] === '0') {
             $offset++;
             if ($negative) {
-                return array(false);
+                return [false];
             }
             if ($wholefile[$offset] === ':' || $wholefile[$offset] === 'e') {
-                return array(0, ++$offset);
+                return [0, ++$offset];
             }
                 
-            return array(false);
+            return [false];
         }
         $ret[0] = 0;
         for (;;) {
@@ -70,13 +70,13 @@ class BDecode
                 $ret[1] = $offset+1;
                 if ($negative) {
                     if ($ret[0] == 0) {
-                        return array(false);
+                        return [false];
                     }
                     $ret[0] = - $ret[0];
                 }
                 return $ret;
             } else {
-                return array(false);
+                return [false];
             }
         }
     }
@@ -97,7 +97,7 @@ class BDecode
         $info = $this->numberdecode($wholefile, $offset);
 
         if ($info[0] === false) {
-            return array(false);
+            return [false];
         }
         $ret[0] = substr($wholefile, $info[1], $info[0]);
         $ret[1] = $info[1]+strlen($ret[0]);
@@ -109,23 +109,23 @@ class BDecode
     function decodeList($wholefile, $offset)
     {
         if ($wholefile[$offset] != 'l') {
-            return array(false);
+            return [false];
         }
         $offset++;
-        $ret = array();
+        $ret = [];
         for ($i=0;; $i++) {
             if ($wholefile[$offset] == 'e') {
                 break;
             }
             $value = $this->decodeEntry($wholefile, $offset);
             if ($value[0] === false) {
-                return array(false);
+                return [false];
             }
             $ret[$i] = $value[0];
             $offset = $value[1];
         }
         // The empty list is an empty array. Seems fine.
-        return array(0=>$ret, 1=>++$offset);
+        return [0=>$ret, 1=>++$offset];
     }
 
     // Tries to construct an array
@@ -137,7 +137,7 @@ class BDecode
         if ($wholefile[$offset] != 'd') {
             return false;
         }
-        $ret=array();
+        $ret= [];
         $offset++;
         for (;;) {
             if ($wholefile[$offset] == 'e') {
@@ -177,7 +177,7 @@ class BDecode
             $offset = $value[1];
         }
         
-        return array(0=>(empty($ret)?true:$ret), 1=>$offset);
+        return [0=>(empty($ret)?true:$ret), 1=>$offset];
     }
 } // End of class declaration.
 

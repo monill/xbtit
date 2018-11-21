@@ -41,7 +41,7 @@ function usertable($res, $frame_caption)
     global $STYLEPATH, $extratpl, $language;
 
     $num = 0;
-    $user=array();
+    $user= [];
     foreach ($res as $id => $a) {
          $num++;
 
@@ -69,7 +69,7 @@ function _torrenttable($rt, $frame_caption, $speed = false)
 
     global $STYLEPATH, $extratpl, $language;
 
-    $torrent=array();
+    $torrent= [];
     $num = 0;
     foreach ($rt as $id => $a) {
         $num++;

@@ -183,7 +183,7 @@ if ($CURUSER["view_users"]=="no") {    // start 'view_users'
 
     include("$CURRENTPATH/offset.php");
 
-    $users=array();
+    $users= [];
     $i=0;
 
     foreach ($rusers as $id => $row_user) {     // start while

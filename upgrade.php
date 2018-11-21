@@ -35,7 +35,7 @@ $dbfile="upgrade/v141_to_v2.sql";
 // declaration of variables
 $INSTALLPATH = dirname(__FILE__);
 $action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : 'welcome');
-$allowed_actions = array('welcome','reqcheck','settings','sql_import','save_mysql','finished');
+$allowed_actions = ['welcome','reqcheck','settings','sql_import','save_mysql','finished'];
 if (!in_array($action, $allowed_actions)) {
     $action = 'welcome';
 }
@@ -90,7 +90,7 @@ function load_lang_file()
 {
     global $install_lang;
 
-    $GLOBALS["find_install_lang"] = array();
+    $GLOBALS["find_install_lang"] = [];
 
     // Make sure the languages directory actually exists.
     if (file_exists(dirname(__FILE__) . '/language/install_lang/')) {
@@ -154,7 +154,7 @@ function language_list()
 
          global $TABLE_PREFIX;
 
-         $ret = array();
+         $ret = [];
          $res = mysqli_query($GLOBALS["conn"], "SELECT * FROM {$TABLE_PREFIX}language ORDER BY language");
 
     while ($row = mysqli_fetch_assoc($res)) {
@@ -172,7 +172,7 @@ function style_list()
 
          global $TABLE_PREFIX;
 
-         $ret = array();
+         $ret = [];
          $res = mysqli_query($GLOBALS["conn"], "SELECT * FROM {$TABLE_PREFIX}style ORDER BY id");
 
     while ($row = mysqli_fetch_assoc($res)) {
@@ -396,7 +396,7 @@ elseif ($action == 'sql_import') {
     }
 
     // check if some basic table are present in current selected db
-    $request_tables=array("{$TABLE_PREFIX}blocks", "{$TABLE_PREFIX}namemap", "{$TABLE_PREFIX}summary", "{$TABLE_PREFIX}forums","{$TABLE_PREFIX}language", "{$TABLE_PREFIX}style", "{$TABLE_PREFIX}users", "{$TABLE_PREFIX}users_level");
+    $request_tables= ["{$TABLE_PREFIX}blocks", "{$TABLE_PREFIX}namemap", "{$TABLE_PREFIX}summary", "{$TABLE_PREFIX}forums","{$TABLE_PREFIX}language", "{$TABLE_PREFIX}style", "{$TABLE_PREFIX}users", "{$TABLE_PREFIX}users_level"];
     for ($i=0; $i<count($request_tables); $i++) {
         $rt=mysqli_num_rows(mysqli_query($GLOBALS["conn"], "SHOW TABLES LIKE '".$request_tables[$i]."'"));
         if ($rt==0) { // table not found!
@@ -410,9 +410,9 @@ elseif ($action == 'sql_import') {
                     die;
         }
     }
-    $replaces = array(
+    $replaces = [
         'btit_' => $TABLE_PREFIX,
-    );
+    ];
     foreach ($install_lang as $key => $value) {
         if (substr($key, 0, 8) == 'default_') {
             $replaces['{$' . $key . '}'] = addslashes($value);
@@ -420,7 +420,7 @@ elseif ($action == 'sql_import') {
     }
 
     if (isset($replaces['{$default_reserved_names}'])) {
-        $replaces['{$default_reserved_names}'] = strtr($replaces['{$default_reserved_names}'], array('\\\\n' => '\\n'));
+        $replaces['{$default_reserved_names}'] = strtr($replaces['{$default_reserved_names}'], ['\\\\n' => '\\n']);
     }
 
     // If the UTF-8 setting was enabled, add it to the table definitions.
@@ -433,8 +433,8 @@ elseif ($action == 'sql_import') {
 
     // Execute the SQL.
     $current_statement = '';
-    $failures = array();
-    $exists = array();
+    $failures = [];
+    $exists = [];
     foreach ($sql_lines as $count => $line) {
         // No comments allowed!
         if (substr(trim($line), 0, 1) != '#' && substr(trim($line), 0, 3) != '---') {

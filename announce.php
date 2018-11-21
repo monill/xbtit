@@ -33,7 +33,7 @@
 ignore_user_abort(1);
 
 $GLOBALS["peer_id"] = "";
-$summaryupdate = array();
+$summaryupdate = [];
 
 $BASEPATH=__DIR__;
 require("$BASEPATH/include/config.php");
@@ -50,7 +50,7 @@ if ($XBTT_USE) {
 
     function implode_with_keys($glue, $array)
     {
-           $output = array();
+           $output = [];
         foreach ($array as $key => $item) {
                 $output[] = $key . "=" . $item;
         }
@@ -623,7 +623,7 @@ function runSpeed($info_hash, $delta)
 
 // select how many users with same pid or ip
 $results = mysqli_query($GLOBALS['conn'], "SELECT status, count(status) FROM {$TABLE_PREFIX}peers WHERE ".($PRIVATE_ANNOUNCE?"pid=\"$pid\"":"ip=\"$ip\"")." AND infohash=\"$info_hash\" AND peer_id<>\"$peer_id\" GROUP BY status") or show_error("Tracker error: invalid torrent");
-$status = array();
+$status = [];
 
 while ($resstat = mysqli_fetch_row($results)) {
     $status[$resstat[0]]=$resstat[1];

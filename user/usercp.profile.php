@@ -40,12 +40,12 @@ switch ($action) {
            $idlangue=((int)0+$_POST["language"]);
            $idstyle=((int)0+$_POST["style"]);
            $email=AddSlashes($_POST["email"]);
-           $avatar=str_replace(array('\t','%25','%00'), array('','',''), htmlspecialchars(AddSlashes($_POST["avatar"])));
+           $avatar=str_replace(['\t','%25','%00'], ['','',''], htmlspecialchars(AddSlashes($_POST["avatar"])));
            $idflag=((int)0+$_POST["flag"]);
            $timezone=((int)$_POST["timezone"]);
 
            // Password confirmation required to update user record
-           (isset($_POST["passconf"])) ? $passcheck=hash_generate(array("salt" => $CURUSER["salt"]), $_POST["passconf"], $CURUSER["username"]) : $passcheck=array();
+           (isset($_POST["passconf"])) ? $passcheck=hash_generate(["salt" => $CURUSER["salt"]], $_POST["passconf"], $CURUSER["username"]) : $passcheck= [];
         if (isset($passcheck[$btit_settings["secsui_pass_type"]]) && is_array($passcheck[$btit_settings["secsui_pass_type"]])) {
             $password=$passcheck[$btit_settings["secsui_pass_type"]]["hash"];
         } else {
@@ -62,7 +62,7 @@ switch ($action) {
            // check avatar is a valid image and one of the supported file types
         if ($avatar && $avatar!="") {
             $imagearr=@getimagesize($avatar);
-            if (!is_array($imagearr) || !in_array($imagearr["mime"], array("image/bmp", "image/jpeg", "image/pjpeg", "image/gif", "image/x-png", "image/png"))) {
+            if (!is_array($imagearr) || !in_array($imagearr["mime"], ["image/bmp", "image/jpeg", "image/pjpeg", "image/gif", "image/x-png", "image/png"])) {
                 stderr($language["ERROR"], $language["ERR_AVATAR_EXT"]);
             }
         }
@@ -93,7 +93,7 @@ switch ($action) {
                     }
                 }
             }
-            $set=array();
+            $set= [];
 
             if ($VALIDATION!="user") {
                 if ($email!="") {
@@ -112,7 +112,7 @@ switch ($action) {
                         require_once(IPS_ROOT_PATH . 'sources/base/ipsController.php');
                         $registry = ipsRegistry::instance();
                         $registry->init();
-                        IPSMember::save($CURUSER["ipb_fid"], array("members" => array("email" => "$email")));
+                        IPSMember::save($CURUSER["ipb_fid"], ["members" => ["email" => "$email"]]);
                     }
                 }
             }
@@ -160,7 +160,7 @@ switch ($action) {
         $usercptpl->set("AVATAR", false, true);
         $usercptpl->set("USER_VALIDATION", false, true);
         $usercptpl->set("INTERNAL_FORUM", false, true);
-        $profiletpl=array();
+        $profiletpl= [];
         $profiletpl["frm_action"]="index.php?page=usercp&amp;do=user&amp;action=post&amp;uid=".$uid."";
         $profiletpl["username"]=$CURUSER["username"];
 
@@ -183,7 +183,7 @@ switch ($action) {
 
       //language list
         $lres=language_list();
-        $langtpl=array();
+        $langtpl= [];
         foreach ($lres as $langue) {
              $langtpl["language_combo"].="\n<option ";
             if ($langue["id"]==$CURUSER["language"]) {
@@ -197,7 +197,7 @@ switch ($action) {
 
       //style list
         $sres=style_list();
-        $styletpl=array();
+        $styletpl= [];
         foreach ($sres as $style) {
             $styletpl["style_combo"].="\n<option ";
             if ($style["id"]==$CURUSER["style"]) {
@@ -211,7 +211,7 @@ switch ($action) {
 
       //flag list
         $fres=flag_list();
-        $flagtpl=array();
+        $flagtpl= [];
         foreach ($fres as $flag) {
             $flagtpl["flag_combo"].="\n<option ";
             if ($flag["id"]==$CURUSER["flag"]) {
@@ -225,7 +225,7 @@ switch ($action) {
 
       //timezone list
         $tres=timezone_list();
-        $tztpl=array();
+        $tztpl= [];
         foreach ($tres as $timezone) {
             $tztpl["tz_combo"].="\n<option ";
             if ($timezone["difference"]==$CURUSER["time_offset"]) {

@@ -60,7 +60,7 @@ if (max(0, $CURUSER["downloaded"])>0) {
     $ratio='&#8734;';
 }
 
-  $ucptpl=array();
+  $ucptpl= [];
   $ucptpl["username"]=unesc($CURUSER["username"]);
 if ($CURUSER["avatar"] && $CURUSER["avatar"]!="") {
     $ucptpl["avatar"]="<img border=\"0\" onload=\"resize_avatar(this);\" src=\"".htmlspecialchars($CURUSER["avatar"])."\" alt=\"\" />";
@@ -127,7 +127,7 @@ if ($XBTT_USE) {
   $utorrents = ((int)$CURUSER["torrentsperpage"]);
 
 if ($numtorrent>0) {
-    list($pagertop, $pagerbottom, $limit) = pager(($utorrents==0?15:$utorrents), $numtorrent, "index.php?page=usercp&amp;uid=$uid&amp;", array("pagename" => "ucp_uploaded"));
+    list($pagertop, $pagerbottom, $limit) = pager(($utorrents==0?15:$utorrents), $numtorrent, "index.php?page=usercp&amp;uid=$uid&amp;", ["pagename" => "ucp_uploaded"]);
 
     $usercptpl->set("pagertop", $pagertop);
 
@@ -136,7 +136,7 @@ if ($numtorrent>0) {
 if ($resuploaded && count($resuploaded)>0) {
      include("include/offset.php");
      $usercptpl->set("RESULTS", true, true);
-     $uptortpl=array();
+     $uptortpl= [];
      $i=0;
     foreach ($resuploaded as $id => $rest) {
           $uptortpl[$i]["filename"]=cut_string(unesc($rest["filename"]), ((int)$btit_settings["cut_name"]));

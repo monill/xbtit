@@ -119,7 +119,7 @@ function apply_default_settings()
         $btit_settings['url']='http://localhost';
     }
     if (!array_key_exists('announce', $btit_settings)) {
-        $btit_settings['announce']=base64_encode(serialize(array('http://localhost/announce.php')));
+        $btit_settings['announce']=base64_encode(serialize(['http://localhost/announce.php']));
     }
     if (!array_key_exists('email', $btit_settings)) {
         $btit_settings['email']='tracker@localhost';
@@ -281,8 +281,8 @@ $SITENAME=$btit_settings['name'];
 //Tracker's Base URL
 $BASEURL=$btit_settings['url'];
 // tracker's announce urls, can be more than one
-$TRACKER_ANNOUNCE_URL=array();
-$TRACKER_ANNOUNCEURLS=array();
+$TRACKER_ANNOUNCE_URL= [];
+$TRACKER_ANNOUNCEURLS= [];
 $TRACKER_ANNOUNCE_URL=unserialize(base64_decode($btit_settings['announce']));
 for ($i=0,$count=count($TRACKER_ANNOUNCE_URL); $i<$count; $i++) {
     if (trim($TRACKER_ANNOUNCE_URL[$i])!='') {

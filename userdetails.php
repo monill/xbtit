@@ -182,7 +182,7 @@ $numtorrent=$resuploaded[0]['tf'];
 unset($resuploaded);
 $userdetailtpl->set("pagertop", "");
 if ($numtorrent>0) {
-    list($pagertop, $pagerbottom, $limit) = pager(($utorrents==0?15:$utorrents), $numtorrent, $_SERVER["PHP_SELF"]."?page=userdetails&amp;id=$id&amp;pagename=uploaded&amp;", array("pagename" => "uploaded"));
+    list($pagertop, $pagerbottom, $limit) = pager(($utorrents==0?15:$utorrents), $numtorrent, $_SERVER["PHP_SELF"]."?page=userdetails&amp;id=$id&amp;pagename=uploaded&amp;", ["pagename" => "uploaded"]);
     $userdetailtpl->set("pagertop", $pagertop);
     $resuploaded = get_result("SELECT f.info_hash, f.filename, UNIX_TIMESTAMP(f.data) as added, f.size, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished FROM $ttables WHERE uploader=$id AND anonymous = \"false\" ORDER BY data DESC $limit", true, $btit_settings['cache_duration']);
 }
@@ -190,7 +190,7 @@ if ($numtorrent>0) {
 
 if ($resuploaded && $numtorrent>0) {
     $userdetailtpl->set("RESULTS", true, true);
-    $uptortpl=array();
+    $uptortpl= [];
     $i=0;
     foreach ($resuploaded as $ud_id => $rest) {
            $rest["filename"]=unesc($rest["filename"]);
@@ -246,10 +246,10 @@ $userdetailtpl->set("pagertopact", "");
 // active torrents
 if ($anq[0]['tp']>0) {
     $userdetailtpl->set("RESULTS_1", true, true);
-    $tortpl=array();
+    $tortpl= [];
     $i=0;
 
-    list($pagertop, $pagerbottom, $limit) = pager(($utorrents==0?15:$utorrents), $anq[0]['tp'], "index.php?page=userdetails&amp;id=$id&amp;pagename=active&amp;", array("pagename" => "active"));
+    list($pagertop, $pagerbottom, $limit) = pager(($utorrents==0?15:$utorrents), $anq[0]['tp'], "index.php?page=userdetails&amp;id=$id&amp;pagename=active&amp;", ["pagename" => "active"]);
     $userdetailtpl->set("pagertopact", $pagertop);
     if ($XBTT_USE) {
             $anq=get_result("SELECT '127.0.0.1' as ip, f.info_hash as infohash, f.filename, f.size, IF(p.left=0,'seeder','leecher') as status, p.downloaded, p.uploaded, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished
@@ -330,9 +330,9 @@ $userdetailtpl->set("pagertophist", "");
 
 if ($anq[0]['th']>0) {
     $userdetailtpl->set("RESULTS_2", true, true);
-    $torhistory=array();
+    $torhistory= [];
     $i=0;
-    list($pagertop, $pagerbottom, $limit) = pager(($utorrents==0?15:$utorrents), $sanq[0]['th'], "index.php?page=userdetails&amp;id=$id&amp;pagename=history&amp;", array("pagename" => "history"));
+    list($pagertop, $pagerbottom, $limit) = pager(($utorrents==0?15:$utorrents), $sanq[0]['th'], "index.php?page=userdetails&amp;id=$id&amp;pagename=history&amp;", ["pagename" => "history"]);
     $userdetailtpl->set("pagertophist", $pagertop);
     if ($XBTT_USE) {
         $anq=get_result("SELECT f.filename, f.size, f.info_hash, IF(h.active=1,'yes','no'), 'unknown' as agent, h.downloaded, h.uploaded, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished

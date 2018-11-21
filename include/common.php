@@ -62,7 +62,7 @@ function send_pm($sender, $recepient, $subject, $msg)
         # if sender id is invalid or 0, use System
         $sender=($sender==0)?0:get_result('SELECT smf_fid, username FROM '.$TABLE_PREFIX.'users WHERE id='.$sender.' LIMIT 1;', true, $CACHE_DURATION);
         if (!isset($sender[0])) {
-            $sender=array();
+            $sender= [];
             $sender['smf_fid']=0;
             $sender['username']='System';
         } else {
@@ -100,7 +100,7 @@ function write_file($file, $content)
     return false;
 }
 
-function send_mail($rec_email, $subject, $message, $IsHtml = false, $cc = array(), $bcc = array())
+function send_mail($rec_email, $subject, $message, $IsHtml = false, $cc = [], $bcc = [])
 {
     global $THIS_BASEPATH, $btit_settings;
 
@@ -288,7 +288,7 @@ function get_result($qrystr, $display_error = false, $cachetime = 0)
         }
     }
 
-    $return=array();
+    $return= [];
     $mr=do_sqlquery($qrystr, $display_error);
     while ($mz=mysqli_fetch_assoc($mr)) {
         $return[]=$mz;
@@ -332,16 +332,16 @@ function validip($ip)
     if (!empty($ip) && $ip==long2ip(ip2long($ip))) {
         # reserved IANA IPv4 addresses
         # http://www.iana.org/assignments/ipv4-address-space
-        $reserved_ips = array (
-            array('0.0.0.0','2.255.255.255'),
-            array('10.0.0.0','10.255.255.255'),
-            array('127.0.0.0','127.255.255.255'),
-            array('169.254.0.0','169.254.255.255'),
-            array('172.16.0.0','172.31.255.255'),
-            array('192.0.2.0','192.0.2.255'),
-            array('192.168.0.0','192.168.255.255'),
-            array('255.255.255.0','255.255.255.255')
-        );
+        $reserved_ips = [
+            ['0.0.0.0','2.255.255.255'],
+            ['10.0.0.0','10.255.255.255'],
+            ['127.0.0.0','127.255.255.255'],
+            ['169.254.0.0','169.254.255.255'],
+            ['172.16.0.0','172.31.255.255'],
+            ['192.0.2.0','192.0.2.255'],
+            ['192.168.0.0','192.168.255.255'],
+            ['255.255.255.0','255.255.255.255']
+        ];
 
         foreach ($reserved_ips as $r) {
             if ((ip2long($ip) >= ip2long($r[0])) && (ip2long($ip) <= ip2long($r[1]))) {
@@ -897,13 +897,13 @@ function test_my_cookie()
         unset($cookie_array);
     }
     if ($cookie_id<=1) {
-        return array("is_valid" => false, "id" => 1);
+        return ["is_valid" => false, "id" => 1];
     } else {
         $res=get_result("SELECT `username`, `password`, `random`, `salt` FROM `{$TABLE_PREFIX}users` WHERE `id`=".$cookie_id);
         if (count($res)==1) {
             $row=$res[0];
         } else {
-            return array("is_valid" => false, "id" => 1);
+            return ["is_valid" => false, "id" => 1];
         }
 
         if ($btit_settings["secsui_cookie_type"]==1) {
@@ -989,9 +989,9 @@ function test_my_cookie()
             $user_hash=sha1(trim($cookie_string, "-"));
         }
         if ($user_hash==$cookie_hash) {
-            return array("is_valid" => true, "id" => $cookie_id);
+            return ["is_valid" => true, "id" => $cookie_id];
         } else {
-            return array("is_valid" => false, "id" => 1);
+            return ["is_valid" => false, "id" => 1];
         }
     }
 }

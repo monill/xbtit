@@ -35,8 +35,8 @@ use splitbrain\PHPArchive\Tar;
 class update_hacks
 {
 
-      var $file=array();
-      var $errors=array();
+      var $file= [];
+      var $errors= [];
       var $hack_path;
       var $errors_count;
       var $ftp_server;
@@ -45,16 +45,16 @@ class update_hacks
       var $ftp_password;
       var $ftp_basedir;
       var $rftp;
-      var $ftp_files_to_copy=array();
+      var $ftp_files_to_copy= [];
       var $ftp_login_need;
-      var $ftp_files_to_chmod=array();
-      var $files_to_backup=array();
+      var $ftp_files_to_chmod= [];
+      var $files_to_backup= [];
 
     function __construct()
     {
         // reset all var
-        $this->file=array();
-        $this->errors=array();
+        $this->file= [];
+        $this->errors= [];
         $this->hack_path="";
         $this->errors_count=0;
         unset($this->ftp_server);
@@ -63,10 +63,10 @@ class update_hacks
         unset($this->ftp_password);
         unset($this->ftp_basedir);
         $this->rftp=null;
-        $this->ftp_files_to_copy=array();
+        $this->ftp_files_to_copy= [];
         $this->ftp_login_need=false;
-        $this->ftp_files_to_chmod=array();
-        $this->files_to_backup=array();
+        $this->ftp_files_to_chmod= [];
+        $this->files_to_backup= [];
     }
 
       // private
@@ -83,7 +83,7 @@ class update_hacks
         if (!isset($this->ftp_server) || !isset($this->ftp_port) || !isset($this->ftp_username) || !isset($this->ftp_password)) {
             session_unset();
             session_destroy();
-            $_SESSION=array();
+            $_SESSION= [];
             $this->_err_message("Missed FTP data!", "FTP", "Correct FTP server, port");
             return false;
         }
@@ -92,7 +92,7 @@ class update_hacks
         if (!$this->rftp) {
             session_unset();
             session_destroy();
-            $_SESSION=array();
+            $_SESSION= [];
             $this->_err_message("Ftp Connection Failed!", "FTP", "Correct FTP server, port");
             return false;
         }
@@ -100,7 +100,7 @@ class update_hacks
         if (!$uftp) {
             session_unset();
             session_destroy();
-            $_SESSION=array();
+            $_SESSION= [];
             $this->_err_message("Ftp Login  Failed!", "FTP", "Correct credentials");
             @ftp_close($this->rftp);
             return false;
@@ -239,7 +239,7 @@ class update_hacks
             return false;
         }
           
-        if (in_array(substr($ori_file, -3), array("tpl","php","txt"))) {
+        if (in_array(substr($ori_file, -3), ["tpl","php","txt"])) {
             $ftp_mode=FTP_ASCII;
         } else {
             $ftp_mode=FTP_BINARY;
@@ -383,7 +383,7 @@ class update_hacks
     {
         $hacks = explode('<hack>', $string);
         $i = 0;
-        $hack=array();
+        $hack= [];
         array_shift($hacks);
         foreach ($hacks as $h) {
             $hack[$i]['title']    = $this->get_tag_value($h, 'title');

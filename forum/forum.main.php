@@ -63,7 +63,7 @@ $subformtpl=new bTemplate();
 if (mysqli_num_rows($forums_res) == 0) {
     $forumtpl->set("NO_FORUMS", true, true);
 } else {
-    $forums=array();
+    $forums= [];
     $i=0;
     while ($forums_arr = mysqli_fetch_assoc($forums_res)) {
         $forums[$i]["name"]  = "<a href=\"index.php?page=forum&amp;action=viewforum&amp;forumid=".$forums_arr["id"]."\">".htmlspecialchars(unesc($forums_arr["name"]))."</a>";
@@ -91,7 +91,7 @@ if (mysqli_num_rows($forums_res) == 0) {
 
             reset($sub_forums);
             $j=0;
-            $subforums=array();
+            $subforums= [];
         foreach ($sub_forums as $id => $subfor) {
             if ($subfor["id_parent"]==$forums_arr["id"]) {
                 $subforums[$j]["status"]=image_or_link("$STYLEPATH/images/".$subfor["img"].".png", "", $img);

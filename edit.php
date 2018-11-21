@@ -106,7 +106,7 @@ if (isset($_GET["info_hash"])) {
         $s .= "</select>\n";
     */
 
-        $torrent=array();
+        $torrent= [];
         $torrent["link"]="index.php?page=edit&info_hash=".$results["info_hash"]."&returnto=".urlencode($link);
         $torrent["filename"]=$results["filename"];
         $torrent["info_hash"]=$results["info_hash"];

@@ -33,7 +33,7 @@ $dbfile= 'database.sql';
 // declaration of variables
 $INSTALLPATH = dirname(__FILE__);
 $action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : 'welcome');
-$allowed_actions = array('save_owner','welcome','reqcheck','settings','sql_import','save_mysql','owner','site_config', 'save_tracker','finished');
+$allowed_actions = ['save_owner','welcome','reqcheck','settings','sql_import','save_mysql','owner','site_config', 'save_tracker','finished'];
 if (!in_array($action, $allowed_actions)) {
     $action = 'welcome';
 }
@@ -85,7 +85,7 @@ function load_lang_file()
 {
     global $install_lang;
 
-    $GLOBALS['find_install_lang'] = array();
+    $GLOBALS['find_install_lang'] = [];
 
     // Make sure the languages directory actually exists.
     if (file_exists(__DIR__ . DIRECTORY_SEPARATOR.'language'.DIRECTORY_SEPARATOR.'install_lang'.DIRECTORY_SEPARATOR)) {
@@ -149,7 +149,7 @@ function language_list()
 
          global $TABLE_PREFIX;
 
-         $ret = array();
+         $ret = [];
          $res = mysqli_query($GLOBALS['conn'], "SELECT * FROM {$TABLE_PREFIX}language ORDER BY language");
 
     while ($row = mysqli_fetch_assoc($res)) {
@@ -167,7 +167,7 @@ function style_list()
 
          global $TABLE_PREFIX;
 
-         $ret = array();
+         $ret = [];
          $res = mysqli_query($GLOBALS['conn'], "SELECT * FROM {$TABLE_PREFIX}style ORDER BY id");
 
     while ($row = mysqli_fetch_assoc($res)) {
@@ -380,7 +380,7 @@ elseif ($action === 'sql_import') {
         $GLOBALS['conn'] = mysqli_connect($dbhost, $TABLE_PREFIX.$dbuser, $dbpass);
         if ($GLOBALS['conn'] !== false) {
             $db_user = $TABLE_PREFIX.$dbuser;
-            updateSettingsFile(array('db_user' => $dbuser));
+            updateSettingsFile(['db_user' => $dbuser]);
         }
     }
     // Still no connection?  Big fat error message :P.
@@ -405,7 +405,7 @@ elseif ($action === 'sql_import') {
             CREATE DATABASE IF NOT EXISTS `' .$TABLE_PREFIX.$database. '` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci');
         if (mysqli_select_db($GLOBALS['conn'], $TABLE_PREFIX.$database)) {
             $db_name = $TABLE_PREFIX.$db_name;
-            updateSettingsFile(array('database' => $database));
+            updateSettingsFile(['database' => $database]);
         }
     }
     // Okay, now let's try to connect...
@@ -418,22 +418,22 @@ elseif ($action === 'sql_import') {
                 </div>';
         return false;
     }
-    $replaces = array('{$db_prefix}' => $TABLE_PREFIX, );
+    $replaces = ['{$db_prefix}' => $TABLE_PREFIX,];
     foreach ($install_lang as $key => $value) {
         if (substr($key, 0, 8) === 'default_') {
             $replaces['{$'.$key.'}'] = addslashes($value);
         }
     }
     if (isset($replaces['{$default_reserved_names}'])) {
-        $replaces['{$default_reserved_names}'] = strtr($replaces['{$default_reserved_names}'], array('\\\\n' => '\\n'));
+        $replaces['{$default_reserved_names}'] = strtr($replaces['{$default_reserved_names}'], ['\\\\n' => '\\n']);
     }
     $replaces['); -- TABLEOPT --'] = ') DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ENGINE=MyISAM;';
     // Read in the SQL.  Turn this on and that off... internationalize... etc.
     $sql_lines = explode("\n", strtr(implode(' ', file(dirname(__file__).DIRECTORY_SEPARATOR.'sql'.DIRECTORY_SEPARATOR.'database.sql')), $replaces));
     // Execute the SQL.
     $current_statement = '';
-    $failures = array();
-    $exists = array();
+    $failures = [];
+    $exists = [];
     foreach ($sql_lines as $count => $line) {
         // No comments allowed!
         if (substr(trim($line), 0, 1) !== '#') {
@@ -475,8 +475,8 @@ elseif ($action === 'site_config') {
     $host = empty($_SERVER['HTTP_HOST']) ? $_SERVER['SERVER_NAME'] . (empty($_SERVER['SERVER_PORT']) || $_SERVER['SERVER_PORT'] == '80' ? '' : ':' . $_SERVER['SERVER_PORT']) : $_SERVER['HTTP_HOST'];
     // finding the base path.
     $baseurl = 'http://' . $host . substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/'));
-    $smf_lang=str_replace(array("\\", "/"), DIRECTORY_SEPARATOR, __DIR__).DIRECTORY_SEPARATOR."smf".DIRECTORY_SEPARATOR."Themes".DIRECTORY_SEPARATOR."default".DIRECTORY_SEPARATOR."languages".DIRECTORY_SEPARATOR."Errors.english.php";
-    $ipb_lang=str_replace(array("\\", "/"), DIRECTORY_SEPARATOR, __DIR__).DIRECTORY_SEPARATOR."ipb".DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."lang_cache".DIRECTORY_SEPARATOR."1".DIRECTORY_SEPARATOR."core_public_error.php";
+    $smf_lang=str_replace(["\\", "/"], DIRECTORY_SEPARATOR, __DIR__).DIRECTORY_SEPARATOR."smf".DIRECTORY_SEPARATOR."Themes".DIRECTORY_SEPARATOR."default".DIRECTORY_SEPARATOR."languages".DIRECTORY_SEPARATOR."Errors.english.php";
+    $ipb_lang=str_replace(["\\", "/"], DIRECTORY_SEPARATOR, __DIR__).DIRECTORY_SEPARATOR."ipb".DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."lang_cache".DIRECTORY_SEPARATOR."1".DIRECTORY_SEPARATOR."core_public_error.php";
     
     echo ("<form action=\"".$_SERVER['PHP_SELF']."?lang_file=".$_SESSION["install_lang"]."&amp;action=save_tracker\" method=\"post\">");
     echo ("<h2>".$install_lang["site_config"]."</h2>");
@@ -549,7 +549,7 @@ elseif ($action === 'save_tracker') {
     @((bool)mysqli_query($GLOBALS["conn"], "USE $database"));
     
     if ($forum === "smf") {
-        $smf_lang=str_replace(array("\\", "/"), DIRECTORY_SEPARATOR, __DIR__).DIRECTORY_SEPARATOR."smf".DIRECTORY_SEPARATOR."Themes".DIRECTORY_SEPARATOR."default".DIRECTORY_SEPARATOR."languages".DIRECTORY_SEPARATOR."Errors.english.php";
+        $smf_lang=str_replace(["\\", "/"], DIRECTORY_SEPARATOR, __DIR__).DIRECTORY_SEPARATOR."smf".DIRECTORY_SEPARATOR."Themes".DIRECTORY_SEPARATOR."default".DIRECTORY_SEPARATOR."languages".DIRECTORY_SEPARATOR."Errors.english.php";
         
         // Lets check the main SMF Settings file is present
         if (!file_exists(__DIR__ .DIRECTORY_SEPARATOR."smf".DIRECTORY_SEPARATOR."Settings.php")) {
@@ -590,7 +590,7 @@ elseif ($action === 'save_tracker') {
             }
         }
     } elseif ($forum === 'ipb') {
-        $BASEDIR=str_replace(array("\\", '/'), DIRECTORY_SEPARATOR, __DIR__);
+        $BASEDIR=str_replace(["\\", '/'], DIRECTORY_SEPARATOR, __DIR__);
         $ipb_lang=$BASEDIR.DIRECTORY_SEPARATOR."ipb".DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."lang_cache".DIRECTORY_SEPARATOR."1".DIRECTORY_SEPARATOR."core_public_error.php";
         
         // Lets check the main IPB Config file is present
@@ -624,15 +624,15 @@ elseif ($action === 'save_tracker') {
             $data=fread($fd, filesize($filename));
             ftruncate($fd, 0);
             rewind($fd);
-            $search=array("\$INFO['banned_group']\t\t\t=\t'5';", "\$INFO['admin_group']\t\t\t=\t'4';", "\$INFO['guest_group']\t\t\t=\t'2';", "\$INFO['auth_group']\t\t\t=\t'1';");
-            $replace=array("\$INFO['banned_group']\t\t\t=\t'0';", "\$INFO['admin_group']\t\t\t=\t'8';", "\$INFO['guest_group']\t\t\t=\t'1';", "\$INFO['auth_group']\t\t\t=\t'2';");
+            $search= ["\$INFO['banned_group']\t\t\t=\t'5';", "\$INFO['admin_group']\t\t\t=\t'4';", "\$INFO['guest_group']\t\t\t=\t'2';", "\$INFO['auth_group']\t\t\t=\t'1';"];
+            $replace= ["\$INFO['banned_group']\t\t\t=\t'0';", "\$INFO['admin_group']\t\t\t=\t'8';", "\$INFO['guest_group']\t\t\t=\t'1';", "\$INFO['auth_group']\t\t\t=\t'2';"];
             $data=str_replace($search, $replace, $data);
             $start=strpos($data, "\$INFO['sql_tbl_prefix']");
             $end=strpos(substr($data, $start), ";")+1;
             $data2=substr($data, $start, $end);
             fwrite($fd, $data);
             fclose($fd);
-            $data=str_replace(array("\$INFO['sql_tbl_prefix']", "\t","'"), array("\$ipb_prefix", '',"\""), $data2);
+            $data=str_replace(["\$INFO['sql_tbl_prefix']", "\t","'"], ["\$ipb_prefix", '',"\""], $data2);
             $data=str_replace("x=\"", "x = \"", $data);
 
             $filename=$BASEDIR. DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR.'settings.php';
@@ -741,7 +741,7 @@ elseif ($action === 'save_owner') {
             $salt .= chr($num);
         }
         $passhash = md5(md5($salt) . md5($pwd));
-        return array($passhash, $salt);
+        return [$passhash, $salt];
     }
 
     // getting variables
@@ -796,7 +796,7 @@ elseif ($action === 'save_owner') {
             @mysqli_query($GLOBALS['conn'], $v);
         }
 
-        $smfpass = array(sha1(strtolower($username) . $password), substr(md5(rand()), 0, 4));
+        $smfpass = [sha1(strtolower($username) . $password), substr(md5(rand()), 0, 4)];
 
         if ($forum === 'smf') {
             @mysqli_query($GLOBALS['conn'], "INSERT INTO `{$db_prefix}members` (`ID_MEMBER`, `memberName`, `dateRegistered`, `ID_GROUP`, `realName`, `passwd`, `emailAddress`, `memberIP`, `memberIP2`, `is_activated`, `passwordSalt`) VALUES (2 ,'$username', UNIX_TIMESTAMP(), 18, '$username', '$smfpass[0]', '$email', '".$_SERVER["REMOTE_ADDR"]."', '".$_SERVER["REMOTE_ADDR"]."', 1, '$smfpass[1]')");
@@ -830,7 +830,7 @@ elseif ($action === 'save_owner') {
 
         $smf_fid=2;
     } elseif ($forum === 'ipb') {
-        $BASEDIR=str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, __DIR__);
+        $BASEDIR=str_replace(['/', '\\'], DIRECTORY_SEPARATOR, __DIR__);
 
         require($BASEDIR. DIRECTORY_SEPARATOR.'include'.DIRECTORY_SEPARATOR.'settings.php');
 
@@ -914,7 +914,7 @@ elseif ($action === 'save_owner') {
     mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}settings` SET `value` = 2 WHERE `variable` = 'latestMember'");
     mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}settings` SET `value` = '$username' WHERE `variable` = 'latestRealName'");
     mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}settings` SET `value` = UNIX_TIMESTAMP() WHERE `variable` = 'memberlist_updated'");
-    mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = '".base64_encode(serialize(array($announceUrl)))."' WHERE `key` = 'announce'");
+    mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = '".base64_encode(serialize([$announceUrl]))."' WHERE `key` = 'announce'");
     mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = 'http://".$host.":2710/announce' WHERE `key` = 'xbtt_url'");
     mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = '".$email."' WHERE `key` = 'email'");
     mysqli_query($GLOBALS["conn"], "UPDATE {$TABLE_PREFIX}settings SET `value` = '".$INSTALLPATH.DIRECTORY_SEPARATOR."include".DIRECTORY_SEPARATOR."logs' WHERE `key` = 'php_log_path'");

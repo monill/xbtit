@@ -52,7 +52,7 @@ if(get_remote_file("http://www.btiteam.org"))
 
 */
 
-$admin=array();
+$admin= [];
 
 $res=do_sqlquery("SELECT * FROM {$TABLE_PREFIX}tasks");
 if ($res) {
@@ -67,8 +67,8 @@ if ($res) {
 
 // check if XBTT tables are present in current db
 $res=do_sqlquery("SHOW TABLES LIKE 'xbt%'");
-$xbt_tables=array('xbt_config','xbt_deny_from_hosts','xbt_files','xbt_files_users','xbt_users');
-$xbt_in_db=array();
+$xbt_tables= ['xbt_config','xbt_deny_from_hosts','xbt_files','xbt_files_users','xbt_users'];
+$xbt_in_db= [];
 if ($res) {
     while ($result=mysqli_fetch_row($res)) {
              $xbt_in_db[]=$result[0];

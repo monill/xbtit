@@ -74,13 +74,13 @@ switch ($action) {
             $newpassword=pass_the_salt(30);
             stderr($language["ERROR"], $language["ERR_PASS_TOO_WEAK_1"].":<br /><br />".(($pass_min_req[1]>0)?"<li><span style='color:blue;font-weight:bold;'>".$pass_min_req[1]."</span> ".(($pass_min_req[1]==1)?$language["ERR_PASS_TOO_WEAK_2"]:$language["ERR_PASS_TOO_WEAK_2A"])."</li>":"").(($pass_min_req[2]>0)?"<li><span style='color:blue;font-weight:bold;'>".$pass_min_req[2]."</span> ".(($pass_min_req[2]==1)?$language["ERR_PASS_TOO_WEAK_3"]:$language["ERR_PASS_TOO_WEAK_3A"])."</li>":"").(($pass_min_req[3]>0)?"<li><span style='color:blue;font-weight:bold;'>".$pass_min_req[3]."</span> ".(($pass_min_req[3]==1)?$language["ERR_PASS_TOO_WEAK_4"]:$language["ERR_PASS_TOO_WEAK_4A"])."</li>":"").(($pass_min_req[4]>0)?"<li><span style='color:blue;font-weight:bold;'>".$pass_min_req[4]."</span> ".(($pass_min_req[4]==1)?$language["ERR_PASS_TOO_WEAK_5"]:$language["ERR_PASS_TOO_WEAK_5A"])."</li>":"")."<br />".$language["ERR_PASS_TOO_WEAK_6"].":<br /><br /><span style='color:blue;font-weight:bold;'>".$newpassword."</span><br />");
         } else {
-            $testpass=hash_generate(array("salt" => $CURUSER["salt"]), $_POST["old_pwd"], $CURUSER["username"]);
+            $testpass=hash_generate(["salt" => $CURUSER["salt"]], $_POST["old_pwd"], $CURUSER["username"]);
             $respwd = do_sqlquery("SELECT * FROM `{$TABLE_PREFIX}users` WHERE `id`=$uid AND `password`='".mysqli_real_escape_string($GLOBALS['conn'], $testpass[$CURUSER["pass_type"]]["hash"])."' AND username=".sqlesc($CURUSER["username"])."", true);
             if (!$respwd || mysqli_num_rows($respwd)==0) {
                 stderr($language["ERROR"], $language["ERR_RETR_DATA"]);
             } else {
                 $arr=mysqli_fetch_assoc($respwd);
-                $multipass=hash_generate(array("salt" => ""), $_POST["new_pwd"], $CURUSER["username"]);
+                $multipass=hash_generate(["salt" => ""], $_POST["new_pwd"], $CURUSER["username"]);
                 $i=$btit_settings["secsui_pass_type"];
                 do_sqlquery("UPDATE {$TABLE_PREFIX}users SET `password`='".mysqli_real_escape_string($GLOBALS['conn'], $multipass[$i]["rehash"])."', `salt`='".mysqli_real_escape_string($GLOBALS['conn'], $multipass[$i]["salt"])."', `pass_type`='".$i."', `dupe_hash`='".mysqli_real_escape_string($GLOBALS['conn'], $multipass[$i]["dupehash"])."' WHERE id=$uid AND password='".mysqli_real_escape_string($GLOBALS['conn'], $testpass[$CURUSER["pass_type"]]["hash"])."' AND username=".sqlesc($CURUSER["username"])."", true);
                 if (substr($GLOBALS["FORUMLINK"], 0, 3)=="smf") {
@@ -99,7 +99,7 @@ switch ($action) {
                     $registry = ipsRegistry::instance();
                     $registry->init();
                     $ipbhash=ipb_passgen($_POST["new_pwd"]);
-                    IPSMember::save($arr["ipb_fid"], array("members" => array("member_login_key" => "", "member_login_key_expire" => "0", "members_pass_hash" => "$ipbhash[0]", "members_pass_salt" => "$ipbhash[1]")));
+                    IPSMember::save($arr["ipb_fid"], ["members" => ["member_login_key" => "", "member_login_key_expire" => "0", "members_pass_hash" => "$ipbhash[0]", "members_pass_salt" => "$ipbhash[1]"]]);
                 }
                 success_msg($language["PWD_CHANGED"], "".$language["NOW_LOGIN"]."<br /><a href=\"index.php?page=login\">Go</a>");
                 stdfoot(true, false);
@@ -111,7 +111,7 @@ switch ($action) {
     case '':
     case 'change':
     default:
-        $pwdtpl=array();
+        $pwdtpl= [];
         $pwdtpl["frm_action"]="index.php?page=usercp&amp;do=pwd&amp;action=post&amp;uid=".$uid."";
         $pwdtpl["frm_cancel"]="index.php?page=usercp&amp;uid=".$uid."";
         $usercptpl->set("pwd", $pwdtpl);

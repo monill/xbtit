@@ -78,7 +78,7 @@ class lightbenc
         switch ($s[$pos]) {
             case 'd':
                 $pos++;
-                $retval=array();
+                $retval= [];
                 while ($s[$pos]!='e') {
                     $key=self::bdecode($s, $pos);
                     $val=self::bdecode($s, $pos);
@@ -93,7 +93,7 @@ class lightbenc
     
             case 'l':
                 $pos++;
-                $retval=array();
+                $retval= [];
                 while ($s[$pos]!='e') {
                     $val=self::bdecode($s, $pos);
                     if ($val===null) {

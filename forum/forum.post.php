@@ -144,7 +144,7 @@ switch ($action) {
 
         // get last 10 posts
         $res = get_result($query, true);
-        $posts=array();
+        $posts= [];
         $pn=0;
         foreach ($res as $id => $arr) {
             if ($arr["username"]) {

@@ -39,12 +39,12 @@ if (!$CURUSER || $CURUSER["view_users"]=="no") {
      //block_begin("Online Users");
      print("\n<table class=\"lista\" width=\"100%\">\n");
 
-     $u_online=array();
-     $group=array();
+     $u_online= [];
+     $group= [];
      $u_online=get_result("SELECT * FROM {$TABLE_PREFIX}online ol", true, $btit_settings['cache_duration']);
 
      $total_online=count($u_online);
-     $uo=array();
+     $uo= [];
     foreach ($u_online as $id => $users_online) {
         if (isset($group[unesc(ucfirst($users_online["user_group"]))])) {
             $group[unesc(ucfirst($users_online["user_group"]))]++;

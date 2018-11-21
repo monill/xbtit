@@ -63,7 +63,7 @@ function report($id, $name, $down, $up, $rank, $first, $last)
         $diff="<b><font color=Cyan>0</font></b>";
     }
 
-    $return=array();
+    $return= [];
     $return["id"]=$id;
     $return["username"]="<a href=\"index.php?page=userdetails&amp;id=".$id."\">$name</a>";
     $return["down"]=makesize($down)."</b></font></td>";
@@ -98,8 +98,8 @@ $block_title=$language["SEARCH_DIFF"];
 $admintpl->set("language", $language);
 $admintpl->set("frm_action", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=searchdiff");
 
-$s=array('KB' => '1024', 'MB' => '1048576', 'GB' => '1073741824', 'TB' => '1099411627776' );
-$opt=array("KB","MB","GB","TB");
+$s= ['KB' => '1024', 'MB' => '1048576', 'GB' => '1073741824', 'TB' => '1099411627776'];
+$opt= ["KB","MB","GB","TB"];
 $option="\n<select name=\"type\" size=\"1\">";
 for ($id=0; $id<count($opt); $id++) {
     $option.="\n<option ";
@@ -180,7 +180,7 @@ if ($readyto=="Go") {
         $q=do_sqlquery("SELECT u.id as fid, username, $udownloaded as downloaded, $uuploaded as uploaded, level, UNIX_TIMESTAMP(joined) as joined, UNIX_TIMESTAMP(lastconnect) as lastconnect FROM $utables LEFT JOIN {$TABLE_PREFIX}users_level ul ON u.id_level=ul.id where (u.id_level='".$kullan."' and ABS($udownloaded - $uuploaded) > '".$mdiff."') ORDER BY ($uuploaded / $udownloaded) ASC", true);
     }
 
-    $lusers=array();
+    $lusers= [];
     while ($user=mysqli_fetch_object($q)) {
         if ($user) {
             $lusers[]=report($user->fid, $user->username, $user->downloaded, $user->uploaded, $user->level, $user->joined, $user->lastconnect);

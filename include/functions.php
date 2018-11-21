@@ -63,7 +63,7 @@ if (!is_dir($logpath[0].'/')) {
 $php_version=explode(".", phpversion());
 if ($php_version[0]<=5 && $php_version[1]<=2) {
     if (@ini_get('register_globals')) {
-        $superglobals = array($_SERVER, $_ENV,$_FILES, $_COOKIE, $_POST, $_GET);
+        $superglobals = [$_SERVER, $_ENV,$_FILES, $_COOKIE, $_POST, $_GET];
         if (isset($_SESSION)) {
             array_unshift($superglobals, $_SESSION);
         }
@@ -85,7 +85,7 @@ if (get_magic_quotes_gpc()) {
             if (is_array($val)) {
                 remove_magic_quotes($array[$key]);
             } elseif (is_string($val)) {
-                $array[$key] = str_replace(array('\\\\','\\\"',"\'"), array('\\','\"',"'"), $val);
+                $array[$key] = str_replace(['\\\\','\\\"',"\'"], ['\\','\"',"'"], $val);
             }
         }
     }
@@ -112,7 +112,7 @@ require_once $CURRENTPATH.'/class.captcha.php';
 require_once $CURRENTPATH.'/class.ajaxpoll.php';
 
 if (!isset($TRACKER_ANNOUNCEURLS)) {
-    $TRACKER_ANNOUNCEURLS=array();
+    $TRACKER_ANNOUNCEURLS= [];
     $TRACKER_ANNOUNCEURLS[]=$BASEURL.'/announce.php';
 }
 
@@ -152,7 +152,7 @@ function load_language($mod_language_name)
     return $THIS_BASEPATH.'/language/english/'.$mod_language_name;
 }
 
-function get_combo($select, $opts = array())
+function get_combo($select, $opts = [])
 {
     $name=(isset($opts['name']))?' name="'.$opts['name'].'"':'';
     $complete=(isset($opts['complete']))?(bool)$opts['complete']:false;
@@ -187,7 +187,7 @@ function get_microtime()
 
 function cut_string($ori_string, $cut_after)
 {
-    $rchars=array('_','.','-');
+    $rchars= ['_','.','-'];
     $ori_string=str_replace($rchars, ' ', $ori_string);
     if (strlen($ori_string)>$cut_after && $cut_after>0) {
         return substr($ori_string, 0, $cut_after).'...';
@@ -291,7 +291,7 @@ function check_online($session_id, $location)
 
 function straipos($haystack, $array, $offset = 0)
 {
-    $occ = array();
+    $occ = [];
     for ($i=0,$len=count($array); $i<$len; $i++) {
         $pos = strpos($haystack, $array[$i], $offset);
         if (is_bool($pos)) {
@@ -305,7 +305,7 @@ function straipos($haystack, $array, $offset = 0)
     ksort($occ);
     reset($occ);
     list($key,$value) = each($occ);
-    return array($key,$value);
+    return [$key,$value];
 }
 
 // Even if you're missing PHP 4.3.0, the MHASH extension might be of use.
@@ -421,7 +421,7 @@ function logincookie($row, $user, $expires = 0x7fffffff)
             }
             unset($ci_exp);
         }
-        $final_cookie=serialize(array("id" => $row["id"], "hash" => sha1(trim($cookie_string, "-"))));
+        $final_cookie=serialize(["id" => $row["id"], "hash" => sha1(trim($cookie_string, "-"))]);
 
         if ($btit_settings["secsui_cookie_type"]==2) {
             $my_mult=60;
@@ -468,7 +468,7 @@ function logoutcookie()
     setcookie("$my_cookie_name", "", (time()-3600), "/");
     session_name("xbtit");
     session_start();
-    $_SESSION=array();
+    $_SESSION= [];
     setcookie("xbtit", "", time()-3600, "/");
     session_destroy();
 }
@@ -801,7 +801,7 @@ function updatedata()
     if (!$resurl || count($resurl)==0) {
         return
 
-        $combinedinfohash=array();
+        $combinedinfohash= [];
     }
     foreach ($resurl as $id => $rhash) {
         $combinedinfohash[]=$rhash['info_hash'];
@@ -811,7 +811,7 @@ function updatedata()
     scrape($row[0], implode("','", $combinedinfohash));
 }
 
-function pager($rpp, $count, $href, $opts = array())
+function pager($rpp, $count, $href, $opts = [])
 {
     global $language;
 
@@ -890,7 +890,7 @@ function pager($rpp, $count, $href, $opts = array())
         $pagerbottom='';
     }
 
-    return array($pagertop, $pagerbottom, "LIMIT $start,$rpp");
+    return [$pagertop, $pagerbottom, "LIMIT $start,$rpp"];
 }
 
 // give back categories recorset
@@ -1591,7 +1591,7 @@ function smf_passgen($username, $pwd)
     $passhash = sha1(strtolower($username) . $pwd);
     $salt=substr(md5(rand()), 0, 4);
 
-    return array($passhash,$salt);
+    return [$passhash,$salt];
 }
 
 function set_smf_cookie($id, $passhash, $salt)
@@ -1638,7 +1638,7 @@ function check_upload($tmp_name = "", $name = "")
         $haystack = " " . fread($handle, filesize($tmp_name));
         fclose($handle);
 
-        $needles=((isset($btit_settings["secsui_quarantine_search_terms"]) && !empty($btit_settings["secsui_quarantine_search_terms"]))?explode(",", $btit_settings["secsui_quarantine_search_terms"]):array());
+        $needles=((isset($btit_settings["secsui_quarantine_search_terms"]) && !empty($btit_settings["secsui_quarantine_search_terms"]))?explode(",", $btit_settings["secsui_quarantine_search_terms"]): []);
 
         $found="no";
 
@@ -1678,7 +1678,7 @@ function hash_generate($row, $pwd, $user)
     global $btit_settings;
 
     $salt=pass_the_salt(20);
-    $passtype=array();
+    $passtype= [];
     // Type 1 - Used in btit / xbtit / Torrent Trader / phpMyBitTorrent
     $passtype[1]["hash"]=md5($pwd);
     $passtype[1]["rehash"]=md5($pwd);
@@ -1735,7 +1735,7 @@ function ipb_passgen($pwd)
     global $THIS_BASEPATH;
 
     if (!isset($THIS_BASEPATH) || empty($THIS_BASEPATH)) {
-        $THIS_BASEPATH=str_replace(array("\\", "/include"), array("/", ""), __DIR__);
+        $THIS_BASEPATH=str_replace(["\\", "/include"], ["/", ""], __DIR__);
     }
     if (!defined('IPS_ENFORCE_ACCESS')) {
         define('IPS_ENFORCE_ACCESS', true);
@@ -1754,13 +1754,13 @@ function ipb_passgen($pwd)
 
     $salt=pass_the_salt(5);
     $passhash = md5(md5($salt) . md5($password));
-    return array($passhash, $salt);
+    return [$passhash, $salt];
 }
 function ipb_md5_passgen($pwd)
 {
     $salt=pass_the_salt(5);
     $passhash = md5(md5($salt) .  $pwd);
-    return array($passhash, $salt);
+    return [$passhash, $salt];
 }
 
 function set_ipb_cookie($ipb_fid = 0)
@@ -1768,7 +1768,7 @@ function set_ipb_cookie($ipb_fid = 0)
     global $THIS_BASEPATH, $registry;
 
     if (!isset($THIS_BASEPATH) || empty($THIS_BASEPATH)) {
-        $THIS_BASEPATH=str_replace(array("\\", "/include"), array("/", ""), __DIR__);
+        $THIS_BASEPATH=str_replace(["\\", "/include"], ["/", ""], __DIR__);
     }
     if (!defined('IPS_ENFORCE_ACCESS')) {
         define('IPS_ENFORCE_ACCESS', true);
@@ -1805,7 +1805,7 @@ function ipb_create($username, $email, $password, $id_level, $newuid)
     global $THIS_BASEPATH, $TABLE_PREFIX, $registry;
 
     if (!isset($THIS_BASEPATH) || empty($THIS_BASEPATH)) {
-        $THIS_BASEPATH=str_replace(array("\\", "/include"), array("/", ""), __DIR__);
+        $THIS_BASEPATH=str_replace(["\\", "/include"], ["/", ""], __DIR__);
     }
     if (!defined('IPS_ENFORCE_ACCESS')) {
         define('IPS_ENFORCE_ACCESS', true);
@@ -1821,7 +1821,7 @@ function ipb_create($username, $email, $password, $id_level, $newuid)
         $registry = ipsRegistry::instance();
         $registry->init();
     }
-    $member_info = IPSMember::create(array("members"=>array("name" => "$username", "members_display_name" => "$username", "email" => "$email", "password" => "$password", "member_group_id" => "$id_level", "allow_admin_mails" => "1", "members_created_remote" => "1")));
+    $member_info = IPSMember::create(["members"=> ["name" => "$username", "members_display_name" => "$username", "email" => "$email", "password" => "$password", "member_group_id" => "$id_level", "allow_admin_mails" => "1", "members_created_remote" => "1"]]);
     $ipb_fid=$member_info["member_id"];
     do_sqlquery("UPDATE `{$TABLE_PREFIX}users` SET `ipb_fid`=".$ipb_fid." WHERE `id`=".$newuid);
 }
@@ -1850,7 +1850,7 @@ function ipb_send_pm($ipb_sender = 0, $ipb_recepient, $ipb_subject, $ipb_msg, $s
     }
 
     if (!isset($THIS_BASEPATH) || empty($THIS_BASEPATH)) {
-        $THIS_BASEPATH=str_replace(array("\\", "/include"), array("/", ""), __DIR__);
+        $THIS_BASEPATH=str_replace(["\\", "/include"], ["/", ""], __DIR__);
     }
     if (!defined('IPS_ENFORCE_ACCESS')) {
         define('IPS_ENFORCE_ACCESS', true);
@@ -1871,7 +1871,7 @@ function ipb_send_pm($ipb_sender = 0, $ipb_recepient, $ipb_subject, $ipb_msg, $s
     $clean_post=trim($ipb_msg, "'");
     $classMessage = new messengerFunctions($registry);
     // Reciever, Sender, array of other users to invite (Display Name), Subject, Message, Is system message
-    $classMessage->sendNewPersonalTopic($ipb_recepient, $ipb_sender, array(), $clean_subj, $clean_post, (($system===true)?array("isSystem" => true, "forcePm" => 1):array("forcePm" => 1)));
+    $classMessage->sendNewPersonalTopic($ipb_recepient, $ipb_sender, [], $clean_subj, $clean_post, (($system===true)? ["isSystem" => true, "forcePm" => 1] : ["forcePm" => 1]));
 }
 
 function ipb_make_post($forum_id, $forum_subj, $forum_post, $poster_id = 0, $update_old_topic = true)
@@ -1887,7 +1887,7 @@ function ipb_make_post($forum_id, $forum_subj, $forum_post, $poster_id = 0, $upd
     }
 
     if (!isset($THIS_BASEPATH) || empty($THIS_BASEPATH)) {
-        $THIS_BASEPATH=str_replace(array("\\", "/include"), array("/", ""), __DIR__);
+        $THIS_BASEPATH=str_replace(["\\", "/include"], ["/", ""], __DIR__);
     }
     if (!defined('IPS_ENFORCE_ACCESS')) {
         define('IPS_ENFORCE_ACCESS', true);

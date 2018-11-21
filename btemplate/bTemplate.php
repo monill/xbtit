@@ -24,10 +24,10 @@ class bTemplate
     var $EArdelim = '>';
 
     // Internal variables
-    var $scalars = array();
-    var $arrays  = array();
-    var $carrays = array();
-    var $ifs     = array();
+    var $scalars = [];
+    var $arrays  = [];
+    var $carrays = [];
+    var $ifs     = [];
 
     /*--------------------------------------------------------------*\
         Method: bTemplate()
@@ -68,9 +68,9 @@ class bTemplate
     \*--------------------------------------------------------------*/
     function set_cloop($tag, $array, $cases)
     {
-        $this->carrays[$tag] = array(
+        $this->carrays[$tag] = [
             'array' => $array,
-            'cases' => $cases);
+            'cases' => $cases];
     }
 
     /*--------------------------------------------------------------*\
@@ -80,16 +80,16 @@ class bTemplate
     function reset_vars($scalars, $arrays, $carrays, $ifs)
     {
         if ($scalars) {
-            $this->scalars = array();
+            $this->scalars = [];
         }
         if ($arrays) {
-            $this->arrays  = array();
+            $this->arrays  = [];
         }
         if ($carrays) {
-            $this->carrays = array();
+            $this->carrays = [];
         }
         if ($ifs) {
-            $this->ifs     = array();
+            $this->ifs     = [];
         }
     }
 
@@ -255,7 +255,7 @@ class bTemplate
 
         // Set up the cases
         $array['cases'][] = 'default';
-        $case_content = array();
+        $case_content = [];
         $parsed = null;
 
         // Get the case strings

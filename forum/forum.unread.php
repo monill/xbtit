@@ -91,7 +91,7 @@ if (!$postsperpage) {
 if ($numtopics > 0) {
     $forumtpl->set("NO_TOPICS", false, true);
 
-    $topics=array();
+    $topics= [];
     $i=0;
     while ($topicarr = mysqli_fetch_assoc($topicsres)) {
         $topicid = $topicarr["id"];

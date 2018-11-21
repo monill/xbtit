@@ -47,7 +47,7 @@ if ($XBTT_USE) {
 
     function implode_with_keys($glue, $array)
     {
-           $output = array();
+           $output = [];
         foreach ($array as $key => $item) {
                 $output[] = $key . "=" . $item;
         }
@@ -171,7 +171,7 @@ if ($usehash) {
     $query = mysqli_query($GLOBALS['conn'], "SELECT info_hash, filename FROM {$TABLE_PREFIX}files WHERE external='no'");
 }
 
-$namemap = array();
+$namemap = [];
 while ($row = mysqli_fetch_row($query)) {
     $namemap[$row[0]] = $row[1];
 }

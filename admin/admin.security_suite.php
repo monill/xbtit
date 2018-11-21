@@ -40,7 +40,7 @@ if (!defined("IN_ACP")) {
 
 if (isset($_POST) && !empty($_POST)) {
     (isset($_POST["secsui_quarantine_search_terms"]) && !empty($_POST["secsui_quarantine_search_terms"])) ? $secsui_quarantine_search_terms=
-    mysqli_real_escape_string($GLOBALS['conn'], strtolower(str_replace(array("\r\n", "\n\r", " "), array(",", ",", ""), $_POST["secsui_quarantine_search_terms"]))) : $secsui_quarantine_search_terms="";
+    mysqli_real_escape_string($GLOBALS['conn'], strtolower(str_replace(["\r\n", "\n\r", " "], [",", ",", ""], $_POST["secsui_quarantine_search_terms"]))) : $secsui_quarantine_search_terms="";
     (isset($_POST["secsui_quarantine_dir"]) && !empty($_POST["secsui_quarantine_dir"])) ? $secsui_quarantine_dir=mysqli_real_escape_string($GLOBALS['conn'], str_replace("\\", "/", $_POST["secsui_quarantine_dir"])) : $secsui_quarantine_dir="";
     (isset($_POST["secsui_quarantine_pm"]) && !empty($_POST["secsui_quarantine_pm"]) && is_numeric($_POST["secsui_quarantine_pm"]) && $_POST["secsui_quarantine_pm"]>=2) ? $secsui_quarantine_pm=(int)0+$_POST["secsui_quarantine_pm"] : $secsui_quarantine_pm=2;
     (isset($_POST["secsui_pass_type"]) && !empty($_POST["secsui_pass_type"]) && is_numeric($_POST["secsui_pass_type"]) && $_POST["secsui_pass_type"]>=1 && $_POST["secsui_pass_type"]<=7) ? $secsui_pass_type=(int)0+$_POST["secsui_pass_type"] : $secsui_pass_type=1;
@@ -79,7 +79,7 @@ if (isset($_POST) && !empty($_POST)) {
 
         $cookie_items=explode(",", $btit_settings["secsui_cookie_items"]);
 
-        $cookie_items_1=array();
+        $cookie_items_1= [];
         foreach ($cookie_items as $ci_value) {
             $ci_exp=explode("-", $ci_value);
             if ($ci_exp[0]==8) {
@@ -93,7 +93,7 @@ if (isset($_POST) && !empty($_POST)) {
             unset($ci_exp);
         }
 
-        $cookie_items_2=array();
+        $cookie_items_2= [];
         foreach ($cookie_items_arr as $ci_value) {
             $ci_exp=explode("-", $ci_value);
             if ($ci_exp[0]==8) {
@@ -304,7 +304,7 @@ unset($types, $type_selected, $key, $value);
 $admintpl->set("secsui_cookie_exp2", $secsui_cookie_exp2);
 
 $cookie_items=explode(",", $btit_settings["secsui_cookie_items"]);
-$cookie_items_1=array();
+$cookie_items_1= [];
 foreach ($cookie_items as $ci_value) {
     $ci_exp=explode("-", $ci_value);
     if ($ci_exp[0]==8) {

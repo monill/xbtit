@@ -132,7 +132,7 @@ if ($act == "takerecover") {
     $email = $arr["email"];
 
     $newpassword=pass_the_salt(30);
-    $multipass=hash_generate(array("salt" => ""), $newpassword, $arr["username"]);
+    $multipass=hash_generate(["salt" => ""], $newpassword, $arr["username"]);
     $i=$btit_settings["secsui_pass_type"];
     do_sqlquery("UPDATE `{$TABLE_PREFIX}users` SET `password`='".mysqli_real_escape_string($GLOBALS['conn'], $multipass[$i]["rehash"])."', `salt`='".mysqli_real_escape_string($GLOBALS['conn'], $multipass[$i]["salt"])."', `pass_type`='".$i."', `dupe_hash`='".mysqli_real_escape_string($GLOBALS['conn'], $multipass[$i]["dupehash"])."' WHERE `id`=$id AND `random`=$random", true);
 
@@ -161,7 +161,7 @@ if ($act == "takerecover") {
         $registry = ipsRegistry::instance();
         $registry->init();
         $ipbhash=ipb_passgen($newpassword);
-        IPSMember::save($arr["ipb_fid"], array("members" => array("member_login_key" => "", "member_login_key_expire" => "0", "members_pass_hash" => "$ipbhash[0]", "members_pass_salt" => "$ipbhash[1]")));
+        IPSMember::save($arr["ipb_fid"], ["members" => ["member_login_key" => "", "member_login_key_expire" => "0", "members_pass_hash" => "$ipbhash[0]", "members_pass_salt" => "$ipbhash[1]"]]);
     }
 
     $body=sprintf($language["RECOVER_EMAIL_2"], $arr["username"], $newpassword, "$BASEURL/index.php?page=login", $SITENAME);
@@ -197,7 +197,7 @@ if ($act == "takerecover") {
     $recovertpl=new bTemplate();
     global $language, $recovertpl;
     $recovertpl->set("language", $language);
-    $recover=array();
+    $recover= [];
     $recover["action"]="index.php?page=recover&amp;act=takerecover";
     $recovertpl->set("recover", $recover);
 

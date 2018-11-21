@@ -52,7 +52,7 @@ function dosize($matches)
 
 function noparsed($matches)
 {
-    return str_replace(array('[',']','://'), array('&#91;','&#93;','&#58;&#47;&#47;'), $matches[1]);
+    return str_replace(['[',']','://'], ['&#91;','&#93;','&#58;&#47;&#47;'], $matches[1]);
 }
 
 function formatlist($matches)
@@ -85,10 +85,10 @@ function bbcode($content)
     $content=preg_replace('/&(?!(amp|[#0-9]+|lt|gt|quot|copy|nbsp);)/ix', '&amp;', $content);
 
   // But some special chars are bad, at least according to vB, so strip them. Most are just blank characters used to bypass filters, except for &#8238; which is just awesome!
-    $content=str_replace(array('&#160;','&#173;','&#8205;','&#8204;','&#8237;','&#8238;'), '', $content);
+    $content=str_replace(['&#160;','&#173;','&#8205;','&#8204;','&#8237;','&#8238;'], '', $content);
 
   // Change new lines to <br />. nl2br function probably would work also. It's probably the same as this though. And gets rid of htmlchars. htmlentities screws up the &amp; stuff.
-    $content=str_replace(array('<','>','\'','"',"\r\n","\r","\n"), array('&lt;','&gt;','&#39;','&quot;','<br />','<br />','<br />'), $content);
+    $content=str_replace(['<','>','\'','"',"\r\n","\r","\n"], ['&lt;','&gt;','&#39;','&quot;','<br />','<br />','<br />'], $content);
 
   // No parse. Just replace [, ], and :// to their HTML equivalents
     $content=preg_replace_callback('/\[noparse\](.+?)\[\/noparse\]/i', 'noparsed', $content);
@@ -165,6 +165,6 @@ function bbcode($content)
 function dehtml($content)
 {
     $content=preg_replace('/&(?!(amp|[#0-9]+|lt|gt|quot|copy|nbsp);)/ix', '&amp;', $content);
-    $content=str_replace(array('&#160;','&#173;','&#8205;','&#8204;','&#8237;','&#8238;'), '', $content);
-    return str_replace(array('<','>','\'','"'), array('&lt;','&gt;','&#39;','&quot;'), $content);
+    $content=str_replace(['&#160;','&#173;','&#8205;','&#8204;','&#8237;','&#8238;'], '', $content);
+    return str_replace(['<','>','\'','"'], ['&lt;','&gt;','&#39;','&quot;'], $content);
 }

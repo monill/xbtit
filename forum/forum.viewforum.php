@@ -119,7 +119,7 @@ if (!$postsperpage) {
 if ($numtopics > 0) {
     $forumtpl->set("NO_TOPICS", false, true);
 
-    $topics=array();
+    $topics= [];
     $i=0;
     while ($topicarr = mysqli_fetch_assoc($topicsres)) {
         $topicid = $topicarr["id"];
@@ -190,7 +190,7 @@ $sub_forums = get_result("SELECT f.*, t.lastpost, t.subject, t.locked, p.userid 
                           " AND f.id_parent=$forumid ORDER BY sort,name", true);
 
 if (count($sub_forums)>0) {
-    $subforms=array();
+    $subforms= [];
     $i=0;
     foreach ($sub_forums as $id => $subfor) {
         $subforums[$i]["status"]=image_or_link("$STYLEPATH/images/".$subfor["img"].".png", "", $subfor["img"]);

@@ -191,7 +191,7 @@ if ($count>0) {
         $order="data";
     }
 
-    $qry_order=str_replace(array("leechers","seeds","finished"), array($tleechs,$tseeds, $tcompletes), $order);
+    $qry_order=str_replace(["leechers","seeds","finished"], [$tleechs,$tseeds, $tcompletes], $order);
 
     $by_param=2;
     if (isset($_GET["by"])) {
@@ -265,7 +265,7 @@ $torrenttpl->set("XBTT", $XBTT_USE, true);
 $torrenttpl->set("torrent_pagerbottom", $pagerbottom);
 
 
-$torrents=array();
+$torrents= [];
 $i=0;
 
 if ($count>0) {

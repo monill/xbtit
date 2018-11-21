@@ -104,8 +104,8 @@ switch ($action) {
                 if ($_POST["xbtt_url"]!="") {
                     // check if XBTT tables are present in current db
                     $res=do_sqlquery("SHOW TABLES LIKE 'xbt%'");
-                    $xbt_tables=array('xbt_config','xbt_files','xbt_files_users','xbt_users');
-                    $xbt_in_db=array();
+                    $xbt_tables= ['xbt_config','xbt_files','xbt_files_users','xbt_users'];
+                    $xbt_in_db= [];
                     if ($res) {
                         while ($result=mysqli_fetch_row($res)) {
                                  $xbt_in_db[]=$result[0];

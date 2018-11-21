@@ -80,7 +80,7 @@ switch ($action) {
                 ((mysqli_free_result($rp) || (is_object($rp) && (get_class($rp) == "mysqli_result"))) ? true : false);
             }
         }
-        $pid_ctpl=array();
+        $pid_ctpl= [];
         $pid_ctpl["frm_action"]="index.php?page=usercp&amp;do=pid_c&amp;action=post&amp;uid=".$uid."";
         $pid_ctpl["userpid"]=$pid;
         $pid_ctpl["ispeer"]=($ispeer[0]>0?$language["CURRENTLY_PEER"]."<br />".$language["STOP_PEER"]."\n":"");

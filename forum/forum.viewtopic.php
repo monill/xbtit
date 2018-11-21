@@ -159,7 +159,7 @@ $res = get_result($query, true);
 $pc = count($res);
 
 $pn = 0;
-$posts=array();
+$posts= [];
 $page=(isset($page)?($page>0?max(1, $page):1):1);
 $post_number=($postsperpage*($page-1))+1;
 foreach ($res as $id => $arr) {

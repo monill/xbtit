@@ -531,7 +531,7 @@ if ($act=="") {
     $sqlquery.="ORDER BY `id` ASC";
 
     $res=mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
-    $forumlist=array();
+    $forumlist= [];
 
     // Lets put all the found results into a single array for later
     $subcat="";

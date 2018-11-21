@@ -45,7 +45,7 @@ class rss_reader
         $EndPos   = strpos($text, '</'.$tag);
         $text=($EndPos > $StartPos)?substr($text, $StartPos, ($EndPos - $StartPos)):'';
 
-        return str_replace(array('<![CDATA[',']]>'), '', $text);
+        return str_replace(['<![CDATA[',']]>'], '', $text);
     }
 
     // input the full rss stream
@@ -57,7 +57,7 @@ class rss_reader
     {
         $fullrss=explode('<channel>', $rss_flux);
         array_shift($fullrss);
-        $rss=array();
+        $rss= [];
         $i=0;
         foreach ($fullrss as $r) {
             $rss[$i]['title']=$this->get_tag_value($r, 'title');

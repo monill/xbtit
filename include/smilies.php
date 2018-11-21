@@ -30,7 +30,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-$smilies = array(
+$smilies = [
   ':)' => 'smile1.gif',
   ';)' => 'wink.gif',
   ':D' => 'grin.gif',
@@ -162,9 +162,9 @@ $smilies = array(
   ':shit:' => 'shit.gif',
   ':beer1:' => 'beer1.gif',
   ':bmkid:' => 'bmkid.gif',
-);
+];
 
-$privatesmilies = array(
+$privatesmilies = [
   ':-)' => 'smile1.gif',
   ';-)' => 'wink.gif',
   ':-D' => 'grin.gif',
@@ -172,4 +172,4 @@ $privatesmilies = array(
   ':-(' => 'sad.gif',
   ':Boozer:' => 'alcoholic.gif',
   ':spank:' => 'spank.gif',
-);
+];
