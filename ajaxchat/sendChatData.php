@@ -129,7 +129,7 @@ function addData($name,$text,$uid)
     $sql = "INSERT INTO {$TABLE_PREFIX}chat (time,name,text,uid) VALUES ('".$now."','".$name."','".$text."','".$uid."')";
     $conn = getDBConnection();
     if($GLOBALS['charset']=="UTF-8" && function_exists('mysql_set_charset'))
-        mysql_set_charset('utf8',$conn);
+        mysqli_set_charset($conn, 'utf8');
 
     $results = mysqli_query( $conn, $sql);
     if (!$results || empty($results)) 
