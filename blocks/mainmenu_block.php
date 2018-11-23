@@ -32,7 +32,7 @@
    global $CURUSER, $FORUMLINK, $language;
 
 ?>
-<table cellpadding="4" cellspacing="1" width="100%" border="0" align="center" style="border-bottom:0px solid;">
+<table cellpadding="4" cellspacing="1" width="100%" border="0" align="center" style="border-bottom:0 solid;">
   <tr>
 <?php
 
