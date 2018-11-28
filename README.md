@@ -1,6 +1,11 @@
-#--------------------------#
-# XBTIT 2
-#--------------------------#
+<p align="center">
+    <img src="https://i.imgur.com/f9sGMg2.png" alt="Banner">
+</p>
+
+<hr>
+
+## <a name="introduction"></a> :page_facing_up: Introduction
+
 Just a few words about this piece of script and some credits ;)
 
 The script is released under modified BSD, which mean you can freely use and
@@ -15,9 +20,8 @@ xbtit has two bittorrent tracker systems - a PHP tracker and xbtt. The PHP track
 The opensource free support forum is
 BTITeam http://www.btiteam.org
 
-#----------------#
-# MAJOR FEATURES #
-#----------------#
+## <a name="features"></a> 💎 Some Features
+
 - real template system, 99% of the html code is out for the PHP files using bTemplate http://www.massassi.com/bTemplate/
 - rewritten (optimized) announce.php (the PHP tracker)
 - integrated optional xbtt backend by Olaf Van der Spek http://xbtt.sourceforge.net/tracker/
@@ -37,22 +41,19 @@ BTITeam http://www.btiteam.org
 - smf_import script to import standard internal forum and users to smf (thank you again to petr1fied)
 - 1.4.x upgrade script
 
-#--------------#
-# REQUIREMENTS #
-#--------------#
+## <a name="requirements"></a> :white_check_mark: Requirements
+
 - Web server with Apache or Lighttp installed and running
 - PHP 4.3 or higher (If you use php 4, you'll have to rename the phpmailer's folder phpmailer->phpmailer5 and phpmailer4->phpmailer)
 - Mysql 4.1 or higher
 
-#----------------#
-# DOCUMENTATION  #
-#----------------#
+## <a name="docs"></a> :book: Documentation
+
 We are working on a wiki which will give information, installation steps, how to, etc ...
 at the moment it is a "work in progress" site: http://wiki.btiteam.org
 
-#---------#
-# CREDITS #
-#---------#
+## <a name="credits"></a> :muscle: Credits
+
 The script in this version is very very different than the original one, but we are pleased to leave the credits from previous version from which this is born ;)
 
 This tracker's origin was as a frontend for DeHackEd's tracker aka phpBTTracker (now almost extinct)
