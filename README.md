@@ -60,9 +60,9 @@ This tracker's origin was as a frontend for DeHackEd's tracker aka phpBTTracker 
  
 We aimed to make a nice user interface and a good admin tool at the same time. Some code and some ideas came from other trackers and projects:
 - torrentbits (http://www.torrentbits.org - dead)
-- torrenttrader (http://www.torrentrader.org)
+- torrenttrader (http://www.torrentrader.org - dead)
 - bytemoonsoon (deadlink)
-- Tbdev: CoLdFuSiOn (http://www.tbdev.net)
+- Tbdev: CoLdFuSiOn (http://www.tbdev.net - dead)
 - xbtt: Olaf van der Spek (http://xbtt.sourceforge.net)
 - phpmailer (http://sourceforge.net/projects/phpmailer)
 - smf (http://www.simplemachines.org/)
