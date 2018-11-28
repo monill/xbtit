@@ -17,7 +17,7 @@ require_once('../class.phpmailer.php');
 $mail                = new PHPMailer();
 
 $body                = file_get_contents('contents.html');
-$body                = preg_replace('/[\]/','',$body);
+$body                = preg_replace('/[\]/', '', $body);
 
 $mail->IsSMTP(); // telling the class to use SMTP
 $mail->Host          = "smtp1.site.com;smtp2.site.com";
@@ -32,7 +32,7 @@ $mail->AddReplyTo('list@mydomain.com', 'List manager');
 
 $mail->Subject       = "PHPMailer Test Subject via smtp, basic with authentication";
 
-@MYSQL_CONNECT("localhost","root","password");
+@MYSQL_CONNECT("localhost", "root", "password");
 @((bool)mysqli_query($GLOBALS['conn'], "USE my_company"));
 $query  = "SELECT full_name, email, photo FROM employee WHERE id=$id";
 $result = @MYSQL_QUERY($query);
@@ -48,9 +48,10 @@ while ($row = mysqli_fetch_array ($result)) {
   } else {
     echo "Message sent to :" . $row["full_name"] . ' (' . str_replace("@", "&#64;", $row["email"]) . ')<br />';
   }
+
   // Clear all addresses and attachments for next loop
-  $mail->ClearAddresses();
-  $mail->ClearAttachments();
+    $mail->ClearAddresses();
+    $mail->ClearAttachments();
 }
 ?>
 

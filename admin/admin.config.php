@@ -31,201 +31,190 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 
-if (!defined("IN_BTIT"))
+if (!defined("IN_BTIT")) {
       die("non direct access!");
+}
 
-if (!defined("IN_ACP"))
+if (!defined("IN_ACP")) {
       die("non direct access!");
+}
 
-$admintpl->set("config_saved",false,true);
-$admintpl->set("xbtt_error",false,true);
+$admintpl->set("config_saved", false, true);
+$admintpl->set("xbtt_error", false, true);
 
-switch ($action)
-    {
+switch ($action) {
     case 'write':
-      if ($_POST["write"]==$language["FRM_CONFIRM"])
-        {
-
-        //$btit_settings=array();
-        $btit_settings["name"]=$_POST["trackername"];
-        $btit_settings["url"]=$_POST["trackerurl"];
-        $btit_settings["announce"]=base64_encode(serialize(explode("\n",$_POST["tracker_announceurl"])));
-        $btit_settings["email"]=$_POST["trackeremail"];
-        $btit_settings["torrentdir"]=$_POST["torrentdir"];
-        $btit_settings["external"]=isset($_POST["exttorrents"])?"true":"false";
-        $btit_settings["gzip"]=isset($_POST["gzip_enabled"])?"true":"false";
-        $btit_settings["debug"]=isset($_POST["show_debug"])?"true":"false";
-        $btit_settings["disable_dht"]=isset($_POST["dht"])?"true":"false";
-        $btit_settings["livestat"]=isset($_POST["livestat"])?"true":"false";
-        $btit_settings["logactive"]=isset($_POST["logactive"])?"true":"false";
-        $btit_settings["loghistory"]=isset($_POST["loghistory"])?"true":"false";
-        $btit_settings["p_announce"]=isset($_POST["p_announce"])?"true":"false";
-        $btit_settings["p_scrape"]=isset($_POST["p_scrape"])?"true":"false";
-        $btit_settings["show_uploader"]=isset($_POST["show_uploader"])?"true":"false";
-        $btit_settings["usepopup"]=isset($_POST["usepopup"])?"true":"false";
-        $btit_settings["default_language"]=$_POST["default_langue"];
-        $btit_settings["default_style"]=$_POST["default_style"];
-        $btit_settings["default_charset"]=$_POST["default_charset"];
-        $btit_settings["max_users"]=$_POST["maxusers"];
-        if($btit_settings["max_torrents_per_page"]!=$_POST["ntorrents"])
-        {
-            $old_setting=$btit_settings["max_torrents_per_page"];
-            $alter=true;
-        }
-        $btit_settings["max_torrents_per_page"]=$_POST["ntorrents"];
-        $btit_settings["sanity_update"]=$_POST["sinterval"];
-        $btit_settings["external_update"]=$_POST["uinterval"];
-        $btit_settings["max_announce"]=$_POST["rinterval"];
-        $btit_settings["min_announce"]=$_POST["mininterval"];
-        $btit_settings["max_peers_per_announce"]=$_POST["maxpeers"];
-        $btit_settings["dynamic"]=isset($_POST["dynamic"])?"true":"false";
-        $btit_settings["nat"]=isset($_POST["nat"])?"true":"false";
-        $btit_settings["persist"]=isset($_POST["persist"])?"true":"false";
-        $btit_settings["allow_override_ip"]=isset($_POST["override"])?"true":"false";
-        $btit_settings["countbyte"]=isset($_POST["countbyte"])?"true":"false";
-        $btit_settings["peercaching"]=isset($_POST["peercaching"])?"true":"false";
-        $btit_settings["maxpid_seeds"]=$_POST["maxseeds"];
-        $btit_settings["maxpid_leech"]=$_POST["maxleech"];
-        $btit_settings["validation"]=$_POST["validation"];
-        $btit_settings["imagecode"]=isset($_POST["imagecode"])?"true":"false";
-        $btit_settings["forum"]=$_POST["f_link"];
-        $btit_settings["ipb_autoposter"]=((isset($_POST["ipb_autoposter"]) && !empty($_POST["ipb_autoposter"]))?(int)0+$_POST["ipb_autoposter"]:0);
-        $btit_settings["clocktype"]=$_POST["clocktype"];
-        $btit_settings["forumblocktype"]=$_POST["forumblocktype"];
-        $btit_settings["newslimit"]=$_POST["newslimit"];
-        $btit_settings["forumlimit"]=$_POST["forumlimit"];
-        $btit_settings["last10limit"]=$_POST["last10limit"];
-        $btit_settings["mostpoplimit"]=$_POST["mostpoplimit"];
-        $btit_settings["phperror"]=isset($_POST["phperror"])?"true":"false";
-        $btit_settings["comment"]=isset($_POST["comment"])?"true":"false";
-        $btit_settings["rating"]=isset($_POST["rating"])?"true":"false";
-
-
-        if (isset($_POST["xbtt_use"]))
-          {
-          // check base xbtt url
-          if ($_POST["xbtt_url"]!="")
-            {
-            // check if XBTT tables are present in current db
-            $res=do_sqlquery("SHOW TABLES LIKE 'xbt%'");
-            $xbt_tables=array('xbt_config','xbt_files','xbt_files_users','xbt_users');
-            $xbt_in_db=array();
-            if ($res)
-               {
-               while ($result=mysqli_fetch_row($res))
-                     {
-                         $xbt_in_db[]=$result[0];
-                     }
-             }
-            $ad=array_diff($xbt_tables,$xbt_in_db);
-            // some xbtt tables missed!
-            if (count($ad)!=0)
-              {
-               $btit_settings["xbtt_use"]="false";
-               $admintpl->set("xbtt_error",true,true);
+        if ($_POST["write"]==$language["FRM_CONFIRM"]) {
+            //$btit_settings=array();
+            $btit_settings["name"]=$_POST["trackername"];
+            $btit_settings["url"]=$_POST["trackerurl"];
+            $btit_settings["announce"]=base64_encode(serialize(explode("\n", $_POST["tracker_announceurl"])));
+            $btit_settings["email"]=$_POST["trackeremail"];
+            $btit_settings["torrentdir"]=$_POST["torrentdir"];
+            $btit_settings["external"]=isset($_POST["exttorrents"])?"true":"false";
+            $btit_settings["gzip"]=isset($_POST["gzip_enabled"])?"true":"false";
+            $btit_settings["debug"]=isset($_POST["show_debug"])?"true":"false";
+            $btit_settings["disable_dht"]=isset($_POST["dht"])?"true":"false";
+            $btit_settings["livestat"]=isset($_POST["livestat"])?"true":"false";
+            $btit_settings["logactive"]=isset($_POST["logactive"])?"true":"false";
+            $btit_settings["loghistory"]=isset($_POST["loghistory"])?"true":"false";
+            $btit_settings["p_announce"]=isset($_POST["p_announce"])?"true":"false";
+            $btit_settings["p_scrape"]=isset($_POST["p_scrape"])?"true":"false";
+            $btit_settings["show_uploader"]=isset($_POST["show_uploader"])?"true":"false";
+            $btit_settings["usepopup"]=isset($_POST["usepopup"])?"true":"false";
+            $btit_settings["default_language"]=$_POST["default_langue"];
+            $btit_settings["default_style"]=$_POST["default_style"];
+            $btit_settings["default_charset"]=$_POST["default_charset"];
+            $btit_settings["max_users"]=$_POST["maxusers"];
+            if ($btit_settings["max_torrents_per_page"]!=$_POST["ntorrents"]) {
+                $old_setting=$btit_settings["max_torrents_per_page"];
+                $alter=true;
             }
-            else
-              {
-              $btit_settings["xbtt_use"]="true";
-              $admintpl->set("xbtt_error",false,true);
-              // save some settings into xbt_config table
-              $xbt_cfg="('anonymous_announce','anonymous_scrape','announce_interval','auto_register')";
-              do_sqlquery("DELETE FROM xbt_config WHERE name IN $xbt_cfg",true);
-              do_sqlquery("INSERT INTO xbt_config (name,value) VALUES ".
-               "('anonymous_announce','".($btit_settings["p_announce"]=="false"?1:0)."'),".
-               "('anonymous_scrape','".($btit_settings["p_scrape"]=="false"?1:0)."'),".
-               "('announce_interval','".$btit_settings["max_announce"]."'),".
-               "('auto_register','0');",true);
-              // insert non exist torrent into xbt_files
-              do_sqlquery("INSERT INTO xbt_files (info_hash, mtime, ctime) SELECT UNHEX(info_hash), unix_timestamp(), unix_timestamp() FROM {$TABLE_PREFIX}files WHERE UNHEX(info_hash) NOT IN (SELECT info_hash FROM xbt_files) AND external='no'",true);
-              // control missed field (latest xbt don't have torrent_pass field)
-              $mf=mysqli_query($GLOBALS['conn'], "SELECT * FROM $database.xbt_users");
+            $btit_settings["max_torrents_per_page"]=$_POST["ntorrents"];
+            $btit_settings["sanity_update"]=$_POST["sinterval"];
+            $btit_settings["external_update"]=$_POST["uinterval"];
+            $btit_settings["max_announce"]=$_POST["rinterval"];
+            $btit_settings["min_announce"]=$_POST["mininterval"];
+            $btit_settings["max_peers_per_announce"]=$_POST["maxpeers"];
+            $btit_settings["dynamic"]=isset($_POST["dynamic"])?"true":"false";
+            $btit_settings["nat"]=isset($_POST["nat"])?"true":"false";
+            $btit_settings["persist"]=isset($_POST["persist"])?"true":"false";
+            $btit_settings["allow_override_ip"]=isset($_POST["override"])?"true":"false";
+            $btit_settings["countbyte"]=isset($_POST["countbyte"])?"true":"false";
+            $btit_settings["peercaching"]=isset($_POST["peercaching"])?"true":"false";
+            $btit_settings["maxpid_seeds"]=$_POST["maxseeds"];
+            $btit_settings["maxpid_leech"]=$_POST["maxleech"];
+            $btit_settings["validation"]=$_POST["validation"];
+            $btit_settings["imagecode"]=isset($_POST["imagecode"])?"true":"false";
+            $btit_settings["forum"]=$_POST["f_link"];
+            $btit_settings["ipb_autoposter"]=((isset($_POST["ipb_autoposter"]) && !empty($_POST["ipb_autoposter"]))?(int)0+$_POST["ipb_autoposter"]:0);
+            $btit_settings["clocktype"]=$_POST["clocktype"];
+            $btit_settings["forumblocktype"]=$_POST["forumblocktype"];
+            $btit_settings["newslimit"]=$_POST["newslimit"];
+            $btit_settings["forumlimit"]=$_POST["forumlimit"];
+            $btit_settings["last10limit"]=$_POST["last10limit"];
+            $btit_settings["mostpoplimit"]=$_POST["mostpoplimit"];
+            $btit_settings["phperror"]=isset($_POST["phperror"])?"true":"false";
+            $btit_settings["comment"]=isset($_POST["comment"])?"true":"false";
+            $btit_settings["rating"]=isset($_POST["rating"])?"true":"false";
+
+
+            if (isset($_POST["xbtt_use"])) {
+                // check base xbtt url
+                if ($_POST["xbtt_url"]!="") {
+                    // check if XBTT tables are present in current db
+                    $res=do_sqlquery("SHOW TABLES LIKE 'xbt%'");
+                    $xbt_tables= ['xbt_config','xbt_files','xbt_files_users','xbt_users'];
+                    $xbt_in_db= [];
+                    if ($res) {
+                        while ($result=mysqli_fetch_row($res)) {
+                                 $xbt_in_db[]=$result[0];
+                        }
+                    }
+                    $ad=array_diff($xbt_tables, $xbt_in_db);
+                    // some xbtt tables missed!
+                    if (count($ad)!=0) {
+                         $btit_settings["xbtt_use"]="false";
+                         $admintpl->set("xbtt_error", true, true);
+                    } else {
+                        $btit_settings["xbtt_use"]="true";
+                        $admintpl->set("xbtt_error", false, true);
+                        // save some settings into xbt_config table
+                        $xbt_cfg="('anonymous_announce','anonymous_scrape','announce_interval','auto_register')";
+                        do_sqlquery("DELETE FROM xbt_config WHERE name IN $xbt_cfg", true);
+                        do_sqlquery("INSERT INTO xbt_config (name,value) VALUES ".
+                         "('anonymous_announce','".($btit_settings["p_announce"]=="false"?1:0)."'),".
+                         "('anonymous_scrape','".($btit_settings["p_scrape"]=="false"?1:0)."'),".
+                         "('announce_interval','".$btit_settings["max_announce"]."'),".
+                         "('auto_register','0');", true);
+                        // insert non exist torrent into xbt_files
+                        do_sqlquery("INSERT INTO xbt_files (info_hash, mtime, ctime) SELECT UNHEX(info_hash), unix_timestamp(), unix_timestamp() FROM {$TABLE_PREFIX}files WHERE UNHEX(info_hash) NOT IN (SELECT info_hash FROM xbt_files) AND external='no'", true);
+                        // control missed field (latest xbt don't have torrent_pass field)
+                        $mf=mysqli_query($GLOBALS['conn'], "SELECT * FROM $database.xbt_users");
              
-              $tp_present=false;
-              $tpv_present=false;
-              for ($i=0;$i<mysqli_num_fields($mf);$i++)
-                {
-                  $fn=mysqli_fetch_field_direct($mf,$i)->name;
-                  if ($fn=="torrent_pass")
-                         $tp_present=true;
-                  if ($fn=="torrent_pass_version")
-                        $tpv_present=true;
-              }
-              if (!$tp_present)
-                 do_sqlquery("ALTER TABLE xbt_users ADD torrent_pass CHAR(32) NOT NULL, ADD torrent_pass_secret bigint unsigned not null;",true);
-              if ($tpv_present)
-                 do_sqlquery("ALTER TABLE `xbt_users` CHANGE `torrent_pass_version` `torrent_pass_version` INT(11) NOT NULL DEFAULT '0'",true);
+                        $tp_present=false;
+                        $tpv_present=false;
+                        for ($i=0; $i<mysqli_num_fields($mf); $i++) {
+                                    $fn=mysqli_fetch_field_direct($mf, $i)->name;
+                            if ($fn=="torrent_pass") {
+                                   $tp_present=true;
+                            }
+                            if ($fn=="torrent_pass_version") {
+                                  $tpv_present=true;
+                            }
+                        }
+                        if (!$tp_present) {
+                            do_sqlquery("ALTER TABLE xbt_users ADD torrent_pass CHAR(32) NOT NULL, ADD torrent_pass_secret bigint unsigned not null;", true);
+                        }
+                        if ($tpv_present) {
+                            do_sqlquery("ALTER TABLE `xbt_users` CHANGE `torrent_pass_version` `torrent_pass_version` INT(11) NOT NULL DEFAULT '0'", true);
+                        }
 
-              // insert missed users in xbt_users
-              do_sqlquery("INSERT INTO xbt_users (uid, torrent_pass) SELECT id,pid FROM {$TABLE_PREFIX}users WHERE id NOT IN (SELECT uid FROM xbt_users)",true);
+                        // insert missed users in xbt_users
+                        do_sqlquery("INSERT INTO xbt_users (uid, torrent_pass) SELECT id,pid FROM {$TABLE_PREFIX}users WHERE id NOT IN (SELECT uid FROM xbt_users)", true);
+                    }
+                } else {
+                    $language["XBTT_TABLES_ERROR"]=$language["XBTT_URL_ERROR"];
+                    $btit_settings["xbtt_use"]="false";
+                    $admintpl->set("xbtt_error", true, true);
+                }
+            } else {
+                $btit_settings["xbtt_use"]="false";
             }
-          }
-          else
-          {
-              $language["XBTT_TABLES_ERROR"]=$language["XBTT_URL_ERROR"];
-              $btit_settings["xbtt_use"]="false";
-              $admintpl->set("xbtt_error",true,true);
-          }
-        }
-        else
-        {
-            $btit_settings["xbtt_use"]="false";
-        }
-        $btit_settings["xbtt_url"]=$_POST["xbtt_url"];
-        $btit_settings["cache_duration"]=$_POST["cache_duration"];
-        $btit_settings["cut_name"]=((int)$_POST["cut_name"]);
+            $btit_settings["xbtt_url"]=$_POST["xbtt_url"];
+            $btit_settings["cache_duration"]=$_POST["cache_duration"];
+            $btit_settings["cut_name"]=((int)$_POST["cut_name"]);
         
-        $btit_settings["mail_type"]=$_POST["mail_type"];
-        if ($btit_settings["mail_type"]=="smtp")
-          {
-          $btit_settings["smtp_server"]=$_POST["smtp_server"];
-          $btit_settings["smtp_port"]=$_POST["smtp_port"];
-          $btit_settings["smtp_username"]=$_POST["smtp_username"];
-          $btit_settings["smtp_password"]=$_POST["smtp_password"];
-        }
+            $btit_settings["mail_type"]=$_POST["mail_type"];
+            if ($btit_settings["mail_type"]=="smtp") {
+                $btit_settings["smtp_server"]=$_POST["smtp_server"];
+                $btit_settings["smtp_port"]=$_POST["smtp_port"];
+                $btit_settings["smtp_username"]=$_POST["smtp_username"];
+                $btit_settings["smtp_password"]=$_POST["smtp_password"];
+            }
 
-        foreach($btit_settings as $key=>$value)
-          {
-              if (is_bool($value))
-               $value==true ? $value='true' : $value='false';
+            foreach ($btit_settings as $key => $value) {
+                if (is_bool($value)) {
+                    $value==true ? $value='true' : $value='false';
+                }
 
-            $values[]="(".sqlesc($key).",".sqlesc($value).")";
-        }
+                $values[]="(".sqlesc($key).",".sqlesc($value).")";
+            }
 
-        //die(implode(",",$values));
-        mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}settings") or stderr($language["ERROR"],((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-        mysqli_query($GLOBALS['conn'], "INSERT INTO {$TABLE_PREFIX}settings (`key`,`value`) VALUES ".implode(",",$values).";") or stderr($language["ERROR"],((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-        // update guest values for language, style, torrentsxpage etc...
-        mysqli_query($GLOBALS['conn'], "UPDATE {$TABLE_PREFIX}users SET language=".sqlesc($btit_settings["default_language"]).",
+            //die(implode(",",$values));
+            mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}settings") or stderr($language["ERROR"], ((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+            mysqli_query($GLOBALS['conn'], "INSERT INTO {$TABLE_PREFIX}settings (`key`,`value`) VALUES ".implode(",", $values).";") or stderr($language["ERROR"], ((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+            // update guest values for language, style, torrentsxpage etc...
+            mysqli_query($GLOBALS['conn'], "UPDATE {$TABLE_PREFIX}users SET language=".sqlesc($btit_settings["default_language"]).",
                             style=".sqlesc($btit_settings["default_style"]).",
-                            torrentsperpage=".sqlesc($btit_settings["max_torrents_per_page"])." WHERE id=1") or stderr($language["ERROR"],((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+                            torrentsperpage=".sqlesc($btit_settings["max_torrents_per_page"])." WHERE id=1") or stderr($language["ERROR"], ((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-            if ( isset( $alter ) ) {
-                if($alter===true)
-                {
+            if (isset($alter)) {
+                if ($alter===true) {
                     mysqli_query($GLOBALS['conn'], "ALTER TABLE `{$TABLE_PREFIX}users` CHANGE `torrentsperpage` `torrentsperpage` TINYINT( 3 ) UNSIGNED NOT NULL DEFAULT ".sqlesc($btit_settings["max_torrents_per_page"]));
                     mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}users` SET `torrentsperpage`=".sqlesc($btit_settings["max_torrents_per_page"])." WHERE `torrentsperpage`=".sqlesc($old_setting));
                 }
             }
 
-        unset($values);
+            unset($values);
         
 
-        $admintpl->set("config_saved",true,true);
+            $admintpl->set("config_saved", true, true);
         }
         // we don't break, so we will display the new config...
 
     case 'read':
     case '':
     default:
-        $admintpl->set("language",$language);
+        $admintpl->set("language", $language);
 
         $btit_settings=get_fresh_config("SELECT `key`,`value` FROM {$TABLE_PREFIX}settings");
 
         // some $btit_settings are stored in database, some other not like in template
         // we will convert and set to correct value in the array.
-        if (is_array(unserialize(base64_decode($btit_settings["announce"]))))
-        $btit_settings["announce"]=implode("\n",unserialize(base64_decode($btit_settings["announce"])));
+        if (is_array(unserialize(base64_decode($btit_settings["announce"])))) {
+            $btit_settings["announce"]=implode("\n", unserialize(base64_decode($btit_settings["announce"])));
+        }
         $btit_settings["external"]=($btit_settings["external"]=="true"?"checked=\"checked\"":"");
         $btit_settings["gzip"]=($btit_settings["gzip"]=="true"?"checked=\"checked\"":"");
         $btit_settings["debug"]=($btit_settings["debug"]=="true"?"checked=\"checked\"":"");
@@ -255,18 +244,18 @@ switch ($action)
         // language dropdown
         $lres=language_list();
         $btit_settings["language_combo"]=("\n<select name=\"default_langue\" size=\"1\">");
-        foreach($lres as $langue)
-          {
+        foreach ($lres as $langue) {
             $btit_settings["language_combo"].="\n<option ";
-            if ($langue["id"]==$btit_settings["default_language"])
-            $btit_settings["language_combo"].="selected=\"selected\" ";
+            if ($langue["id"]==$btit_settings["default_language"]) {
+                $btit_settings["language_combo"].="selected=\"selected\" ";
+            }
             $btit_settings["language_combo"].="value=\"".$langue["id"]."\">".$langue["language"]."</option>";
-              if ( isset( $btit_settings[ "language_combo" ] ) ) {
-                  if ( isset( $option ) ) {
-                      $btit_settings["language_combo"].=($option);
-                  }
-              }
-          }
+            if (isset($btit_settings[ "language_combo" ])) {
+                if (isset($option)) {
+                    $btit_settings["language_combo"].=($option);
+                }
+            }
+        }
         $btit_settings["language_combo"].=("\n</select>\n");
         unset($lres);
         // charset
@@ -316,13 +305,13 @@ switch ($action)
         // style dropdown
         $sres=style_list();
         $btit_settings["style_combo"]="\n<select name=\"default_style\" size=\"1\">";
-        foreach($sres as $style)
-          {
+        foreach ($sres as $style) {
             $btit_settings["style_combo"].="\n<option ";
-            if ($style["id"]==$btit_settings["default_style"])
-               $btit_settings["style_combo"].="selected=\"selected\" ";
+            if ($style["id"]==$btit_settings["default_style"]) {
+                $btit_settings["style_combo"].="selected=\"selected\" ";
+            }
             $btit_settings["style_combo"].="value=\"".$style["id"]."\">".$style["style"]."</option>";
-          }
+        }
         $btit_settings["style_combo"].="\n</select>\n";
         unset($sres);
         // validation dropdown
@@ -344,9 +333,8 @@ switch ($action)
         $btit_settings["smtp_username"]=isset($btit_settings["smtp_username"])?$btit_settings["smtp_username"]:"";
         $btit_settings["smtp_password"]=isset($btit_settings["smtp_password"])?$btit_settings["smtp_password"]:"";
 
-        $admintpl->set("config",$btit_settings);
-        $admintpl->set("frm_action","index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=config&amp;action=write");
+        $admintpl->set("config", $btit_settings);
+        $admintpl->set("frm_action", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=config&amp;action=write");
         $admintpl->set("ipb_in_use", (($btit_settings["forum"]=="ipb")?true:false), true);
         break;
 }
-?>

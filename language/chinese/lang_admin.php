@@ -313,4 +313,3 @@ $language['MHI_IT'] = '这个';//"it"
 $language['MHI_REPLACE'] = '替换为';//"Replace with"
 $language['MHI_COPY'] = '复制';
 $language['MHI_AS'] = '为';//“as”
-?>

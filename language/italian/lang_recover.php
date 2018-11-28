@@ -7,4 +7,3 @@ $language["ERR_INV_EMAIL"]="Devi inserire un indirizzo di email valido";
 $language["ERR_NO_CAPTCHA"]="Devi inserire il codice in immagine'ImageCode'";
 $language["IMAGE_CODE"]="Codice Immagine";
 $language["SECURITY_CODE"]="Rispondi alla domanda";
-?>

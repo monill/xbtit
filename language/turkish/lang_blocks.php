@@ -5,7 +5,7 @@ $language['BLOCK_MAINMENU']=''; # this is the Main Menu no name needed, some dip
 # We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber 
 $language['BLOCK_DDMENU']='';
 $language['BLOCK_MENU']='Ana Menü'; # block menu needs the name
-$language['BLOCK_CALENDAR']='Takvim'; 
+$language['BLOCK_CALENDAR']='Takvim';
 $language['BLOCK_CLOCK']='Saat';
 $language['BLOCK_FORUM']='Forum';
 $language['BLOCK_LASTMEMBER']='Son Üye';
@@ -25,4 +25,3 @@ $language['WELCOME_LASTUSER']=' Sitemize hoş geldiniz ';
 $language['BLOCK_MINCLASSVIEW']='Görüntüleyebilecek minimum seviye';
 $language['BLOCK_MAXCLASSVIEW']='Görüntüleyebilecek maksimum seviye';
 $language['BLOCK_TOTAL']='Toplam';
-?>

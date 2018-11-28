@@ -45,4 +45,3 @@ $language['WELCOME_UCP_INVITE']='Dette er dit invitations panel.<br />Her fra se
 // UserBars
 $language['USERBAR'] = 'UserBar';
 $language['NEWUSERBAR'] = 'Skift UserBar';
-?>

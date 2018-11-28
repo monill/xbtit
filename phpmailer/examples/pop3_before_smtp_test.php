@@ -28,10 +28,9 @@
   $mail->Body     =  'Hello world';
   $mail->AddAddress('name@anydomain.com', 'First Last');
 
-  if (!$mail->Send())
-  {
+if (!$mail->Send()) {
     echo $mail->ErrorInfo;
-  }
+}
 ?>
 </pre>
 

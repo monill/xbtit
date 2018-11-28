@@ -4,7 +4,7 @@
  * English Version
  */
 
-$PHPMAILER_LANG = array();
+$PHPMAILER_LANG = [];
 
 $PHPMAILER_LANG['provide_address']      = 'You must provide at least one recipient email address.';
 $PHPMAILER_LANG['mailer_not_supported'] = ' mailer is not supported.';
@@ -20,4 +20,3 @@ $PHPMAILER_LANG['file_open']            = 'File Error: Could not open file: ';
 $PHPMAILER_LANG['encoding']             = 'Unknown encoding: ';
 $PHPMAILER_LANG['signing']              = 'Signing Error: ';
 $PHPMAILER_LANG['smtp_error']           = 'SMTP server error: ';
-?>

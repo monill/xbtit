@@ -8,7 +8,8 @@ $language['FILE_UPLOAD_ERROR_2']='Fil upload fejl';
 $language['ERR_PARSER']='Der er en fejl i din torrent. Parseren accepterede den ikke.';
 $language['WRITE_CATEGORY']='Du skal vælge en kategori...';
 $language['DOWNLOAD']='Download';
-$language['MSG_UP_SUCCESS']='Torrenten er uploadet.';$language['Genre']='Genre';
+$language['MSG_UP_SUCCESS']='Torrenten er uploadet.';
+$language['Genre']='Genre';
 $language['MSG_DOWNLOAD_PID']='PID system activt, hent torrenten med dit PID';
 $language['EMPTY_DESCRIPTION']='Du skal indtaste en beskrivelse!';
 $language['EMPTY_ANNOUNCE']='Announce er tom';
@@ -34,5 +35,3 @@ $language["CHECK_FOLDERS_PERM"]="Check venligst bibliotekets tilladelser og prø
 $language["ILEGAL_UPLOAD"]="Ilegal upload!! Dette er ikke et billede<br>Prøv venligst igen";
 $language["IMAGE"]="Billede";
 $language["SCREEN"]="Screenshots";
-
-?>

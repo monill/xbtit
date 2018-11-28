@@ -20,4 +20,3 @@ $language["BLOCK_MAINUSERTOOLBAR"]="Κεντρική εργαλειοθήκη χ
 $language["WELCOME_LASTUSER"]=" Καλώς ήρθατε στο νέο μας Tracker ";
 $language["BLOCK_MINCLASSVIEW"]="Ο ελάχιστος βαθμός μπορεί να δει";
 $language["BLOCK_MAXCLASSVIEW"]="Ο μέγιστος βαθμός μπορεί να δει";
-?>

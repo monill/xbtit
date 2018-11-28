@@ -33,4 +33,3 @@ $language["RATING"]="Βαθμολογία";
 $language["ERR_NO_VOTE"]="Πρέπει να βάλεις ψήφο.";
 $language["VOTES"]="Ψήφοι";
 $language["SHOW_HIDE"]="Φανέρωσε/κρύψε αρχεία";
-?>

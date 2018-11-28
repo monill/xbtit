@@ -11,7 +11,7 @@ $lang[4]='">&nbsp;&nbsp;&nbsp; ';
 $lang[5]='</font></center></strong>';
 $lang[6]='<br /><center>snälla <a target="_new" href="http://www.simplemachines.org/download/">Ladda hem SMF</a> och ladda upp innehållet av de arkiv i "smf" mappen.<br />Om man har i "smf" mappen varsågod frambringa någon i ditt förföljare rot och ladda upp<br/>innehållet av de arkiv att det.<br /><br />när det väl är uppladdat så ska det sluta med ett litet p för att användas med $lang[8]
 $lang[7]='<br /><center>P'; //använd P som versal för användning med $lang[8]
-$lang[8]='arrendera installerare av SMF genom att <a target="_new" href="smf/install.php">Tryck här</a>*<br /><br /><strong>* Snälla använd samma databas inloggning detaljer som dom använt till din tracker,<br />du kan använda vilken databas prefix du vill (undantaget som du använde när<br />tracker blev installerad )<br /><br />';
+$lang[8]='arrendera installerare av SMF genom att <a target="_new" href="smf/install.php">Tryck här</a>*<br /><br /><strong>* Snälla använd samma databas inloggning detaljer som dom använt till din tracker,<br />du kan använda vilken databas prefix du vill(undantaget som du använde när<br />tracker blev installerad)<br /><br />';
 $lang[9]='<font color="#0000FF" size="3">Du får uppfriska den sida en gång så du har de nödvändig bestyr!</font></strong></center>';
 $lang[10]='<center><strong>SMF installerad?<font color="';
 $lang[11]='Fil hittades inte!';

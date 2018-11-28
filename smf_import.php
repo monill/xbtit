@@ -49,43 +49,43 @@ require_once($BASEDIR."/include/common.php");
 require_once($BASEDIR."/language/english/lang_smf_import.php");
 
 // Lets open a connection to the database
-((bool)mysqli_query( ($GLOBALS['conn'] = mysqli_connect($dbhost, $dbuser, $dbpass)), "USE $database"));
+((bool)mysqli_query(($GLOBALS['conn'] = mysqli_connect($dbhost, $dbuser, $dbpass)), "USE $database"));
 
 $cookie=test_my_cookie();
 
-if($cookie["is_valid"]===true)
-{
+if ($cookie["is_valid"]===true) {
     $res=mysqli_query($GLOBALS['conn'], "SELECT `ul`.`admin_access` FROM `{$TABLE_PREFIX}users` `u` LEFT JOIN `{$TABLE_PREFIX}users_level` `ul` ON `u`.`id_level`=`ul`.`id` WHERE `u`.`id`=".$cookie["id"]);
-    if(@mysqli_num_rows($res)==1)
+    if (@mysqli_num_rows($res)==1) {
         $row=mysqli_fetch_assoc($res);
+    }
 }
-if(!isset($row["admin_access"]))
+if (!isset($row["admin_access"])) {
     $row["admin_access"]="no";
+}
 
-if($cookie["is_valid"]===false || $row["admin_access"]=="no")
+if ($cookie["is_valid"]===false || $row["admin_access"]=="no") {
     die($lang[38]);
+}
 
 $lock=mysqli_fetch_assoc(mysqli_query($GLOBALS['conn'], "SELECT random FROM {$TABLE_PREFIX}users WHERE id=1"));
-if($lock["random"]==54345)
+if ($lock["random"]==54345) {
     die($lang[26] . $lang[27] . $lang[35]);
+}
 
 (!file_exists($BASEDIR."/smf/Settings.php") ? $files_present=$lang[1] : $files_present=$lang[0]);
 
-if($files_present==$lang[0])
-{
+if ($files_present==$lang[0]) {
     $filename=$BASEDIR."/smf/Settings.php";
-    $fd=fopen($filename,"r");
-    $data=fread($fd,filesize($filename));
+    $fd=fopen($filename, "r");
+    $data=fread($fd, filesize($filename));
     $start=strpos($data, "\$db_prefix");
-    $end=strpos(substr($data,$start),";")+1;
-    $data=substr($data,$start,$end);
+    $end=strpos(substr($data, $start), ";")+1;
+    $data=substr($data, $start, $end);
     fclose($fd);
     
     $filename=__DIR__."/include/settings.php";
-    if (file_exists($filename))
-    {
-        if (is_writable($filename))
-        {
+    if (file_exists($filename)) {
+        if (is_writable($filename)) {
             $filesize=filesize($filename);
             $fd = fopen($filename, "w");
             $contents ="<?php\n\n";
@@ -96,12 +96,12 @@ if($files_present==$lang[0])
             $contents.= "\$TABLE_PREFIX = \"$TABLE_PREFIX\";\n";
             $contents.= $data."\n";
             $contents.= "\n?>";
-            fwrite($fd,$contents);
+            fwrite($fd, $contents);
             fclose($fd);
-        }
-        else
+        } else {
             die($lang[36] . $filename . $lang[37]);
-    } 
+        }
+    }
 }
 (isset($_GET["act"]) ? $act=$_GET["act"] : $act="");
 (isset($_GET["confirm"]) ? $confirm=$_GET["confirm"] : $confirm="");
@@ -109,76 +109,72 @@ if($files_present==$lang[0])
 (isset($_GET["counter"]) ? $counter=((int)$_GET["counter"]) : $counter=0);
 (isset($_GET["lastacc"]) ? $lastacc=((int)$_GET["lastacc"]) : $lastacc=0);
 
-if($act=="")
-{
-    if(!isset($db_prefix) || empty($db_prefix))
-    {
+if ($act=="") {
+    if (!isset($db_prefix) || empty($db_prefix)) {
         $db_prefix=substr($data, 14, (strlen($data)-16));
     }
 
     echo $lang[2];
     echo $lang[3] . (($files_present==$lang[0]) ? "#00FF00" : "#FF0000") . $lang[4] . $files_present .  $lang[5];
-    if($files_present==$lang[1])
+    if ($files_present==$lang[1]) {
         die($lang[6] . $lang[8] . $lang[9] . $lang[35]);
+    }
 
     // Make sure SMF is installed by checking the tables are there
     // (There should be 41 as of v1.1.4 but lets be generous and ensure
     // there are at least 35 SMF tables)
     $count=0;
-    $tablelist=mysqli_query($GLOBALS['conn'], "SHOW TABLES FROM $database"); 
+    $tablelist=mysqli_query($GLOBALS['conn'], "SHOW TABLES FROM $database");
 
-    while($list=mysqli_fetch_assoc($tablelist))
-    {
-        if(substr($list["Tables_in_".$database], 0, strlen($db_prefix))==$db_prefix)
-        $count++;
+    while ($list=mysqli_fetch_assoc($tablelist)) {
+        if (substr($list["Tables_in_".$database], 0, strlen($db_prefix))==$db_prefix) {
+            $count++;
+        }
     }
     (($count<35) ? $smf_installed=$lang[1] : $smf_installed=$lang[0]);
 
     // Check the SMF Version
     $res=mysqli_query($GLOBALS['conn'], "SELECT `value` FROM `{$db_prefix}settings` WHERE `variable`='smfVersion'");
-    if(@mysqli_num_rows($res)>0)
-    {
+    if (@mysqli_num_rows($res)>0) {
         $row=mysqli_fetch_assoc($res);
-        $smf_type=(((int)(substr($row["value"],0,1))==1)?"smf":"smf2");
+        $smf_type=(((int)(substr($row["value"], 0, 1))==1)?"smf":"smf2");
     }
     
     echo $lang[10] . (($smf_installed==$lang[0]) ? "#00FF00" : "#FF0000") . $lang[4] . $smf_installed . ((isset($row["value"]) && !empty($row["value"]))?" (".$row["value"].") ":"") . $lang[5];
-    if($smf_installed==$lang[1])
+    if ($smf_installed==$lang[1]) {
         die($lang[7] . $lang[8] . $lang[9] . $lang[35]);
+    }
 
     // Check if the default english language file is present and writable
     (!file_exists($BASEDIR."/smf/Themes/default/languages/Errors.english.php") ? $lang_present=$lang[1] : $lang_present=$lang[0]);
-    if($lang_present==$lang[0])
+    if ($lang_present==$lang[0]) {
         (is_writable($BASEDIR."/smf/Themes/default/languages/Errors.english.php") ? $lang_writable=$lang[0] : $lang_writable=$lang[1]);
+    }
      
-    if($lang_present==$lang[1])
+    if ($lang_present==$lang[1]) {
         $status=$lang[11];
-    elseif($lang_present==$lang[0] && $lang_writable==$lang[1])
+    } elseif ($lang_present==$lang[0] && $lang_writable==$lang[1]) {
         $status=$lang[12];
-    else
+    } else {
         $status=$lang[0];
+    }
     
     echo $lang[13] . (($status==$lang[0]) ? "#00FF00" : "#FF0000") . $lang[4] . $status . $lang[5];
     
-    if($status==$lang[11])
+    if ($status==$lang[11]) {
         die($lang[15] . $BASEDIR . "/smf/Themes/default/languages/Errors.english.php" . $lang[16] . $lang[9] . $lang[35]);
-    elseif($status==$lang[12])
+    } elseif ($status==$lang[12]) {
         die($lang[15] . $BASEDIR . "/smf/Themes/default/languages/Errors.english.php" . $lang[17] . $lang[9] . $lang[35]);
+    }
 
     die($lang[19] . $_SERVER["PHP_SELF"] . "?act=init_setup&smf_type=" . $smf_type . $lang[20] . $lang[35]);
-    
-}
-elseif($act=="init_setup"  && $confirm!="yes")
-{
+} elseif ($act=="init_setup"  && $confirm!="yes") {
     die($lang[21] . $lang[22] . $lang[23] . $lang[35]);
-}
-elseif($act=="init_setup"  && $confirm=="yes")
-{
+} elseif ($act=="init_setup"  && $confirm=="yes") {
     $input_pwd = $_GET["pwd"];
 
-    if ($input_pwd!=="$dbpass")
-       {
-       die($lang[34] . $lang[35]);
+    if ($input_pwd!=="$dbpass") {
+        die($lang[34] . $lang[35]);
     }
 
     $smf_type=$_GET["smf_type"];
@@ -196,13 +192,11 @@ elseif($act=="init_setup"  && $confirm=="yes")
     
     $getranks=mysqli_query($GLOBALS['conn'], $query);
     $ranklist="";
-    while($rank=mysqli_fetch_assoc($getranks))
-    {
+    while ($rank=mysqli_fetch_assoc($getranks)) {
         $ranklist.=$rank["id_level"].",";
 
         // Rank is validating, set up limited access
-        if($rank["id_level"]==12)
-        {
+        if ($rank["id_level"]==12) {
             $query1 ="INSERT INTO `{$db_prefix}board_permissions` (".(($smf_type=="smf")?"`ID_GROUP`, `ID_BOARD`":"`id_group`, `id_profile`").", `permission`) VALUES ";
             $query1.="(".$rank["id_level"].", 0, 'poll_view'), ";
             $query1.="(".$rank["id_level"].", 0, 'report_any'), ";
@@ -222,15 +216,14 @@ elseif($act=="init_setup"  && $confirm=="yes")
             $query2.="(".$rank["id_level"].", 'profile_view_own'), ";
             $query2.="(".$rank["id_level"].", 'profile_identity_own')";
 
-            if($smf_type=="smf")
+            if ($smf_type=="smf") {
                 $query3 ="INSERT INTO `{$db_prefix}membergroups` (`ID_GROUP`, `groupName`, `onlineColor`, `minPosts`, `stars`) VALUES ";
-            else
+            } else {
                 $query3 ="INSERT INTO `{$db_prefix}membergroups` (`id_group`, `group_name`, `online_color`, `min_posts`, `stars`) VALUES ";
+            }
             $query3.="(".$rank["id_level"].", 'Validating', '', -1, '')";
-        }
-        // Rank has full admin access
-        elseif($rank["edit_forum"]=="yes" && $rank["admin_access"]=="yes")
-        {
+        } // Rank has full admin access
+        elseif ($rank["edit_forum"]=="yes" && $rank["admin_access"]=="yes") {
             $query1 ="INSERT INTO `{$db_prefix}board_permissions` (".(($smf_type=="smf")?"`ID_GROUP`, `ID_BOARD`":"`id_group`, `id_profile`").", `permission`) VALUES ";
             $query1.="(".$rank["id_level"].", 0, 'poll_lock_own'), ";
             $query1.="(".$rank["id_level"].", 0, 'poll_edit_any'), ";
@@ -304,15 +297,14 @@ elseif($act=="init_setup"  && $confirm=="yes")
             $query2.="(".$rank["id_level"].", 'view_mlist'), ";
             $query2.="(".$rank["id_level"].", 'view_stats')";
 
-            if($smf_type=="smf")
+            if ($smf_type=="smf") {
                 $query3 ="INSERT INTO `{$db_prefix}membergroups` (`ID_GROUP`, `groupName`, `onlineColor`, `minPosts`, `stars`) VALUES ";
-            else
+            } else {
                 $query3 ="INSERT INTO `{$db_prefix}membergroups` (`id_group`, `group_name`, `online_color`, `min_posts`, `stars`) VALUES ";
+            }
             $query3.="(".$rank["id_level"].", '".$rank["level"]."', '#FF0000', -1, '5#staradmin.gif')";
-        }
-        // Rank has forum edit rights but no admin access (moderator/low level admin)
-        elseif($rank["edit_forum"]=="yes" && $rank["admin_access"]=="no")
-        {
+        } // Rank has forum edit rights but no admin access (moderator/low level admin)
+        elseif ($rank["edit_forum"]=="yes" && $rank["admin_access"]=="no") {
             $query1 ="INSERT INTO `{$db_prefix}board_permissions` (".(($smf_type=="smf")?"`ID_GROUP`, `ID_BOARD`":"`id_group`, `id_profile`").", `permission`) VALUES ";
             $query1.="(".$rank["id_level"].", 0, 'delete_any'), ";
             $query1.="(".$rank["id_level"].", 0, 'delete_own'), ";
@@ -364,14 +356,13 @@ elseif($act=="init_setup"  && $confirm=="yes")
             $query2.="(".$rank["id_level"].", 'profile_upload_avatar'), ";
             $query2.="(".$rank["id_level"].", 'profile_remote_avatar')";
 
-            if($smf_type=="smf")
+            if ($smf_type=="smf") {
                 $query3 ="INSERT INTO `{$db_prefix}membergroups` (`ID_GROUP`, `groupName`, `onlineColor`, `minPosts`, `stars`) VALUES ";
-            else
+            } else {
                 $query3 ="INSERT INTO `{$db_prefix}membergroups` (`id_group`, `group_name`, `online_color`, `min_posts`, `stars`) VALUES ";
+            }
             $query3.="(".$rank["id_level"].", '".$rank["level"]."', '#00FF00', -1, '5#starmod.gif')";
-        }
-        else
-        {
+        } else {
             // Bog standard settings
             $query1 ="INSERT INTO `{$db_prefix}board_permissions` (".(($smf_type=="smf")?"`ID_GROUP`, `ID_BOARD`":"`id_group`, `id_profile`").", `permission`) VALUES ";
             $query1.="(".$rank["id_level"].", 0, 'view_attachments'), ";
@@ -407,20 +398,21 @@ elseif($act=="init_setup"  && $confirm=="yes")
             $query2.="(".$rank["id_level"].", 'karma_edit'), ";
             $query2.="(".$rank["id_level"].", 'calendar_view')";
 
-            if($smf_type=="smf")
+            if ($smf_type=="smf") {
                 $query3 ="INSERT INTO `{$db_prefix}membergroups` (`ID_GROUP`, `groupName`, `onlineColor`, `minPosts`, `stars`) VALUES ";
-            else
+            } else {
                 $query3 ="INSERT INTO `{$db_prefix}membergroups` (`id_group`, `group_name`, `online_color`, `min_posts`, `stars`) VALUES ";
+            }
             $query3.="(".$rank["id_level"].", '".$rank["level"]."', '', -1, '')";
         }
         // Run the queries
         @mysqli_query($GLOBALS['conn'], $query1);
         @mysqli_query($GLOBALS['conn'], $query2);
         @mysqli_query($GLOBALS['conn'], $query3);
-        @mysqli_query($GLOBALS['conn'],"UPDATE `{$TABLE_PREFIX}users_level` SET `smf_group_mirror`=".$rank["id_level"]." WHERE `level`='".mysqli_query($GLOBALS['conn'],$rank["level"])."'");
+        @mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}users_level` SET `smf_group_mirror`=".$rank["id_level"]." WHERE `level`='".mysqli_query($GLOBALS['conn'], $rank["level"])."'");
     }
     // Allow all ranks to see the initial test forum
-    @mysqli_query($GLOBALS['conn'], "UPDATE `{$db_prefix}boards` SET `member".(($smf_type=="smf")?"G":"_g")."roups`='".substr($ranklist,0,strlen($ranklist)-1).",-1' WHERE ".(($smf_type=="smf")?"`ID_BOARD`":"`id_board`")."=1");
+    @mysqli_query($GLOBALS['conn'], "UPDATE `{$db_prefix}boards` SET `member".(($smf_type=="smf")?"G":"_g")."roups`='".substr($ranklist, 0, strlen($ranklist)-1).",-1' WHERE ".(($smf_type=="smf")?"`ID_BOARD`":"`id_board`")."=1");
     // Disable forum registration
     @mysqli_query($GLOBALS['conn'], "UPDATE `{$db_prefix}settings` SET `value`=3 WHERE `variable`='registration_method'");
 
@@ -439,42 +431,37 @@ elseif($act=="init_setup"  && $confirm=="yes")
 
     $foutput="<?php\n\n";
 
-    foreach($txt as $k => $v)
-    {
+    foreach ($txt as $k => $v) {
         $foutput.="\$txt['$k']   =   '".str_replace("'", "\\'", $v)."';\n";
     }
     $foutput.="\n?>";
 
-    fwrite($fd,$foutput);
+    fwrite($fd, $foutput);
     fclose($fd);
 
     // Make sure there is an smf_fid column in the users table, if not add one
     $query=mysqli_query($GLOBALS['conn'], "SHOW COLUMNS FROM `{$TABLE_PREFIX}users` WHERE `Field`='smf_fid'");
     $count=mysqli_num_rows($query);
-    if ($count==0)
+    if ($count==0) {
         @mysqli_query($GLOBALS['conn'], "ALTER TABLE `{$TABLE_PREFIX}users` ADD `smf_fid` INT( 10 ) NOT NULL DEFAULT '0',  ADD INDEX (`smf_fid`)");
-    else
-    {
+    } else {
         $indexed=mysqli_query($GLOBALS['conn'], "SHOW INDEX FROM `{$TABLE_PREFIX}users` WHERE `Key_name`='smf_fid'");
-        if(@mysqli_num_rows($indexed)==0)
-        {
+        if (@mysqli_num_rows($indexed)==0) {
             mysqli_query($GLOBALS['conn'], "ALTER TABLE `{$TABLE_PREFIX}users` ADD INDEX (`smf_fid`)");
         }
     }
     die($lang[24] . $lang[25] . $lang[35]);
-}
-elseif($act=="member_import" && $confirm=="yes")
-{
+} elseif ($act=="member_import" && $confirm=="yes") {
     $smf_type=$_GET["smf_type"];
 
-    if($start==2)
+    if ($start==2) {
         $end=$start+98;
-    else
+    } else {
         $end=$start+99;
+    }
     $newstart=$end+1;
     
-    if($lastacc==0)
-    {
+    if ($lastacc==0) {
         $last=mysqli_query($GLOBALS['conn'], "SELECT `id` FROM `{$TABLE_PREFIX}users` ORDER BY `id` DESC LIMIT 1");
         $acc=mysqli_fetch_assoc($res);
         $lastacc=$acc["id"];
@@ -484,20 +471,17 @@ elseif($act=="member_import" && $confirm=="yes")
     $query="SELECT `u`.`id`, `u`.`username`, `u`.`id_level`+10 `id_level`, `u`.`password`, `u`.`pass_type`, `u`.`email`, UNIX_TIMESTAMP(`u`.`joined`) `joined`, `u`.`lip`, COUNT(`p`.`userid`) `posts` FROM `{$TABLE_PREFIX}users` `u` LEFT JOIN `{$TABLE_PREFIX}posts` `p` ON `u`.`id`=`p`.`userid` WHERE `u`.`id` >=$start AND `u`.`id` <=$end GROUP BY `u`.`id` ORDER BY `u`.`id` ASC";
     $list=mysqli_query($GLOBALS['conn'], $query);
     $count=mysqli_num_rows($list);
-    if($start==2)
+    if ($start==2) {
         @mysqli_query($GLOBALS['conn'], "TRUNCATE TABLE `{$db_prefix}members`");
-    if($count>0)
-    {
-        while ($account=mysqli_fetch_assoc($list))
-        {
+    }
+    if ($count>0) {
+        while ($account=mysqli_fetch_assoc($list)) {
             $counter++;
             @mysqli_query($GLOBALS['conn'], "INSERT INTO `{$db_prefix}members` (".(($smf_type=="smf")?"`ID_MEMBER`, `memberName`, `dateRegistered`, `ID_GROUP`, `realName`, `passwd`, `emailAddress`, `memberIP`, `memberIP2`, `is_activated`, `passwordSalt`":"`id_member`, `member_name`, `date_registered`, `id_group`, `real_name`, `passwd`, `email_address`, `member_ip`, `member_ip2`, `is_activated`, `password_salt`").", `posts`) VALUES (".$account["id"].", '".$account["username"]."', ".$account["joined"].", ".$account["id_level"].", '".$account["username"]."', '".(($account["pass_type"]==1)?$account["password"]:"ffffffffffffffffffffffffffffffffffffffff")."', '".$account["email"]."', '".long2ip($account["lip"])."', '".long2ip($account["lip"])."', 1, '',".$account["posts"].")");
             @mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}users` SET `smf_fid`=".$account["id"]." WHERE `id`=".$account["id"]);
         }
         print("<script LANGUAGE=\"javascript\">window.location.href='".$_SERVER["PHP_SELF"]."?act=member_import&confirm=yes&start=$newstart&counter=$counter&lastacc=$lastacc&smf_type=$smf_type'</script>");
-    }
-    elseif($lastacc > $end)
-    {
+    } elseif ($lastacc > $end) {
         print("<script LANGUAGE=\"javascript\">window.location.href='".$_SERVER["PHP_SELF"]."?act=member_import&confirm=yes&start=$newstart&counter=$counter&lastacc=$lastacc&smf_type=$smf_type'</script>");
     }
     
@@ -505,27 +489,23 @@ elseif($act=="member_import" && $confirm=="yes")
     @mysqli_query($GLOBALS['conn'], "UPDATE {$db_prefix}settings SET value='".(($smf_type=="smf")?$last["memberName"]:$last["member_name"])."' WHERE variable='latestRealName'");
     @mysqli_query($GLOBALS['conn'], "UPDATE {$db_prefix}settings SET value='".(($smf_type=="smf")?$last["ID_MEMBER"]:$last["id_member"])."' WHERE variable='latestMember'");
     print($lang[28] . $counter . $lang[29]);
-}
-elseif($act=="import_forum" && $confirm!="yes")
+} elseif ($act=="import_forum" && $confirm!="yes") {
     die($lang[30] . $lang[31] . $lang[35]);
-elseif($act=="import_forum" && $confirm=="yes")
-{
+} elseif ($act=="import_forum" && $confirm=="yes") {
     $smf_type=$_GET["smf_type"];
 
     $res=mysqli_query($GLOBALS['conn'], "SELECT COUNT(*) `count` FROM `{$TABLE_PREFIX}forums`");
     $row=mysqli_fetch_assoc($res);
-    if($row["count"]==0)
+    if ($row["count"]==0) {
         print("<script LANGUAGE='javascript'>window.location.href='".$_SERVER["PHP_SELF"]."?act=completed&smf_type=$smf_type'</script>");
+    }
 
-    if($smf_type=="smf")
-    {
+    if ($smf_type=="smf") {
         $sqlquery ="SELECT MAX(`boardOrder`)+1 `nextboard`, `membergroups`, MAX(`catOrder`)+1 `nextcat` ";
         $sqlquery.="FROM `{$db_prefix}boards`, `{$db_prefix}categories` ";
         $sqlquery.="WHERE `ID_BOARD`=1 ";
         $sqlquery.="GROUP BY `membergroups`";
-    }
-    else
-    {
+    } else {
         $sqlquery ="SELECT MAX(`board_order`)+1 `nextboard`, `member_groups` `membergroups`, MAX(`cat_order`)+1 `nextcat` ";
         $sqlquery.="FROM `{$db_prefix}boards`, `{$db_prefix}categories` ";
         $sqlquery.="WHERE `id_board`=1 ";
@@ -551,74 +531,78 @@ elseif($act=="import_forum" && $confirm=="yes")
     $sqlquery.="ORDER BY `id` ASC";
 
     $res=mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
-    $forumlist=array();
+    $forumlist= [];
 
     // Lets put all the found results into a single array for later
     $subcat="";
-    while($forums=mysqli_fetch_assoc($res))
-    {
+    while ($forums=mysqli_fetch_assoc($res)) {
         $i=$forums["id"];
-        foreach($forums as $key => $value)
-        {
-            if($key=="minclassread" && $value!=1) $value=$value+10;
-            elseif($key=="minclassread" && $value==1) $value=-1;
-            elseif($key=="minclasswrite" && $value!=1) $value=$value+10;
-            elseif($key=="minclasswrite" && $value==1) $value=-1;
+        foreach ($forums as $key => $value) {
+            if ($key=="minclassread" && $value!=1) {
+                $value=$value+10;
+            } elseif ($key=="minclassread" && $value==1) {
+                $value=-1;
+            } elseif ($key=="minclasswrite" && $value!=1) {
+                $value=$value+10;
+            } elseif ($key=="minclasswrite" && $value==1) {
+                $value=-1;
+            }
             $forumlist[$i][$key]=$value;
         }
-        if($forumlist[$i]["minclassread"]==-1)
+        if ($forumlist[$i]["minclassread"]==-1) {
             $forumlist[$i]["permissions"]=$membergroups . ",-1";
-        else
+        } else {
             $forumlist[$i]["permissions"]=substr($membergroups, strpos($membergroups, sprintf("%s", $forumlist[$i]["minclassread"])), strlen($membergroups));
+        }
     
         $sqlquery ="INSERT INTO `{$db_prefix}boards` ";
-        if($smf_type=="smf")
+        if ($smf_type=="smf") {
             $sqlquery.="(`ID_CAT`, `boardOrder`, `memberGroups`, `name`, `description`) ";
-        else
+        } else {
             $sqlquery.="(`id_cat`, `board_order`, `member_groups`, `name`, `description`) ";
+        }
         $sqlquery.="VALUES ($ourcat, $nextboard, '".$forumlist[$i]["permissions"]."', ";
-        $sqlquery.=" '".mysqli_query($GLOBALS['conn'],$forumlist[$i]["name"])."', ";
-        $sqlquery.="'".mysqli_query($GLOBALS['conn'],$forumlist[$i]["description"])."')";
+        $sqlquery.=" '".mysqli_query($GLOBALS['conn'], $forumlist[$i]["name"])."', ";
+        $sqlquery.="'".mysqli_query($GLOBALS['conn'], $forumlist[$i]["description"])."')";
 
         @mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
         $forumlist[$i]["newid"]=((is_null($___mysqli_res = mysqli_insert_id($GLOBALS['conn']))) ? false : $___mysqli_res);
-        if($forumlist[$i]["id_parent"]!=0) $subcat.=$i .",";
+        if ($forumlist[$i]["id_parent"]!=0) {
+            $subcat.=$i .",";
+        }
         $nextboard++;
     }
-    if(isset($subcat) && !empty($subcat))
-    {
+    if (isset($subcat) && !empty($subcat)) {
         $subcat=explode(",", substr($subcat, 0, strlen($subcat)-1));
-        foreach($subcat AS $v)
-        {
+        foreach ($subcat as $v) {
             $main=$forumlist[$v]["id_parent"];
             $forid=$forumlist[$v]["newid"];
             $newparent=$forumlist[$main]["newid"];
-            if($smf_type=="smf")
+            if ($smf_type=="smf") {
                 $sqlquery="UPDATE `{$db_prefix}boards` SET `ID_PARENT`=$newparent WHERE `ID_BOARD`=".$forid;
-            else
+            } else {
                 $sqlquery="UPDATE `{$db_prefix}boards` SET `id_parent`=$newparent WHERE `id_board`=".$forid;
+            }
             @mysqli_query($GLOBALS['conn'], $sqlquery); /* or die(mysql_error()."<br />SQL Query:<br />".$sqlquery); */
         }
     }
     $sqlquery="SELECT * FROM `{$TABLE_PREFIX}topics` ORDER BY `id` ASC";
     $res=mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
-    while($topiclist=mysqli_fetch_assoc($res))
-    {
+    while ($topiclist=mysqli_fetch_assoc($res)) {
         $i=$topiclist["id"];
         (($topiclist["locked"]=="no") ? $topiclist["locked"]=0 : $topiclist["locked"]=1);
         (($topiclist["sticky"]=="no") ? $topiclist["sticky"]=0 : $topiclist["sticky"]=1);
             
-        foreach($topiclist AS $k => $v)
-        {
+        foreach ($topiclist as $k => $v) {
             $topics[$i][$k]=$v;
         }
-        if($smf_type=="smf")
+        if ($smf_type=="smf") {
             $sqlquery="INSERT INTO `{$db_prefix}topics` (`isSticky`, `ID_BOARD`, `ID_FIRST_MSG`, `ID_LAST_MSG`, `ID_MEMBER_STARTED`, `numViews`, `locked`) ";
-        else
+        } else {
             $sqlquery="INSERT INTO `{$db_prefix}topics` (`is_sticky`, `id_board`, `id_first_msg`, `id_last_msg`, `id_member_started`, `num_views`, `locked`) ";
-        if(isset($forumlist[$topics[$i]["forumid"]]["newid"]) && !empty($forumlist[$topics[$i]["forumid"]]["newid"]))
-        {
-            $sqlquery.="VALUES (".$topics[$i]["sticky"].", ".$forumlist[$topics[$i]["forumid"]]["newid"].", ".rand(0,2147483647).", ".rand(0,2147483647).", ".$topics[$i]["userid"].", ".$topics[$i]["views"].", ".$topics[$i]["locked"].")";
+        }
+        if (isset($forumlist[$topics[$i]["forumid"]]["newid"]) && !empty($forumlist[$topics[$i]["forumid"]]["newid"])) {
+            $sqlquery.="VALUES (".$topics[$i]["sticky"].", ".$forumlist[$topics[$i]["forumid"]]["newid"].", ".rand(0, 2147483647).", ".rand(0, 2147483647).", ".$topics[$i]["userid"].", ".$topics[$i]["views"].", ".$topics[$i]["locked"].")";
             @mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
             $topics[$i]["newtopicid"]=((is_null($___mysqli_res = mysqli_insert_id($GLOBALS['conn']))) ? false : $___mysqli_res);
         }
@@ -626,49 +610,41 @@ elseif($act=="import_forum" && $confirm=="yes")
     $sqlquery="SELECT `p`.* , `u`.`username`, `u`.`email`, `u`.`lip`, `ua`.`username` `edit_username` FROM `{$TABLE_PREFIX}posts` `p` LEFT JOIN `{$TABLE_PREFIX}users` `u` ON `p`.`userid` = `u`.`id` LEFT JOIN `{$TABLE_PREFIX}users` `ua` ON `p`.`editedby` = `ua`.`id` ORDER BY `p`.`id` ASC";
     $res=mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
 
-    while($postlist=mysqli_fetch_assoc($res))
-    {
+    while ($postlist=mysqli_fetch_assoc($res)) {
         $i=$postlist["id"];
             
-        foreach($postlist AS $k => $v)
-        {
+        foreach ($postlist as $k => $v) {
             $posts[$i][$k]=$v;
         }
-        if($smf_type=="smf")
+        if ($smf_type=="smf") {
             $sqlquery="INSERT INTO `{$db_prefix}messages` (`ID_TOPIC`, `ID_BOARD`, `posterTime`, `ID_MEMBER`, `subject`, `posterName`, `posterEmail`, `posterIP`, `smileysEnabled`, `modifiedTime`, `modifiedName`, `body`) ";
-        else
+        } else {
             $sqlquery="INSERT INTO {$db_prefix}messages (`id_topic`, `id_board`, `poster_time`, `id_member`, `subject`, `poster_name`, `poster_email`, `poster_ip`, `smileys_enabled`, `modified_time`, `modified_name`, `body`) ";
+        }
 
-        if(isset($topics[$posts[$i]["topicid"]]["newtopicid"]) && !empty($topics[$posts[$i]["topicid"]]["newtopicid"]))
-        {
-            $sqlquery.="VALUES (".$topics[$posts[$i]["topicid"]]["newtopicid"].", ".$forumlist[$topics[$posts[$i]["topicid"]]["forumid"]]["newid"].", ".$posts[$i]["added"].", ".$posts[$i]["userid"].", '".mysqli_query($GLOBALS['conn'],$topics[$posts[$i]["topicid"]]["subject"])."', '".$posts[$i]["username"]."', '".$posts[$i]["email"]."', '".long2ip($posts[$i]["lip"])."', 1, ".$posts[$i]["editedat"].", '".(($posts[$i]["editedby"]==0) ? "" : $posts[$i]["edit_username"])."', '".mysqli_query($GLOBALS['conn'],$posts[$i]["body"])."')";
+        if (isset($topics[$posts[$i]["topicid"]]["newtopicid"]) && !empty($topics[$posts[$i]["topicid"]]["newtopicid"])) {
+            $sqlquery.="VALUES (".$topics[$posts[$i]["topicid"]]["newtopicid"].", ".$forumlist[$topics[$posts[$i]["topicid"]]["forumid"]]["newid"].", ".$posts[$i]["added"].", ".$posts[$i]["userid"].", '".mysqli_query($GLOBALS['conn'], $topics[$posts[$i]["topicid"]]["subject"])."', '".$posts[$i]["username"]."', '".$posts[$i]["email"]."', '".long2ip($posts[$i]["lip"])."', 1, ".$posts[$i]["editedat"].", '".(($posts[$i]["editedby"]==0) ? "" : $posts[$i]["edit_username"])."', '".mysqli_query($GLOBALS['conn'], $posts[$i]["body"])."')";
             @mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
             $posts[$i]["newpostid"]=((is_null($___mysqli_res = mysqli_insert_id($GLOBALS['conn']))) ? false : $___mysqli_res);
         }
     }
     $sqlquery="SELECT MAX(".(($smf_type=="smf")?"`ID_MSG`":"`id_msg`").") `max`, ".(($smf_type=="smf")?"`ID_BOARD`":"`id_board`")." `idb` FROM `{$db_prefix}messages` GROUP BY `idb`";
     $res=mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
-    while($row=mysqli_fetch_assoc($res))
-    {
+    while ($row=mysqli_fetch_assoc($res)) {
         $sqlquery="UPDATE `{$db_prefix}boards` SET ".(($smf_type=="smf")?"`ID_LAST_MSG`":"`id_last_msg`")."=".$row["max"]." WHERE ".(($smf_type=="smf")?"`ID_BOARD`":"`id_board`")."=".$row["idb"];
         @mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
     }
     $sqlquery="SELECT MIN(".(($smf_type=="smf")?"`ID_MSG`":"`id_msg`").") `min`, MAX(".(($smf_type=="smf")?"`ID_MSG`":"`id_msg`").") `max`, ".(($smf_type=="smf")?"`ID_TOPIC`":"`id_topic`")." `idt` FROM `{$db_prefix}messages` GROUP BY `idt`";
     $res=mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
-    while($row=mysqli_fetch_assoc($res))
-    {
+    while ($row=mysqli_fetch_assoc($res)) {
         $sqlquery="UPDATE `{$db_prefix}topics` SET ".(($smf_type=="smf")?"`ID_FIRST_MSG`":"`id_first_msg`")."=".$row["min"].", ".(($smf_type=="smf")?"`ID_LAST_MSG`":"`id_last_msg`")."=".$row["max"]." WHERE ".(($smf_type=="smf")?"`ID_TOPIC`":"`id_topic`")."=".$row["idt"];
         @mysqli_query($GLOBALS['conn'], $sqlquery) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false))."<br />SQL Query:<br />".$sqlquery);
     }
-print("<script LANGUAGE=\"javascript\">window.location.href='".$_SERVER["PHP_SELF"]."?act=completed&smf_type=$smf_type'</script>");
-}
-elseif($act=="completed")
-{
+    print("<script LANGUAGE=\"javascript\">window.location.href='".$_SERVER["PHP_SELF"]."?act=completed&smf_type=$smf_type'</script>");
+} elseif ($act=="completed") {
     $smf_type=$_GET["smf_type"];
     // Lock import file from future use and change to smf mode
     @mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}settings` SET `value` ='smf".(($smf_type=="smf")?"":"2")."' WHERE `key`='forum'");
     @mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}users` SET `random`=54345 WHERE `id`=1");
     echo $lang[32] . $lang[33] . $lang[35];
 }
-
-?>

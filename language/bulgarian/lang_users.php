@@ -17,5 +17,3 @@ $language["EDIT"]            = "Редактирай";
 $language["DELETE"]          = "Изтрий";
 $language["NO_USERS_FOUND"]  = "Няма намерени потребители!";
 $language["UNKNOWN"]         = "Непознат";
-
-?>

@@ -5,4 +5,3 @@ $language["PEER_PORT"]="Porta";
 $language["PEER_STATUS"]="Status";
 $language["PEER_CLIENT"]="Cliente";
 $language["NO_HISTORY"]="Nenhum histórico para exibir";
-?>

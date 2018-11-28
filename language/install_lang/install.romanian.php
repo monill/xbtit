@@ -33,7 +33,7 @@
 // tradus de RippeR //
 
 $install_lang["charset"]                = "ISO-8859-1";
-$install_lang["lang_rtl"]               = FALSE;
+$install_lang["lang_rtl"]               = false;
 $install_lang["step"]                   = "PAS:";
 $install_lang["welcome_header"]         = "Bun-venit";
 $install_lang["welcome"]                = "Bun-venit la instalarea noului xbtit.";
@@ -124,4 +124,3 @@ $install_lang["ipb_err_4a"]             = "IPB English language file (<b>";
 $install_lang["ipb_err_4b"]             = "</b>) doesn't exist, cannot proceed.<br /><br />Click <a href=\"javascript: history.go(-1);\">here</a> to return to the previous page.";
 $install_lang["ipb_err_5"]             = "Unable to write to the IPB Config file (<b>";
 $install_lang["ipb_err_6"]             = "Unable to write to the Tracker Config file (<b>";
-?>

@@ -4,4 +4,3 @@
 // Per qualsiasi info ci trovate su http://dpwsmedia.com
 $language["INSERT_USERNAME"]="Devi inserire il nome utente!";
 $language["INSERT_PASSWORD"]="Devi inserire la password!";
-?>

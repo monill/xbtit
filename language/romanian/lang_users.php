@@ -15,4 +15,3 @@ $language['EDIT']='Editează';
 $language['DELETE']='Şterge';
 $language['NO_USERS_FOUND']='Nici un utilizatoe găsit!';
 $language['UNKNOWN']='Necunoscută';
-?>

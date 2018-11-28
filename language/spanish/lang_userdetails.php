@@ -33,4 +33,3 @@ $language['DELETE']             = 'Borrar';
 $language['PM']                 = 'MP';
 $language['BACK']               = 'Volver';
 $language['NO_HISTORY']         = 'No hay historia para mostrar...';
-?>

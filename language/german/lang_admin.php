@@ -269,4 +269,3 @@ $language["HACK_SOLUTION"]="Solution";
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="You cannot delete Guest user or yourself!";
 $language["USER_NOT_EDIT"]="You cannot edit Guest user or yourself!";
-?>

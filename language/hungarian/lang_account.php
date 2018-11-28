@@ -19,5 +19,3 @@ $language["WEEK"]="Rövid";
 $language["MEDIUM"]="Közepes";
 $language["SAFE"]="Biztonságos";
 $language["STRONG"]="Erős";
-
-?>

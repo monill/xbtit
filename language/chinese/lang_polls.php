@@ -51,4 +51,3 @@ $language['HOURS']='时';
 $language['MINUTES']='分';
 $language['SECONDS']='秒';
 //AJAX Poll System Hack Stop
-?>

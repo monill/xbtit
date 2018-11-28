@@ -74,8 +74,9 @@ $language['SETTING_FORUMBLOCK']='Forum block type';
 $language['SETTING_NUM_NEWS']='Grænse for Latest news block (numerisk)';
 $language['SETTING_NUM_POSTS']='Grænse for Forum block (numerisk)';
 $language['SETTING_NUM_LASTTORRENTS']='Grænse for Sidste torrents block (numerisk)';
-$language['SETTING_NUM_TOPTORRENTS']='Grænse for Mest populære torrents block (numerisk)';$language["Custom_foot"]="Egen footer line (blank for ikke at vise):";
-	  $language["ADMIN_INFO"]="Administration af:";
+$language['SETTING_NUM_TOPTORRENTS']='Grænse for Mest populære torrents block (numerisk)';
+$language["Custom_foot"]="Egen footer line (blank for ikke at vise):";
+      $language["ADMIN_INFO"]="Administration af:";
 
 $language['CLOCK_ANALOG']='Analog';
 $language['CLOCK_DIGITAL']='Digital';
@@ -349,5 +350,3 @@ $language['RECYCLE_EXPL']='<i>Periode i <u>dage</u> hvorefter inviationer vil bl
 $language["SETTING_MIN_DLRATIO"]="Minimum ratio for at kunne downloade torrents";
 $language["SETTING_CUSTOM_SETTINGS"]="Custom indstilinger";
 $language["BYPASS_DLCHECK"]="Bypass download check";
-
-?>

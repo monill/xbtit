@@ -31,75 +31,70 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 
-if (!defined("IN_BTIT"))
+if (!defined("IN_BTIT")) {
       die("non direct access!");
+}
 
 
-if (!$CURUSER || $CURUSER["uid"]==1)
-   {
-   stderr($language["ERROR"],$language["ONLY_REG_COMMENT"]);
+if (!$CURUSER || $CURUSER["uid"]==1) {
+    stderr($language["ERROR"], $language["ONLY_REG_COMMENT"]);
 }
 
 $comment = $_POST["comment"];
 
 $id = $_GET["id"];
-if ($_GET["cid"])
+if ($_GET["cid"]) {
     $cid = ((int)$_GET["cid"]);
-else
+} else {
     $cid=0;
+}
 
 
-if ($_GET["action"])
- {
-  if ($CURUSER["delete_torrents"]==="yes" && $_GET["action"]==="delete")
-    {
-     do_sqlquery("DELETE FROM {$TABLE_PREFIX}comments WHERE id=$cid",true);
-     redirect("index.php?page=torrent-details&id=$id#comments");
-     exit;
+if ($_GET["action"]) {
+    if ($CURUSER["delete_torrents"]==="yes" && $_GET["action"]==="delete") {
+         do_sqlquery("DELETE FROM {$TABLE_PREFIX}comments WHERE id=$cid", true);
+         redirect("index.php?page=torrent-details&id=$id#comments");
+         exit;
     }
- }
+}
 
 $tpl_comment=new bTemplate();
 
-$tpl_comment->set("language",$language);
-$tpl_comment->set("comment_id",$id);
-$tpl_comment->set("comment_username",$CURUSER["username"]);
-$tpl_comment->set("comment_comment",textbbcode("comment","comment",htmlspecialchars(unesc($comment))));
+$tpl_comment->set("language", $language);
+$tpl_comment->set("comment_id", $id);
+$tpl_comment->set("comment_username", $CURUSER["username"]);
+$tpl_comment->set("comment_comment", textbbcode("comment", "comment", htmlspecialchars(unesc($comment))));
 
 
 if ($_POST["info_hash"]) {
-   if ($_POST["confirm"] === $language["FRM_CONFIRM"]) {
-   $comment = addslashes($_POST["comment"]);
-      $user=addslashes($CURUSER["username"]);
-      if ($user === "") $user="Anonymous";
-	  if(empty($comment)){
-     stderr($language["ERROR"],$language['ERR_COMMENT_EMPTY']);
-     exit();
-     }
-	 else{	 
-  do_sqlquery("INSERT INTO {$TABLE_PREFIX}comments (added,text,ori_text,user,info_hash) VALUES (NOW(),\"$comment\",\"$comment\",\"$user\",\"" . mysqli_query($GLOBALS['conn'],stripslashes($_POST["info_hash"])) . "\")",true);
-  redirect("index.php?page=torrent-details&id=" . stripslashes($_POST["info_hash"])."#comments");
-  die();
-  }
-}
+    if ($_POST["confirm"] === $language["FRM_CONFIRM"]) {
+        $comment = addslashes($_POST["comment"]);
+        $user=addslashes($CURUSER["username"]);
+        if ($user === "") {
+            $user="Anonymous";
+        }
+        if (empty($comment)) {
+            stderr($language["ERROR"], $language['ERR_COMMENT_EMPTY']);
+            exit();
+        } else {
+            do_sqlquery("INSERT INTO {$TABLE_PREFIX}comments (added,text,ori_text,user,info_hash) VALUES (NOW(),\"$comment\",\"$comment\",\"$user\",\"" . mysqli_query($GLOBALS['conn'], stripslashes($_POST["info_hash"])) . "\")", true);
+            redirect("index.php?page=torrent-details&id=" . stripslashes($_POST["info_hash"])."#comments");
+            die();
+        }
+    }
 # Comment preview by miskotes
 #############################
 
-if ($_POST["confirm"] === $language["FRM_PREVIEW"]) {
+    if ($_POST["confirm"] === $language["FRM_PREVIEW"]) {
+        $tpl_comment->set("PREVIEW", true, true);
+        $tpl_comment->set("comment_preview", set_block($language["COMMENT_PREVIEW"], "center", format_comment($comment), false));
 
-$tpl_comment->set("PREVIEW",TRUE,TRUE);
-$tpl_comment->set("comment_preview",set_block($language["COMMENT_PREVIEW"],"center",format_comment($comment),false));
-
-#####################
-# Comment preview end
+        #####################
+        # Comment preview end
+    } else {
+        redirect("index.php?page=torrent-details&id=" . stripslashes($_POST["info_hash"])."#comments");
+        die();
+    }
+} else {
+    $tpl_comment->set("PREVIEW", false, true);
 }
-  else
-    {
-    redirect("index.php?page=torrent-details&id=" . stripslashes($_POST["info_hash"])."#comments");
-    die();
-  }
-}
-else
-    $tpl_comment->set("PREVIEW",FALSE,TRUE);
-
-?>

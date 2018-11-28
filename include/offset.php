@@ -37,5 +37,4 @@ dbconn();
 global $CURUSER;
 
 $now=time();
-$offset=(date('I',$now)===1)?(date('Z',$now)-3600):(date('Z',$now))-($CURUSER['time_offset']*3600);
-?>
+$offset=(date('I', $now)===1)?(date('Z', $now)-3600):(date('Z', $now))-($CURUSER['time_offset']*3600);

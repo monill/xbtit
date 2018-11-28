@@ -6,7 +6,7 @@ include("class.phpmailer.php");
 $mail             = new PHPMailer();
 
 $body             = $mail->getFile('contents.html');
-$body             = eregi_replace("[\]",'',$body);
+$body             = eregi_replace("[\]", '', $body);
 
 $mail->IsSMTP();
 $mail->SMTPAuth   = true;                  // enable SMTP authentication
@@ -17,7 +17,7 @@ $mail->Port       = 465;                   // set the SMTP port for the GMAIL se
 $mail->Username   = "yourusername@gmail.com";  // GMAIL username
 $mail->Password   = "yourpassword";            // GMAIL password
 
-$mail->AddReplyTo("yourusername@gmail.com","First Last");
+$mail->AddReplyTo("yourusername@gmail.com", "First Last");
 
 $mail->From       = "name@yourdomain.com";
 $mail->FromName   = "First Last";
@@ -36,10 +36,8 @@ $mail->AddAttachment("images/phpmailer.gif");             // attachment
 
 $mail->IsHTML(true); // send as HTML
 
-if(!$mail->Send()) {
-  echo "Mailer Error: " . $mail->ErrorInfo;
+if (!$mail->Send()) {
+    echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
-  echo "Message sent!";
+    echo "Message sent!";
 }
-
-?>

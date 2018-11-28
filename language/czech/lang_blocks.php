@@ -5,7 +5,7 @@ $language['BLOCK_MAINMENU']=''; # this is the Main Menu no name needed, some dip
 # We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber 
 $language['BLOCK_DDMENU']='';
 $language['BLOCK_MENU']='Hlavní Menu'; # block menu needs the name
-$language['BLOCK_CALENDAR']='Kalendář'; 
+$language['BLOCK_CALENDAR']='Kalendář';
 $language['BLOCK_CLOCK']='Hodiny';
 $language['BLOCK_FORUM']='Fórum';
 $language['BLOCK_LASTMEMBER']='Poslední člen';
@@ -24,4 +24,3 @@ $language['BLOCK_MAINUSERTOOLBAR']='Hlavní User Toolbar';
 $language['WELCOME_LASTUSER']=' Vítejte na The Trackeru ';
 $language['BLOCK_MINCLASSVIEW']='Minimumální hodnost, která může vidět';
 $language['BLOCK_MAXCLASSVIEW']='Maximální hodnost, která může vidět';
-?>

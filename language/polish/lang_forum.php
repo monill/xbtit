@@ -33,5 +33,3 @@ $language["POST"]="Post";
 $language["SEARCH_AGAIN"]="Szukaj ponownie";
 $language["SEARCH_HELP"]="Wpisz jedno bądź więcej słów, aby wyszukać.<br />Bardzo znane słowa i słowa z mniej niż trzema znakami będą ignorowane.";
 $language["SEARCHED_FOR"]="Wyszukiwanie dla";
-
-?>

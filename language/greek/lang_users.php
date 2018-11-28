@@ -17,5 +17,3 @@ $language["EDIT"]            = "Επεξεργασία";
 $language["DELETE"]          = "Διαγραφή";
 $language["NO_USERS_FOUND"]  = "Δεν βρέθηκαν χρήστες!";
 $language["UNKNOWN"]         = "Άγνωστο";
-
-?>

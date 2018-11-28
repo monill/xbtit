@@ -30,19 +30,22 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-class rss_reader {
-    function __construct() {
+class rss_reader
+{
+    function __construct()
+    {
         // constructor
     }
 
     // private
     // find the content in $text between <$tag> and </$tag>
-    function get_tag_value($text, $tag) {
+    function get_tag_value($text, $tag)
+    {
         $StartPos = strpos($text, '<'.$tag)+strlen($tag)+2;
         $EndPos   = strpos($text, '</'.$tag);
         $text=($EndPos > $StartPos)?substr($text, $StartPos, ($EndPos - $StartPos)):'';
 
-        return str_replace(array('<![CDATA[',']]>'), '', $text);
+        return str_replace(['<![CDATA[',']]>'], '', $text);
     }
 
     // input the full rss stream
@@ -50,29 +53,30 @@ class rss_reader {
     // array(channel =>
     //      (title,link,description,item=>
     //             array(title,link,description,category,comments,pubDate,guid)))
-    function rss_to_array($rss_flux) {
-        $fullrss=explode('<channel>',$rss_flux);
+    function rss_to_array($rss_flux)
+    {
+        $fullrss=explode('<channel>', $rss_flux);
         array_shift($fullrss);
-        $rss=array();
+        $rss= [];
         $i=0;
-        foreach($fullrss as $r) {
-            $rss[$i]['title']=$this->get_tag_value($r,'title');
-            $rss[$i]['link']=$this->get_tag_value($r,'link');
-            $rss[$i]['description']=$this->get_tag_value($r,'description');
-            $rss[$i]['copyright']=$this->get_tag_value($r,'copyright');
-            $rss[$i]['language']=$this->get_tag_value($r,'language');
-            $rss[$i]['lastBuildDate']=$this->get_tag_value($r,'lastBuildDate');
-            $items=explode('<item>',$r);
+        foreach ($fullrss as $r) {
+            $rss[$i]['title']=$this->get_tag_value($r, 'title');
+            $rss[$i]['link']=$this->get_tag_value($r, 'link');
+            $rss[$i]['description']=$this->get_tag_value($r, 'description');
+            $rss[$i]['copyright']=$this->get_tag_value($r, 'copyright');
+            $rss[$i]['language']=$this->get_tag_value($r, 'language');
+            $rss[$i]['lastBuildDate']=$this->get_tag_value($r, 'lastBuildDate');
+            $items=explode('<item>', $r);
             array_shift($items);
             $j=0;
-            foreach($items as $item) {
-                $rss[$i]['item'][$j]['title']=$this->get_tag_value($item,'title');
-                $rss[$i]['item'][$j]['link']=$this->get_tag_value($item,'link');
-                $rss[$i]['item'][$j]['description']=$this->get_tag_value($item,'description');
-                $rss[$i]['item'][$j]['category']=$this->get_tag_value($item,'category');
-                $rss[$i]['item'][$j]['comments']=$this->get_tag_value($item,'comments');
-                $rss[$i]['item'][$j]['pubDate']=$this->get_tag_value($item,'pubDate');
-                $rss[$i]['item'][$j]['guid']=$this->get_tag_value($item,'guid');
+            foreach ($items as $item) {
+                $rss[$i]['item'][$j]['title']=$this->get_tag_value($item, 'title');
+                $rss[$i]['item'][$j]['link']=$this->get_tag_value($item, 'link');
+                $rss[$i]['item'][$j]['description']=$this->get_tag_value($item, 'description');
+                $rss[$i]['item'][$j]['category']=$this->get_tag_value($item, 'category');
+                $rss[$i]['item'][$j]['comments']=$this->get_tag_value($item, 'comments');
+                $rss[$i]['item'][$j]['pubDate']=$this->get_tag_value($item, 'pubDate');
+                $rss[$i]['item'][$j]['guid']=$this->get_tag_value($item, 'guid');
                 $j++;
             }
             $i++;
@@ -80,4 +84,3 @@ class rss_reader {
         return $rss;
     }
 }
-?>

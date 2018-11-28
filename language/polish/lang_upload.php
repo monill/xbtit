@@ -25,4 +25,3 @@ $language["ERR_MOVING_TORR"]="Błąd przenoszenia torrenta...";
 $language["ERR_ALREADY_EXIST"]="Ten torrent już istnieje w bazie danych.";
 $language["MSG_DOWNLOAD_PID"]="System PID aktywny, pobierz torrenta ze swoim PID.";
 $language["MSG_UP_SUCCESS"]="Przesyłanie zakończone pomyślnie! Torrent został dodany.";
-?>

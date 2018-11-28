@@ -28,7 +28,7 @@ $language["ACP_FRONTEND"]="nh&#7919;ng &#273;i&#7873;u ch&#7881;nh n&#7897;i dun
 $language["ACP_USERS_TOOLS"]="nh&#7919;ng kh&#7843; n&#259;ng c&#7911;a thành viên";
 $language["ACP_TORRENTS_TOOLS"]="nh&#7919;ng kh&#7843; n&#259;ng c&#7911;a torrent";
 $language["ACP_OTHER_TOOLS"]="nh&#7919;ng kh&#7843; n&#259;ng c&#7911;a các ph&#7847;n khác";
-$language["ACP_MYSQL_STATS"]="nh&#7919;ng th&#7889;ng kê c&#7911;a MySql"; 
+$language["ACP_MYSQL_STATS"]="nh&#7919;ng th&#7889;ng kê c&#7911;a MySql";
 $language["XBTT_BACKEND"]="kh&#7843; n&#259;ng c&#7911;a XBTT";
 $language["XBTT_USE"]="s&#7917; d&#7909;ngk <a href=\"http://xbtt.sourceforge.net/tracker/\" target=\"_blank\">XBTT</a> khi l&#7853;p l&#7841;i?";
 $language["XBTT_URL"]="n&#417;i liên l&#7841;c c&#259;n b&#7843;n c&#7911;a XBTT (nh&#432; là http://localhost:2710)";
@@ -45,8 +45,8 @@ $language["ALLOW_DHT"]="t&#7855;t DHT (&#273;ánh d&#7845;u vào torrent)<br />\ v
 $language["ALLOW_LIVESTATS"]="cài &#273;&#7863;t nh&#7919;ng th&#7889;ng kê (chú ý: lo cho ph&#7909;c v&#7909; cao h&#417;n)";
 $language["ALLOW_SITELOG"]="cài &#273;&#7863;t ghi chú c&#259;n b&#7843;n c&#7911;a di&#7875;n &#273;àn (nh&#7919;ng thay &#273;&#7893;i c&#7911;a torrent/thành viên)";
 $language["ALLOW_HISTORY"]="cài &#273;&#7863;t quá kh&#7913; (torrent/thành viên)";
-$language["ALLOW_PRIVATE_ANNOUNCE"]="thông báo tin t&#7913;c"; 
-$language["ALLOW_PRIVATE_SCRAPE"]="th&#7889;ng kê"; 
+$language["ALLOW_PRIVATE_ANNOUNCE"]="thông báo tin t&#7913;c";
+$language["ALLOW_PRIVATE_SCRAPE"]="th&#7889;ng kê";
 $language["SHOW_UPLOADER"]="hi&#7879;n ng&#432;&#7901;i t&#7843;i lên";
 $language["USE_POPUP"]="s&#7917; d&#7909;ng hi&#7879;n lên chi ti&#7871;t /nh&#7919;ng thành viên tham d&#7921; cho các torrent";
 $language["DEFAULT_LANGUAGE"]="ngôn ng&#7917; chính";
@@ -270,4 +270,3 @@ $language["HACK_UNINSTALLED_OK"]="ch&#432;&#417;ng trình m&#7899;i vi&#7871;t &#
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="B&#7841;n không th&#7875; xóa b&#7887; cho chính b&#7841;n hay là tài li&#7879;u c&#7911;a Khách!";
 $language["USER_NOT_EDIT"]="B&#7841;n không th&#7875; thay &#273;&#7893;i cho chính b&#7841;n hay là tài li&#7879;u c&#7911;a Khách!";
-?>

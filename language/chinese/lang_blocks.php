@@ -6,7 +6,7 @@ $language['BLOCK_INFO']='Tracker信息';
 $language['BLOCK_MENU']='主菜单';
 /* We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber */
 $language['BLOCK_DDMENU']='';
-$language['BLOCK_CALENDAR']='日历'; 
+$language['BLOCK_CALENDAR']='日历';
 $language['BLOCK_CLOCK']='当前时间';
 $language['BLOCK_FORUM']='论坛';
 $language['BLOCK_LASTMEMBER']='欢迎';
@@ -25,4 +25,3 @@ $language['BLOCK_MAINUSERTOOLBAR']='用户工具栏';
 $language['WELCOME_LASTUSER']=' 欢迎新成员: ';
 $language['BLOCK_MINCLASSVIEW']='最小可见用户组';
 $language['BLOCK_MAXCLASSVIEW']='最大可见用户组';
-?>

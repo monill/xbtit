@@ -33,7 +33,7 @@
 // turkish installation file //
 
 $install_lang["charset"]                = "UTF-8";
-$install_lang["lang_rtl"]               = FALSE;
+$install_lang["lang_rtl"]               = false;
 $install_lang["step"]                   = "ADIM:";
 $install_lang["welcome_header"]         = "Hoş geldiniz";
 $install_lang["welcome"]                = "Yeni xbtit kurulumuna hoş geldiniz.";
@@ -146,4 +146,3 @@ $install_lang["ipb_err_4a"]             = "IPB İngilizce dil dosyası (<b>";
 $install_lang["ipb_err_4b"]             = "</b>) mevcut değil, devam edilemez.<br /><br />Bir önceki sayfaya dönmek için <a href=\"javascript: history.go(-1);\">buraya</a> tıklayın.";
 $install_lang["ipb_err_5"]             = "IPB Yapılandırma dosyasına yazma başarısız (<b>";
 $install_lang["ipb_err_6"]             = "İzleyici Yapılandırma dosyasına yazma başarısız (<b>";
-?>

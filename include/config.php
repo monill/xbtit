@@ -35,98 +35,196 @@ require(__DIR__.'/settings.php');
 // cache interval for cfg read again (it's mysql based now, we don't want overload only for cfg read!)
 $reload_cfg_interval=60;
 
-function get_cached_config($qrystr, $cachetime=0) {
-  global $dbhost, $dbuser, $dbpass, $database, $num_queries, $cached_querys, $mySecret;
-  $cache_file=realpath(__DIR__.'/..').'/cache/'.md5($qrystr." -- ".$mySecret).'.txt';
-  $num_queries++;
-  if ($cachetime>0)
-    if (file_exists($cache_file) && (time()-$cachetime) < filemtime($cache_file)) {
-          $cached_querys++;
-      return unserialize(file_get_contents($cache_file));
+function get_cached_config($qrystr, $cachetime = 0)
+{
+    global $dbhost, $dbuser, $dbpass, $database, $num_queries, $cached_querys, $mySecret;
+    $cache_file=realpath(__DIR__.'/..').'/cache/'.md5($qrystr." -- ".$mySecret).'.txt';
+    $num_queries++;
+    if ($cachetime>0) {
+        if (file_exists($cache_file) && (time()-$cachetime) < filemtime($cache_file)) {
+              $cached_querys++;
+            return unserialize(file_get_contents($cache_file));
         }
+    }
 
-  ($GLOBALS['conn'] = mysqli_connect($dbhost,  $dbuser,  $dbpass)) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-  ((bool)mysqli_query($GLOBALS['conn'], "USE $database")) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-  $mr=mysqli_query($GLOBALS['conn'], $qrystr." -- ".$mySecret) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-  while ($mz=mysqli_fetch_assoc($mr)) {
-    if ($mz['value']==='true')
-      $return[$mz['key']]= true;
-    elseif ($mz['value']==='false')
-      $return[$mz['key']]= false;
-    elseif (is_numeric($mz['value']))
-      $return[$mz['key']]= max(0,$mz['value']);
-    else
-      $return[$mz['key']]= StripSlashes($mz['value']);
-  }
+    ($GLOBALS['conn'] = mysqli_connect($dbhost, $dbuser, $dbpass)) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+    ((bool)mysqli_query($GLOBALS['conn'], "USE $database")) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+    $mr=mysqli_query($GLOBALS['conn'], $qrystr." -- ".$mySecret) or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+    while ($mz=mysqli_fetch_assoc($mr)) {
+        if ($mz['value']==='true') {
+            $return[$mz['key']]= true;
+        } elseif ($mz['value']==='false') {
+            $return[$mz['key']]= false;
+        } elseif (is_numeric($mz['value'])) {
+            $return[$mz['key']]= max(0, $mz['value']);
+        } else {
+            $return[$mz['key']]= StripSlashes($mz['value']);
+        }
+    }
 
-  unset($mz);
-  ((mysqli_free_result($mr) || (is_object($mr) && (get_class($mr) == "mysqli_result"))) ? true : false);
-  ((is_null($___mysqli_res = mysqli_close($GLOBALS['conn']))) ? false : $___mysqli_res);
+    unset($mz);
+    ((mysqli_free_result($mr) || (is_object($mr) && (get_class($mr) == "mysqli_result"))) ? true : false);
+    ((is_null($___mysqli_res = mysqli_close($GLOBALS['conn']))) ? false : $___mysqli_res);
 
-  if ($cachetime>0) {
-    $fp=fopen($cache_file,'w');
-    fwrite($fp,serialize($return));
-    fclose($fp);
-  }
-  return $return;
+    if ($cachetime>0) {
+        $fp=fopen($cache_file, 'w');
+        fwrite($fp, serialize($return));
+        fclose($fp);
+    }
+    return $return;
 }
 
 
 // default settings
-function apply_default_settings() {
+function apply_default_settings()
+{
     global $btit_settings;
-    if (!array_key_exists('max_announce',$btit_settings)) $btit_settings['max_announce']=1800;
-    if (!array_key_exists('min_announce',$btit_settings)) $btit_settings['min_announce']=300;
-    if (!array_key_exists('max_peers_per_announce',$btit_settings)) $btit_settings['max_peers_per_announce']=50;
-    if (!array_key_exists('dynamic',$btit_settings)) $btit_settings['dynamic']=false;
-    if (!array_key_exists('nat',$btit_settings)) $btit_settings['nat']=false;
-    if (!array_key_exists('persist',$btit_settings)) $btit_settings['persist']=false;
-    if (!array_key_exists('allow_override_ip',$btit_settings)) $btit_settings['allow_override_ip']=false;
-    if (!array_key_exists('countbyte',$btit_settings)) $btit_settings['countbyte']=true;
-    if (!array_key_exists('peercaching',$btit_settings)) $btit_settings['peercaching']=true;
-    if (!array_key_exists('maxpid_seeds',$btit_settings)) $btit_settings['maxpid_seeds']=3;
-    if (!array_key_exists('maxpid_leech',$btit_settings)) $btit_settings['maxpid_leech']=2;
-    if (!array_key_exists('name',$btit_settings)) $btit_settings['name']='BtiTracker Test Site';
-    if (!array_key_exists('url',$btit_settings)) $btit_settings['url']='http://localhost';
-    if (!array_key_exists('announce',$btit_settings)) $btit_settings['announce']=base64_encode(serialize(array('http://localhost/announce.php')));
-    if (!array_key_exists('email',$btit_settings)) $btit_settings['email']='tracker@localhost';
-    if (!array_key_exists('torrentdir',$btit_settings)) $btit_settings['torrentdir']='torrents';
-    if (!array_key_exists('validation',$btit_settings)) $btit_settings['validation']='user';
+    if (!array_key_exists('max_announce', $btit_settings)) {
+        $btit_settings['max_announce']=1800;
+    }
+    if (!array_key_exists('min_announce', $btit_settings)) {
+        $btit_settings['min_announce']=300;
+    }
+    if (!array_key_exists('max_peers_per_announce', $btit_settings)) {
+        $btit_settings['max_peers_per_announce']=50;
+    }
+    if (!array_key_exists('dynamic', $btit_settings)) {
+        $btit_settings['dynamic']=false;
+    }
+    if (!array_key_exists('nat', $btit_settings)) {
+        $btit_settings['nat']=false;
+    }
+    if (!array_key_exists('persist', $btit_settings)) {
+        $btit_settings['persist']=false;
+    }
+    if (!array_key_exists('allow_override_ip', $btit_settings)) {
+        $btit_settings['allow_override_ip']=false;
+    }
+    if (!array_key_exists('countbyte', $btit_settings)) {
+        $btit_settings['countbyte']=true;
+    }
+    if (!array_key_exists('peercaching', $btit_settings)) {
+        $btit_settings['peercaching']=true;
+    }
+    if (!array_key_exists('maxpid_seeds', $btit_settings)) {
+        $btit_settings['maxpid_seeds']=3;
+    }
+    if (!array_key_exists('maxpid_leech', $btit_settings)) {
+        $btit_settings['maxpid_leech']=2;
+    }
+    if (!array_key_exists('name', $btit_settings)) {
+        $btit_settings['name']='BtiTracker Test Site';
+    }
+    if (!array_key_exists('url', $btit_settings)) {
+        $btit_settings['url']='http://localhost';
+    }
+    if (!array_key_exists('announce', $btit_settings)) {
+        $btit_settings['announce']=base64_encode(serialize(['http://localhost/announce.php']));
+    }
+    if (!array_key_exists('email', $btit_settings)) {
+        $btit_settings['email']='tracker@localhost';
+    }
+    if (!array_key_exists('torrentdir', $btit_settings)) {
+        $btit_settings['torrentdir']='torrents';
+    }
+    if (!array_key_exists('validation', $btit_settings)) {
+        $btit_settings['validation']='user';
+    }
 
-    if (!array_key_exists('imagecode',$btit_settings)) $btit_settings['imagecode']=true;
-    if (!array_key_exists('sanity_update',$btit_settings)) $btit_settings['sanity_update']=300;
-    if (!array_key_exists('external_update',$btit_settings)) $btit_settings['external_update']=0;
-    if (!array_key_exists('forum',$btit_settings)) $btit_settings['forum']='';
-    if (!array_key_exists('external',$btit_settings)) $btit_settings['external']=true;
-    if (!array_key_exists('gzip',$btit_settings)) $btit_settings['gzip']=false;
-    if (!array_key_exists('debug',$btit_settings)) $btit_settings['debug']=true;
-    if (!array_key_exists('disable_dht',$btit_settings)) $btit_settings['disable_dht']=false;
-    if (!array_key_exists('livestat',$btit_settings)) $btit_settings['livestat']=true;
-    if (!array_key_exists('logactive',$btit_settings)) $btit_settings['logactive']=true;
-    if (!array_key_exists('loghistory',$btit_settings)) $btit_settings['loghistory']=false;
+    if (!array_key_exists('imagecode', $btit_settings)) {
+        $btit_settings['imagecode']=true;
+    }
+    if (!array_key_exists('sanity_update', $btit_settings)) {
+        $btit_settings['sanity_update']=300;
+    }
+    if (!array_key_exists('external_update', $btit_settings)) {
+        $btit_settings['external_update']=0;
+    }
+    if (!array_key_exists('forum', $btit_settings)) {
+        $btit_settings['forum']='';
+    }
+    if (!array_key_exists('external', $btit_settings)) {
+        $btit_settings['external']=true;
+    }
+    if (!array_key_exists('gzip', $btit_settings)) {
+        $btit_settings['gzip']=false;
+    }
+    if (!array_key_exists('debug', $btit_settings)) {
+        $btit_settings['debug']=true;
+    }
+    if (!array_key_exists('disable_dht', $btit_settings)) {
+        $btit_settings['disable_dht']=false;
+    }
+    if (!array_key_exists('livestat', $btit_settings)) {
+        $btit_settings['livestat']=true;
+    }
+    if (!array_key_exists('logactive', $btit_settings)) {
+        $btit_settings['logactive']=true;
+    }
+    if (!array_key_exists('loghistory', $btit_settings)) {
+        $btit_settings['loghistory']=false;
+    }
 
-    if (!array_key_exists('default_language',$btit_settings)) $btit_settings['default_language']=1;
-    if (!array_key_exists('default_charset',$btit_settings)) $btit_settings['default_charset']='ISO-8859-1';
-    if (!array_key_exists('default_style',$btit_settings)) $btit_settings['default_style']=1;
-    if (!array_key_exists('max_users',$btit_settings)) $btit_settings['max_users']=0;
-    if (!array_key_exists('max_torrents_per_page',$btit_settings)) $btit_settings['max_torrents_per_page']=15;
-    if (!array_key_exists('p_announce',$btit_settings)) $btit_settings['p_announce']=true;
-    if (!array_key_exists('p_scrape',$btit_settings)) $btit_settings['p_scrape']=false;
-    if (!array_key_exists('show_uploader',$btit_settings)) $btit_settings['show_uploader']=true;
-    if (!array_key_exists('newslimit',$btit_settings)) $btit_settings['newslimit']=3;
-    if (!array_key_exists('forumlimit',$btit_settings)) $btit_settings['forumlimit']=5;
-    if (!array_key_exists('last10limit',$btit_settings)) $btit_settings['last10limit']=5;
-    if (!array_key_exists('mostpoplimit',$btit_settings)) $btit_settings['mostpoplimit']=5;
-    if (!array_key_exists('clocktype',$btit_settings)) $btit_settings['clocktype']=true;
-    if (!array_key_exists('usepopup',$btit_settings)) $btit_settings['usepopup']=false;
-    if (!array_key_exists('xbtt_use',$btit_settings)) $btit_settings['xbtt_use']=false;
-    if (!array_key_exists('xbtt_url',$btit_settings)) $btit_settings['xbtt_url']='';
-    if (!array_key_exists('cache_duration',$btit_settings)) $btit_settings['cache_duration']=0;
-    if (!array_key_exists('mail_type',$btit_settings)) $btit_settings['mail_type']='php';
-    if (!array_key_exists('ajax_poller',$btit_settings)) $btit_settings['ajax_poller']=true;
+    if (!array_key_exists('default_language', $btit_settings)) {
+        $btit_settings['default_language']=1;
+    }
+    if (!array_key_exists('default_charset', $btit_settings)) {
+        $btit_settings['default_charset']='ISO-8859-1';
+    }
+    if (!array_key_exists('default_style', $btit_settings)) {
+        $btit_settings['default_style']=1;
+    }
+    if (!array_key_exists('max_users', $btit_settings)) {
+        $btit_settings['max_users']=0;
+    }
+    if (!array_key_exists('max_torrents_per_page', $btit_settings)) {
+        $btit_settings['max_torrents_per_page']=15;
+    }
+    if (!array_key_exists('p_announce', $btit_settings)) {
+        $btit_settings['p_announce']=true;
+    }
+    if (!array_key_exists('p_scrape', $btit_settings)) {
+        $btit_settings['p_scrape']=false;
+    }
+    if (!array_key_exists('show_uploader', $btit_settings)) {
+        $btit_settings['show_uploader']=true;
+    }
+    if (!array_key_exists('newslimit', $btit_settings)) {
+        $btit_settings['newslimit']=3;
+    }
+    if (!array_key_exists('forumlimit', $btit_settings)) {
+        $btit_settings['forumlimit']=5;
+    }
+    if (!array_key_exists('last10limit', $btit_settings)) {
+        $btit_settings['last10limit']=5;
+    }
+    if (!array_key_exists('mostpoplimit', $btit_settings)) {
+        $btit_settings['mostpoplimit']=5;
+    }
+    if (!array_key_exists('clocktype', $btit_settings)) {
+        $btit_settings['clocktype']=true;
+    }
+    if (!array_key_exists('usepopup', $btit_settings)) {
+        $btit_settings['usepopup']=false;
+    }
+    if (!array_key_exists('xbtt_use', $btit_settings)) {
+        $btit_settings['xbtt_use']=false;
+    }
+    if (!array_key_exists('xbtt_url', $btit_settings)) {
+        $btit_settings['xbtt_url']='';
+    }
+    if (!array_key_exists('cache_duration', $btit_settings)) {
+        $btit_settings['cache_duration']=0;
+    }
+    if (!array_key_exists('mail_type', $btit_settings)) {
+        $btit_settings['mail_type']='php';
+    }
+    if (!array_key_exists('ajax_poller', $btit_settings)) {
+        $btit_settings['ajax_poller']=true;
+    }
 }
 
-$btit_settings=get_cached_config('SELECT `key`,`value` FROM '.$TABLE_PREFIX.'settings',$reload_cfg_interval);
+$btit_settings=get_cached_config('SELECT `key`,`value` FROM '.$TABLE_PREFIX.'settings', $reload_cfg_interval);
 
 apply_default_settings();
 
@@ -183,13 +281,13 @@ $SITENAME=$btit_settings['name'];
 //Tracker's Base URL
 $BASEURL=$btit_settings['url'];
 // tracker's announce urls, can be more than one
-$TRACKER_ANNOUNCE_URL=array();
-$TRACKER_ANNOUNCEURLS=array();
+$TRACKER_ANNOUNCE_URL= [];
+$TRACKER_ANNOUNCEURLS= [];
 $TRACKER_ANNOUNCE_URL=unserialize(base64_decode($btit_settings['announce']));
-for($i=0,$count=count($TRACKER_ANNOUNCE_URL); $i<$count; $i++)
-  {
-  if (trim($TRACKER_ANNOUNCE_URL[$i])!='')
-     $TRACKER_ANNOUNCEURLS[]=trim($TRACKER_ANNOUNCE_URL[$i]);
+for ($i=0,$count=count($TRACKER_ANNOUNCE_URL); $i<$count; $i++) {
+    if (trim($TRACKER_ANNOUNCE_URL[$i])!='') {
+        $TRACKER_ANNOUNCEURLS[]=trim($TRACKER_ANNOUNCE_URL[$i]);
+    }
 }
 //Tracker's email (owner email)
 $SITEEMAIL=$btit_settings['email'];
@@ -262,5 +360,3 @@ $votesppage=25;
 // inits
 $cached_querys=0;
 $num_querys=0;
-
-?>

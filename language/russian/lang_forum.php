@@ -33,5 +33,3 @@ $language["POST"]="Ответ";
 $language["SEARCH_AGAIN"]="Искать Заново";
 $language["SEARCH_HELP"]="Введите одно или несколько слов для поиска.<br />Слова менее 3 символов игнорируются поиском.";
 $language["SEARCHED_FOR"]="Вы искали";
-
-?>

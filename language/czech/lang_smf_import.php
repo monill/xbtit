@@ -1,7 +1,8 @@
 <?php
 
-if(!isset($_GET["smf_type"]))
+if (!isset($_GET["smf_type"])) {
     $_GET["smf_type"]="";
+}
 
 // smf_import.php language file
 
@@ -44,4 +45,3 @@ $lang[35]='</body>'."\n".'</html>'."\n";
 $lang[36]='<center>Nemůžu zapisovat do:<br /><br /><b>';
 $lang[37]='</b><br /><br />Prosím ujistěte se, že tento soubor je zapisovatelný a a spusťte skript znovu.</center>';
 $lang[38]='<center><br /><font color="red" size="4"><b>Přístup odepřen</b></font></center>';
-?>

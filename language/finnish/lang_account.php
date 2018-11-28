@@ -19,5 +19,3 @@ $language["WEEK"]="Heikko";
 $language["MEDIUM"]="Keskivahva";
 $language["SAFE"]="Turvallinen";
 $language["STRONG"]="Vahva";
-
-?>

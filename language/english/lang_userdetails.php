@@ -34,4 +34,3 @@ $language['PM']                 = 'PM';
 $language['BACK']               = 'Back';
 $language['NO_HISTORY']         = 'No history to display...';
 $language['GUEST_DETAILS']      = 'You can\'t view the details for the Guest account!';
-?>
