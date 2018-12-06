@@ -3,7 +3,7 @@ textarea#glow{
 color:#666;
 font-size:14px;
 -moz-border-radius: 8px; -webkit-border-radius: 8px;
-margin:5px 0px 10px 0px;
+margin:5px 0 10px 0;
 padding:10px;
 height:300px;
 width:95%;
@@ -39,7 +39,7 @@ input#glow{
 color:#666;
 font-size:14px;
 -moz-border-radius: 8px; -webkit-border-radius: 8px;
-margin:5px 0px 10px 0px;
+margin:5px 0 10px 0;
 padding:10px;
 height:16px;
 width:92%;
