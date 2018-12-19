@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -39,19 +39,19 @@ require_once(load_language("lang_usercp.php"));
 global $CURUSER, $language, $usercptpl;
 
 if (isset($_GET["what"]) && $_GET["what"]) {
-      $what=$_GET["what"];
+    $what=$_GET["what"];
 } else {
     $what = "inbox";
 }
 
 if (isset($_GET["action"]) && $_GET["action"]) {
-      $action=$_GET["action"];
+    $action=$_GET["action"];
 } else {
     $action = "";
 }
 
 if (isset($_GET["preview"]) && $_GET["preview"]) {
-      $preview=$_GET["preview"];
+    $preview=$_GET["preview"];
 } else {
     $preview = "";
 }
@@ -59,9 +59,9 @@ if (isset($_GET["preview"]) && $_GET["preview"]) {
 $uid=(isset($_GET["uid"])?((int)$_GET["uid"]):1);
 
 if ($CURUSER["uid"]!=$uid || $CURUSER["uid"]==1) {
-       err_msg($language["ERROR"], $language["ERR_USER_NOT_USER"]);
-       stdfoot();
-       exit;
+    err_msg($language["ERROR"], $language["ERR_USER_NOT_USER"]);
+    stdfoot();
+    exit;
 } else {
     $utorrents=max(0, $CURUSER["torrentsperpage"]);
     if (isset($_GET["do"])) {
@@ -111,9 +111,9 @@ if ($CURUSER["uid"]!=$uid || $CURUSER["uid"]==1) {
     }
 
 
-// Reverify Mail Hack by Petr1fied - Start --->
-// Update the members e-mail account if the validation link checks out
-// ==========================================================================================
+    // Reverify Mail Hack by Petr1fied - Start --->
+    // Update the members e-mail account if the validation link checks out
+    // ==========================================================================================
     // If both "do=verify" and "action=changemail" are in the url
 
     if ($do=="verify" && $action=="changemail") {
@@ -131,7 +131,7 @@ if ($CURUSER["uid"]!=$uid || $CURUSER["uid"]==1) {
             $registry = ipsRegistry::instance();
             $registry->init();
         }
-       // Get the other values we need from the url
+        // Get the other values we need from the url
         $newmail=$_GET["newmail"];
         (isset($_GET["uid"]) && !empty($_GET["uid"]) && is_numeric($_GET["uid"]) && $_GET["uid"]>0) ? $id=max(0, $_GET["uid"]) : $id=0;
         if ($id==0) {
@@ -139,13 +139,13 @@ if ($CURUSER["uid"]!=$uid || $CURUSER["uid"]==1) {
         }
         $random=max(0, $_GET["random"]);
         $idlevel=$CURUSER["id_level"];
-       // Get the members random number, current email and temp email from their record
+        // Get the members random number, current email and temp email from their record
         $getacc=mysqli_fetch_assoc(do_sqlquery("SELECT `u`.`random`, `u`.`email`, `u`.`temp_email`".((substr($GLOBALS["FORUMLINK"], 0, 3)=="smf")?", `u`.`smf_fid`, `ul`.`smf_group_mirror`":(($GLOBALS["FORUMLINK"]=="ipb")?", `u`.`ipb_fid`, `ul`.`ipb_group_mirror`":""))." FROM `{$TABLE_PREFIX}users` `u` ".((substr($GLOBALS["FORUMLINK"], 0, 3)=="smf" || $GLOBALS["FORUMLINK"]=="ipb")?"LEFT JOIN `{$TABLE_PREFIX}users_level` `ul` ON 3=`ul`.`id`":"")." WHERE `u`.`id`=".$id, true));
         $oldmail=$getacc["email"];
         $dbrandom=$getacc["random"];
         $mailcheck=$getacc["temp_email"];
 
-       // If the random number in the url matches that in the member record
+        // If the random number in the url matches that in the member record
         if ($random==$dbrandom) {
             // Verify the email address in the url is the address we sent the mail to
             if ($newmail!=$mailcheck) {
@@ -187,7 +187,7 @@ if ($CURUSER["uid"]!=$uid || $CURUSER["uid"]==1) {
             stdfoot();
             exit;
         }
-       // End the block and add a couple of linespaces afterwards.
+        // End the block and add a couple of linespaces afterwards.
     }
-// <--- Reverify Mail Hack by Petr1fied - End
+    // <--- Reverify Mail Hack by Petr1fied - End
 }

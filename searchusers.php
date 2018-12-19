@@ -48,10 +48,10 @@ if (!$resheet) {
     $STYLEURL="$BASEURL/style/xbtit_default";
     $style="$BASEURL/style/xbtit_default/main.css";
 } else {
-        $resstyle=$resheet[0];
-        $STYLEPATH="$THIS_BASEPATH/".$resstyle["style_url"];
-        $style="$BASEURL/".$resstyle["style_url"]."/main.css";
-        $STYLEURL="$BASEURL/".$resstyle["style_url"];
+    $resstyle=$resheet[0];
+    $STYLEPATH="$THIS_BASEPATH/".$resstyle["style_url"];
+    $style="$BASEURL/".$resstyle["style_url"]."/main.css";
+    $STYLEURL="$BASEURL/".$resstyle["style_url"];
 }
 
 
@@ -67,8 +67,8 @@ if ($idlang==0) {
 if (!$reslang) {
     $USERLANG="$THIS_BASEPATH/language/english";
 } else {
-        $rlang=$reslang[0];
-        $USERLANG="$THIS_BASEPATH/".$rlang["language_url"];
+    $rlang=$reslang[0];
+    $USERLANG="$THIS_BASEPATH/".$rlang["language_url"];
 }
 
 if (!file_exists($USERLANG)) {
@@ -83,7 +83,7 @@ if (!empty($language["charset"])) {
 }
 
 if (isset($_GET['action']) && $_GET['action']) {
-            $action=$_GET['action'];
+    $action=$_GET['action'];
 } else {
     $action = '';
 }
@@ -92,7 +92,7 @@ if (isset($_GET['action']) && $_GET['action']) {
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<?php echo (!empty($language["rtl"])?"<html dir=\"".$language["rtl"]."\">\n":"<html>\n"); ?>
+<?php echo(!empty($language["rtl"])?"<html dir=\"".$language["rtl"]."\">\n":"<html>\n"); ?>
   <head>
   <title>Search User</title>
   <meta http-equiv="content-type" content="text/html; charset=<?php echo $GLOBALS["charset"] ?>/>" />
@@ -102,12 +102,12 @@ if (isset($_GET['action']) && $_GET['action']) {
 <?php
 
 if ($action!="find") {
-?>
+    ?>
 <form action="searchusers.php?action=find" name="users" method="post">
 <div align="center">
   <table class="lista">
   <tr>
-     <td class="header"><?php echo $language["USER_NAME"];?>:</td>
+     <td class="header"><?php echo $language["USER_NAME"]; ?>:</td>
      <td class="lista"><input type="text" name="user" size="40" maxlength="40" /></td>
      <td class="lista"><input type="submit" name="confirm" value="Search" /></td>
   </tr>
@@ -116,12 +116,12 @@ if ($action!="find") {
 </form>
 <?php
 } else {
-    $res=get_result("SELECT username FROM {$TABLE_PREFIX}users WHERE id>1 AND username LIKE '%".mysqli_query($GLOBALS['conn'], $_POST["user"])."%' ORDER BY username", true, $btit_settings['cache_duration']);
-    if (!$res or count($res)==0) {
-         print("<center>".$language["NO_USERS_FOUND"]."!<br />");
-         print("<a href=searchusers.php>".$language["RETRY"]."</a></center>");
-    } else {
-    ?>
+        $res=get_result("SELECT username FROM {$TABLE_PREFIX}users WHERE id>1 AND username LIKE '%".mysqli_query($GLOBALS['conn'], $_POST["user"])."%' ORDER BY username", true, $btit_settings['cache_duration']);
+        if (!$res or count($res)==0) {
+            print("<center>".$language["NO_USERS_FOUND"]."!<br />");
+            print("<a href=searchusers.php>".$language["RETRY"]."</a></center>");
+        } else {
+            ?>
     <script type="text/javascript">
 
     function SendIT(){
@@ -134,23 +134,22 @@ if ($action!="find") {
     <form action="searchusers.php?action=find" name="result" method="post">
     <table class="lista">
     <tr>
-     <td class="header"><?php print($language["USER_NAME"]);?>:</td>
+     <td class="header"><?php print($language["USER_NAME"]); ?>:</td>
     <?php
      print("\n<td class=\"lista\">
      <select name=\"name\" size=\"1\">");
-    foreach ($res as $id => $result) {
-        print("\n<option value=\"".$result["username"]."\">".$result["username"]."</option>");
-    }
-     print("\n</select>\n</td>");
-     print("\n<td class=\"lista\"><input type=\"button\" name=\"confirm\" onclick=\"javascript:SendIT();\" value=\"".$language["FRM_CONFIRM"]."\" /></td>");
-    ?>
+            foreach ($res as $id => $result) {
+                print("\n<option value=\"".$result["username"]."\">".$result["username"]."</option>");
+            }
+            print("\n</select>\n</td>");
+            print("\n<td class=\"lista\"><input type=\"button\" name=\"confirm\" onclick=\"javascript:SendIT();\" value=\"".$language["FRM_CONFIRM"]."\" /></td>"); ?>
     </tr>
     </table>
     </form>
     </div>
     <?php
+        }
     }
-}
 print("\n<br />\n<div align=\"center\"><a href=\"javascript: window.close()\">".$language["CLOSE"]."</a></div>");
 print("</body>\n</html>\n");
 ?>

@@ -1,13 +1,13 @@
 <?php
 class TextTestResult extends TestResult
 {
-  /* Specialize TestResult to produce text/html report */
-    function TextTestResult()
+    /* Specialize TestResult to produce text/html report */
+    public function TextTestResult()
     {
         $this->TestResult();  // call superclass constructor
     }
 
-    function report()
+    public function report()
     {
         /* report result of test run */
         $nRun = $this->countTests();
@@ -34,13 +34,13 @@ class TextTestResult extends TestResult
         print("</ol>\n");
     }
 
-    function _startTest($test)
+    public function _startTest($test)
     {
         printf("%s ", $test->name());
         flush();
     }
 
-    function _endTest($test)
+    public function _endTest($test)
     {
         $outcome = $test->failed()
          ? "<font color=\"red\">FAIL</font>"

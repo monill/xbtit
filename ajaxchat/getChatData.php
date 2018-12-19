@@ -67,7 +67,6 @@ getData($lastID);
 # function that do retrieve all messages with an id greater than $lastID
 function getData($lastID)
 {
-
     require_once("conn.php"); # getting connection data
   
     include("../include/settings.php");   # getting table prefix
@@ -87,7 +86,7 @@ function getData($lastID)
     
     # getting the data array
     while ($row = mysqli_fetch_array($results)) {
-    # getting the data array
+        # getting the data array
         $id   = $row['id'];
         $uid  = $row['uid'];
         $time = $row['time'];
@@ -99,7 +98,7 @@ function getData($lastID)
         # if ($name == '') { $name = 'Anonymous'; $text = 'No message'; }
 
       
-      # we put together our chat using some css
+        # we put together our chat using some css
         $chatout = "
                  <li><span class='name'>".date("d/m/Y H:i:s", $time - $offset)." | <a href=index.php?page=userdetails&id=".$uid.">".$name."</a>:</span></li>
                             <div class='lista' style='text-align:right;
@@ -113,6 +112,6 @@ function getData($lastID)
                  <div class='chatoutput'>".format_shout($text)."</div>
                  ";
 
-         echo $chatout; # echo as known handles arrays very fast...
+        echo $chatout; # echo as known handles arrays very fast...
     }
 }

@@ -32,11 +32,11 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 $admintpl->set("add_new", false, true);
@@ -53,16 +53,16 @@ switch ($action) {
       // controle if this level can be cancelled
         $rcanc=do_sqlquery("SELECT can_be_deleted FROM {$TABLE_PREFIX}users_level WHERE id=$id");
         if (!$rcanc || mysqli_num_rows($rcanc)==0) {
-             err_msg($language["ERROR"], $language["ERR_CANT_FIND_GROUP"]);
-             stdfoot(false, false, true);
-             die;
+            err_msg($language["ERROR"], $language["ERR_CANT_FIND_GROUP"]);
+            stdfoot(false, false, true);
+            die;
         }
         $rcancanc=mysqli_fetch_array($rcanc);
         if ($rcancanc["can_be_deleted"]=="yes") {
-             do_sqlquery("DELETE FROM {$TABLE_PREFIX}users_level WHERE id=$id", true);
-             success_msg($language["SUCCESS"], $language["GROUP_DELETED"]."<br />\n<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=groups\">".$language["ACP_USER_GROUP"]."</a>");
-             stdfoot(false, false, true);
-             die;
+            do_sqlquery("DELETE FROM {$TABLE_PREFIX}users_level WHERE id=$id", true);
+            success_msg($language["SUCCESS"], $language["GROUP_DELETED"]."<br />\n<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=groups\">".$language["ACP_USER_GROUP"]."</a>");
+            stdfoot(false, false, true);
+            die;
         } else {
             err_msg($language["ERROR"], $language["CANT_DELETE_GROUP"]);
             stdfoot(false, false, true);
@@ -138,19 +138,19 @@ switch ($action) {
     case 'save':
         if ($_POST["write"]==$language["FRM_CONFIRM"]) {
             if (isset($_GET["mode"]) && $_GET["mode"]=="new") {
-                 $gid=max(0, $_POST["base_group"]);
-                 $gname=sqlesc($_POST["gname"]);
-                 $rfields=get_result("SELECT * FROM {$TABLE_PREFIX}users_level WHERE id=$gid", true);
-                 // we have unique record, set the first and unique to our array
-                 $rfields=$rfields[0];
+                $gid=max(0, $_POST["base_group"]);
+                $gname=sqlesc($_POST["gname"]);
+                $rfields=get_result("SELECT * FROM {$TABLE_PREFIX}users_level WHERE id=$gid", true);
+                // we have unique record, set the first and unique to our array
+                $rfields=$rfields[0];
                 foreach ($rfields as $key => $value) {
                     if ($key!="id" && $key!="level" && $key!="can_be_deleted") {
                         $fields[]=$key;
                     }
                 }
-                 do_sqlquery("INSERT INTO {$TABLE_PREFIX}users_level (can_be_deleted,level,".implode(",", $fields).") SELECT 'yes',$gname,".implode(",", $fields)." FROM {$TABLE_PREFIX}users_level WHERE id=$gid", true);
-                 unset($fields);
-                 unset($rfields);
+                do_sqlquery("INSERT INTO {$TABLE_PREFIX}users_level (can_be_deleted,level,".implode(",", $fields).") SELECT 'yes',$gname,".implode(",", $fields)." FROM {$TABLE_PREFIX}users_level WHERE id=$gid", true);
+                unset($fields);
+                unset($rfields);
             } else {
                 $gid=max(0, $_GET["id"]);
                 $update= [];
@@ -198,22 +198,22 @@ switch ($action) {
         $groups= [];
         $i=0;
         while ($level=mysqli_fetch_array($rlevel)) {
-              $groups[$i]["user"]="<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=groups&amp;action=edit&amp;id=".$level["id"]."\">".unesc($level["prefixcolor"]).unesc($level["level"]).unesc($level["suffixcolor"])."</a>";
-              $groups[$i]["torrent_aut"]=$level["view_torrents"]."/".$level["edit_torrents"]."/".$level["delete_torrents"];
-              $groups[$i]["users_aut"]=$level["view_users"]."/".$level["edit_users"]."/".$level["delete_users"];
-              $groups[$i]["news_aut"]=$level["view_news"]."/".$level["edit_news"]."/".$level["delete_news"];
-              $groups[$i]["forum_aut"]=$level["view_forum"]."/".$level["edit_forum"]."/".$level["delete_forum"];
-              $groups[$i]["can_upload"]=$level["can_upload"];
-              $groups[$i]["can_download"]=$level["can_download"];
-              $groups[$i]["admin_access"]=$level["admin_access"];
-              $groups[$i]["WT"]=$level["WT"];
+            $groups[$i]["user"]="<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=groups&amp;action=edit&amp;id=".$level["id"]."\">".unesc($level["prefixcolor"]).unesc($level["level"]).unesc($level["suffixcolor"])."</a>";
+            $groups[$i]["torrent_aut"]=$level["view_torrents"]."/".$level["edit_torrents"]."/".$level["delete_torrents"];
+            $groups[$i]["users_aut"]=$level["view_users"]."/".$level["edit_users"]."/".$level["delete_users"];
+            $groups[$i]["news_aut"]=$level["view_news"]."/".$level["edit_news"]."/".$level["delete_news"];
+            $groups[$i]["forum_aut"]=$level["view_forum"]."/".$level["edit_forum"]."/".$level["delete_forum"];
+            $groups[$i]["can_upload"]=$level["can_upload"];
+            $groups[$i]["can_download"]=$level["can_download"];
+            $groups[$i]["admin_access"]=$level["admin_access"];
+            $groups[$i]["WT"]=$level["WT"];
             if (substr($FORUMLINK, 0, 3)=="smf") {
                 $groups[$i]["smf_group_mirror"]=$level["smf_group_mirror"];
             } elseif ($FORUMLINK=="ipb") {
                 $groups[$i]["ipb_group_mirror"]=$level["ipb_group_mirror"];
             }
-              $groups[$i]["delete"]=($level["can_be_deleted"]=="no"?"No":"<a onclick=\"return confirm('".AddSlashes($language["DELETE_CONFIRM"])."')\" href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=groups&amp;action=delete&amp;id=".$level["id"]."\">".image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"])."</a>");
-              $i++;
+            $groups[$i]["delete"]=($level["can_be_deleted"]=="no"?"No":"<a onclick=\"return confirm('".AddSlashes($language["DELETE_CONFIRM"])."')\" href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=groups&amp;action=delete&amp;id=".$level["id"]."\">".image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"])."</a>");
+            $i++;
         }
 
         unset($level);

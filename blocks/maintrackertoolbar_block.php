@@ -74,8 +74,7 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
     $row=$res[0];
     $dled=0+$row["dled"];
     $upld=0+$row["upld"];
-    $traffic=makesize($dled+$upld);
-?>
+    $traffic=makesize($dled+$upld); ?>
        <div class="row">
        <div class="col-md-6">
        <div class="panel panel-default">

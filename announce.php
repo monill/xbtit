@@ -47,15 +47,14 @@ error_reporting(E_ALL ^ E_NOTICE);
 // thank you petr1fied for the code.
 global $XBTT_USE;
 if ($XBTT_USE) {
-
     function implode_with_keys($glue, $array)
     {
-           $output = [];
+        $output = [];
         foreach ($array as $key => $item) {
-                $output[] = $key . "=" . $item;
+            $output[] = $key . "=" . $item;
         }
 
-           return implode($glue, $output);
+        return implode($glue, $output);
     }
 
     if (isset($_GET["pid"])) {
@@ -77,8 +76,7 @@ if ($XBTT_USE) {
 
     if ($pid!="") { // private announce
         header("Location: $XBTT_URL/$pid/announce?" . $query_string);
-    } else // public
-    {
+    } else { // public
         header("Location: $XBTT_URL/announce?" . $query_string);
     }
 
@@ -204,7 +202,7 @@ $left = (float)($_GET["left"]);
 if ($PRIVATE_ANNOUNCE) {
     $pid = AddSlashes(StripSlashes($pid));
 
-// if PID empty string or not send by client
+    // if PID empty string or not send by client
     if ($pid=="" || !$pid) {
         show_error("Please redownload the torrent. PID system is active and pid was not found in the torrent");
     }
@@ -244,10 +242,10 @@ if ($PRIVATE_ANNOUNCE) {
         //end
     }
 } else {
-// PID turned off
+    // PID turned off
     $respid = mysqli_query($GLOBALS['conn'], "SELECT u.*, level, can_download, WT FROM {$TABLE_PREFIX}users u INNER JOIN {$TABLE_PREFIX}users_level ul on u.id_level=ul.id WHERE u.cip='$ip' LIMIT 1");
     if (!$respid || mysqli_num_rows($respid)!=1) {
-     // maybe it's guest with new query I must found at least guest user
+        // maybe it's guest with new query I must found at least guest user
         $respid = mysqli_query($GLOBALS['conn'], "SELECT u.*, level, can_download, WT FROM {$TABLE_PREFIX}users u INNER JOIN {$TABLE_PREFIX}users_level ul on u.id_level=ul.id WHERE u.id=1 LIMIT 1");
     }
     if (!$respid || mysqli_num_rows($respid)!=1) {
@@ -279,7 +277,7 @@ if ($PRIVATE_ANNOUNCE) {
                 show_error($rowpid["username"]." your Waiting Time = ".$wait." h");
             }
         }
-      //end
+        //end
     }
 }
 
@@ -347,7 +345,6 @@ function isFireWalled($hash, $peerid, $ip, $port)
 // Returns info on one peer
 function getPeerInfo($user, $hash)
 {
-
     global $TABLE_PREFIX;
 
     // If "trackerid" is set, let's try that
@@ -389,7 +386,7 @@ function start($info_hash, $ip, $port, $peer_id, $left, $downloaded = 0, $upload
             show_error('Invalid IP address. Must be standard dotted decimal (hostnames not allowed)');
         }
 
-         $ip =  mysqli_real_escape_string($GLOBALS['conn'], $_GET['ip']);
+        $ip =  mysqli_real_escape_string($GLOBALS['conn'], $_GET['ip']);
     } else {
         $ip = getip();
     }
@@ -479,7 +476,6 @@ if (!isset($GLOBALS["maxleech"])) {
 // send random peers to client (direct print)
 function sendRandomPeers($info_hash)
 {
-
     global $TABLE_PREFIX;
 
 
@@ -507,8 +503,7 @@ function sendRandomPeers($info_hash)
             $p .= str_pad(pack("Nn", ip2long($row["ip"]), $row["port"]), 6);
         }
         echo strlen($p).':'.$p;
-    } else // no_peer_id or no feature supported
-    {
+    } else { // no_peer_id or no feature supported
         echo 'l';
         while ($row = mysqli_fetch_assoc($result)) {
             echo "d2:ip".strlen($row["ip"]).":".$row["ip"];
@@ -534,7 +529,6 @@ function sendRandomPeers($info_hash)
 //  if we should grab it ourselves.
 function killPeer($userid, $hash, $left, $assumepeer = false)
 {
-
     global $TABLE_PREFIX;
 
     if (!$assumepeer) {
@@ -574,7 +568,6 @@ function killPeer($userid, $hash, $left, $assumepeer = false)
 // Transfers bytes from "left" to "dlbytes" when a peer reports in.
 function collectBytes($peer, $hash, $left, $downloaded = 0, $uploaded = 0, $pid = "")
 {
-
     global $TABLE_PREFIX;
 
     $peerid=$peer["peer_id"];
@@ -594,23 +587,22 @@ function collectBytes($peer, $hash, $left, $downloaded = 0, $uploaded = 0, $pid 
 
 function runSpeed($info_hash, $delta)
 {
-
     global $TABLE_PREFIX;
 
-        //stick in our latest data before we calc it out
-        quickQuery("INSERT IGNORE INTO {$TABLE_PREFIX}timestamps (info_hash, bytes, delta, sequence) SELECT '$info_hash' AS info_hash, dlbytes, UNIX_TIMESTAMP() - lastSpeedCycle, NULL FROM {$TABLE_PREFIX}files WHERE info_hash=\"$info_hash\"");
+    //stick in our latest data before we calc it out
+    quickQuery("INSERT IGNORE INTO {$TABLE_PREFIX}timestamps (info_hash, bytes, delta, sequence) SELECT '$info_hash' AS info_hash, dlbytes, UNIX_TIMESTAMP() - lastSpeedCycle, NULL FROM {$TABLE_PREFIX}files WHERE info_hash=\"$info_hash\"");
 
-        // mysql blows sometimes so we have to read the data into php before updating it
-        $results = mysqli_query($GLOBALS['conn'], 'SELECT (MAX(bytes)-MIN(bytes))/SUM(delta), COUNT(*), MIN(sequence) FROM '.$TABLE_PREFIX.'timestamps WHERE info_hash="'.$info_hash.'"');
-        $data = mysqli_fetch_row($results);
+    // mysql blows sometimes so we have to read the data into php before updating it
+    $results = mysqli_query($GLOBALS['conn'], 'SELECT (MAX(bytes)-MIN(bytes))/SUM(delta), COUNT(*), MIN(sequence) FROM '.$TABLE_PREFIX.'timestamps WHERE info_hash="'.$info_hash.'"');
+    $data = mysqli_fetch_row($results);
 
-        summaryAdd("speed", $data[0], true);
-        summaryAdd("lastSpeedCycle", "UNIX_TIMESTAMP()", true);
+    summaryAdd("speed", $data[0], true);
+    summaryAdd("lastSpeedCycle", "UNIX_TIMESTAMP()", true);
 
-        // if we have more than 20 drop the rest
+    // if we have more than 20 drop the rest
     if ($data[1] == 21) {
         quickQuery("DELETE FROM {$TABLE_PREFIX}timestamps WHERE info_hash=\"$info_hash\" AND sequence=${data[2]}");
-    } else if ($data[1] > 21) {
+    } elseif ($data[1] > 21) {
         // This query requires MySQL 4.0.x, but should rarely be used.
         quickQuery('DELETE FROM '.$TABLE_PREFIX.'timestamps WHERE info_hash="'.$info_hash.'" ORDER BY sequence LIMIT '.($data['1'] - 20));
     }
@@ -647,17 +639,17 @@ unset($status);
 // UPDATE users ratio down/up for every event on every announce
 // only with the difference between stored down/up and sended by client
 if ($LIVESTATS) {
-     $resstat = mysqli_query($GLOBALS['conn'], "SELECT `uploaded`, `downloaded` FROM `{$TABLE_PREFIX}peers` WHERE ".(($PRIVATE_ANNOUNCE)?"`pid`='".$pid."'":"`ip`='".$ip."'")." AND `infohash`='".$info_hash."' AND `peer_id`='".$peer_id."'");
+    $resstat = mysqli_query($GLOBALS['conn'], "SELECT `uploaded`, `downloaded` FROM `{$TABLE_PREFIX}peers` WHERE ".(($PRIVATE_ANNOUNCE)?"`pid`='".$pid."'":"`ip`='".$ip."'")." AND `infohash`='".$info_hash."' AND `peer_id`='".$peer_id."'");
     if ($resstat && mysqli_num_rows($resstat)>0) {
         $livestat=mysqli_fetch_assoc($resstat);
         // only if uploaded/downloaded are >= stored data in peer list
         //if ($uploaded>=$livestat["uploaded"])
-             $newup=max(0, ($uploaded-$livestat["uploaded"]));
+        $newup=max(0, ($uploaded-$livestat["uploaded"]));
         //else
         //      $newup=$uploaded;
 
         //if ($downloaded>=$livestat["downloaded"])
-             $newdown=max(0, ($downloaded-$livestat["downloaded"]));
+        $newdown=max(0, ($downloaded-$livestat["downloaded"]));
         //else
         //      $newdown=$downloaded;
         // rev 485
@@ -666,17 +658,17 @@ if ($LIVESTATS) {
     }
        ((mysqli_free_result($resstat) || (is_object($resstat) && (get_class($resstat) == "mysqli_result"))) ? true : false);
 
-       // begin history - also this is registered live or not
+    // begin history - also this is registered live or not
     if ($LOG_HISTORY) {
         $resu=mysqli_query($GLOBALS['conn'], "SELECT id FROM {$TABLE_PREFIX}users WHERE ".($PRIVATE_ANNOUNCE?"pid='$pid'":"cip='$ip'") ." ORDER BY lastconnect DESC LIMIT 1");
-       // if found at least one user should be 1
+        // if found at least one user should be 1
         if ($resu && mysqli_num_rows($resu)==1) {
             $curuid=mysqli_fetch_assoc($resu);
             quickQuery("UPDATE {$TABLE_PREFIX}history set uploaded=IFNULL(uploaded,0)+$newup, downloaded=IFNULL(downloaded,0)+$newdown WHERE uid=".$curuid["id"]." AND infohash='$info_hash'");
         }
         ((mysqli_free_result($resu) || (is_object($resu) && (get_class($resu) == "mysqli_result"))) ? true : false);
     }
-       // end history    }
+    // end history    }
 }
 
 
@@ -755,7 +747,7 @@ switch ($event) {
         // begin history
         if ($LOG_HISTORY) {
             $resu=mysqli_query($GLOBALS['conn'], "SELECT id FROM {$TABLE_PREFIX}users WHERE ".($PRIVATE_ANNOUNCE?"pid='$pid'":"cip='$ip'") ." ORDER BY lastconnect DESC LIMIT 1");
-           // if found at least one user should be 1
+            // if found at least one user should be 1
             if ($resu && mysqli_num_rows($resu)==1) {
                 $curuid=mysqli_fetch_assoc($resu);
                 // if user has already completed this torrent, mysql will give error because of unique index (uid+infohash)

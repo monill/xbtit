@@ -32,7 +32,7 @@
 
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 require_once(load_language("lang_account.php"));
@@ -95,8 +95,8 @@ if (isset($_POST["uid"]) && isset($_POST["act"])) {
 
 // already logged?
 if ($act=="signup" && isset($CURUSER["uid"]) && $CURUSER["uid"]!=1) {
-        $url="index.php";
-        redirect($url);
+    $url="index.php";
+    redirect($url);
 }
 
 
@@ -108,11 +108,11 @@ if ($act=="signup" && $MAX_USERS!=0 && $numusers>=$MAX_USERS) {
 }
 
 if ($act=="confirm") {
-      global $FORUMLINK, $db_prefix;
+    global $FORUMLINK, $db_prefix;
 
-      $random=((int)$_GET["confirm"]);
-      $random2=rand(10000, 60000);
-      $res=do_sqlquery("UPDATE `{$TABLE_PREFIX}users` SET `id_level`=3".((substr($FORUMLINK, 0, 3)=="smf" || $FORUMLINK=="ipb") ? ", `random`=$random2" : "")." WHERE `id_level`=2 AND `random`=$random", true);
+    $random=((int)$_GET["confirm"]);
+    $random2=rand(10000, 60000);
+    $res=do_sqlquery("UPDATE `{$TABLE_PREFIX}users` SET `id_level`=3".((substr($FORUMLINK, 0, 3)=="smf" || $FORUMLINK=="ipb") ? ", `random`=$random2" : "")." WHERE `id_level`=2 AND `random`=$random", true);
     if (!$res) {
         die("ERROR: ".mysqli_error($GLOBALS['conn'])."\n");
     } else {
@@ -130,11 +130,11 @@ if ($act=="confirm") {
             if (!isset($THIS_BASEPATH) || empty($THIS_BASEPATH)) {
                 $THIS_BASEPATH= __DIR__;
             }
-                  require_once($THIS_BASEPATH. '/ipb/initdata.php');
-                  require_once(IPS_ROOT_PATH . 'sources/base/ipsRegistry.php');
-                  require_once(IPS_ROOT_PATH . 'sources/base/ipsController.php');
-                  $registry = ipsRegistry::instance();
-                  $registry->init();
+            require_once($THIS_BASEPATH. '/ipb/initdata.php');
+            require_once(IPS_ROOT_PATH . 'sources/base/ipsRegistry.php');
+            require_once(IPS_ROOT_PATH . 'sources/base/ipsController.php');
+            $registry = ipsRegistry::instance();
+            $registry->init();
 
             $get=get_result("SELECT `u`.`ipb_fid`, `ul`.`ipb_group_mirror` FROM `{$TABLE_PREFIX}users` `u` LEFT JOIN `{$TABLE_PREFIX}users_level` `ul` ON `u`.`id_level`=`ul`.`id` WHERE `u`.`id_level`=3 AND `u`.`random`=$random2", true, $btit_settings['cache_duration']);
             $forum_level=(($get[0]["ipb_group_mirror"]>0)?$get[0]["ipb_group_mirror"]:3);
@@ -152,10 +152,10 @@ if ($_POST["conferma"]) {
         $pass_min_req=explode(",", $btit_settings["secsui_pass_min_req"]);
         if ($ret==0) {
             if ($VALIDATION=="user") {
-                 success_msg($language["ACCOUNT_CREATED"], $language["EMAIL_SENT"]);
-                 stdfoot();
-                 exit();
-            } else if ($VALIDATION=="none") {
+                success_msg($language["ACCOUNT_CREATED"], $language["EMAIL_SENT"]);
+                stdfoot();
+                exit();
+            } elseif ($VALIDATION=="none") {
                 success_msg($language["ACCOUNT_CREATED"], $language["ACCOUNT_CONGRATULATIONS"]);
                 stdfoot();
                 exit();
@@ -194,7 +194,6 @@ if ($_POST["conferma"]) {
 
 function tabella($action, $dati = [])
 {
-
     global $idflag,$link, $idlangue, $idstyle, $CURUSER,$USE_IMAGECODE, $TABLE_PREFIX, $language, $tpl_account,$THIS_BASEPATH, $btit_settings;
 
     $pass_min_req=explode(",", $btit_settings["secsui_pass_min_req"]);
@@ -214,13 +213,13 @@ function tabella($action, $dati = [])
     $tpl_account->set("pass_sym_set", (($pass_min_req[4]>0)?true:false), true);
 
     if ($action=="signup") {
-          $dati["username"]="";
-          $dati["email"]="";
-          $dati["language"]=$idlangue;
-          $dati["style"]=$idstyle;
+        $dati["username"]="";
+        $dati["email"]="";
+        $dati["language"]=$idlangue;
+        $dati["style"]=$idstyle;
     }
 
-   // avoid error with js
+    // avoid error with js
     $language["DIF_PASSWORDS"]=AddSlashes($language["DIF_PASSWORDS"]);
     $language["INSERT_PASSWORD"]=AddSlashes($language["INSERT_PASSWORD"]);
     $language["USER_PWD_AGAIN"]=AddSlashes($language["USER_PWD_AGAIN"]);
@@ -285,7 +284,7 @@ function tabella($action, $dati = [])
         $remotedns = strtoupper($remotedns);
         preg_match('/^(.+)\.([A-Z]{2,3})$/', $remotedns, $tldm);
         if (isset($tldm[2])) {
-             $remotedns = mysqli_real_escape_string($GLOBALS['conn'], $tldm[2]);
+            $remotedns = mysqli_real_escape_string($GLOBALS['conn'], $tldm[2]);
         }
     }
 
@@ -294,7 +293,7 @@ function tabella($action, $dati = [])
         if ($flag["id"]==$dati["flag"] || ($flag["domain"]==$remotedns && $action=="signup")) {
             $option.="selected=\"selected\"  ";
         }
-            $option.="value=\"".$flag["id"]."\">".$flag["name"]."</option>";
+        $option.="value=\"".$flag["id"]."\">".$flag["name"]."</option>";
     }
     $option.="\n</select>";
 
@@ -326,10 +325,10 @@ function tabella($action, $dati = [])
 
     $tpl_account->set("account_combo_timezone", $option);
 
-// -----------------------------
-// Captcha hack
-// -----------------------------
-// if set to use secure code: try to display imagecode
+    // -----------------------------
+    // Captcha hack
+    // -----------------------------
+    // if set to use secure code: try to display imagecode
     if ($USE_IMAGECODE && $action!="mod") {
         if (extension_loaded('gd')) {
             $arr = gd_info();
@@ -358,22 +357,21 @@ function tabella($action, $dati = [])
             $tpl_account->set("CAPTCHA", false, true);
         }
     } elseif ($action!="mod") {
-           include("$THIS_BASEPATH/include/security_code.php");
-           $scode_index = rand(0, count($security_code) - 1);
-           $scode="<input type=\"hidden\" name=\"security_index\" value=\"$scode_index\" />\n";
-           $scode.=$security_code[$scode_index]["question"];
-           $tpl_account->set("scode_question", $scode);
-           // we will request simple operation to user
-           $tpl_account->set("CAPTCHA", false, true);
+        include("$THIS_BASEPATH/include/security_code.php");
+        $scode_index = rand(0, count($security_code) - 1);
+        $scode="<input type=\"hidden\" name=\"security_index\" value=\"$scode_index\" />\n";
+        $scode.=$security_code[$scode_index]["question"];
+        $tpl_account->set("scode_question", $scode);
+        // we will request simple operation to user
+        $tpl_account->set("CAPTCHA", false, true);
     }
-// -----------------------------
+    // -----------------------------
 // Captcha hack
 // -----------------------------
 }
 
 function aggiungiutente()
 {
-
     global $SITENAME,$SITEEMAIL,$BASEURL,$VALIDATION,$USERLANG,$USE_IMAGECODE, $TABLE_PREFIX, $XBTT_USE, $language,$THIS_BASEPATH, $FORUMLINK, $db_prefix, $btit_settings;
 
     $utente=mysqli_real_escape_string($GLOBALS['conn'], $_POST["user"]);
@@ -402,46 +400,46 @@ function aggiungiutente()
     } else {
         $idlevel=2;
     }
-# Create Random number
+    # Create Random number
     $floor = 100000;
     $ceiling = 999999;
     srand((double)microtime()*1000000);
     $random = rand($floor, $ceiling);
 
     if ($utente=="" || $pwd=="" || $email=="") {
-           return -1;
-           exit;
+        return -1;
+        exit;
     }
 
     $res=do_sqlquery("SELECT email FROM {$TABLE_PREFIX}users WHERE email='$email'", true);
     if (mysqli_num_rows($res)>0) {
-           return -2;
-           exit;
+        return -2;
+        exit;
     }
 
-// valid email check - by vibes
+    // valid email check - by vibes
     $regex='/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/i';
     if (!preg_match($regex, $email)) {
-           return -3;
-           exit;
+        return -3;
+        exit;
     }
-// valid email check end
+    // valid email check end
 
-// duplicate username
+    // duplicate username
     $res=do_sqlquery("SELECT username FROM {$TABLE_PREFIX}users WHERE username='$utente'", true);
     if (mysqli_num_rows($res)>0) {
-           return -4;
-           exit;
+        return -4;
+        exit;
     }
-// duplicate username
+    // duplicate username
 
     if (strpos(mysqli_real_escape_string($GLOBALS['conn'], $utente), " ")==true) {
-           return -7;
-           exit;
+        return -7;
+        exit;
     }
     if ($USE_IMAGECODE) {
         if (extension_loaded('gd')) {
-             $arr = gd_info();
+            $arr = gd_info();
             if ($arr['FreeType Support']==1) {
                 $public=$_POST['public_key'];
                 $private=$_POST['private_key'];
@@ -454,8 +452,8 @@ function aggiungiutente()
                     exit;
                 }
             } else {
-                 include("$THIS_BASEPATH/include/security_code.php");
-                 $scode_index=((int)$_POST["security_index"]);
+                include("$THIS_BASEPATH/include/security_code.php");
+                $scode_index=((int)$_POST["security_index"]);
                 if ($security_code[$scode_index]["answer"]!=$_POST["scode_answer"]) {
                     err_msg($language["ERROR"], $language["ERR_IMAGE_CODE"]);
                     stdfoot();
@@ -483,8 +481,8 @@ function aggiungiutente()
 
     $bannedchar= ["\\", "/", ":", "*", "?", "\"", "@", "$", "'", "`", ",", ";", ".", "<", ">", "!", "�", "%", "^", "&", "(", ")", "+", "=", "#", "~"];
     if (straipos(mysqli_real_escape_string($GLOBALS['conn'], $utente), $bannedchar)==true) {
-           return -8;
-           exit;
+        return -8;
+        exit;
     }
 
     $pass_to_test=$_POST["pwd"];
@@ -531,7 +529,7 @@ function aggiungiutente()
 
     $newuid=((is_null($___mysqli_res = mysqli_insert_id($GLOBALS['conn']))) ? false : $___mysqli_res);
 
-// Continue to create smf members if they disable smf mode
+    // Continue to create smf members if they disable smf mode
     $test=do_sqlquery("SHOW TABLES LIKE '{$db_prefix}members'", true);
 
     if (substr($FORUMLINK, 0, 3)=="smf" || mysqli_num_rows($test)) {
@@ -553,19 +551,19 @@ function aggiungiutente()
         do_sqlquery("UPDATE `{$TABLE_PREFIX}users` SET `smf_fid`=$fid WHERE `id`=$newuid", true);
     }
 
-// Continue to create ipb members if they disable ipb mode
+    // Continue to create ipb members if they disable ipb mode
     $test=do_sqlquery("SHOW TABLES LIKE '{$ipb_prefix}members'");
 
     if ($FORUMLINK=="ipb" || mysqli_num_rows($test)) {
         ipb_create($utente, $email, $pwd, $idlevel, $newuid);
     }
 
-// xbt
+    // xbt
     if ($XBTT_USE) {
-           $resin=do_sqlquery("INSERT INTO xbt_users (uid, torrent_pass) VALUES ($newuid,'$pid')", true);
+        $resin=do_sqlquery("INSERT INTO xbt_users (uid, torrent_pass) VALUES ($newuid,'$pid')", true);
     }
     if ($VALIDATION=="user") {
-           ini_set("sendmail_from", "");
+        ini_set("sendmail_from", "");
         if (((is_object($GLOBALS['conn'])) ? mysqli_errno($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_errno()) ? $___mysqli_res : false))==0) {
             send_mail($email, $language["ACCOUNT_CONFIRM"], $language["ACCOUNT_MSG"]."\n\n".$BASEURL."/index.php?page=account&act=confirm&confirm=$random&language=$idlangue");
             write_log("Signup new user $utente ($email)", "add");

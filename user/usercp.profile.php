@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -116,7 +116,7 @@ switch ($action) {
                     }
                 }
             }
-          // <--- Reverify Mail Hack by Petr1fied - End
+            // <--- Reverify Mail Hack by Petr1fied - End
             if ($idlangue>0) {
                 $set[]="language=$idlangue";
             }
@@ -142,7 +142,7 @@ switch ($action) {
                 stdfoot(true, false);
                 exit;
             } elseif ($updateset!="") {
-            // <--- Reverify Mail Hack by Petr1fied - End
+                // <--- Reverify Mail Hack by Petr1fied - End
                 do_sqlquery("UPDATE {$TABLE_PREFIX}users SET $updateset WHERE id='".$uid."'", true);
 
                 success_msg($language["SUCCESS"], $language["INF_CHANGED"]."<br /><a href=\"index.php?page=usercp&amp;uid=".$uid."\">".$language["BCK_USERCP"]."</a>");
@@ -185,7 +185,7 @@ switch ($action) {
         $lres=language_list();
         $langtpl= [];
         foreach ($lres as $langue) {
-             $langtpl["language_combo"].="\n<option ";
+            $langtpl["language_combo"].="\n<option ";
             if ($langue["id"]==$CURUSER["language"]) {
                 $langtpl["language_combo"].="selected=\"selected\" ";
             }

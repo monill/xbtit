@@ -3,8 +3,8 @@
 // Translated to Vietnamese Language by VoTienSinh  & ThanhThanh for www.diemthuy.nl
 
 global $users, $torrents, $seeds, $leechers, $percent;
-// $language["rtl"]="rtl"; // xin b&#7841;n &#273;&#7915;ng ph&#234; b&#236;nh n&#7871;u ng&#244;n ng&#7917; c&#7911;a b&#7841;n vi&#7871;t t&#432; ph&#7843;i qua tr&#225;i  
-// $language["charset"]="ISO-8859-1"; // &#273;&#7915;ng ph&#234; b&#236;nh h&#224;ng n&#224;y v&#7899;i &#273;&#7863;c t&#237;nh c&#7911;a ng&#244;n ng&#7917; n&#7871;u c&#243; s&#7921; kh&#225;c bi&#7879;t v&#7899;i n&#7899;i xu&#7845;t ph&#225;t 
+// $language["rtl"]="rtl"; // xin b&#7841;n &#273;&#7915;ng ph&#234; b&#236;nh n&#7871;u ng&#244;n ng&#7917; c&#7911;a b&#7841;n vi&#7871;t t&#432; ph&#7843;i qua tr&#225;i
+// $language["charset"]="ISO-8859-1"; // &#273;&#7915;ng ph&#234; b&#236;nh h&#224;ng n&#224;y v&#7899;i &#273;&#7863;c t&#237;nh c&#7911;a ng&#244;n ng&#7917; n&#7871;u c&#243; s&#7921; kh&#225;c bi&#7879;t v&#7899;i n&#7899;i xu&#7845;t ph&#225;t
 $language["ACCOUNT_CONFIRM"]="ch&#7913;ng th&#7921;c ch&#432;&#417;ng m&#7909;c t&#7841;i di&#7875;n &#273;&#224;n $SITENAME.";
 $language["ACCOUNT_CONGRATULATIONS"]="ch&#250;c m&#7915;ng, b&#226;y gi&#7901; ch&#432;&#417;ng m&#7909;c c&#7911;a b&#7841;n th&#236; h&#7907;p l&#7879;!<br />b&#7841;n c&#243; th&#7875; s&#7911; d&#7909;ng ch&#432;&#417;ng m&#7909;c c&#7911;a b&#7841;n t&#7841;i di&#7875;n &#273;&#224;n<a href=index.php?page=login>login</a>.";
 $language["ACCOUNT_CREATE"]="l&#7853;p  ch&#432;&#417;ng m&#7909;c";

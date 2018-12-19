@@ -32,7 +32,7 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
       
 

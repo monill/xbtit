@@ -32,33 +32,33 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 function image_combo($current_image = "")
 {
-      global $STYLEPATH, $language, $STYLEURL;
+    global $STYLEPATH, $language, $STYLEURL;
 
-      $dir = @opendir("$STYLEPATH/images/categories/");
-      $ret="\n<select name=\"image\" size=\"1\" onchange=\"update_cat(this.options[selectedIndex].value,'$STYLEURL/images/categories/spacer.gif');\">\n<option value=\"\">".$language["SELECT"]."</option>";
+    $dir = @opendir("$STYLEPATH/images/categories/");
+    $ret="\n<select name=\"image\" size=\"1\" onchange=\"update_cat(this.options[selectedIndex].value,'$STYLEURL/images/categories/spacer.gif');\">\n<option value=\"\">".$language["SELECT"]."</option>";
     while ($file = @readdir($dir)) {
         if (!@is_dir("$STYLEPATH/images/categories/" . $file)) {
             $img_size = @getimagesize("$STYLEPATH/images/categories/" . $file);
-          // IT'S AN IMAGE ;)
+            // IT'S AN IMAGE ;)
             if ($img_size[0] && $img_size[1]) {
                 $ret.="\n<option value=\"$file\" ".($current_image==$file?"selected=\"selected\"":"").">$file</option>";
             }
         }
     }
-      @closedir($dir);
-      $ret.="\n</select>";
+    @closedir($dir);
+    $ret.="\n</select>";
 
-      return $ret;
+    return $ret;
 }
 
 
@@ -66,20 +66,20 @@ function category_read()
 {
     global $admintpl,$language,$STYLEURL,$CURUSER,$STYLEPATH;
 
-     $admintpl->set("category_add", false, true);
-     $admintpl->set("language", $language);
+    $admintpl->set("category_add", false, true);
+    $admintpl->set("language", $language);
 
-     $cres=genrelist();
+    $cres=genrelist();
     for ($i=0; $i<count($cres); $i++) {
         $cres[$i]["name"]=unesc($cres[$i]["name"]);
         $cres[$i]["image"]="<img src=\"$STYLEURL/images/categories/".$cres[$i]["image"]."\" alt=\"\" border=\"0\" />";
         $cres[$i]["edit"]="<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=category&amp;action=edit&amp;id=".$cres[$i]["id"]."\">".image_or_link("$STYLEPATH/images/edit.png", "", $language["EDIT"])."</a>";
         $cres[$i]["delete"]="<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=category&amp;action=delete&amp;id=".$cres[$i]["id"]."\" onclick=\"return confirm('".AddSlashes($language["DELETE_CONFIRM"])."')\">".image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"])."</a>";
     }
-     $admintpl->set("categories", $cres);
-     $admintpl->set("category_add_new", "<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=category&amp;action=add\">".$language["CATEGORY_ADD"]."</a>");
+    $admintpl->set("categories", $cres);
+    $admintpl->set("category_add_new", "<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=category&amp;action=add\">".$language["CATEGORY_ADD"]."</a>");
 
-     unset($cres);
+    unset($cres);
 }
 
 
@@ -130,9 +130,9 @@ switch ($action) {
 
     case 'delete':
         if (isset($_GET["id"])) {
-           // we should get only 1 style, selected with radio ...
+            // we should get only 1 style, selected with radio ...
             $id=max(0, $_GET["id"]);
-           // delete style from database
+            // delete style from database
             do_sqlquery("DELETE FROM {$TABLE_PREFIX}categories WHERE id=$id", true);
             category_read();
         }

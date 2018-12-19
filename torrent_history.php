@@ -32,7 +32,7 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -92,14 +92,14 @@ if (count($res)==0) {
         $upld=makesize($row["uploaded"]);
         $history[$i]["DOWNLOADED"]=$dled;
         $history[$i]["UPLOADED"]=$upld;
-    //Peer Ratio
+        //Peer Ratio
         if (((int)$row["downloaded"])>0) {
-             $ratio=number_format($row["uploaded"]/$row["downloaded"], 2);
+            $ratio=number_format($row["uploaded"]/$row["downloaded"], 2);
         } else {
             $ratio='&#8734;';
         }
         $history[$i]["RATIO"]=$ratio;
-    //End Peer Ratio
+        //End Peer Ratio
 
         $history[$i]["FINISHED"]=get_elapsed_time($row["date"])." ago";
         $i++;

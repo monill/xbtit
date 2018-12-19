@@ -36,8 +36,8 @@ if (!$CURUSER || $CURUSER["view_users"]=="no") {
 } else {
     //lastest member
 
-     block_begin("Latest Member");
-     $a = get_result("SELECT id,username FROM {$TABLE_PREFIX}users WHERE
+    block_begin("Latest Member");
+    $a = get_result("SELECT id,username FROM {$TABLE_PREFIX}users WHERE
      id_level<>1 AND id_level<>2 ORDER BY id DESC LIMIT 1", true, $btit_settings['cache_duration']);
     if ($a) {
         $a=$a[0];
@@ -48,7 +48,7 @@ if (!$CURUSER || $CURUSER["view_users"]=="no") {
         }
         echo " <div align=\"center\"><table border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" > <tr><td class=\"blocklist\" align=\"center\">".$language["WELCOME_LASTUSER"]."<br /><b>$latestuser</b>!</td></tr></table></div>\n";
     }
-     block_end("");
+    block_end("");
 } // end if user can view
 
 //end

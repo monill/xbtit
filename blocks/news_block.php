@@ -35,7 +35,7 @@ if (!isset($CURUSER)) {
     global $CURUSER;
 }
 if (!$CURUSER || $CURUSER["view_news"]=="no") {
-       //err_msg(ERROR,NOT_AUTH_VIEW_NEWS."!");
+    //err_msg(ERROR,NOT_AUTH_VIEW_NEWS."!");
        //stdfoot();
        //exit;
        // modified 1.2

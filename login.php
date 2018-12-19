@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 session_name("xbtit");

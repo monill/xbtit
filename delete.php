@@ -32,7 +32,7 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -70,7 +70,7 @@ if (isset($_POST["action"])) {
         if (mysqli_num_rows($ris)==0) {
             stderr("Sorry!", "torrent $hash not found.");
         } else {
-            list($torhash,$torname,$torurl)=mysqli_fetch_array($ris);
+            list($torhash, $torname, $torurl)=mysqli_fetch_array($ris);
         }
         write_log("Deleted torrent $torname ($torhash)", "delete");
 
@@ -111,7 +111,7 @@ $torrent["date"]=date("d/m/Y", $row["data"]-$offset);
 if (!$XBTT_USE) {
     if ($row["speed"] < 0) {
         $speed = "N/D";
-    } else if ($row["speed"] > 2097152) {
+    } elseif ($row["speed"] > 2097152) {
         $speed = round($row["speed"]/1048576, 2) . " MB/sec";
     } else {
         $speed = round($row["speed"] / 1024, 2) . " KB/sec";

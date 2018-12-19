@@ -32,7 +32,7 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -73,7 +73,7 @@ if (count($res)==0) {
     $peerstpl->set("NOPEERS", false, true);
 
     foreach ($res as $id => $row) {
-      // for user name instead of peer
+        // for user name instead of peer
         if ($XBTT_USE) {
             $resu=true;
         } elseif ($PRIVATE_ANNOUNCE) {
@@ -97,16 +97,16 @@ if (count($res)==0) {
                     $peers[$i]["USERNAME"]="<a href=\"javascript: windowunder('index.php?page=userdetails&amp;id=".$rowuser["id"]."')\">".unesc($rowuser["username"])."</a>";
                     $peers[$i]["PM"]="<a href=\"javascript: windowunder('index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid=$CURUSER[uid]&amp;what=new&amp;to=".urlencode(unesc($rowuser["username"]))."')\">".image_or_link("$STYLEPATH/images/pm.png", "", "PM")."</a>";
                 } else {
-                       $peers[$i]["USERNAME"]="<a href=\"index.php?page=userdetails&amp;id=".$rowuser["id"]."\">".unesc($rowuser["username"])."</a>";
-                       $peers[$i]["PM"]="<a href=\"index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid=".$CURUSER["uid"]."&amp;what=new&amp;to=".urlencode(unesc($rowuser["username"]))."\">".image_or_link("$STYLEPATH/images/pm.png", "", "PM")."</a>";
+                    $peers[$i]["USERNAME"]="<a href=\"index.php?page=userdetails&amp;id=".$rowuser["id"]."\">".unesc($rowuser["username"])."</a>";
+                    $peers[$i]["PM"]="<a href=\"index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid=".$CURUSER["uid"]."&amp;what=new&amp;to=".urlencode(unesc($rowuser["username"]))."\">".image_or_link("$STYLEPATH/images/pm.png", "", "PM")."</a>";
                 }
             } else {
                 $peers[$i]["USERNAME"]=$language["GUEST"];
                 $peers[$i]["PM"]="";
             }
         } else {
-             $peers[$i]["USERNAME"]=$language["GUEST"];
-             $peers[$i]["PM"]="";
+            $peers[$i]["USERNAME"]=$language["GUEST"];
+            $peers[$i]["PM"]="";
         }
 
         if ($row["flagpic"]!="" && $row["flagpic"]!="unknown.gif") {
@@ -134,14 +134,14 @@ if (count($res)==0) {
         $peers[$i]["DOWNLOADED"]=$dled;
         $peers[$i]["UPLOADED"]=$upld;
 
-    //Peer Ratio
+        //Peer Ratio
         if (((int)$row["downloaded"])>0) {
-             $ratio=number_format($row["uploaded"]/$row["downloaded"], 2);
+            $ratio=number_format($row["uploaded"]/$row["downloaded"], 2);
         } else {
             $ratio='&#8734;';
         }
         $peers[$i]["RATIO"]=$ratio;
-    //End Peer Ratio
+        //End Peer Ratio
 
         $peers[$i]["SEEN"]=get_elapsed_time($row["lastupdate"])." ago";
         $i++;

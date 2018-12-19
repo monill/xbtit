@@ -39,8 +39,8 @@ require_once("$THIS_BASEPATH/include/BEncode.php");
 dbconn();
 
 if (!$CURUSER || $CURUSER["can_download"]=="no") {
-       require(load_language("lang_main.php"));
-       die($language["NOT_AUTH_DOWNLOAD"]);
+    require(load_language("lang_main.php"));
+    die($language["NOT_AUTH_DOWNLOAD"]);
 }
 
 if (ini_get('zlib.output_compression')) {
@@ -51,8 +51,8 @@ $infohash=mysqli_real_escape_string($GLOBALS['conn'], $_GET['id']);
 $filepath=$TORRENTSDIR.'/'.$infohash.'.btf';
 
 if (!is_file($filepath) || !is_readable($filepath)) {
-      require(load_language("lang_main.php"));
-      die($language["CANT_FIND_TORRENT"]);
+    require(load_language("lang_main.php"));
+    die($language["CANT_FIND_TORRENT"]);
 }
 
 $f=rawurlencode(html_entity_decode($_GET["f"]));

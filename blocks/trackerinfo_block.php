@@ -79,7 +79,7 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
     $upld=0+$row["upld"];
     $traffic=makesize($dled+$upld);
 
-//   print("<tr><td class=\"blocklist\" align=\"center\">\n");
+    //   print("<tr><td class=\"blocklist\" align=\"center\">\n");
     print("<table width=\"100%\" class=\"lista\" cellspacing=\"0\">\n");
     print("<tr>\n<td colspan=\"2\" align=\"center\" class=\"lista\" style='text-align:center;'>".unesc($SITENAME)."</td></tr>\n");
     print("<tr><td align=\"left\" class=\"lista\" style=\"border-bottom: solid 1px #9BAEBF;width:70%;\">".$language["MEMBERS"].":</td><td align=\"right\" class=\"lista\" style=\"border-bottom: solid 1px #9BAEBF;width:30%;\">$users</td></tr>\n");
@@ -90,6 +90,6 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
     print("<tr><td align=\"left\" class=\"lista\" style=\"border-bottom: solid 1px #9BAEBF;width:70%;\">".$language["SEEDERS"]."/".$language["LEECHERS"].":</td><td align=\"right\" class=\"lista\" style=\"border-bottom: solid 1px #9BAEBF;width:30%;\">$percent%</td></tr>\n");
     print("<tr><td align=\"left\" class=\"lista\" style=\"border-bottom: solid 1px #9BAEBF;width:70%;\">".$language["TRAFFIC"].":</td><td align=\"right\" class=\"lista\" style=\"border-bottom: solid 1px #9BAEBF;width:30%;\">$traffic</td></tr>\n");
     print("</table>\n");
-//   print("</table>\n</td></tr>");
+    //   print("</table>\n</td></tr>");
 //   block_end();
 } // end if user can view

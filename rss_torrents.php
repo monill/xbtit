@@ -80,17 +80,15 @@ foreach ($doGet as $id => $item) {
     $leechers=strip_tags($item['leechers']);
     $desc=format_comment($item['description']);
     $f=rawurlencode($item['filename']);
-    // output to browser
-
-?>
+    // output to browser ?>
 
 <item>
-<title><![CDATA[<?php print htmlspecialchars("[$cat] $filename [".SEEDERS." ($seeders)/".LEECHERS." ($leechers)]");?>]]></title>
+<title><![CDATA[<?php print htmlspecialchars("[$cat] $filename [".SEEDERS." ($seeders)/".LEECHERS." ($leechers)]"); ?>]]></title>
 <description><![CDATA[<?php print $desc; ?>]]></description>
-<link><?php print "$BASEURL";?>/index.php?page=torrent-details&amp;id=<?php print "$id";?></link>
-<guid><?php print "$BASEURL";?>/index.php?page=torrent-details&amp;id=<?php print "$id";?></guid>
-<enclosure url="<?php print("$BASEURL/download.php?id=$id&amp;f=$f.torrent");?>" length="<?php print $item["size"] ?>" type="application/x-bittorrent" />
-<pubDate><?php print $added;?></pubDate>
+<link><?php print "$BASEURL"; ?>/index.php?page=torrent-details&amp;id=<?php print "$id"; ?></link>
+<guid><?php print "$BASEURL"; ?>/index.php?page=torrent-details&amp;id=<?php print "$id"; ?></guid>
+<enclosure url="<?php print("$BASEURL/download.php?id=$id&amp;f=$f.torrent"); ?>" length="<?php print $item["size"] ?>" type="application/x-bittorrent" />
+<pubDate><?php print $added; ?></pubDate>
 </item>
 
 <?php

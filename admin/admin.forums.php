@@ -32,11 +32,11 @@
 
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -47,18 +47,18 @@ switch ($action) {
         $forums= [];
         $i=0;
         foreach ($resf as $id => $result) {
-              $forums[$i]["td_padding"]="";
-              $forums[$i]["name"]="<b>".unesc($result["name"])."</b><br />".unesc($result["description"]);
-              $forums[$i]["topiccount"]=$result["topiccount"];
-              $forums[$i]["postcount"]=$result["postcount"];
-              $forums[$i]["readlevel"]=$result["readlevel"];
-              $forums[$i]["writelevel"]=$result["writelevel"];
-              $forums[$i]["createlevel"]=$result["createlevel"];
-              $forums[$i]["sortorder"]=$result["sort"];
-              $forums[$i]["edit"]="<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=forum&amp;action=edit&amp;id=".$result["id"]."\">".image_or_link("$STYLEPATH/images/edit.png", "", $language["EDIT"])."</a>";
-              $forums[$i]["delete"]="<a onclick=\"return confirm('".AddSlashes($language["DELETE_CONFIRM"])."')\" href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=forum&amp;action=delete&amp;id=".$result["id"]."\">".image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"])."</a>";
-              $res_subf=get_result("SELECT f.*,uread.level as readlevel,uwrite.level as writelevel, ucreate.level as createlevel FROM {$TABLE_PREFIX}forums f INNER JOIN {$TABLE_PREFIX}users_level  as uread on uread.id_level=minclassread INNER JOIN {$TABLE_PREFIX}users_level as uwrite on uwrite.id_level=minclasswrite INNER JOIN {$TABLE_PREFIX}users_level as ucreate on ucreate.id_level=minclasscreate WHERE f.id_parent=".$result["id"]." AND uread.can_be_deleted='no' AND uwrite.can_be_deleted='no' AND ucreate.can_be_deleted='no' ORDER BY f.sort,f.id", true);
-              $i++;
+            $forums[$i]["td_padding"]="";
+            $forums[$i]["name"]="<b>".unesc($result["name"])."</b><br />".unesc($result["description"]);
+            $forums[$i]["topiccount"]=$result["topiccount"];
+            $forums[$i]["postcount"]=$result["postcount"];
+            $forums[$i]["readlevel"]=$result["readlevel"];
+            $forums[$i]["writelevel"]=$result["writelevel"];
+            $forums[$i]["createlevel"]=$result["createlevel"];
+            $forums[$i]["sortorder"]=$result["sort"];
+            $forums[$i]["edit"]="<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=forum&amp;action=edit&amp;id=".$result["id"]."\">".image_or_link("$STYLEPATH/images/edit.png", "", $language["EDIT"])."</a>";
+            $forums[$i]["delete"]="<a onclick=\"return confirm('".AddSlashes($language["DELETE_CONFIRM"])."')\" href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=forum&amp;action=delete&amp;id=".$result["id"]."\">".image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"])."</a>";
+            $res_subf=get_result("SELECT f.*,uread.level as readlevel,uwrite.level as writelevel, ucreate.level as createlevel FROM {$TABLE_PREFIX}forums f INNER JOIN {$TABLE_PREFIX}users_level  as uread on uread.id_level=minclassread INNER JOIN {$TABLE_PREFIX}users_level as uwrite on uwrite.id_level=minclasswrite INNER JOIN {$TABLE_PREFIX}users_level as ucreate on ucreate.id_level=minclasscreate WHERE f.id_parent=".$result["id"]." AND uread.can_be_deleted='no' AND uwrite.can_be_deleted='no' AND ucreate.can_be_deleted='no' ORDER BY f.sort,f.id", true);
+            $i++;
             foreach ($res_subf as $ids => $sub_f) {
                 $forums[$i]["td_padding"]="style=\"padding-left:35px;\"";
                 $forums[$i]["name"]="<b>".unesc($sub_f["name"])."</b><br />".unesc($sub_f["description"]);
@@ -72,8 +72,8 @@ switch ($action) {
                 $forums[$i]["delete"]="<a onclick=\"return confirm('".AddSlashes($language["DELETE_CONFIRM"])."')\" href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=forum&amp;action=delete&amp;id=".$sub_f["id"]."\">".image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"])."</a>";
                 $i++;
             }
-              unset($res_subf);
-              unset($sub_f);
+            unset($res_subf);
+            unset($sub_f);
         }
         unset($resf);
         unset($result);
@@ -193,14 +193,14 @@ switch ($action) {
         $resforum=mysqli_query($GLOBALS['conn'], "SELECT *,IF((SELECT COUNT(*) FROM {$TABLE_PREFIX}forums WHERE id_parent=$id)>0,1,0) as i_am_parent FROM {$TABLE_PREFIX}forums WHERE id=$id");
 
         if ($_GET["confirm"]==1) {
-             mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}posts WHERE topicid IN (SELECT id FROM {$TABLE_PREFIX}topics WHERE forumid=$id)") or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-             mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}topics WHERE forumid=$id") or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-             mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}forums WHERE id=$id") or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
-             redirect("index.php?page=admin&user=".$CURUSER["uid"]."&code=".$CURUSER["random"]."&do=forum&action=read");
-             exit();
+            mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}posts WHERE topicid IN (SELECT id FROM {$TABLE_PREFIX}topics WHERE forumid=$id)") or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+            mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}topics WHERE forumid=$id") or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+            mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}forums WHERE id=$id") or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+            redirect("index.php?page=admin&user=".$CURUSER["uid"]."&code=".$CURUSER["random"]."&do=forum&action=read");
+            exit();
         }
         if ($resforum) {
-               $result=mysqli_fetch_assoc($resforum);
+            $result=mysqli_fetch_assoc($resforum);
             if ($result["i_am_parent"]) {
                 err_msg($language["WARNING"], $language["FORUM_ERR_CANNOT_DELETE_PARENT"]);
                 stdfoot(false, false, true);

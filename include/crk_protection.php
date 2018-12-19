@@ -131,9 +131,9 @@ if (is_array($_GET) && count($_GET)>0) {
     $cepl=implode(' ', $_GET);
 
     if (!empty($cepl)) {
-          $cepl=preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
-          $cepl=urldecode($cepl);
-          $cepl=strtolower($cepl);
+        $cepl=preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
+        $cepl=urldecode($cepl);
+        $cepl=strtolower($cepl);
     }
     foreach ($ban as $k => $l) {
         if (str_replace($k, '', $cepl)!=$cepl&&str_replace($l, '', $cepl)!=$cepl) {
@@ -148,9 +148,9 @@ if (is_array($_POST) && count($_POST)>0) {
     $cepl=implode(' ', $_POST);
 
     if (!empty($cepl)) {
-          $cepl=preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
-          $cepl=urldecode($cepl);
-          $cepl=strtolower($cepl);
+        $cepl=preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
+        $cepl=urldecode($cepl);
+        $cepl=strtolower($cepl);
     }
     foreach ($ban as $k => $l) {
         if (str_replace($k, '', $cepl)!=$cepl&&str_replace($l, '', $cepl)!=$cepl) {

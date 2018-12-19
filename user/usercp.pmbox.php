@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -222,7 +222,7 @@ switch ($action) {
 
             $usercptpl->set("MSG_EDIT", true, true);
 
-           // if new pm will give id=0 and empty array
+            // if new pm will give id=0 and empty array
             if (isset($_GET['id']) && $_GET['id']) {
                 $id=((int)0+$_GET['id']);
             } else {

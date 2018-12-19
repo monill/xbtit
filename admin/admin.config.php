@@ -32,11 +32,11 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 $admintpl->set("config_saved", false, true);
@@ -108,14 +108,14 @@ switch ($action) {
                     $xbt_in_db= [];
                     if ($res) {
                         while ($result=mysqli_fetch_row($res)) {
-                                 $xbt_in_db[]=$result[0];
+                            $xbt_in_db[]=$result[0];
                         }
                     }
                     $ad=array_diff($xbt_tables, $xbt_in_db);
                     // some xbtt tables missed!
                     if (count($ad)!=0) {
-                         $btit_settings["xbtt_use"]="false";
-                         $admintpl->set("xbtt_error", true, true);
+                        $btit_settings["xbtt_use"]="false";
+                        $admintpl->set("xbtt_error", true, true);
                     } else {
                         $btit_settings["xbtt_use"]="true";
                         $admintpl->set("xbtt_error", false, true);
@@ -135,12 +135,12 @@ switch ($action) {
                         $tp_present=false;
                         $tpv_present=false;
                         for ($i=0; $i<mysqli_num_fields($mf); $i++) {
-                                    $fn=mysqli_fetch_field_direct($mf, $i)->name;
+                            $fn=mysqli_fetch_field_direct($mf, $i)->name;
                             if ($fn=="torrent_pass") {
-                                   $tp_present=true;
+                                $tp_present=true;
                             }
                             if ($fn=="torrent_pass_version") {
-                                  $tpv_present=true;
+                                $tpv_present=true;
                             }
                         }
                         if (!$tp_present) {

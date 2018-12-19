@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -117,9 +117,9 @@ if ($action=="del") {
     if (!isset($_POST["conferma"])) {
     } elseif ($_POST["conferma"] == $language["FRM_CONFIRM"]) {
         if (isset($_POST["news"]) && isset($_POST["title"])) {
-             $news=$_POST["news"];
-             $uid=$CURUSER["uid"];
-             $title=$_POST["title"];
+            $news=$_POST["news"];
+            $uid=$CURUSER["uid"];
+            $title=$_POST["title"];
             if ($news=="" || $title=="") {
                 err_msg($language["ERROR"], $language["ERR_INS_TITLE_NEWS"]);
             } else {

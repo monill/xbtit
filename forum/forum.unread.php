@@ -31,12 +31,12 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 if (!defined("IN_BTIT_FORUM")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 

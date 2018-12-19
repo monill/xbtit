@@ -31,19 +31,18 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 function usertable($res, $frame_caption)
 {
-
     global $STYLEPATH, $extratpl, $language;
 
     $num = 0;
     $user= [];
     foreach ($res as $id => $a) {
-         $num++;
+        $num++;
 
         if ($a["downloaded"]>0) {
             $ratio = $a["uploaded"] / $a["downloaded"];
@@ -52,11 +51,11 @@ function usertable($res, $frame_caption)
             $ratio = $language["INFINITE"];
         }
 
-         $user[$num-1]["rank"]=$num;
-         $user[$num-1]["username"]=($a["id"]>1?"<a href=\"index.php?page=userdetails&amp;id=" . $a["id"] . "\"><b>" . $a["username"] ."</b></a>":"<b>" . $a["username"] ."</b>");
-         $user[$num-1]["uploaded"]=makesize($a["uploaded"]);
-         $user[$num-1]["downloaded"]=makesize($a["downloaded"]);
-         $user[$num-1]["ratio"]=$ratio;
+        $user[$num-1]["rank"]=$num;
+        $user[$num-1]["username"]=($a["id"]>1?"<a href=\"index.php?page=userdetails&amp;id=" . $a["id"] . "\"><b>" . $a["username"] ."</b></a>":"<b>" . $a["username"] ."</b>");
+        $user[$num-1]["uploaded"]=makesize($a["uploaded"]);
+        $user[$num-1]["downloaded"]=makesize($a["downloaded"]);
+        $user[$num-1]["ratio"]=$ratio;
     }
 
     $extratpl->set("language", $language);
@@ -66,7 +65,6 @@ function usertable($res, $frame_caption)
 
 function _torrenttable($rt, $frame_caption, $speed = false)
 {
-
     global $STYLEPATH, $extratpl, $language;
 
     $torrent= [];
@@ -176,12 +174,12 @@ if ($CURUSER["view_torrents"]=="yes") {
     }
 
     if (!$XBTT_USE) {
-           $r = get_result("SELECT f.info_hash as hash, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished, dlbytes as dwned , filename as name, url as url, info, speed as speed, uploader FROM $ttables WHERE external='no' ORDER BY speed DESC, $tseeds DESC LIMIT 10", true, $CACHE_DURATION);
+        $r = get_result("SELECT f.info_hash as hash, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished, dlbytes as dwned , filename as name, url as url, info, speed as speed, uploader FROM $ttables WHERE external='no' ORDER BY speed DESC, $tseeds DESC LIMIT 10", true, $CACHE_DURATION);
         if (count($r)>0) {
             $out.=_torrenttable($r, $language["TOP_10_BSPEED"], true);
             $out.= "<br /><br />";
         }
-           $r = get_result("SELECT f.info_hash as hash, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished, dlbytes as dwned , filename as name, url as url, info, speed as speed, uploader FROM $ttables WHERE external='no' ORDER BY speed ASC, $tseeds DESC LIMIT 10", true, $CACHE_DURATION);
+        $r = get_result("SELECT f.info_hash as hash, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished, dlbytes as dwned , filename as name, url as url, info, speed as speed, uploader FROM $ttables WHERE external='no' ORDER BY speed ASC, $tseeds DESC LIMIT 10", true, $CACHE_DURATION);
         if (count($r)>0) {
             $out.=_torrenttable($r, $language["TOP_10_WSPEED"], true);
             $out.= "<br /><br />";

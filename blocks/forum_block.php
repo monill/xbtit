@@ -112,7 +112,7 @@ if ($topics!=0) {
         }
         // --- Use the value defined in the site config or use 5 by default
         if (isset($GLOBALS["block_forumlimit"])) {
-               $limit="LIMIT " . $GLOBALS["block_forumlimit"];
+            $limit="LIMIT " . $GLOBALS["block_forumlimit"];
         } else {
             $limit="LIMIT 5";
         }

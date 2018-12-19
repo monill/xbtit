@@ -75,12 +75,12 @@ if ($CURUSER["view_torrents"]=="yes") {
     }
 
 
-/* there is already a my panel to edit profiles no need to waste space unless really needed in top menu*/
+    /* there is already a my panel to edit profiles no need to waste space unless really needed in top menu*/
 
-/*  just tidying up a little here */
+    /*  just tidying up a little here */
 
-/*print("<li><a href='#'>".$language['USER_MENU']."</a>\n");
-    print("<ul>\n");*/
+    /*print("<li><a href='#'>".$language['USER_MENU']."</a>\n");
+        print("<ul>\n");*/
 
     
     if ($CURUSER["view_users"]=="yes") {

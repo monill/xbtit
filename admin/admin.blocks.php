@@ -32,31 +32,31 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 
 function blocks_combo($current_block = "")
 {
-      global $THIS_BASEPATH, $language;
+    global $THIS_BASEPATH, $language;
 
-      $dir = @opendir("$THIS_BASEPATH/blocks/");
-      $ret="\n<select name=\"block_name\" size=\"1\">\n<option value=\"\" ".($current_block==""?"selected=\"selected\"":"").">".$language["SELECT"]."</option>";
+    $dir = @opendir("$THIS_BASEPATH/blocks/");
+    $ret="\n<select name=\"block_name\" size=\"1\">\n<option value=\"\" ".($current_block==""?"selected=\"selected\"":"").">".$language["SELECT"]."</option>";
     while ($file = @readdir($dir)) {
         if (@is_file("$THIS_BASEPATH/blocks/" . $file) && $file!="index.php") {
             $content=str_replace(["_block",".php"], "", $file);
             $ret.="\n<option value=\"$content\" ".($current_block==$content?"selected=\"selected\"":"").">$file</option>";
         }
     }
-      @closedir($dir);
-      $ret.="\n</select>";
+    @closedir($dir);
+    $ret.="\n</select>";
 
-      return $ret;
+    return $ret;
 }
 
 function read_blocks()
@@ -65,24 +65,24 @@ function read_blocks()
 
     require_once(load_language("lang_blocks.php"));
 
-      $br=get_result("SELECT * FROM {$TABLE_PREFIX}blocks ORDER BY sortid", true);
-      $tops= [];
-        $dropdown= [];
-        $extras= [];
-      $lefts= [];
-      $centers= [];
-      $rights= [];
-      $bottom= [];
-      $t=0;
-        $d=0;
-        $e=0;
-      $l=0;
-      $c=0;
-      $r=0;
-      $b=0;
+    $br=get_result("SELECT * FROM {$TABLE_PREFIX}blocks ORDER BY sortid", true);
+    $tops= [];
+    $dropdown= [];
+    $extras= [];
+    $lefts= [];
+    $centers= [];
+    $rights= [];
+    $bottom= [];
+    $t=0;
+    $d=0;
+    $e=0;
+    $l=0;
+    $c=0;
+    $r=0;
+    $b=0;
 
-      $rlevel=mysqli_query($GLOBALS['conn'], "SELECT DISTINCT id_level, predef_level, level FROM {$TABLE_PREFIX}users_level ORDER BY id_level");
-      $alevel= [];
+    $rlevel=mysqli_query($GLOBALS['conn'], "SELECT DISTINCT id_level, predef_level, level FROM {$TABLE_PREFIX}users_level ORDER BY id_level");
+    $alevel= [];
     while ($reslevel=mysqli_fetch_assoc($rlevel)) {
         $alevel[]=$reslevel;
     }
@@ -347,25 +347,25 @@ function read_blocks()
                 break;
         }
     }
-      unset($br);
-      $admintpl->set("frm_action", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=blocks&amp;action=save");
-      $admintpl->set("top_blocks", $t>0, true);
-        $admintpl->set("dropdown_blocks", $d>0, true);
-        $admintpl->set("extra_blocks", $e>0, true);
-      $admintpl->set("left_blocks", $l>0, true);
-      $admintpl->set("center_blocks", $c>0, true);
-      $admintpl->set("right_blocks", $r>0, true);
-      $admintpl->set("bottom_blocks", $b>0, true);
-      $admintpl->set("tops", $tops);
-        $admintpl->set("dropdown", $dropdown);
-        $admintpl->set("extras", $extras);
-      $admintpl->set("lefts", $lefts);
-      $admintpl->set("centers", $centers);
-      $admintpl->set("rights", $rights);
-      $admintpl->set("bottoms", $bottom);
-      $admintpl->set("language", $language);
-      $admintpl->set("edit_block", false, true);
-      $admintpl->set("add_new_block", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=blocks&amp;action=edit");
+    unset($br);
+    $admintpl->set("frm_action", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=blocks&amp;action=save");
+    $admintpl->set("top_blocks", $t>0, true);
+    $admintpl->set("dropdown_blocks", $d>0, true);
+    $admintpl->set("extra_blocks", $e>0, true);
+    $admintpl->set("left_blocks", $l>0, true);
+    $admintpl->set("center_blocks", $c>0, true);
+    $admintpl->set("right_blocks", $r>0, true);
+    $admintpl->set("bottom_blocks", $b>0, true);
+    $admintpl->set("tops", $tops);
+    $admintpl->set("dropdown", $dropdown);
+    $admintpl->set("extras", $extras);
+    $admintpl->set("lefts", $lefts);
+    $admintpl->set("centers", $centers);
+    $admintpl->set("rights", $rights);
+    $admintpl->set("bottoms", $bottom);
+    $admintpl->set("language", $language);
+    $admintpl->set("edit_block", false, true);
+    $admintpl->set("add_new_block", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=blocks&amp;action=edit");
 }
 
 function position_combo($current = "l")
@@ -373,8 +373,8 @@ function position_combo($current = "l")
     global $language;
     $ret="\n<select name=\"block_position\" size=\"1\">";
     $ret.="\n<option value=\"t\" ".($current=="t"?"selected=\"selected\"":"").">".$language["TOP"]."</option>";
-      $ret.="\n<option value=\"d\" ".($current=="d"?"selected=\"selected\"":"").">".$language["DROPDOWN"]."</option>";
-      $ret.="\n<option value=\"e\" ".($current=="e"?"selected=\"selected\"":"").">".$language["EXTRA"]."</option>";
+    $ret.="\n<option value=\"d\" ".($current=="d"?"selected=\"selected\"":"").">".$language["DROPDOWN"]."</option>";
+    $ret.="\n<option value=\"e\" ".($current=="e"?"selected=\"selected\"":"").">".$language["EXTRA"]."</option>";
     $ret.="\n<option value=\"l\" ".($current=="l"?"selected=\"selected\"":"").">".$language["LEFT"]."</option>";
     $ret.="\n<option value=\"c\" ".($current=="c"?"selected=\"selected\"":"").">".$language["CENTER"]."</option>";
     $ret.="\n<option value=\"r\" ".($current=="r"?"selected=\"selected\"":"").">".$language["RIGHT"]."</option>";
@@ -466,13 +466,13 @@ switch ($action) {
         if ($_POST["confirm"]==$language["FRM_CONFIRM"]) {
             $br=get_result("SELECT * FROM {$TABLE_PREFIX}blocks", true);
             foreach ($br as $id => $block) {
-                  $active=(isset($_POST["status_".$block["blockid"]])?1:0);
-                  $position=sqlesc($_POST["position_".$block["blockid"]]);
-                  $sort=max(0, $_POST["sort_".$block["blockid"]]);
-                  $block_minview=sqlesc(((int)$_POST["minclassview_".$block["blockid"]]));
-                  $block_maxview=sqlesc(((int)$_POST["maxclassview_".$block["blockid"]]));
-                  $id=$block["blockid"];
-                  do_sqlquery("UPDATE {$TABLE_PREFIX}blocks SET position=$position, sortid=$sort, status=$active, minclassview=$block_minview, maxclassview=$block_maxview WHERE blockid=$id", true);
+                $active=(isset($_POST["status_".$block["blockid"]])?1:0);
+                $position=sqlesc($_POST["position_".$block["blockid"]]);
+                $sort=max(0, $_POST["sort_".$block["blockid"]]);
+                $block_minview=sqlesc(((int)$_POST["minclassview_".$block["blockid"]]));
+                $block_maxview=sqlesc(((int)$_POST["maxclassview_".$block["blockid"]]));
+                $id=$block["blockid"];
+                do_sqlquery("UPDATE {$TABLE_PREFIX}blocks SET position=$position, sortid=$sort, status=$active, minclassview=$block_minview, maxclassview=$block_maxview WHERE blockid=$id", true);
             }
         }
         // don't break, we read the new block's position ;)

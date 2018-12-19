@@ -33,7 +33,7 @@
 
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -155,7 +155,7 @@ if ($count>0) {
     // getting order
     $order_param=3;
     if (isset($_GET["order"])) {
-         $order_param=(int)$_GET["order"];
+        $order_param=(int)$_GET["order"];
         switch ($order_param) {
             case 1:
                 $order="cname";
@@ -212,7 +212,7 @@ if ($count>0) {
         $query = "SELECT f.info_hash as hash, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished,  f.dlbytes as dwned , IFNULL(f.filename,'') AS filename, f.url, f.info, f.speed, UNIX_TIMESTAMP( f.data ) as added, c.image, c.name as cname, f.category as catid, f.size, f.external, f.uploader FROM $ttables LEFT JOIN {$TABLE_PREFIX}categories c ON c.id = f.category $where ORDER BY $qry_order $by $limit";
     }
     // End the queries
-       $results = get_result($query, true, $btit_settings['cache_duration']);
+    $results = get_result($query, true, $btit_settings['cache_duration']);
 }
 
 
@@ -290,7 +290,7 @@ if ($count>0) {
             $torrents[$i]["filename"]="<a href=\"index.php?page=torrent-details&amp;id=".$data["hash"]."\" title=\"".$language["VIEW_DETAILS"].": ".$data["filename"]."\">".($data["filename"]!=""?$filename:$data["hash"])."</a>".($data["external"]=="no"?"":" (<span style=\"color:red\">EXT</span>)");
         }
 
-       // search for comments
+        // search for comments
         if ($btit_settings["comment"]==true) {
             $commentres = get_result("SELECT COUNT(*) as comments FROM {$TABLE_PREFIX}comments WHERE info_hash='" . $data["hash"] . "'", true);
             $commentdata = $commentres[0];
@@ -306,12 +306,12 @@ if ($count>0) {
             }
         }
 
-       // Rating
+        // Rating
         if ($btit_settings["rating"]==true) {
             $vres = get_result("SELECT sum(rating) as totrate, count(*) as votes FROM {$TABLE_PREFIX}ratings WHERE infohash = '" . $data["hash"] . "'", true);
             $vrow = $vres[0];
             if ($vrow && $vrow["votes"]>=1) {
-                 $totrate=round($vrow["totrate"]/$vrow["votes"], 1);
+                $totrate=round($vrow["totrate"]/$vrow["votes"], 1);
                 if ($totrate==5) {
                     $totrate="<img src=\"$STYLEURL/images/5.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\" alt=\"\" />";
                 } elseif ($totrate>4.4 && $totrate<5) {
@@ -337,34 +337,34 @@ if ($count>0) {
 
             $torrents[$i]["rating"]="$totrate";
         }
-       // end rating
+        // end rating
 
-       //waitingtime
-       // display only if the curuser have some WT restriction
+        //waitingtime
+        // display only if the curuser have some WT restriction
         if (((int)$CURUSER["WT"])>0) {
-             $wait=0;
-             //$resuser=get_result("SELECT * FROM {$TABLE_PREFIX}users WHERE id=".$CURUSER["uid"],true,$CACHE_DURATION);
-             //$rowuser=$resuser[0];
-             $wait=0;
+            $wait=0;
+            //$resuser=get_result("SELECT * FROM {$TABLE_PREFIX}users WHERE id=".$CURUSER["uid"],true,$CACHE_DURATION);
+            //$rowuser=$resuser[0];
+            $wait=0;
             if (((int)$CURUSER['downloaded'])>0) {
                 $ratio=number_format($CURUSER['uploaded']/$CURUSER['downloaded'], 2);
             } else {
                 $ratio=0.0;
             }
-             $vz = $data["added"];
-             $timer = floor((time() - $vz) / 3600);
+            $vz = $data["added"];
+            $timer = floor((time() - $vz) / 3600);
             if ($ratio<1.0 && $CURUSER['uid']!=$data["uploader"]) {
                 $wait=$CURUSER["WT"];
             }
-             $wait -=$timer;
+            $wait -=$timer;
 
             if ($wait<=0) {
                 $wait=0;
             }
             if (strlen($data["hash"]) > 0) {
-                 $torrents[$i]["waiting"]=($wait>0?$wait." h":"---");
+                $torrents[$i]["waiting"]=($wait>0?$wait." h":"---");
             }
-           //end waitingtime
+            //end waitingtime
         } else {
             $torrents[$i]["waiting"]="";
         }
@@ -376,13 +376,13 @@ if ($count>0) {
         $torrents[$i]["added"]=date("d/m/Y", $data["added"]-$offset); // data
         $torrents[$i]["size"]=makesize($data["size"]);
 
-       //Uploaders nick details
+        //Uploaders nick details
         if ($SHOW_UPLOADER && $data["anonymous"] == "true") {
             $torrents[$i]["uploader"]=$language["ANONYMOUS"];
         } elseif ($SHOW_UPLOADER && $data["anonymous"] == "false") {
             $torrents[$i]["uploader"]="<a href=\"index.php?page=userdetails&amp;id=" . $data["upname"] . "\">".StripSlashes($data['prefixcolor'].$data["uploader"].$data['suffixcolor'])."</a>";
         }
-      //Uploaders nick details
+        //Uploaders nick details
 
         if ($data["external"]=="no") {
             if ($GLOBALS["usepopup"]) {
@@ -427,7 +427,7 @@ if ($count>0) {
         if (!$XBTT_USE) {
             if ($data["speed"] < 0 || $data["external"]=="yes") {
                 $speed = $language["NA"];
-            } else if ($data["speed"] > 2097152) {
+            } elseif ($data["speed"] > 2097152) {
                 $speed = round($data["speed"]/1048576, 2) . " MB/sec";
             } else {
                 $speed = round($data["speed"] / 1024, 2) . " KB/sec";
@@ -435,20 +435,20 @@ if ($count>0) {
         }
         $torrents[$i]["speed"]=$speed;
 
-      // progress
+        // progress
         if ($data["external"]=="yes") {
             $prgsf=$language["NA"];
         } else {
-             $id = $data['hash'];
+            $id = $data['hash'];
             if ($XBTT_USE) {
                 $subres = get_result("SELECT sum(IFNULL(xfu.left,0)) as to_go, count(xfu.uid) as numpeers FROM xbt_files_users xfu INNER JOIN xbt_files xf ON xf.fid=xfu.fid WHERE xf.info_hash=UNHEX('$id') AND xfu.active=1", true, $btit_settings['cache_duration']);
             } else {
                 $subres = get_result("SELECT sum(IFNULL(bytes,0)) as to_go, count(*) as numpeers FROM {$TABLE_PREFIX}peers where infohash='$id'", true, $btit_settings['cache_duration']);
             }
-             $subres2 = get_result("SELECT size FROM {$TABLE_PREFIX}files WHERE info_hash ='$id'", true, $btit_settings['cache_duration']);
-             $torrent = $subres2[0];
-             $subrow = $subres[0];
-             $tmp=0+$subrow["numpeers"];
+            $subres2 = get_result("SELECT size FROM {$TABLE_PREFIX}files WHERE info_hash ='$id'", true, $btit_settings['cache_duration']);
+            $torrent = $subres2[0];
+            $subrow = $subres[0];
+            $tmp=0+$subrow["numpeers"];
             if ($tmp>0) {
                 $tsize=(0+$torrent["size"])*$tmp;
                 $tbyte=0+$subrow["to_go"];
@@ -457,7 +457,7 @@ if ($count>0) {
             } else {
                 $prgsf=0;
             }
-               $prgsf.="%";
+            $prgsf.="%";
         }
         $torrents[$i]["average"]=$prgsf;
 

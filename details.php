@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -44,13 +44,13 @@ if (!isset($id) || !$id) {
 require_once(load_language("lang_torrents.php"));
 
 if (isset($_GET["act"]) && $_GET["act"]=="update") {
-       //die("<center>".$language["TORRENT_UPDATE"]."</center>");
-       require_once(__DIR__."/include/getscrape.php");
+    //die("<center>".$language["TORRENT_UPDATE"]."</center>");
+    require_once(__DIR__."/include/getscrape.php");
 
-       scrape(urldecode($_GET["surl"]), $id);
+    scrape(urldecode($_GET["surl"]), $id);
 
-       redirect("index.php?page=torrent-details&id=$id");
-       exit();
+    redirect("index.php?page=torrent-details&id=$id");
+    exit();
 }
 
 
@@ -218,8 +218,8 @@ if (file_exists($row["url"])) {
             // can't be but...
         }
     }
-     $row["numfiles"]=$numfiles.($numfiles==1?" file":" files");
-     unset($content);
+    $row["numfiles"]=$numfiles.($numfiles==1?" file":" files");
+    unset($content);
 } else {
     $torrenttpl->set("DISPLAY_FILES", false, true);
 }
@@ -244,7 +244,7 @@ $row["uploader"]=$uploader;
 
 if ($row["speed"] < 0) {
     $speed = "N/D";
-} else if ($row["speed"] > 2097152) {
+} elseif ($row["speed"] > 2097152) {
     $speed = round($row["speed"]/1048576, 2) . " MB/sec";
 } else {
     $speed = round($row["speed"] / 1024, 2) . " KB/sec";
@@ -265,11 +265,11 @@ if (($XBTT_USE && !$PRIVATE_ANNOUNCE) || $row["external"]=="yes") {
     $row["leechers"]=$language["LEECHERS"].": <a href=\"index.php?page=peers&amp;id=".$row["info_hash"]."\">" . $row["leechers"] ."</a>";
 }
 if ($row["external"]=="yes") {
-     $torrenttpl->set("EXTERNAL", true, true);
-     $row["update_url"]="<a href=\"index.php?page=torrent-details&amp;act=update&amp;id=".$row["info_hash"]."&amp;surl=".urlencode($row["announce_url"])."\">".$language["UPDATE"]."</a>";
-     $row["announce_url"]="<b>".$language["EXTERNAL"]."</b><br />".$row["announce_url"];
-     $row["lastupdate"]=get_date_time($row["lastupdate"]);
-     $row["lastsuccess"]=get_date_time($row["lastsuccess"]);
+    $torrenttpl->set("EXTERNAL", true, true);
+    $row["update_url"]="<a href=\"index.php?page=torrent-details&amp;act=update&amp;id=".$row["info_hash"]."&amp;surl=".urlencode($row["announce_url"])."\">".$language["UPDATE"]."</a>";
+    $row["announce_url"]="<b>".$language["EXTERNAL"]."</b><br />".$row["announce_url"];
+    $row["lastupdate"]=get_date_time($row["lastupdate"]);
+    $row["lastsuccess"]=get_date_time($row["lastsuccess"]);
 } else {
     $torrenttpl->set("EXTERNAL", false, true);
 }
@@ -285,27 +285,27 @@ if (!$subres || count($subres)===0) {
 
     $torrenttpl->set('NO_COMMENTS', true, true);
 } else {
-     $torrenttpl->set('NO_COMMENTS', false, true);
+    $torrenttpl->set('NO_COMMENTS', false, true);
 
     if ($CURUSER['uid']>1) {
         $torrenttpl->set('INSERT_COMMENT', true, true);
     } else {
         $torrenttpl->set('INSERT_COMMENT', false, true);
     }
-     $comments= [];
-     $count=0;
+    $comments= [];
+    $count=0;
     foreach ($subres as $subrow) {
         $comments[$count]['user']="<a href=\"index.php?page=userdetails&amp;id=".$subrow["uid"]."\">" . unesc($subrow['user']);
         $comments[$count]['date']=date("d/m/Y H.i.s", $subrow["data"]-$offset);
-       // only users able to delete torrents can delete comments...
+        // only users able to delete torrents can delete comments...
         if ($CURUSER['delete_torrents']==="yes") {
             $comments[$count]['delete']="<a onclick=\"return confirm('". str_replace("'", "\'", $language["DELETE_CONFIRM"])."')\" href=\"index.php?page=comment&amp;id=$id&amp;cid=" . $subrow["id"] . "&amp;action=delete\">".image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"])."</a>";
         }
         $comments[$count]['comment']=format_comment($subrow["text"]);
         $count++;
     }
-     unset($subrow);
-     unset($subres);
+    unset($subrow);
+    unset($subres);
 }
 
 $torrenttpl->set("current_username", $CURUSER["username"]);

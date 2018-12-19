@@ -33,11 +33,11 @@
 // - baterist BTIT v1.2 SearchDiff Hack v0.3
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -46,7 +46,6 @@ $uid= $CURUSER['uid'];
 
 function report($id, $name, $down, $up, $rank, $first, $last)
 {
-
     global $CURUSER, $language;
 
     if ($down > 0) {
@@ -133,12 +132,12 @@ $admintpl->set("search_value", $diff);
 if ($changeug=="Work" && isset($_POST["uyedegis"])) {
     $dis="";
     if ($grupdegis=="evet") {
-         $dis.="<div align=\"center\">";
+        $dis.="<div align=\"center\">";
         foreach ($_POST["uyedegis"] as $uyedegis => $degeri) {
             do_sqlquery("UPDATE {$TABLE_PREFIX}users SET id_level='".$kullan1."' WHERE id='".$degeri."'");
             $dis.="User <b>".$degeri."</b> ID LEVEL has changed to <b>".$kullan1."</b><br />";
         }
-         $dis.="</div>";
+        $dis.="</div>";
     }
 
     if ($mesajat=="evet") {

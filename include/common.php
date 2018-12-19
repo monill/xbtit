@@ -741,7 +741,7 @@ function getagent($httpagent, $peer_id = '')
         for ($i=0; $i<=strlen(substr($peer_id, 4, 9)); $i++) {
             $c = $peer_id[$i+4];
             if (ctype_alnum($c) || $c == chr(0)) {
-                            $rufus_chk = true;
+                $rufus_chk = true;
             } else {
                 break;
             }

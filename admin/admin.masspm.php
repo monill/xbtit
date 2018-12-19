@@ -121,9 +121,9 @@ switch ($action) {
                 if ($flevel==0||$tlevel==0) {
                     # selected all
                     $where='WHERE u.id>1';
-                        $rank_details='in all '.$language['USER_LEVEL'].'s';
+                    $rank_details='in all '.$language['USER_LEVEL'].'s';
                 } else {
-                  # get id_level names
+                    # get id_level names
                     $where='id_level='.$flevel;
                     if ($flevel==$tlevel) {
                         $limit=1;
@@ -149,7 +149,7 @@ switch ($action) {
                         $rank_details='in '.$language['USER_LEVEL'].' <b>('.$levels[$flevel].')</b>';
                     }
                 }
-                  # correct ratio value
+                # correct ratio value
                 if ($XBTT_USE) {
                     $tables=$TABLE_PREFIX.'users u LEFT JOIN xbt_users x ON x.uid=u.id';
                     if ($ratio) {
@@ -161,10 +161,10 @@ switch ($action) {
                         $where.=' AND ((u.uploaded)/(u.downloaded=0))'.$pick;
                     }
                 }
-                  # get data
-                    $pm_users=get_result('SELECT u.id, u.username FROM '.$tables.' '.$where, true);
-                    $i=0;
-                  # revamp data
+                # get data
+                $pm_users=get_result('SELECT u.id, u.username FROM '.$tables.' '.$where, true);
+                $i=0;
+                # revamp data
                 foreach ($pm_users as $cur) {
                     if ((!$pm_sender) && $cur['id']==$CURUSER['uid']) {
                         continue;
@@ -177,13 +177,13 @@ switch ($action) {
                         $l_users[] ='<a href="'.$BASEURL.'/index.php?page=userdetails&amp;id='.$cur['id'].'">'.$cur['username'].'</a>';
                     }
                 }
-                  # set output vars
-                    $block_title=$language['MASS_SENT'];
-                    $masspm_post=true;
-                    $masspm['subject']=$original_subject;
-                    $masspm['body']=format_comment($original_msg);
-                    $masspm['info']='<b>'.$i.'</b> '.$language['USERS_FOUND'].' '.$rank_details.' '.$ratio_d.' !! '.((!$pm)?' [ DEBUG MODE ] ':'').'<br /><br />'.$language['USERS_PMED'].'<br />'.implode(' - ', $l_users);
-                    break;
+                # set output vars
+                $block_title=$language['MASS_SENT'];
+                $masspm_post=true;
+                $masspm['subject']=$original_subject;
+                $masspm['body']=format_comment($original_msg);
+                $masspm['info']='<b>'.$i.'</b> '.$language['USERS_FOUND'].' '.$rank_details.' '.$ratio_d.' !! '.((!$pm)?' [ DEBUG MODE ] ':'').'<br /><br />'.$language['USERS_PMED'].'<br />'.implode(' - ', $l_users);
+                break;
             }
         }
 

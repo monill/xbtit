@@ -31,11 +31,11 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined('IN_BTIT')) {
-      die('non direct access!');
+    die('non direct access!');
 }
 
 if (!defined('IN_ACP')) {
-      die('non direct access!');
+    die('non direct access!');
 }
 
 
@@ -63,11 +63,11 @@ switch ($action) {
             $firstip = sprintf('%u', ip2long($firstip));
             $lastip = sprintf('%u', ip2long($lastip));
             if ($firstip === -1 || $lastip === -1) {
-                 err_msg($language['ERROR'], $language['BAN_IP_ERROR']);
+                err_msg($language['ERROR'], $language['BAN_IP_ERROR']);
             } else {
-                 $comment = sqlesc($comment);
-                 $added = sqlesc(time());
-                 do_sqlquery("INSERT INTO {$TABLE_PREFIX}bannedip (added, addedby, first, last, comment) VALUES($added, $CURUSER[uid], $firstip, $lastip, $comment)", true);
+                $comment = sqlesc($comment);
+                $added = sqlesc(time());
+                do_sqlquery("INSERT INTO {$TABLE_PREFIX}bannedip (added, addedby, first, last, comment) VALUES($added, $CURUSER[uid], $firstip, $lastip, $comment)", true);
             }
         }
     // don't break, so now we read directly ;)

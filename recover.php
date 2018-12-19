@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -55,7 +55,7 @@ if ($act == "takerecover") {
     $arr = mysqli_fetch_assoc($res) or stderr($language["ERROR"], $language["ERR_EMAIL_NOT_FOUND_1"]." <b>$email</b> ".$language["ERR_EMAIL_NOT_FOUND_2"]);
     if ($USE_IMAGECODE) {
         if (extension_loaded('gd')) {
-             $arr_gd = gd_info();
+            $arr_gd = gd_info();
             if ($arr_gd['FreeType Support']==1) {
                 $public=$_POST['public_key'];
                 $private=$_POST['private_key'];
@@ -66,8 +66,8 @@ if ($act == "takerecover") {
                     stderr($language["ERROR"], $language["ERR_IMAGE_CODE"]);
                 }
             } else {
-                 include("$THIS_BASEPATH/include/security_code.php");
-                 $scode_index=((int)$_POST["security_index"]);
+                include("$THIS_BASEPATH/include/security_code.php");
+                $scode_index=((int)$_POST["security_index"]);
                 if ($security_code[$scode_index]["answer"]!=$_POST["scode_answer"]) {
                     err_msg($language["ERROR"], $language["ERR_IMAGE_CODE"]);
                     stdfoot();
@@ -76,7 +76,7 @@ if ($act == "takerecover") {
             }
         } else {
             include("$THIS_BASEPATH/include/security_code.php");
-                $scode_index=((int)$_POST["security_index"]);
+            $scode_index=((int)$_POST["security_index"]);
             if ($security_code[$scode_index]["answer"]!=$_POST["scode_answer"]) {
                 err_msg($language["ERROR"], $language["ERR_IMAGE_CODE"]);
                 stdfoot();

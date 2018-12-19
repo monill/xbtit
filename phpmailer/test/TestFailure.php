@@ -1,22 +1,22 @@
 <?php
 class TestFailure
 {
-  /* Record failure of a single TestCase, associating it with the
-     exception(s) that occurred */
-    var $fFailedTestName;
-    var $fExceptions;
+    /* Record failure of a single TestCase, associating it with the
+       exception(s) that occurred */
+    public $fFailedTestName;
+    public $fExceptions;
 
-    function TestFailure(&$test, &$exceptions)
+    public function TestFailure(&$test, &$exceptions)
     {
         $this->fFailedTestName = $test->name();
         $this->fExceptions = $exceptions;
     }
 
-    function getExceptions()
+    public function getExceptions()
     {
         return $this->fExceptions;
     }
-    function getTestName()
+    public function getTestName()
     {
         return $this->fFailedTestName;
     }

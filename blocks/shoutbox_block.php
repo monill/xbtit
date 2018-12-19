@@ -172,7 +172,7 @@ function format_shout($text)
 
 function smile()
 {
-?>
+    ?>
 <div align="center">
   <table cellpadding="1" cellspacing="1">
   <tr>
@@ -184,8 +184,7 @@ function smile()
     while ((list($code, $url) = each($smilies)) && $count<20) {
         print("\n<td><a href=\"javascript: SmileIT('".str_replace("'", "\'", $code)."')\"><img border=\"0\" src=\"images/smilies/$url\" alt=\"$code\" /></a></td>");
         $count++;
-    }
-    ?>
+    } ?>
   </tr>
   </table>
 </div>
@@ -221,7 +220,7 @@ $msg = [];
 function file_save($filename, $content, $flags = 0)
 {
     if (!($file = fopen($filename, 'w'))) {
-         return false;
+        return false;
     }
     $n = fwrite($file, $content);
     fclose($file);
@@ -261,7 +260,7 @@ for ($i=0; $i<10 && $i<count($msg2); ++$i) {
     $sql="SELECT u.id as uid,prefixcolor,suffixcolor FROM {$TABLE_PREFIX}users u INNER JOIN {$TABLE_PREFIX}users_level ul ON ul.id_level=u.id_level WHERE u.username='".$msg2[$i]['pseudo']."'";
     $res = do_sqlquery($sql);
     $result=mysqli_fetch_assoc($res);
-  // user or level don't exit in db
+    // user or level don't exit in db
     if (!$result) {
         echo '<b>'.'</b>&nbsp;&nbsp;&nbsp;['.date("d/m/y H:i", $msg2[$i]['date']-$offset).']'.'&nbsp;&nbsp;<b>'.$msg2[$i]['pseudo'].'</b>:&nbsp;&nbsp;&nbsp;'.format_shout($msg2[$i]['texte']).'<hr>';
     } else {
@@ -278,13 +277,12 @@ unset($_POST['pseudo']);
 unset($_POST['mess']);
 
 if ($CURUSER["uid"]>1) {
-/*
-header("Expires: Mon, 1 Jan 1990 01:00:00 GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-*/
-?>
+    /*
+    header("Expires: Mon, 1 Jan 1990 01:00:00 GMT");
+    header("Cache-Control: no-store, no-cache, must-revalidate");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+    */ ?>
 <div class="miniform" align="center">
 <form method="post" name="shout" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
 <input type="hidden" name="pseudo" value="<?php echo $CURUSER["username"]?>" /><br />
@@ -294,26 +292,25 @@ header("Pragma: no-cache");
 <input name="submit" type="submit" value="<?php echo $language["FRM_REFRESH"]; ?>" />&nbsp;&nbsp;
 <?php
 $messages = count($msg);
-if ($messages > 0) {
-    if ($CURUSER["edit_torrents"]=="yes") {
-        ?>
+    if ($messages > 0) {
+        if ($CURUSER["edit_torrents"]=="yes") {
+            ?>
         <input type="submit" name="action" value="<?php echo $language["FRM_CLEAN"]; ?>" /> &nbsp; &nbsp; &nbsp;<a href="javascript: Pophistory()"><?php echo $language["HISTORY"]; ?></a>
     <?php
     if (isset($_POST['action']) && $_POST['action'] == 'Clean') {
         clean_shoutbox();
     }
-    } else {
-        ?>
+        } else {
+            ?>
         <a href="javascript: Pophistory()"><?php echo $language["HISTORY"]; ?></a>
     <?php
-    }
-}
-?>
+        }
+    } ?>
 </form>
 </div>
 <?php
 } else {
-    print("<div align=\"center\"><a href=\"javascript: Pophistory()\">".$language["HISTORY"]."</a>\n<br />".$language["ERR_MUST_BE_LOGGED_SHOUT"]."</div>");
-}
+        print("<div align=\"center\"><a href=\"javascript: Pophistory()\">".$language["HISTORY"]."</a>\n<br />".$language["ERR_MUST_BE_LOGGED_SHOUT"]."</div>");
+    }
 block_end();
 ?>

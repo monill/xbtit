@@ -32,12 +32,12 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 if (!defined("IN_BTIT_FORUM")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -155,7 +155,7 @@ switch ($action) {
 
             $posts[$pn]["date"]=get_date_time($arr["added"]);
             $posts[$pn]["elapsed"]="(".get_elapsed_time($arr["added"]) . " ago)";
-            $posts[$pn]["avatar"]="<img onload=\"resize_avatar(this);\" src=\"".($arr["avatar"] && $arr["avatar"] != "" ? htmlspecialchars($arr["avatar"]): "$STYLEURL/images/default_avatar.gif" )."\" alt=\"\" />";
+            $posts[$pn]["avatar"]="<img onload=\"resize_avatar(this);\" src=\"".($arr["avatar"] && $arr["avatar"] != "" ? htmlspecialchars($arr["avatar"]): "$STYLEURL/images/default_avatar.gif")."\" alt=\"\" />";
             $posts[$pn]["user_group"]=$arr["user_group"];
             $posts[$pn]["flag"]="<img src=\"images/flag/".($arr["flagpic"] && $arr["flagpic"]!=""?$arr["flagpic"]:"unknown.gif")."\" alt=\"".($arr["name"] && $arr["name"]!=""?$arr["name"]:"unknown")."\" />";
             $posts[$pn]["ratio"]=(((int)$arr['downloaded']) > 0?number_format($arr['uploaded'] / $arr['downloaded'], 2):"---");
@@ -284,12 +284,12 @@ switch ($action) {
             $userid = ((int)$CURUSER["uid"]);
 
             if ($newtopic) {
-              //---- Create topic
+                //---- Create topic
                 $add_topic_count=", topiccount=topiccount+1";
                 do_sqlquery("INSERT INTO {$TABLE_PREFIX}topics (userid, forumid, subject) VALUES($userid, $forumid, $subject)", true);
                 $topicid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS['conn']))) ? false : $___mysqli_res) or stderr($language["ERROR"], $language["ERR_NO_TOPIC_ID"]);
             } else {
-              //---- Make sure topic exists and is unlocked
+                //---- Make sure topic exists and is unlocked
                 if ($aut[0]["locked"] == 'yes' && $CURUSER["edit_forum"] != "yes") {
                     stderr($language["ERROR"], $language["ERR_TOPIC_LOCKED"]);
                 }

@@ -32,7 +32,7 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -52,9 +52,9 @@ if ($_GET["cid"]) {
 
 if ($_GET["action"]) {
     if ($CURUSER["delete_torrents"]==="yes" && $_GET["action"]==="delete") {
-         do_sqlquery("DELETE FROM {$TABLE_PREFIX}comments WHERE id=$cid", true);
-         redirect("index.php?page=torrent-details&id=$id#comments");
-         exit;
+        do_sqlquery("DELETE FROM {$TABLE_PREFIX}comments WHERE id=$cid", true);
+        redirect("index.php?page=torrent-details&id=$id#comments");
+        exit;
     }
 }
 
@@ -82,14 +82,14 @@ if ($_POST["info_hash"]) {
             die();
         }
     }
-# Comment preview by miskotes
-#############################
+    # Comment preview by miskotes
+    #############################
 
     if ($_POST["confirm"] === $language["FRM_PREVIEW"]) {
         $tpl_comment->set("PREVIEW", true, true);
         $tpl_comment->set("comment_preview", set_block($language["COMMENT_PREVIEW"], "center", format_comment($comment), false));
 
-        #####################
+    #####################
         # Comment preview end
     } else {
         redirect("index.php?page=torrent-details&id=" . stripslashes($_POST["info_hash"])."#comments");

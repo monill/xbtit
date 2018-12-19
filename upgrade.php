@@ -58,31 +58,31 @@ $GLOBALS["btit_installer"]       = "xbtit Upgrade ::";
 load_lang_file();
 
 // starting main page
-echo ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
-echo ("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
-echo ("<head>");
-echo ("<meta http-equiv=\"content-type\" content=\"text/html; charset=".(isset($install_lang["charset"])?$install_lang["charset"]:"ISO-8859-1")."\" />");
-echo ("<title>".$GLOBALS["btit_installer"]."&nbsp;".$GLOBALS["current_btit_version"]."</title>");
-echo ("<link href=\"style/xbtit_default/css/bootstrap.css\" rel=\"stylesheet\">");
-echo ("<link href=\"style/xbtit_default/css/modern.css\" rel=\"stylesheet\">");
-echo ("<link href=\"style/xbtit_default/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">");
-echo ("<!--[if lt IE 9]> <script src=\"https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js\"></script><script src=\"https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js\"></script><![endif]-->");
-echo ("</head>");
-echo ("<body>");
-echo ("<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">");
-echo ("<div class=\"container\">");
-echo ("<div class=\"navbar-header\">");
-echo ("<a class=\"navbar-brand\" href=\"index.php\">XBTIT</a>");
-echo ("</div>");
-echo ("<div class=\"container\">");
-echo ("</nav>");
-echo ("<div class=\"row\">");
+echo("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
+echo("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
+echo("<head>");
+echo("<meta http-equiv=\"content-type\" content=\"text/html; charset=".(isset($install_lang["charset"])?$install_lang["charset"]:"ISO-8859-1")."\" />");
+echo("<title>".$GLOBALS["btit_installer"]."&nbsp;".$GLOBALS["current_btit_version"]."</title>");
+echo("<link href=\"style/xbtit_default/css/bootstrap.css\" rel=\"stylesheet\">");
+echo("<link href=\"style/xbtit_default/css/modern.css\" rel=\"stylesheet\">");
+echo("<link href=\"style/xbtit_default/font-awesome/css/font-awesome.min.css\" rel=\"stylesheet\" type=\"text/css\">");
+echo("<!--[if lt IE 9]> <script src=\"https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js\"></script><script src=\"https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js\"></script><![endif]-->");
+echo("</head>");
+echo("<body>");
+echo("<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">");
+echo("<div class=\"container\">");
+echo("<div class=\"navbar-header\">");
+echo("<a class=\"navbar-brand\" href=\"index.php\">XBTIT</a>");
+echo("</div>");
+echo("<div class=\"container\">");
+echo("</nav>");
+echo("<div class=\"row\">");
 //echo ("<div class=\"col-md-8\">");
-echo ("<div class=\"panel panel-default\">");
-echo ("<div class=\"panel-heading\">");
-echo ("<h4><i class=\"fa fa-fw fa-cogs\"></i>XBTIT Installation</h4>");
-echo ("</div>");
-echo ("<div class=\"panel-body\" align=\"center\">");
+echo("<div class=\"panel panel-default\">");
+echo("<div class=\"panel-heading\">");
+echo("<h4><i class=\"fa fa-fw fa-cogs\"></i>XBTIT Installation</h4>");
+echo("</div>");
+echo("<div class=\"panel-body\" align=\"center\">");
 // now we can add the different pages for the installer
 
 // Getting wished install language
@@ -107,20 +107,20 @@ function load_lang_file()
     // Didn't find any, show an error message!
     if (empty($GLOBALS["find_install_lang"])) {
         step("Installation ERROR!", "ERROR!", "*");
-        echo ("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
-        echo ("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
-        echo ("<head>");
-        echo ("<meta http-equiv=\"content-type\" content=\"text/html; charset=ISO-8859-1\" />");
-        echo ("<title>".$GLOBALS["btit_installer"]."&nbsp;".$GLOBALS["current_btit_version"]." - Language Error</title>");
-        echo ("<link rel=\"stylesheet\" href=\"style/xbtit_default/main.css\" type=\"text/css\" />");
-        echo ("</head>");
-        echo ("<body style=\"font-family: sans-serif;\"><div style=\"width: 600px;\">");
-        echo ("<p>A critical language error has occurred.</p>");
-        echo ("<p>This installer was unable to find the installer's language file or files.  They should be found under:</p>");
-        echo ("<div style=\"margin: 1ex; font-family: monospace; font-weight: bold;\">/language/install_lang/</div>");
-        echo ("<p>In some cases, FTP clients do not properly upload files with this many folders.  Please double check to make sure you <span style=\"font-weight: 600;\">have uploaded all the files in the distribution</span>.</p>");
-        echo ("<p>If you continue to get this error message, feel free to <a href=\"http://www.btiteam.org/smf/index.php/\">look to us for support</a>.</p>");
-        echo ("</div>");
+        echo("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
+        echo("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
+        echo("<head>");
+        echo("<meta http-equiv=\"content-type\" content=\"text/html; charset=ISO-8859-1\" />");
+        echo("<title>".$GLOBALS["btit_installer"]."&nbsp;".$GLOBALS["current_btit_version"]." - Language Error</title>");
+        echo("<link rel=\"stylesheet\" href=\"style/xbtit_default/main.css\" type=\"text/css\" />");
+        echo("</head>");
+        echo("<body style=\"font-family: sans-serif;\"><div style=\"width: 600px;\">");
+        echo("<p>A critical language error has occurred.</p>");
+        echo("<p>This installer was unable to find the installer's language file or files.  They should be found under:</p>");
+        echo("<div style=\"margin: 1ex; font-family: monospace; font-weight: bold;\">/language/install_lang/</div>");
+        echo("<p>In some cases, FTP clients do not properly upload files with this many folders.  Please double check to make sure you <span style=\"font-weight: 600;\">have uploaded all the files in the distribution</span>.</p>");
+        echo("<p>If you continue to get this error message, feel free to <a href=\"http://www.btiteam.org/smf/index.php/\">look to us for support</a>.</p>");
+        echo("</div>");
         die;
     }
 
@@ -137,11 +137,11 @@ function load_lang_file()
     // Make sure it exists, if it doesn't reset it.
     if (!isset($_SESSION["install_lang"]) || !file_exists(dirname(__FILE__) . '/language/install_lang/' . $_SESSION["install_lang"])) {
         // Use the first one...
-        list ($_SESSION["install_lang"]) = array_keys($GLOBALS["find_install_lang"]);
+        list($_SESSION["install_lang"]) = array_keys($GLOBALS["find_install_lang"]);
 
         // If we have english and some other language, use the other language.  We Americans hate english :P.
         if ($_SESSION["install_lang"] == "install.english.php" && count($GLOBALS["find_install_lang"]) > 1) {
-            list ($_SESSION["install_lang"]) = array_keys($GLOBALS["find_install_lang"]);
+            list($_SESSION["install_lang"]) = array_keys($GLOBALS["find_install_lang"]);
         }
     }
 
@@ -151,38 +151,36 @@ function load_lang_file()
 
 function language_list()
 {
+    global $TABLE_PREFIX;
 
-         global $TABLE_PREFIX;
-
-         $ret = [];
-         $res = mysqli_query($GLOBALS["conn"], "SELECT * FROM {$TABLE_PREFIX}language ORDER BY language");
+    $ret = [];
+    $res = mysqli_query($GLOBALS["conn"], "SELECT * FROM {$TABLE_PREFIX}language ORDER BY language");
 
     while ($row = mysqli_fetch_assoc($res)) {
         $ret[] = $row;
     }
 
-         unset($row);
-         ((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
+    unset($row);
+    ((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
 
-         return $ret;
+    return $ret;
 }
 
 function style_list()
 {
+    global $TABLE_PREFIX;
 
-         global $TABLE_PREFIX;
-
-         $ret = [];
-         $res = mysqli_query($GLOBALS["conn"], "SELECT * FROM {$TABLE_PREFIX}style ORDER BY id");
+    $ret = [];
+    $res = mysqli_query($GLOBALS["conn"], "SELECT * FROM {$TABLE_PREFIX}style ORDER BY id");
 
     while ($row = mysqli_fetch_assoc($res)) {
         $ret[] = $row;
     }
 
-         unset($row);
-         ((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
+    unset($row);
+    ((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
 
-         return $ret;
+    return $ret;
 }
 
 //starting functions for the install
@@ -190,27 +188,27 @@ function style_list()
 function step($text = '', $stepname = '', $stepnumber = '')
 {
     ////////// top block  //////////
-    echo ("<div><table class=\"lista\" cellpadding=\"0\" cellspacing=\"0\" width=\"90%\" align=\"center\">");
-    echo ("<tr><td class=\"block\" height=\"20px\" style=\"padding: 5px;\">");
-    echo ("<center><b>".$text."</b><div align=\"right\">" . $stepname . "&nbsp;(" . $stepnumber . "/5)</div></center>");
-    echo ("</td></tr></table></div>");
+    echo("<div><table class=\"lista\" cellpadding=\"0\" cellspacing=\"0\" width=\"90%\" align=\"center\">");
+    echo("<tr><td class=\"block\" height=\"20px\" style=\"padding: 5px;\">");
+    echo("<center><b>".$text."</b><div align=\"right\">" . $stepname . "&nbsp;(" . $stepnumber . "/5)</div></center>");
+    echo("</td></tr></table></div>");
     ////////// main block //////////
-    echo ("<table class=\"lista\" cellspacing=\"0\" cellpadding=\"10\" width=\"90%\" align=\"center\">");
-    echo ("<tr><td style=\"padding: 10px;\" class=\"lista\">");
+    echo("<table class=\"lista\" cellspacing=\"0\" cellpadding=\"10\" width=\"90%\" align=\"center\">");
+    echo("<tr><td style=\"padding: 10px;\" class=\"lista\">");
 }
 
 // check if the installation is not locked
 if (file_exists(dirname(__FILE__)."/install.lock")) {
     step("Installation Error!", "ERROR!", "*");
-    echo ("<p>For security reasons, this installer is locked!<br>Please (via FTP) remove or change the 'install.lock' file before continue.</p>");
+    echo("<p>For security reasons, this installer is locked!<br>Please (via FTP) remove or change the 'install.lock' file before continue.</p>");
     die;
 }
 
 // main page -> step zero
 if ($action == 'welcome') {
     step($install_lang["welcome_header"], $install_lang["step"]."&nbsp;".$install_lang["welcome_header"], "*");
-    echo ("<p align=\"center\" style=\"color: red\">REMEMBER TO BACKUP FIRST!!!</p>");
-    echo ("<p align=\"center\">".$install_lang["welcome"]."</p>");
+    echo("<p align=\"center\" style=\"color: red\">REMEMBER TO BACKUP FIRST!!!</p>");
+    echo("<p align=\"center\">".$install_lang["welcome"]."</p>");
     
     // Show a language selection...
     if (count($GLOBALS["find_install_lang"]) > 1) {
@@ -232,23 +230,23 @@ if ($action == 'welcome') {
                 </div>';
     }
     // listing the 777 files
-    echo ("".$install_lang["list_chmod"]."");
-    echo ("<ul>");
-    echo ("<li>./include/settings.php</li>");
-    echo ("<li>./cache/</li>");
-    echo ("<li>./torrents/</li>");
-    echo ("<li>./badwords.txt</li>");
-    echo ("</ul>");
+    echo("".$install_lang["list_chmod"]."");
+    echo("<ul>");
+    echo("<li>./include/settings.php</li>");
+    echo("<li>./cache/</li>");
+    echo("<li>./torrents/</li>");
+    echo("<li>./badwords.txt</li>");
+    echo("</ul>");
 
-    echo ("".$install_lang["system_req"]."");
+    echo("".$install_lang["system_req"]."");
     // changelog
-    echo ("<p>".$install_lang["view_log"]."&nbsp;<a href=\"changelog.txt\" target=\"_blank\">".$install_lang["here"]."</a></p>");
-    echo ("<div align=\"right\"><input type=\"button\" class=\"button\" name=\"continue\" value=\"".$install_lang["start"]."\" onclick=\"javascript:document.location.href='$cur_script?lang_file=".$_SESSION["install_lang"]."&amp;action=reqcheck'\" /></div>");
+    echo("<p>".$install_lang["view_log"]."&nbsp;<a href=\"changelog.txt\" target=\"_blank\">".$install_lang["here"]."</a></p>");
+    echo("<div align=\"right\"><input type=\"button\" class=\"button\" name=\"continue\" value=\"".$install_lang["start"]."\" onclick=\"javascript:document.location.href='$cur_script?lang_file=".$_SESSION["install_lang"]."&amp;action=reqcheck'\" /></div>");
 } // requirements check
 elseif ($action == 'reqcheck') {
     step($install_lang["requirements_check"], $install_lang["step"]."&nbsp;".$install_lang["reqcheck"], "1");
 
-// check cache folder
+    // check cache folder
     if (file_exists(dirname(__FILE__)."/cache")) {
         if (is_writable(dirname(__FILE__)."/cache")) {
             $cache=$install_lang["write_succes"];
@@ -258,7 +256,7 @@ elseif ($action == 'reqcheck') {
     } else {
         $cache=$install_lang["write_file_not_found"];
     }
-// check torrents folder
+    // check torrents folder
     if (file_exists(dirname(__FILE__)."/torrents")) {
         if (is_writable(dirname(__FILE__)."/torrents")) {
             $torrents=$install_lang["write_succes"];
@@ -268,7 +266,7 @@ elseif ($action == 'reqcheck') {
     } else {
         $torrents=$install_lang["write_file_not_found"];
     }
-// check badwords.txt
+    // check badwords.txt
     if (file_exists(dirname(__FILE__)."/badwords.txt")) {
         if (is_writable(dirname(__FILE__)."/badwords.txt")) {
             $badwords=$install_lang["write_succes"];
@@ -278,7 +276,7 @@ elseif ($action == 'reqcheck') {
     } else {
         $badwords=$install_lang["write_file_not_found"];
     }
-// check include/settings.php
+    // check include/settings.php
     if (file_exists(dirname(__FILE__)."/include/settings.php")) {
         if (is_writable(dirname(__FILE__)."/include/settings.php")) {
             $settings=$install_lang["write_succes"];
@@ -295,18 +293,18 @@ elseif ($action == 'reqcheck') {
         $allow_url_fopen=$install_lang["allow_url_fopen_OFF"]."&nbsp;&nbsp;&nbsp;".$install_lang["can_continue"];
     }
   
-    echo ("<h2>".$install_lang["requirements_check"]."</h2>");
-    echo ("<table width=\"100%\" cellpadding=\"4\" cellspacing=\"4\" border=\"0\" style=\"margin-bottom: 2ex;\">");
-    echo ("<tr><td width=\"40%\" valign=\"top\">".$install_lang["cache_folder"].":</td><td>".$cache."</td></tr>");
-    echo ("<tr><td width=\"40%\" valign=\"top\">".$install_lang["torrents_folder"].":</td><td>".$torrents."</td></tr>");
-    echo ("<tr><td width=\"40%\" valign=\"top\">".$install_lang["badwords_file"].":</td><td>".$badwords."</td></tr>");
-    echo ("<tr><td width=\"40%\" valign=\"top\">".$install_lang["settings.php"].":</td><td>".$settings."</td></tr>");
-    echo ("<tr><td width=\"40%\" valign=\"top\">".$install_lang["allow_url_fopen"].":</td><td>".$allow_url_fopen."</td></tr>");
-    echo ("</table>");
+    echo("<h2>".$install_lang["requirements_check"]."</h2>");
+    echo("<table width=\"100%\" cellpadding=\"4\" cellspacing=\"4\" border=\"0\" style=\"margin-bottom: 2ex;\">");
+    echo("<tr><td width=\"40%\" valign=\"top\">".$install_lang["cache_folder"].":</td><td>".$cache."</td></tr>");
+    echo("<tr><td width=\"40%\" valign=\"top\">".$install_lang["torrents_folder"].":</td><td>".$torrents."</td></tr>");
+    echo("<tr><td width=\"40%\" valign=\"top\">".$install_lang["badwords_file"].":</td><td>".$badwords."</td></tr>");
+    echo("<tr><td width=\"40%\" valign=\"top\">".$install_lang["settings.php"].":</td><td>".$settings."</td></tr>");
+    echo("<tr><td width=\"40%\" valign=\"top\">".$install_lang["allow_url_fopen"].":</td><td>".$allow_url_fopen."</td></tr>");
+    echo("</table>");
     // don't continue if this file doesn't exists
     if (file_exists(dirname(__FILE__)."/include/settings.php")) {
         if (is_writable(dirname(__FILE__)."/include/settings.php")) {
-            echo ("<div align=\"right\"><input type=\"button\" class=\"button\" name=\"continue\" value=\"".$install_lang["next"]."\" onclick=\"javascript:document.location.href='$cur_script?lang_file=".$_SESSION["install_lang"]."&amp;action=settings'\" /></div>");
+            echo("<div align=\"right\"><input type=\"button\" class=\"button\" name=\"continue\" value=\"".$install_lang["next"]."\" onclick=\"javascript:document.location.href='$cur_script?lang_file=".$_SESSION["install_lang"]."&amp;action=settings'\" /></div>");
         }
     }
 } // setting up the tracker
@@ -320,43 +318,43 @@ elseif ($action == 'settings') {
     $db_passwd = @ini_get('mysql.default_password');
     $db_name = empty($db_name) ? 'xbtit' : $db_name;
     
-    echo ("<form action=\"".$_SERVER['PHP_SELF']."?lang_file=".$_SESSION["install_lang"]."&amp;action=save_mysql\" method=\"post\">");
-    echo ("<h2>".$install_lang["mysql_settings"]."</h2><h3>".$install_lang["mysql_settings_info"]."</h3>");
-    echo ("<table width=\"100%\" cellpadding=\"4\" cellspacing=\"4\" border=\"0\" style=\"margin-bottom: 2ex;\">");
-    echo ("<tr><td width=\"20%\" valign=\"top\">".$install_lang["mysql_settings_server"].":</td><td><input type=\"text\" name=\"db_server\" id=\"db_server_input\" value=\"".$db_server."\" size=\"30\" /></td></tr>");
-    echo ("<tr><td valign=\"top\">".$install_lang["mysql_settings_username"].":</td><td><input type=\"text\" name=\"db_user\" id=\"db_user_input\" value=\"".$db_user."\" size=\"30\" /></td></tr>");
-    echo ("<tr><td valign=\"top\">".$install_lang["mysql_settings_password"].":</td><td><input type=\"password\" name=\"db_passwd\" id=\"db_passwd_input\" value=\"".$db_passwd."\" size=\"30\" /></td></tr>");
-    echo ("<tr><td valign=\"top\">".$install_lang["mysql_settings_database"].":</td><td><input type=\"text\" name=\"db_name\" id=\"db_name_input\" value=\"".$db_name."\" size=\"30\" /></td></tr>");
-    echo ("<tr><td valign=\"top\">".$install_lang["mysql_settings_prefix"].":</td><td><input type=\"text\" name=\"db_prefix\" id=\"db_prefix_input\" value=\"xbtit_\" size=\"30\" /></td></tr></table>");
-    echo ("<div align=\"right\"><input type=\"submit\" value=\"". $install_lang["next"]."\" /></div></form>");
+    echo("<form action=\"".$_SERVER['PHP_SELF']."?lang_file=".$_SESSION["install_lang"]."&amp;action=save_mysql\" method=\"post\">");
+    echo("<h2>".$install_lang["mysql_settings"]."</h2><h3>".$install_lang["mysql_settings_info"]."</h3>");
+    echo("<table width=\"100%\" cellpadding=\"4\" cellspacing=\"4\" border=\"0\" style=\"margin-bottom: 2ex;\">");
+    echo("<tr><td width=\"20%\" valign=\"top\">".$install_lang["mysql_settings_server"].":</td><td><input type=\"text\" name=\"db_server\" id=\"db_server_input\" value=\"".$db_server."\" size=\"30\" /></td></tr>");
+    echo("<tr><td valign=\"top\">".$install_lang["mysql_settings_username"].":</td><td><input type=\"text\" name=\"db_user\" id=\"db_user_input\" value=\"".$db_user."\" size=\"30\" /></td></tr>");
+    echo("<tr><td valign=\"top\">".$install_lang["mysql_settings_password"].":</td><td><input type=\"password\" name=\"db_passwd\" id=\"db_passwd_input\" value=\"".$db_passwd."\" size=\"30\" /></td></tr>");
+    echo("<tr><td valign=\"top\">".$install_lang["mysql_settings_database"].":</td><td><input type=\"text\" name=\"db_name\" id=\"db_name_input\" value=\"".$db_name."\" size=\"30\" /></td></tr>");
+    echo("<tr><td valign=\"top\">".$install_lang["mysql_settings_prefix"].":</td><td><input type=\"text\" name=\"db_prefix\" id=\"db_prefix_input\" value=\"xbtit_\" size=\"30\" /></td></tr></table>");
+    echo("<div align=\"right\"><input type=\"submit\" value=\"". $install_lang["next"]."\" /></div></form>");
 } // saving the database connection data
 elseif ($action == 'save_mysql') {
     if (empty($_POST["db_server"]) || empty($_POST["db_user"]) || empty($_POST["db_passwd"]) || empty($_POST["db_name"])) {
         step($install_lang["mysqlcheck"], $install_lang["step"]."&nbsp;".$install_lang["mysqlcheck_step"], "2");
-        echo ($install_lang["no_leave_blank"]);
+        echo($install_lang["no_leave_blank"]);
         die;
     }
-// check settings.php file
+    // check settings.php file
     if (file_exists(dirname(__FILE__)."/include/settings.php")) {
         if (is_writable(dirname(__FILE__)."/include/settings.php")) {
-             $fd = fopen("include/settings.php", "w");
-             $foutput = "<?php\n\n";
-             $foutput.= "\$dbhost = \"".$_POST["db_server"]."\";\n";
-             $foutput.= "\$dbuser = \"".$_POST["db_user"]."\";\n";
-             $foutput.= "\$dbpass = \"".$_POST["db_passwd"]."\";\n";
-             $foutput.= "\$database = \"".$_POST["db_name"]."\";\n";
-             $foutput.= "\$TABLE_PREFIX = \"".$_POST["db_prefix"]."\";\n";
-             $foutput.= "\n?>";
-             fwrite($fd, $foutput);
-             fclose($fd);
-             step($install_lang["mysqlcheck"], $install_lang["step"]."&nbsp;".$install_lang["mysqlcheck_step"], "2");
-             echo ($install_lang["mysql_settings"]."&nbsp;".$install_lang["saved"]);
-             echo ("<div align=\"right\"><input type=\"button\" class=\"button\" name=\"continue\" value=\"".$install_lang["next"]."\" onclick=\"javascript:document.location.href='$cur_script?lang_file=".$_SESSION["install_lang"]."&amp;action=sql_import'\" /></div>");
+            $fd = fopen("include/settings.php", "w");
+            $foutput = "<?php\n\n";
+            $foutput.= "\$dbhost = \"".$_POST["db_server"]."\";\n";
+            $foutput.= "\$dbuser = \"".$_POST["db_user"]."\";\n";
+            $foutput.= "\$dbpass = \"".$_POST["db_passwd"]."\";\n";
+            $foutput.= "\$database = \"".$_POST["db_name"]."\";\n";
+            $foutput.= "\$TABLE_PREFIX = \"".$_POST["db_prefix"]."\";\n";
+            $foutput.= "\n?>";
+            fwrite($fd, $foutput);
+            fclose($fd);
+            step($install_lang["mysqlcheck"], $install_lang["step"]."&nbsp;".$install_lang["mysqlcheck_step"], "2");
+            echo($install_lang["mysql_settings"]."&nbsp;".$install_lang["saved"]);
+            echo("<div align=\"right\"><input type=\"button\" class=\"button\" name=\"continue\" value=\"".$install_lang["next"]."\" onclick=\"javascript:document.location.href='$cur_script?lang_file=".$_SESSION["install_lang"]."&amp;action=sql_import'\" /></div>");
         } else {
-            echo ($install_lang["file_not_writeable"]);
+            echo($install_lang["file_not_writeable"]);
         }
     } else {
-        echo ($install_lang["file_not_exists"]);
+        echo($install_lang["file_not_exists"]);
     }
 } // checking the database connection
 elseif ($action == 'sql_import') {
@@ -400,14 +398,14 @@ elseif ($action == 'sql_import') {
     for ($i=0; $i<count($request_tables); $i++) {
         $rt=mysqli_num_rows(mysqli_query($GLOBALS["conn"], "SHOW TABLES LIKE '".$request_tables[$i]."'"));
         if ($rt==0) { // table not found!
-                echo '
+            echo '
                             <div class="error_message">
                                 <div style="color: red;">Table '.$request_tables[$i].' seems to be missed!</div>
                                 <br />
                                 <a href="', $_SERVER['PHP_SELF'], '?step=0&amp;overphp=true">', $install_lang['error_message_click'], '</a> ', $install_lang['error_message_try_again'], '
                             </div>';
 
-                    die;
+            die;
         }
     }
     $replaces = [
@@ -477,28 +475,28 @@ elseif ($action == 'sql_import') {
 
         die;
     }
-     echo (str_replace("database.sql", $dbfile, $install_lang["database_saved"]));
-     echo ("<div align=\"right\"><input type=\"button\" class=\"button\" name=\"continue\" value=\"".$install_lang["next"]."\" onclick=\"javascript:document.location.href='$cur_script?lang_file=".$_SESSION["install_lang"]."&amp;action=finished'\" /></div>");
+    echo(str_replace("database.sql", $dbfile, $install_lang["database_saved"]));
+    echo("<div align=\"right\"><input type=\"button\" class=\"button\" name=\"continue\" value=\"".$install_lang["next"]."\" onclick=\"javascript:document.location.href='$cur_script?lang_file=".$_SESSION["install_lang"]."&amp;action=finished'\" /></div>");
 } // finished
 elseif ($action == 'finished') {
     step($install_lang["finished"], $install_lang["step"]."&nbsp;".$install_lang["finished_step"], "*");
-    echo ("<h2>".$install_lang["succes_upgrade1"]."</h2>");
+    echo("<h2>".$install_lang["succes_upgrade1"]."</h2>");
     if (!rename("install.unlock", "install.lock") || !unlink("upgrade.php")) {
-        echo ($install_lang["succes_upgrade2b"]);
+        echo($install_lang["succes_upgrade2b"]);
     } else {
-        echo ($install_lang["succes_upgrade2a"]);
+        echo($install_lang["succes_upgrade2a"]);
     }
-    echo ("<br /><br />");
-    echo ($install_lang["succes_upgrade3"]);
-    echo ("<br />");
-    echo ("<p>BTITeam</p>");
-    echo ("<div align=\"center\"><a href=\"index.php\" target=\"_self\">".$install_lang["go_to_tracker"]."</a>");
+    echo("<br /><br />");
+    echo($install_lang["succes_upgrade3"]);
+    echo("<br />");
+    echo("<p>BTITeam</p>");
+    echo("<div align=\"center\"><a href=\"index.php\" target=\"_self\">".$install_lang["go_to_tracker"]."</a>");
 }
-echo ("</td>\n</tr>\n</table>");
-echo ("</div>");
-echo ("</div>");
-echo ("</div>");
-echo ("</div>");
-echo ("</div>");
-echo ("</body>");
-echo ("</html>");
+echo("</td>\n</tr>\n</table>");
+echo("</div>");
+echo("</div>");
+echo("</div>");
+echo("</div>");
+echo("</div>");
+echo("</body>");
+echo("</html>");

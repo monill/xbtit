@@ -31,12 +31,12 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 if (!defined("IN_BTIT_FORUM")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -85,13 +85,13 @@ if (mysqli_num_rows($forums_res) == 0) {
             $forums[$i]["lastpost"]  = $language["NA"];
         }
 
-            $forums[$i]["status"]=image_or_link("$STYLEPATH/images/".$forums_arr["img"].".png", "", $img);
+        $forums[$i]["status"]=image_or_link("$STYLEPATH/images/".$forums_arr["img"].".png", "", $img);
         // just in case they are no subs
-            $forums[$i]["subforums"]="";
+        $forums[$i]["subforums"]="";
 
-            reset($sub_forums);
-            $j=0;
-            $subforums= [];
+        reset($sub_forums);
+        $j=0;
+        $subforums= [];
         foreach ($sub_forums as $id => $subfor) {
             if ($subfor["id_parent"]==$forums_arr["id"]) {
                 $subforums[$j]["status"]=image_or_link("$STYLEPATH/images/".$subfor["img"].".png", "", $img);
@@ -110,7 +110,7 @@ if (mysqli_num_rows($forums_res) == 0) {
                                    "in <a href=\"index.php?page=forum&amp;action=viewtopic&amp;topicid=".$subfor["topicid"]."&amp;msg=".$subfor["lastpost"]."#".$subfor["lastpost"]."\">".htmlspecialchars(unesc($subfor["subject"]))."</a>";
                     }
                 } else {
-                        $subforums[$j]["lastpost"]  = $language["NA"];
+                    $subforums[$j]["lastpost"]  = $language["NA"];
                 }
                 $j++;
                 unset($sub_forums[$id]);
@@ -122,7 +122,7 @@ if (mysqli_num_rows($forums_res) == 0) {
             $subformtpl->set("parent_forum", htmlspecialchars(unesc($forums_arr["name"]))."'s ".$language["SUBFORUM"]);
             $forums[$i]["subforums"]=$subformtpl->fetch(load_template("forum.subforums.tpl"));
         }
-            $i++;
+        $i++;
     }
 
     $forumtpl->set("NO_FORUMS", false, true);

@@ -31,11 +31,11 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (isset($_POST["in_xbtit"]) && $_POST["in_xbtit"]=='1') {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (isset($_POST["in_admin"]) && $_POST["in_xbtit"]=='1') {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 session_name("xbtit");

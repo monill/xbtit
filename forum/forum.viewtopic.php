@@ -32,12 +32,12 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 if (!defined("IN_BTIT_FORUM")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -116,11 +116,11 @@ $postcount = $arr[0];
 // the message to find has been given in query string
 if ($msg_number!="") {
     if ($msg_number=="new") {
-         // search last read by user
-         $newpost=get_result("SELECT MIN(id) as np FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid AND id>IFNULL((SELECT lastpostread FROM {$TABLE_PREFIX}readposts WHERE topicid=$topicid AND userid=".((int)$CURUSER["uid"])."),1)", true);
-         $new_id=($newpost[0]["np"]?$newpost[0]["np"]:"last");
-         unset($newpost);
-         $res = do_sqlquery("SELECT COUNT(*) FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid".($new_id=="last"?"":" AND id<=$new_id"), true);
+        // search last read by user
+        $newpost=get_result("SELECT MIN(id) as np FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid AND id>IFNULL((SELECT lastpostread FROM {$TABLE_PREFIX}readposts WHERE topicid=$topicid AND userid=".((int)$CURUSER["uid"])."),1)", true);
+        $new_id=($newpost[0]["np"]?$newpost[0]["np"]:"last");
+        unset($newpost);
+        $res = do_sqlquery("SELECT COUNT(*) FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid".($new_id=="last"?"":" AND id<=$new_id"), true);
     } else {
         $res = do_sqlquery("SELECT COUNT(*) FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid AND id<=$msg_number", true);
     }
@@ -138,7 +138,7 @@ if ($page=="last") {
     $_GET["pages"] = ceil($postcount / $postsperpage);
 }
 
-list($pagertop, $pagerbottom,$limit)=forum_pager($postsperpage, $postcount, "index.php?page=forum&amp;action=viewtopic&amp;topicid=$topicid&amp;");
+list($pagertop, $pagerbottom, $limit)=forum_pager($postsperpage, $postcount, "index.php?page=forum&amp;action=viewtopic&amp;topicid=$topicid&amp;");
 
 if ($XBTT_USE) {
     $query = "SELECT p.*, u.username, IFNULL(ul.level,'".$language['UNKNOWN']."') as user_group, u.avatar, u.uploaded+IFNULL(x.uploaded,0) as uploaded".
@@ -173,7 +173,7 @@ foreach ($res as $id => $arr) {
 
     $posts[$pn]["date"]=get_date_time($arr["added"]);
     $posts[$pn]["elapsed"]="(".get_elapsed_time($arr["added"]) . " ago)";
-    $posts[$pn]["avatar"]="<img onload=\"resize_avatar(this);\" src=\"".($arr["avatar"] && $arr["avatar"] != "" ? htmlspecialchars($arr["avatar"]): "$STYLEURL/images/default_avatar.gif" )."\" alt=\"\" />";
+    $posts[$pn]["avatar"]="<img onload=\"resize_avatar(this);\" src=\"".($arr["avatar"] && $arr["avatar"] != "" ? htmlspecialchars($arr["avatar"]): "$STYLEURL/images/default_avatar.gif")."\" alt=\"\" />";
     $posts[$pn]["user_group"]=$arr["user_group"];
     $posts[$pn]["flag"]="<img src=\"images/flag/".($arr["flagpic"] && $arr["flagpic"]!=""?$arr["flagpic"]:"unknown.gif")."\" alt=\"".($arr["name"] && $arr["name"]!=""?$arr["name"]:"unknown")."\" />";
     $posts[$pn]["ratio"]=(((int)$arr['downloaded']) > 0?number_format($arr['uploaded'] / $arr['downloaded'], 2):"---");
@@ -225,8 +225,7 @@ $ret=do_sqlquery("SELECT id FROM {$TABLE_PREFIX}readposts WHERE topicid=$topicid
 // first time this user
 if (mysqli_num_rows($ret)==0) {
     do_sqlquery("INSERT INTO {$TABLE_PREFIX}readposts SET lastpostread=(SELECT MAX(id) FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid), topicid=$topicid, userid=".((int)0+$CURUSER["uid"]), true);
-} else // update existing record
- {
+} else { // update existing record
     $rp_id=mysqli_fetch_row($ret);
     do_sqlquery("UPDATE {$TABLE_PREFIX}readposts SET lastpostread=(SELECT MAX(id) FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid) WHERE id=".$rp_id[0], true);
 }
