@@ -31,19 +31,19 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 function read_styles()
 {
-        global $TABLE_PREFIX, $language, $CURUSER, $admintpl, $STYLEPATH;
+    global $TABLE_PREFIX, $language, $CURUSER, $admintpl, $STYLEPATH;
 
-        $sres=style_list();
+    $sres=style_list();
     for ($i=0; $i<count($sres); $i++) {
         $res = do_sqlquery("SELECT COUNT(*) FROM {$TABLE_PREFIX}users WHERE style = " . $sres[$i]["id"], true);
         $sres[$i]["style_users"]=mysqli_result($res, 0, 0);
@@ -53,28 +53,28 @@ function read_styles()
         $sres[$i]["edit"]="<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=style&amp;action=edit&amp;id=".$sres[$i]["id"]."\">".image_or_link("$STYLEPATH/images/edit.png", "", $language["EDIT"])."</a>";
         $sres[$i]["delete"]="<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=style&amp;action=delete&amp;id=".$sres[$i]["id"]."\" onclick=\"return confirm('".AddSlashes($language["DELETE_CONFIRM"])."')\">".image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"])."</a>";
     }
-        $admintpl->set("style_add", false, true);
-        $admintpl->set("language", $language);
-        $admintpl->set("styles", $sres);
-        $admintpl->set("style_add_new", "<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=style&amp;action=add\">".$language["STYLE_ADD"]."</a>");
-        unset($sres);
-        ((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
+    $admintpl->set("style_add", false, true);
+    $admintpl->set("language", $language);
+    $admintpl->set("styles", $sres);
+    $admintpl->set("style_add_new", "<a href=\"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=style&amp;action=add\">".$language["STYLE_ADD"]."</a>");
+    unset($sres);
+    ((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
 }
 
 
 function styles_combo($all = false, $selected = "")
 {
-      global $THIS_BASEPATH, $language;
+    global $THIS_BASEPATH, $language;
     if (!$all) {
         $sr=style_list();
         foreach ($sr as $s) {
             $news[]=$s["style_url"];
         }
     }
-      $dir = @opendir("$THIS_BASEPATH/style");
-      $lc="\n<select name=\"style_url\" size=\"1\">";
+    $dir = @opendir("$THIS_BASEPATH/style");
+    $lc="\n<select name=\"style_url\" size=\"1\">";
     if ($selected=="") {
-          $lc.="\n<option value=\"\">".$language["SELECT"]."</option>";
+        $lc.="\n<option value=\"\">".$language["SELECT"]."</option>";
     }
 
     while ($file = @readdir($dir)) {
@@ -84,9 +84,9 @@ function styles_combo($all = false, $selected = "")
             }
         }
     }
-      @closedir($dir);
-      $lc.="</select>";
-      return $lc;
+    @closedir($dir);
+    $lc.="</select>";
+    return $lc;
 }
 
 switch ($action) {
@@ -131,20 +131,20 @@ switch ($action) {
             <option value='2'".(($sres[0]["style_type"]==2)?" selected='yes'":"").">".$language["ATM_STYLE"]."</option>
             <option value='3'".(($sres[0]["style_type"]==3)?" selected='yes'":"").">".$language["PET_STYLE"]."</option>
            </select>");
-              $admintpl->set("frm_action", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=style&amp;action=save&amp;mode=edit&amp;id=$id");
-              $admintpl->set("style_combo", styles_combo(true, $sres[0]["style_url"]));
+            $admintpl->set("frm_action", "index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=style&amp;action=save&amp;mode=edit&amp;id=$id");
+            $admintpl->set("style_combo", styles_combo(true, $sres[0]["style_url"]));
         }
         break;
 
     case 'delete':
         if (isset($_GET["id"])) {
-             // we should get only 1 style, selected with radio ...
-             $id=max(0, $_GET["id"]);
-             // update the deleted user's style to default one
-             do_sqlquery("UPDATE {$TABLE_PREFIX}users SET style='".$btit_settings["default_style"]."' WHERE style=$id", true);
-             // delete style from database
-             do_sqlquery("DELETE FROM {$TABLE_PREFIX}style WHERE id=$id", true);
-             read_styles();
+            // we should get only 1 style, selected with radio ...
+            $id=max(0, $_GET["id"]);
+            // update the deleted user's style to default one
+            do_sqlquery("UPDATE {$TABLE_PREFIX}users SET style='".$btit_settings["default_style"]."' WHERE style=$id", true);
+            // delete style from database
+            do_sqlquery("DELETE FROM {$TABLE_PREFIX}style WHERE id=$id", true);
+            read_styles();
         }
         break;
 

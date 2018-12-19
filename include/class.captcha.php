@@ -31,17 +31,17 @@
 ////////////////////////////////////////////////////////////////////////////////////
 class ocr_captcha
 {
-    var $key;                                // ultra private static text
-    var $long;                               // size of text
-    var $lx;                                 // width of picture
-    var $ly;                                 // height of picture
-    var $nb_noise;                           // nb of background noisy characters
-    var $filename;                           // file of captcha picture stored on disk
-    var $imagetype='png';                    // can also be 'png' or 'jpg'
-    var $public_key;                         // public key
-    var $font_file='./include/adlibn.ttf';   // path to font file
+    public $key;                                // ultra private static text
+    public $long;                               // size of text
+    public $lx;                                 // width of picture
+    public $ly;                                 // height of picture
+    public $nb_noise;                           // nb of background noisy characters
+    public $filename;                           // file of captcha picture stored on disk
+    public $imagetype='png';                    // can also be 'png' or 'jpg'
+    public $public_key;                         // public key
+    public $font_file='./include/adlibn.ttf';   // path to font file
 
-    function __construct($long = 6, $lx = 120, $ly = 30, $nb_noise = 25)
+    public function __construct($long = 6, $lx = 120, $ly = 30, $nb_noise = 25)
     {
         $this->key=md5('A nice little private text used to generate private keys.');
         $this->long=$long;
@@ -52,7 +52,7 @@ class ocr_captcha
         $this->public_key=substr(md5(uniqid(rand(), true)), 0, $this->long);
     }
 
-    function get_filename($public = '')
+    public function get_filename($public = '')
     {
         global $CAPTCHA_FOLDER;
         if ($public=='') {
@@ -62,7 +62,7 @@ class ocr_captcha
     }
 
     // generate the private text coming from the public text, using $this->key (not to be public!!), all you have to do is here to change the algorithm
-    function generate_private($public = '')
+    public function generate_private($public = '')
     {
         if ($public=='') {
             $public=$this->public_key;
@@ -71,7 +71,7 @@ class ocr_captcha
     }
 
     // check if the public text is link to the private text
-    function check_captcha($public, $private)
+    public function check_captcha($public, $private)
     {
         // when check, destroy picture on disk
         if (file_exists($this->get_filename($public))) {
@@ -80,8 +80,8 @@ class ocr_captcha
         return (strtolower($private)==strtolower($this->generate_private($public)));
     }
 
-  // display a captcha picture with private text and return the public text
-    function make_captcha($noise = true)
+    // display a captcha picture with private text and return the public text
+    public function make_captcha($noise = true)
     {
         $private_key=$this->generate_private();
         $image = imagecreatetruecolor($this->lx, $this->ly);
@@ -98,7 +98,7 @@ class ocr_captcha
                 ImageTTFText($image, $size, $angle, $x, $y, $color, $this->font_file, $text);
             }
         } else {
-              // random grid color
+            // random grid color
             for ($i=0; $i<$this->lx; $i+=10) {
                 $color=imagecolorallocate($image, rand(160, 224), rand(160, 224), rand(160, 224));
                 imageline($image, $i, 0, $i, $this->ly, $color);
@@ -130,7 +130,7 @@ class ocr_captcha
         ImageDestroy($image);
     }
 
-    function display_captcha($noise = true)
+    public function display_captcha($noise = true)
     {
         $this->make_captcha($noise);
         @chmod($this->get_filename(), 0766);

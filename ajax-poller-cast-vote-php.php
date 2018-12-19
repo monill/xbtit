@@ -47,14 +47,14 @@ if (isset($_GET['pollId'])) {
     $userID = ((int)0+$CURUSER['uid']);
 
 
-  // Insert new vote into the database
-  // You may put in some more code here to limit the number of votes the same ip adress could cast.
+    // Insert new vote into the database
+    // You may put in some more code here to limit the number of votes the same ip adress could cast.
 
     if ($optionId) {
         mysqli_query($GLOBALS['conn'], "INSERT INTO {$TABLE_PREFIX }poller_vote(pollerID,optionID,ipAddress,voteDate,memberID) VALUES('".$pollId."','".$optionId."','".ip2long(getenv("REMOTE_ADDR"))."',unix_timestamp(),'".$userID."')");
     }
 
-  // Returning data as xml
+    // Returning data as xml
 
     echo '<?xml version="1.0" ?>';
 

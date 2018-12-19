@@ -1,6 +1,6 @@
 <?php
 /*
-	Programming info
+    Programming info
 
 All functions output a small array, which we'll call $return for now.
 
@@ -10,7 +10,7 @@ $return[1] is the offset over the whole bencoded data of the next
 
 numberdecode returns [0] as the integer read, and [1]-1 points to the
 symbol that was interprented as the end of the interger (either "e" or
-":"). 
+":").
 numberdecode is used for integer decodes both for i11e and 11:hello there
 so it is tolerant of the ending symbol.
 
@@ -36,7 +36,7 @@ Known bugs:
 // Protect our namespace using a class
 class BDecode
 {
-    function numberdecode($wholefile, $offset)
+    public function numberdecode($wholefile, $offset)
     {
         // Funky handling of negative numbers and zero
         $negative = false;
@@ -60,12 +60,12 @@ class BDecode
             if ($wholefile[$offset] >= '0' && $wholefile[$offset] <= '9') {
                 $ret[0] *= 10;
                 //Added 2005.02.21 - VisiGod
-           //Changing the type of variable from integer to double to prevent a numeric overflow
+                //Changing the type of variable from integer to double to prevent a numeric overflow
                 settype($ret[0], 'double');
                 //Added 2005.02.21 - VisiGod
                 $ret[0] += ord($wholefile[$offset]) - ord('0');
                 $offset++;
-            } else if ($wholefile[$offset] == 'e' || $wholefile[$offset] == ':') {
+            } elseif ($wholefile[$offset] == 'e' || $wholefile[$offset] == ':') {
                 // Tolerate : or e because this is a multiuse function
                 $ret[1] = $offset+1;
                 if ($negative) {
@@ -81,7 +81,7 @@ class BDecode
         }
     }
 
-    function decodeEntry($wholefile, $offset = 0)
+    public function decodeEntry($wholefile, $offset = 0)
     {
         if ($wholefile[$offset] == 'd') {
             return $this->decodeDict($wholefile, $offset);
@@ -106,7 +106,7 @@ class BDecode
         return $ret;
     }
 
-    function decodeList($wholefile, $offset)
+    public function decodeList($wholefile, $offset)
     {
         if ($wholefile[$offset] != 'l') {
             return [false];
@@ -129,7 +129,7 @@ class BDecode
     }
 
     // Tries to construct an array
-    function decodeDict($wholefile, $offset = 0)
+    public function decodeDict($wholefile, $offset = 0)
     {
         if ($wholefile[$offset] == 'l') {
             return $this->decodeList($wholefile, $offset);
@@ -146,7 +146,7 @@ class BDecode
             }
             $left = $this->decodeEntry($wholefile, $offset);
             if ($left[0]===false) {
-                 die("stop...".$left[1]);
+                die("stop...".$left[1]);
                 return false;
             }
             

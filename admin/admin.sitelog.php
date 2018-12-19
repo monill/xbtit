@@ -31,18 +31,18 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 if (!$CURUSER || $CURUSER["admin_access"]!="yes") {
-       err_msg(ERROR, NOT_ADMIN_CP_ACCESS);
-       stdfoot();
-       exit;
+    err_msg(ERROR, NOT_ADMIN_CP_ACCESS);
+    stdfoot();
+    exit;
 } else {
     $delete_timeout=time() - (60*60*24*7); // delete log older then 7 days
     do_sqlquery("DELETE FROM {$TABLE_PREFIX}logs where added<$delete_timeout");

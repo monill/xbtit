@@ -32,31 +32,31 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!$CURUSER || ($CURUSER["admin_access"]!="yes" && $CURUSER["edit_users"]!="yes")) {
-       err_msg($language["ERROR"], $language["NOT_ADMIN_CP_ACCESS"]);
-       stdfoot();
-       exit;
+    err_msg($language["ERROR"], $language["NOT_ADMIN_CP_ACCESS"]);
+    stdfoot();
+    exit;
 }
 
 // Additional admin check by miskotes
 $aid = max(0, $_GET["user"]);
 $arandom = max(0, $_GET["code"]);
 if (!$aid || empty($aid) || $aid==0 || !$arandom || empty($arandom) || $arandom==0) {
-       err_msg($language["ERROR"], $language["NOT_ADMIN_CP_ACCESS"]);
-       stdfoot();
-       exit;
+    err_msg($language["ERROR"], $language["NOT_ADMIN_CP_ACCESS"]);
+    stdfoot();
+    exit;
 }
 //if ($arandom!=$ranid["random"] || $aid!=$ranid["id"])
 //{
 $mqry=do_sqlquery("select u.id, ul.admin_access from {$TABLE_PREFIX}users u INNER JOIN {$TABLE_PREFIX}users_level ul on ul.id=u.id_level WHERE u.id=$aid AND random=$arandom AND (admin_access='yes' OR edit_users='yes') AND username=".sqlesc($CURUSER["username"]), true);
 
 if (mysqli_num_rows($mqry)<1) {
-       err_msg($language["ERROR"], $language["NOT_ADMIN_CP_ACCESS"]);
-       stdfoot();
-       exit;
+    err_msg($language["ERROR"], $language["NOT_ADMIN_CP_ACCESS"]);
+    stdfoot();
+    exit;
 } else {
     $mres=mysqli_fetch_assoc($mqry);
 }

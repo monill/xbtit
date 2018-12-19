@@ -32,11 +32,11 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 $admintpl->set("test_ok2", false, true);
 $admintpl->set("manual_install", true, true);
@@ -145,7 +145,7 @@ switch ($action) {
                     die;
                 }
             } else {
-                 stderr($language["ERROR"], join("<br />\n", $newhack->errors));
+                stderr($language["ERROR"], join("<br />\n", $newhack->errors));
             }
         } else {
             stderr($language["ERROR"], $language["HACK_BAD_ID"]);
@@ -281,7 +281,7 @@ switch ($action) {
                 die;
             }
         } else {
-             stderr($language["ERROR"], join("<br />\n", $newhack->errors));
+            stderr($language["ERROR"], join("<br />\n", $newhack->errors));
         }
 
         break;

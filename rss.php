@@ -102,15 +102,13 @@ if ($CURUSER["view_torrents"]=="yes") {
         $descr=format_comment($item['description']."\n");
         $seeders=strip_tags($item['seeders']);
         $leechers=strip_tags($item['leechers']);
-        // output to browser
-
-    ?>
+        // output to browser ?>
 
     <item>
-    <title><![CDATA[<?php print htmlspecialchars("[".TORRENT."] ".$filename);?>]]></title>
-    <description><![CDATA[<?php print ($descr)." (".SEEDERS." ".safehtml($seeders)." -- ".LEECHERS." ".safehtml($leechers);?>)]]></description>
-    <link><?php print $BASEURL;?>/index.php?page=torrent-details&amp;id=<?php print $id;?></link>
-    <pubDate><?php print $added;?></pubDate>
+    <title><![CDATA[<?php print htmlspecialchars("[".TORRENT."] ".$filename); ?>]]></title>
+    <description><![CDATA[<?php print($descr)." (".SEEDERS." ".safehtml($seeders)." -- ".LEECHERS." ".safehtml($leechers); ?>)]]></description>
+    <link><?php print $BASEURL; ?>/index.php?page=torrent-details&amp;id=<?php print $id; ?></link>
+    <pubDate><?php print $added; ?></pubDate>
     </item>
 
     <?php
@@ -129,14 +127,13 @@ if ($CURUSER["view_forum"]=="yes") {
         $added=strip_tags(date("d/m/Y H:i:s", $item['added']));
         $body=format_comment("[b]Author: ".$item['username']."[/b]\n\n".$item['body']."\n");
         // output to browser
-        $link=htmlspecialchars($BASEURL."/index.php?page=forum&action=viewtopic&topicid=$topicid&page=p$postid#$postid");
-    ?>
+        $link=htmlspecialchars($BASEURL."/index.php?page=forum&action=viewtopic&topicid=$topicid&page=p$postid#$postid"); ?>
 
     <item>
-    <title><![CDATA[<?php print ("[".FORUM."] ".$forum." - ".$subject);?>]]></title>
-    <description><![CDATA[<?php print ($body); ?>]]></description>
-    <link><?php print $link;?></link>
-    <pubDate><?php print $added;?></pubDate>
+    <title><![CDATA[<?php print("[".FORUM."] ".$forum." - ".$subject); ?>]]></title>
+    <description><![CDATA[<?php print($body); ?>]]></description>
+    <link><?php print $link; ?></link>
+    <pubDate><?php print $added; ?></pubDate>
     </item>
 
     <?php

@@ -1,5 +1,5 @@
 <?php
- 
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -58,23 +58,20 @@ if ($CURUSER["uid"] > 1) {
 
     function smile()
     {
+        print "<div align='center'><table cellpadding='1' cellspacing='1'><tr>";
 
-          print "<div align='center'><table cellpadding='1' cellspacing='1'><tr>";
-
-          global $smilies, $count;
-          reset($smilies);
+        global $smilies, $count;
+        reset($smilies);
 
         while ((list($code, $url) = each($smilies)) && $count<16) {
             print("\n<td><a href=\"javascript: SmileIT('".str_replace("'", "\'", $code)."')\">
                <img border=\"0\" src=\"images/smilies/$url\" alt=\"$code\" /></a></td>");
                
-                $count++;
+            $count++;
         }
   
-          print "</tr></table></div>";
-    }
-
-?>
+        print "</tr></table></div>";
+    } ?>
 
 <div style="text-align: center;">
 
@@ -129,9 +126,9 @@ if ($CURUSER["uid"] > 1) {
 
 <?php
 } else {
-    print("<div align=\"center\">\n
+        print("<div align=\"center\">\n
            <br />".$language["ERR_MUST_BE_LOGGED_SHOUT"]."</div>");
-}
+    }
 
     block_end();
 ?>

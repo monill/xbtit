@@ -32,7 +32,7 @@
 
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!$CURUSER || $CURUSER["view_forum"]!="yes") {
@@ -40,9 +40,9 @@ if (!$CURUSER || $CURUSER["view_forum"]!="yes") {
 }
 
 if (substr($btit_settings["forum"], 0, 3)=="smf") {
-     $FORUMLINK=$BASEURL."/smf";
-     $smf_content="";
-     $smf_content.="
+    $FORUMLINK=$BASEURL."/smf";
+    $smf_content="";
+    $smf_content.="
      <script type=\"text/javascript\" language=\"JavaScript\">
 
      function autoIframe(frameId){
@@ -80,9 +80,9 @@ if (substr($btit_settings["forum"], 0, 3)=="smf") {
      err_msg($language["ERROR"], "Resizable window will not work without Javascript.<br />Please enable Javascript or view the forum in a new window <a target='_new' href='$BASEURL/$FORUMLINK'>Here</a>")
      ."</noscript>";
     
-     $topic=((int)$_GET["topicid"]);
-     $action=htmlspecialchars($_GET["action"]);
-     $user=((int)$_GET["userid"]);
+    $topic=((int)$_GET["topicid"]);
+    $action=htmlspecialchars($_GET["action"]);
+    $user=((int)$_GET["userid"]);
 
     if ($action=="viewtopic") {
         $smf_content.="
@@ -106,11 +106,11 @@ if (substr($btit_settings["forum"], 0, 3)=="smf") {
           </div>";
     }
 
-     $tpl->set("main_content", set_block($block_title, "center", $smf_content));
+    $tpl->set("main_content", set_block($block_title, "center", $smf_content));
 } elseif ($btit_settings["forum"]=="ipb") {
-     $FORUMLINK=$BASEURL."/".$btit_settings["forum"];
-     $ipb_content="";
-     $ipb_content.="
+    $FORUMLINK=$BASEURL."/".$btit_settings["forum"];
+    $ipb_content="";
+    $ipb_content.="
      <script type=\"text/javascript\" language=\"JavaScript\">
 
      function autoIframe(frameId){
@@ -148,10 +148,10 @@ if (substr($btit_settings["forum"], 0, 3)=="smf") {
      err_msg($language["ERROR"], "Resizable window will not work without Javascript.<br />Please enable Javascript or view the forum in a new window <a target='_new' href='$BASEURL/$FORUMLINK'>Here</a>")
      ."</noscript>";
     
-     $topic=((int)$_GET["topicid"]);
+    $topic=((int)$_GET["topicid"]);
     ;
-     $action=htmlspecialchars($_GET["action"]);
-     $user=((int)$_GET["userid"]);
+    $action=htmlspecialchars($_GET["action"]);
+    $user=((int)$_GET["userid"]);
      
     if ($action=="viewtopic") {
         $ipb_content.="
@@ -180,7 +180,7 @@ if (substr($btit_settings["forum"], 0, 3)=="smf") {
           </div>";
     }
 
-     $tpl->set("main_content", set_block($block_title, "center", $ipb_content));
+    $tpl->set("main_content", set_block($block_title, "center", $ipb_content));
 } else {
     if (isset($_GET["action"])) {
         $action = $_GET["action"];
@@ -198,22 +198,21 @@ if (substr($btit_settings["forum"], 0, 3)=="smf") {
                 $ori_string=highlight_search($ori_string, $hl);
             }
         }
-         $h=strtoupper($ori_string);
-         $n=strtoupper($hl_words);
-         $pos=strpos($h, $n);
+        $h=strtoupper($ori_string);
+        $n=strtoupper($hl_words);
+        $pos=strpos($h, $n);
         if ($pos !== false) {
             $var=substr($ori_string, 0, $pos)."<span class=\"highlight\">".substr($ori_string, $pos, strlen($hl_words))."</span>";
             $var.=substr($ori_string, ($pos+strlen($hl_words)));
             $ori_string=$var;
         }
-         return $ori_string;
+        return $ori_string;
     }
 
 
 
     function forum_pager($rpp, $count, $href, $opts = [])
     {
-
         global $language;
 
         if ($rpp!=0) {
@@ -266,8 +265,8 @@ if (substr($btit_settings["forum"], 0, 3)=="smf") {
             $pager .= "\n&nbsp;<span class=\"pager\"><a href=\"{$href}$pagename=1\">&nbsp;&laquo;</a></span>";
             $pager .= "\n<span class=\"pager\"><a href=\"{$href}$pagename=".($page-1)."\">&lt;&nbsp;</a></span>";
         }
-    //    else
-    //        $pager .= "\n<span class=\"pager\">&lt;&nbsp;</span>";
+        //    else
+        //        $pager .= "\n<span class=\"pager\">&lt;&nbsp;</span>";
 
         if ($count) {
             for ($i = $begin; $i <= $end; $i++) {
@@ -283,8 +282,8 @@ if (substr($btit_settings["forum"], 0, 3)=="smf") {
                 $pager .= "\n&nbsp;<span class=\"pager\"><a href=\"{$href}$pagename=".($page+1)."\">&nbsp;&gt;</a></span>";
                 $pager .= "\n&nbsp;<span class=\"pager\"><a href=\"{$href}$pagename=$pages\">&nbsp;&raquo;</a></span>";
             }
-    //        else
-    //            $pager .= "\n&nbsp;<span class=\"pager\">&nbsp;&gt;</span>";
+            //        else
+            //            $pager .= "\n&nbsp;<span class=\"pager\">&nbsp;&gt;</span>";
 
             $pagertop = "$pager\n</form>";
             $pagerbottom = str_replace("change_page", "change_page1", $pager)."\n";

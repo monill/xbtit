@@ -32,7 +32,7 @@
 
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -46,15 +46,15 @@ if (!isset($_GET["returnto"])) {
 $link=rawurlencode($_GET["returnto"]);
 
 if ($CURUSER["view_users"]!="yes") {
-       err_msg($language["ERROR"], $language["NOT_AUTHORIZED"]." ".$language["MEMBERS"]);
-       stdfoot();
-       die();
+    err_msg($language["ERROR"], $language["NOT_AUTHORIZED"]." ".$language["MEMBERS"]);
+    stdfoot();
+    die();
 }
 
 if ($id==1) { // trying to view guest details?
-       err_msg($language["ERROR"], $language["GUEST_DETAILS"]);
-       stdfoot();
-       die();
+    err_msg($language["ERROR"], $language["GUEST_DETAILS"]);
+    stdfoot();
+    die();
 }
 
 if ($XBTT_USE) {
@@ -87,9 +87,9 @@ if ($id>1) {
         $row=$res[0];
     }
 } else {
-       err_msg($language["ERROR"], $language["BAD_ID"]);
-       stdfoot();
-       die();
+    err_msg($language["ERROR"], $language["BAD_ID"]);
+    stdfoot();
+    die();
 }
 
 include("include/offset.php");
@@ -99,13 +99,13 @@ if (((int)$row["downloaded"])>0) {
     $sr = $row["uploaded"]/$row["downloaded"];
     if ($sr >= 4) {
         $s = "images/smilies/thumbsup.gif";
-    } else if ($sr >= 2) {
+    } elseif ($sr >= 2) {
         $s = "images/smilies/grin.gif";
-    } else if ($sr >= 1) {
+    } elseif ($sr >= 1) {
         $s = "images/smilies/smile1.gif";
-    } else if ($sr >= 0.5) {
+    } elseif ($sr >= 0.5) {
         $s = "images/smilies/noexpression.gif";
-    } else if ($sr >= 0.25) {
+    } elseif ($sr >= 0.25) {
         $s = "images/smilies/sad.gif";
     } else {
         $s = "images/smilies/thumbsdown.gif";
@@ -151,27 +151,27 @@ $userdetailtpl -> set("userdetail_local_time", (date("d/m/Y H:i:s", time()-$offs
 $userdetailtpl -> set("userdetail_downloaded", (makesize($row["downloaded"])));
 $userdetailtpl -> set("userdetail_uploaded", (makesize($row["uploaded"])));
 $userdetailtpl -> set("userdetail_ratio", ($ratio));
-$userdetailtpl-> set("userdetail_forum_internal", ( $GLOBALS["FORUMLINK"] == '' || $GLOBALS["FORUMLINK"] == 'internal' || substr($GLOBALS["FORUMLINK"], 0, 3) == 'smf' || $GLOBALS["FORUMLINK"] == 'ipb'), true);
+$userdetailtpl-> set("userdetail_forum_internal", ($GLOBALS["FORUMLINK"] == '' || $GLOBALS["FORUMLINK"] == 'internal' || substr($GLOBALS["FORUMLINK"], 0, 3) == 'smf' || $GLOBALS["FORUMLINK"] == 'ipb'), true);
 
 // Only show if forum is internal
 if ($GLOBALS["FORUMLINK"] == '' || $GLOBALS["FORUMLINK"] == 'internal') {
     $sql = get_result("SELECT count(*) as tp FROM {$TABLE_PREFIX}posts p INNER JOIN {$TABLE_PREFIX}users u ON p.userid = u.id WHERE u.id = " . $id, true, $btit_settings['cache_duration']);
     $posts = $sql[0]['tp'];
     unset($sql);
-    $memberdays = max(1, round(( time() - $row['joined'] ) / 86400));
+    $memberdays = max(1, round((time() - $row['joined']) / 86400));
     $posts_per_day = number_format(round($posts / $memberdays, 2), 2);
     $userdetailtpl-> set("userdetail_forum_posts", $posts . " &nbsp; [" . sprintf($language["POSTS_PER_DAY"], $posts_per_day) . "]");
 } elseif (substr($GLOBALS["FORUMLINK"], 0, 3)=="smf") {
     $forum=get_result("SELECT `date".(($GLOBALS["FORUMLINK"]=="smf")?"R":"_r")."egistered`, `posts` FROM `{$db_prefix}members` WHERE ".(($GLOBALS["FORUMLINK"]=="smf")?"`ID_MEMBER`":"`id_member`")."=".$row["smf_fid"], true, $btit_settings['cache_duration']);
     $forum=$forum[0];
-    $memberdays = max(1, round(( time() - (($GLOBALS["FORUMLINK"]=="smf")?$forum["dateRegistered"]:$forum["date_registered"]) ) / 86400));
+    $memberdays = max(1, round((time() - (($GLOBALS["FORUMLINK"]=="smf")?$forum["dateRegistered"]:$forum["date_registered"])) / 86400));
     $posts_per_day = number_format(round($forum["posts"] / $memberdays, 2), 2);
     $userdetailtpl-> set("userdetail_forum_posts", $forum["posts"] . " &nbsp; [" . sprintf($language["POSTS_PER_DAY"], $posts_per_day) . "]");
     unset($forum);
 } elseif ($GLOBALS["FORUMLINK"]=="ipb") {
     $forum=get_result("SELECT `joined`, `posts` FROM `{$ipb_prefix}members` WHERE `member_id`=".$row["ipb_fid"], true, $btit_settings['cache_duration']);
     $forum=$forum[0];
-    $memberdays = max(1, round(( time() - $forum["joined"] ) / 86400));
+    $memberdays = max(1, round((time() - $forum["joined"]) / 86400));
     $posts_per_day = number_format(round($forum["posts"] / $memberdays, 2), 2);
     $userdetailtpl-> set("userdetail_forum_posts", $forum["posts"] . " &nbsp; [" . sprintf($language["POSTS_PER_DAY"], $posts_per_day) . "]");
     unset($forum);
@@ -193,8 +193,8 @@ if ($resuploaded && $numtorrent>0) {
     $uptortpl= [];
     $i=0;
     foreach ($resuploaded as $ud_id => $rest) {
-           $rest["filename"]=unesc($rest["filename"]);
-           $filename=cut_string($rest["filename"], ((int)$btit_settings["cut_name"]));
+        $rest["filename"]=unesc($rest["filename"]);
+        $filename=cut_string($rest["filename"], ((int)$btit_settings["cut_name"]));
         if ($GLOBALS["usepopup"]) {
             $uptortpl[$i]["filename"]="<a href=\"javascript:popdetails('index.php?page=torrent-details&amp;id=".$rest{"info_hash"}."')\" title=\"".$language["VIEW_DETAILS"].": ".$rest["filename"]."\">".$filename."</a>";
             $uptortpl[$i]["added"]=date("d/m/Y", $rest["added"]-$offset);
@@ -225,7 +225,7 @@ if ($resuploaded && $numtorrent>0) {
             $i++;
         }
     }
-          $userdetailtpl->set("uptor", $uptortpl);
+    $userdetailtpl->set("uptor", $uptortpl);
 } else {
     $userdetailtpl->set("RESULTS", false, true);
 }
@@ -252,7 +252,7 @@ if ($anq[0]['tp']>0) {
     list($pagertop, $pagerbottom, $limit) = pager(($utorrents==0?15:$utorrents), $anq[0]['tp'], "index.php?page=userdetails&amp;id=$id&amp;pagename=active&amp;", ["pagename" => "active"]);
     $userdetailtpl->set("pagertopact", $pagertop);
     if ($XBTT_USE) {
-            $anq=get_result("SELECT '127.0.0.1' as ip, f.info_hash as infohash, f.filename, f.size, IF(p.left=0,'seeder','leecher') as status, p.downloaded, p.uploaded, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished
+        $anq=get_result("SELECT '127.0.0.1' as ip, f.info_hash as infohash, f.filename, f.size, IF(p.left=0,'seeder','leecher') as status, p.downloaded, p.uploaded, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished
                         FROM xbt_files_users p INNER JOIN xbt_files x ON p.fid=x.fid INNER JOIN {$TABLE_PREFIX}files f ON f.bin_hash = x.info_hash
                         WHERE p.uid=$id AND p.active=1 ORDER BY status DESC $limit", true, $btit_settings['cache_duration']);
     } else {
@@ -280,7 +280,7 @@ if ($anq[0]['tp']>0) {
                 $tortpl[$i]["downloaded"]=makesize($torlist['downloaded']);
                 $tortpl[$i]["uploaded"]=makesize($torlist['uploaded']);
                 if ($torlist['downloaded']>0) {
-                     $peerratio=number_format($torlist['uploaded']/$torlist['downloaded'], 2);
+                    $peerratio=number_format($torlist['uploaded']/$torlist['downloaded'], 2);
                 } else {
                     $peerratio='&#8734;';
                 }
@@ -299,7 +299,7 @@ if ($anq[0]['tp']>0) {
                 $tortpl[$i]["downloaded"]=makesize($torlist['downloaded']);
                 $tortpl[$i]["uploaded"]=makesize($torlist['uploaded']);
                 if ($torlist['downloaded']>0) {
-                     $peerratio=number_format($torlist['uploaded']/$torlist['downloaded'], 2);
+                    $peerratio=number_format($torlist['uploaded']/$torlist['downloaded'], 2);
                 } else {
                     $peerratio='&#8734;';
                 }
@@ -343,8 +343,8 @@ if ($anq[0]['th']>0) {
     }
 //    print("<div align=\"center\">$pagertop</div>");
     foreach ($anq as $ud_id => $torlist) {
-            $torlist['filename']=unesc($torlist['filename']);
-            $filename=cut_string($torlist['filename'], ((int)$btit_settings["cut_name"]));
+        $torlist['filename']=unesc($torlist['filename']);
+        $filename=cut_string($torlist['filename'], ((int)$btit_settings["cut_name"]));
 
         if ($GLOBALS["usepopup"]) {
             $torhistory[$i]["filename"]="<a href=\"javascript:popdetails('index.php?page=torrent-details&amp;id=".$torlist['info_hash']."')\" title=\"".$language["VIEW_DETAILS"].": ".$torlist['filename']."\">".$filename."</a>";

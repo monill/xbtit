@@ -32,16 +32,16 @@
 
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 if ($CURUSER["view_users"]=="no") {    // start 'view_users'
-       err_msg($language["ERROR"], $language["NOT_AUTHORIZED"]." ".$language["MEMBERS"]."!");
-       stdfoot();
-       exit;
+    err_msg($language["ERROR"], $language["NOT_AUTHORIZED"]." ".$language["MEMBERS"]."!");
+    stdfoot();
+    exit;
 } else {
-         global $CURUSER, $STYLEPATH, $CURRENTPATH, $TABLE_PREFIX, $XBTT_USE;
+    global $CURUSER, $STYLEPATH, $CURRENTPATH, $TABLE_PREFIX, $XBTT_USE;
 
     if ($XBTT_USE) {
         $udownloaded="u.downloaded+IFNULL(x.downloaded,0)";
@@ -60,8 +60,8 @@ if ($CURUSER["view_users"]=="no") {    // start 'view_users'
         $_GET["level"] = "";
     }
 
-         $search=htmlspecialchars($_GET["searchtext"]);
-         $addparams="";
+    $search=htmlspecialchars($_GET["searchtext"]);
+    $addparams="";
     if ($search!="") {
         $where=" AND u.username LIKE '%".htmlspecialchars(mysqli_query($GLOBALS['conn'], $_GET["searchtext"]))."%'";
         $addparams="searchtext=$search";
@@ -69,7 +69,7 @@ if ($CURUSER["view_users"]=="no") {    // start 'view_users'
         $where="";
     }
 
-         $level=((int)0+$_GET["level"]);
+    $level=((int)0+$_GET["level"]);
     if ($level>0) {
         $where.=" AND u.id_level=$level";
         if ($addparams!="") {
@@ -79,8 +79,8 @@ if ($CURUSER["view_users"]=="no") {    // start 'view_users'
         }
     }
 
-          $order_param=3;
-          // getting order
+    $order_param=3;
+    // getting order
     if (isset($_GET["order"])) {
         $order_param=(int)$_GET["order"];
         switch ($order_param) {
@@ -115,7 +115,7 @@ if ($CURUSER["view_users"]=="no") {    // start 'view_users'
         $order="joined";
     }
 
-          $by_param=1;
+    $by_param=1;
     if (isset($_GET["by"])) {
         $by_param=(int)$_GET["by"];
         $by=($by_param==1?"ASC":"DESC");
@@ -127,11 +127,11 @@ if ($CURUSER["view_users"]=="no") {    // start 'view_users'
         $addparams.="&amp;";
     }
 
-         $scriptname = htmlspecialchars($_SERVER["PHP_SELF"]."?page=users");
+    $scriptname = htmlspecialchars($_SERVER["PHP_SELF"]."?page=users");
 
-         $res=get_result("select COUNT(*) as tu FROM {$TABLE_PREFIX}users u INNER JOIN {$TABLE_PREFIX}users_level ul ON u.id_level=ul.id WHERE u.id>1 $where", true, $btit_settings['cache_duration']);
-         $count = $res[0]['tu'];
-         list($pagertop, $pagerbottom, $limit) = pager(20, $count, $scriptname."&amp;" . $addparams.(strlen($addparam)>0?"&amp;":"")."order=$order_param&amp;by=$by_param&amp;");
+    $res=get_result("select COUNT(*) as tu FROM {$TABLE_PREFIX}users u INNER JOIN {$TABLE_PREFIX}users_level ul ON u.id_level=ul.id WHERE u.id>1 $where", true, $btit_settings['cache_duration']);
+    $count = $res[0]['tu'];
+    list($pagertop, $pagerbottom, $limit) = pager(20, $count, $scriptname."&amp;" . $addparams.(strlen($addparam)>0?"&amp;":"")."order=$order_param&amp;by=$by_param&amp;");
 
     if ($by=="ASC") {
         $mark="&nbsp;&uarr;";
@@ -139,7 +139,7 @@ if ($CURUSER["view_users"]=="no") {    // start 'view_users'
         $mark="&nbsp;&darr;";
     }
 
-// load language file
+    // load language file
     require(load_language("lang_users.php"));
 
     $userstpl = new bTemplate();
@@ -150,11 +150,11 @@ if ($CURUSER["view_users"]=="no") {    // start 'view_users'
     $res=get_result("SELECT id,level FROM {$TABLE_PREFIX}users_level WHERE id_level>1 ORDER BY id_level", true, $btit_settings['cache_duration']);
     $select="";
     foreach ($res as $id => $row) {    // start while
-          $select.="<option value='".$row["id"]."'";
+        $select.="<option value='".$row["id"]."'";
         if ($level==$row["id"]) {
             $select.="selected=\"selected\"";
         }
-          $select.=">".$row["level"]."</option>\n";
+        $select.=">".$row["level"]."</option>\n";
     }    // end while
           
     $userstpl->set("users_search_select", $select);
@@ -187,11 +187,11 @@ if ($CURUSER["view_users"]=="no") {    // start 'view_users'
     $i=0;
 
     foreach ($rusers as $id => $row_user) {     // start while
-          $users[$i]["username"] = "<a href=\"index.php?page=userdetails&amp;id=".$row_user["id"]."\">".unesc($row_user["prefixcolor"]).unesc($row_user["username"]).unesc($row_user["suffixcolor"])."</a>";
-          $users[$i]["userlevel"] = $row_user["level"];
-          $users[$i]["joined"] = $row_user["joined"]==0 ? $language["NOT_AVAILABLE"] : date("d/m/Y H:i:s", $row_user["joined"]-$offset);
-          $users[$i]["lastconnect"] = $row_user["lastconnect"]==0 ? $language["NOT_AVAILABLE"] : date("d/m/Y H:i:s", $row_user["lastconnect"]-$offset);
-          $users[$i]["flag"] = $row_user["flag"] == 0 ? "<img src='images/flag/unknown.gif' alt='".$language["UNKNOWN"]."' title='".$language["UNKNOWN"]."' />" : "<img src='images/flag/" . $row_user['flagpic'] . "' alt='" . $row_user['name'] . "' title='" . $row_user['name'] . "' />";
+        $users[$i]["username"] = "<a href=\"index.php?page=userdetails&amp;id=".$row_user["id"]."\">".unesc($row_user["prefixcolor"]).unesc($row_user["username"]).unesc($row_user["suffixcolor"])."</a>";
+        $users[$i]["userlevel"] = $row_user["level"];
+        $users[$i]["joined"] = $row_user["joined"]==0 ? $language["NOT_AVAILABLE"] : date("d/m/Y H:i:s", $row_user["joined"]-$offset);
+        $users[$i]["lastconnect"] = $row_user["lastconnect"]==0 ? $language["NOT_AVAILABLE"] : date("d/m/Y H:i:s", $row_user["lastconnect"]-$offset);
+        $users[$i]["flag"] = $row_user["flag"] == 0 ? "<img src='images/flag/unknown.gif' alt='".$language["UNKNOWN"]."' title='".$language["UNKNOWN"]."' />" : "<img src='images/flag/" . $row_user['flagpic'] . "' alt='" . $row_user['name'] . "' title='" . $row_user['name'] . "' />";
                        
         //user ratio
         if (((int)$row_user["downloaded"])>0) {

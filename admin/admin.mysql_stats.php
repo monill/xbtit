@@ -31,11 +31,11 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -77,7 +77,7 @@ function formatByteDown($value, $limes = 6, $comma = 0)
 
     for ($d = 6, $ex = 15; $d >= 1; $d--, $ex-=3) {
         if (isset($GLOBALS['byteUnits'][$d]) && $value >= $li * pow(10, $ex)) {
-            $value = round($value / ( pow(1024, $d) / $dh)) /$dh;
+            $value = round($value / (pow(1024, $d) / $dh)) /$dh;
             $unit = $GLOBALS['byteUnits'][$d];
             break 1;
         } // end if
@@ -246,13 +246,13 @@ unset($tmp_array);
                             <td class="lista">&nbsp;Failed Attempts&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format($serverStatus['Aborted_connects'], 0, '.', ','); ?>&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format(($serverStatus['Aborted_connects'] * 3600 / $serverStatus['Uptime']), 2, '.', ','); ?>&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0 ) ? number_format(($serverStatus['Aborted_connects'] * 100 / $serverStatus['Connections']), 2, '.', ',') . '&nbsp;%' : '---'; ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0) ? number_format(($serverStatus['Aborted_connects'] * 100 / $serverStatus['Connections']), 2, '.', ',') . '&nbsp;%' : '---'; ?>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="lista">&nbsp;Aborted Clients&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format($serverStatus['Aborted_clients'], 0, '.', ','); ?>&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format(($serverStatus['Aborted_clients'] * 3600 / $serverStatus['Uptime']), 2, '.', ','); ?>&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0 ) ? number_format(($serverStatus['Aborted_clients'] * 100 / $serverStatus['Connections']), 2, '.', ',') . '&nbsp;%' : '---'; ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0) ? number_format(($serverStatus['Aborted_clients'] * 100 / $serverStatus['Connections']), 2, '.', ',') . '&nbsp;%' : '---'; ?>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="lista">&nbsp;Total&nbsp;</td>
@@ -310,10 +310,9 @@ unset($tmp_array);
 $useBgcolorOne = true;
 $countRows = 0;
 foreach ($queryStats as $name => $value) {
-// For the percentage column, use Questions - Connections, because
-// the number of connections is not an item of the Query types
-// but is included in Questions. Then the total of the percentages is 100.
-?>
+    // For the percentage column, use Questions - Connections, because
+    // the number of connections is not an item of the Query types
+    // but is included in Questions. Then the total of the percentages is 100. ?>
                         <tr>
                             <td class="lista">&nbsp;<?php echo htmlspecialchars($name); ?>&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format($value, 0, '.', ','); ?>&nbsp;</td>
@@ -322,9 +321,8 @@ foreach ($queryStats as $name => $value) {
                         </tr>
 <?php
     $useBgcolorOne = !$useBgcolorOne;
-if (++$countRows == ceil(count($queryStats) / 2)) {
-    $useBgcolorOne = true;
-?>
+    if (++$countRows == ceil(count($queryStats) / 2)) {
+        $useBgcolorOne = true; ?>
             </table>
         </td>
         <td valign="top">
@@ -335,7 +333,7 @@ if (++$countRows == ceil(count($queryStats) / 2)) {
                     <td class="header">&nbsp;%&nbsp;</td>
                 </tr>
 <?php
-}
+    }
 }
 unset($countRows);
 unset($useBgcolorOne);
@@ -356,7 +354,7 @@ unset($serverStatus['Questions']);
 unset($serverStatus['Uptime']);
 
 if (!empty($serverStatus)) {
-?>
+    ?>
     <table align="center" width="96%" class="lista" border="0" cellpadding="4" cellspacing="1">
       <tr>
         <td>
@@ -382,17 +380,16 @@ if (!empty($serverStatus)) {
 <?php
     $useBgcolorOne = true;
     $countRows = 0;
-foreach ($serverStatus as $name => $value) {
-?>
+    foreach ($serverStatus as $name => $value) {
+        ?>
                 <tr>
                     <td class="lista">&nbsp;<?php echo htmlspecialchars(str_replace('_', ' ', $name)); ?>&nbsp;</td>
                     <td class="lista" align="right">&nbsp;<?php echo htmlspecialchars($value); ?>&nbsp;</td>
                 </tr>
 <?php
 $useBgcolorOne = !$useBgcolorOne;
-if (++$countRows == ceil(count($serverStatus) / 3) || $countRows == ceil(count($serverStatus) * 2 / 3)) {
-    $useBgcolorOne = true;
-?>
+        if (++$countRows == ceil(count($serverStatus) / 3) || $countRows == ceil(count($serverStatus) * 2 / 3)) {
+            $useBgcolorOne = true; ?>
         </table>
     </td>
     <td valign="top">
@@ -402,10 +399,9 @@ if (++$countRows == ceil(count($serverStatus) / 3) || $countRows == ceil(count($
                 <td class="header">&nbsp;Value&nbsp;</td>
             </tr>
 <?php
-}
-}
-    unset($useBgcolorOne);
-?>
+        }
+    }
+    unset($useBgcolorOne); ?>
                     </table>
                 </td>
             </tr>

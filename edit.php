@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -47,11 +47,11 @@ if ($link=="") {
 if ((isset($_POST["comment"])) && (isset($_POST["name"]))) {
     if ($_POST["action"]==$language["FRM_CONFIRM"]) {
         if ($_POST["name"]=='') {
-             stderr("Error!", "You must specify torrent name.");
+            stderr("Error!", "You must specify torrent name.");
         }
 
         if ($_POST["comment"]=='') {
-             stderr("Error!", "You must specify description.");
+            stderr("Error!", "You must specify description.");
         }
 
         $fname=htmlspecialchars(AddSlashes(unesc($_POST["name"])));
@@ -88,23 +88,23 @@ if (isset($_GET["info_hash"])) {
         err_msg($language["ERROR"], $language["TORRENT_EDIT_ERROR"]);
     } else {
         if (!$CURUSER || $CURUSER["uid"]<2 || ($CURUSER["edit_torrents"]=="no" && $CURUSER["uid"]!=$results["uploader"])) {
-               stderr($language["ERROR"], $language["CANT_EDIT_TORR"]);
+            stderr($language["ERROR"], $language["CANT_EDIT_TORR"]);
         }
 
         $torrenttpl=new bTemplate();
         $torrenttpl->set("language", $language);
-    /*
-        $s = "<select name=\"type\">\n<option value=\"0\">(".$language["CHOOSE_ONE"].")</option>\n";
-        $cats = genrelist();
+        /*
+            $s = "<select name=\"type\">\n<option value=\"0\">(".$language["CHOOSE_ONE"].")</option>\n";
+            $cats = genrelist();
 
-        foreach ($cats as $row) {
-        $s .= "<option value=\"" . $row["id"] . "\"";
-        if ($row["id"] == $results["cat_name"])
-            $s .= " \"selected\"";
-        $s .= ">" . unesc($row["name"]) . "</option>\n";
-        }
-        $s .= "</select>\n";
-    */
+            foreach ($cats as $row) {
+            $s .= "<option value=\"" . $row["id"] . "\"";
+            if ($row["id"] == $results["cat_name"])
+                $s .= " \"selected\"";
+            $s .= ">" . unesc($row["name"]) . "</option>\n";
+            }
+            $s .= "</select>\n";
+        */
 
         $torrent= [];
         $torrent["link"]="index.php?page=edit&info_hash=".$results["info_hash"]."&returnto=".urlencode($link);

@@ -44,15 +44,14 @@ require_once $BASEPATH.'/include/crk_protection.php';
 // informations given in config + pid if private
 // thank you petr1fied for the code.
 if ($XBTT_USE) {
-
     function implode_with_keys($glue, $array)
     {
-           $output = [];
+        $output = [];
         foreach ($array as $key => $item) {
-                $output[] = $key . "=" . $item;
+            $output[] = $key . "=" . $item;
         }
 
-           return implode($glue, $output);
+        return implode($glue, $output);
     }
 
     if (isset($_GET["pid"])) {
@@ -66,8 +65,7 @@ if ($XBTT_USE) {
 
     if ($pid!="") { // private announce
         header("Location: $XBTT_URL/$pid/scrape?" . $query_string);
-    } else // public
-    {
+    } else { // public
         header("Location: $XBTT_URL/scrape?" . $query_string);
     }
 
@@ -133,15 +131,15 @@ if (isset($_GET["info_hash"])) {
     } else {
         $qryStr=$_SERVER["QUERY_STRING"];
     }
-  // support for multi-scrape
-  // more info @ http://wiki.depthstrike.com/index.php/P2P:Programming:Trackers:PHP:Multiscrape
+    // support for multi-scrape
+    // more info @ http://wiki.depthstrike.com/index.php/P2P:Programming:Trackers:PHP:Multiscrape
     foreach (explode("&", $qryStr) as $item) {
         if (substr($item, 0, 10) == "info_hash=") {
             $ihash=urldecode(substr($item, 10));
 
             if (strlen($ihash) == 20) {
                 $ihash = bin2hex($ihash);
-            } else if (strlen($ihash) == 40) {
+            } elseif (strlen($ihash) == 40) {
                 if (!verifyHash($ihash)) {
                     continue; //showError(INVALID_INFO_HASH);
                 } else {
@@ -149,7 +147,7 @@ if (isset($_GET["info_hash"])) {
                 }
             }
 
-             $newmatches[]=$ihash;
+            $newmatches[]=$ihash;
         }
     }
 

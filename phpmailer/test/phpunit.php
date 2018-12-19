@@ -50,12 +50,12 @@ function trace($msg)
 class Exception
 {
     /* Emulate a Java exception, sort of... */
-    var $message;
-    function Exception($message)
+    public $message;
+    public function Exception($message)
     {
         $this->message = $message;
     }
-    function getMessage()
+    public function getMessage()
     {
         return $this->message;
     }

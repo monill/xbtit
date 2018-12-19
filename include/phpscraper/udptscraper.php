@@ -1,29 +1,29 @@
 <?php
     /* 	Torrent UDP Scraper
-		v1.2
-		
-		2010 by Johannes Zinnau
-		johannes@johnimedia.de
-		
-		Licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License
-		http://creativecommons.org/licenses/by-sa/3.0/
-		
-		It would be very nice if you send me your changes on this class, so that i can include them if they are improve it.
-		Thanks!
-		
-		Usage:
-		try{
-			$timeout = 2;
-			
-			$scraper = new udptscraper($timeout);
-			$ret = $scraper->scrape('udp://tracker.tld:port',array('0000000000000000000000000000000000000000'));
-			
-			print_r($ret);
-		}catch(ScraperException $e){
-			echo('Error: ' . $e->getMessage() . "<br />\n");
-			echo('Connection error: ' . ($e->isConnectionError() ? 'yes' : 'no') . "<br />\n");
-		}
-	*/
+        v1.2
+
+        2010 by Johannes Zinnau
+        johannes@johnimedia.de
+
+        Licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License
+        http://creativecommons.org/licenses/by-sa/3.0/
+
+        It would be very nice if you send me your changes on this class, so that i can include them if they are improve it.
+        Thanks!
+
+        Usage:
+        try{
+            $timeout = 2;
+
+            $scraper = new udptscraper($timeout);
+            $ret = $scraper->scrape('udp://tracker.tld:port',array('0000000000000000000000000000000000000000'));
+
+            print_r($ret);
+        }catch(ScraperException $e){
+            echo('Error: ' . $e->getMessage() . "<br />\n");
+            echo('Connection error: ' . ($e->isConnectionError() ? 'yes' : 'no') . "<br />\n");
+        }
+    */
     
     require_once(__DIR__ . '/tscraper.php');
     
@@ -31,7 +31,7 @@ class udptscraper extends tscraper
 {
         
     /* 	$url: Tracker url like: udp://tracker.tld:port or udp://tracker.tld:port/announce
-    $infohash: Infohash string or array (max 74 items). 40 char long infohash. 
+    $infohash: Infohash string or array (max 74 items). 40 char long infohash.
     */
     public function scrape($url, $infohash)
     {

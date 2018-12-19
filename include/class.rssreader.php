@@ -32,14 +32,14 @@
 
 class rss_reader
 {
-    function __construct()
+    public function __construct()
     {
         // constructor
     }
 
     // private
     // find the content in $text between <$tag> and </$tag>
-    function get_tag_value($text, $tag)
+    public function get_tag_value($text, $tag)
     {
         $StartPos = strpos($text, '<'.$tag)+strlen($tag)+2;
         $EndPos   = strpos($text, '</'.$tag);
@@ -53,7 +53,7 @@ class rss_reader
     // array(channel =>
     //      (title,link,description,item=>
     //             array(title,link,description,category,comments,pubDate,guid)))
-    function rss_to_array($rss_flux)
+    public function rss_to_array($rss_flux)
     {
         $fullrss=explode('<channel>', $rss_flux);
         array_shift($fullrss);

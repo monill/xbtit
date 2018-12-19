@@ -139,8 +139,8 @@ if ($files_present==$lang[0]) {
 (isset($_GET["lastacc"]) ? $lastacc=((int)$_GET["lastacc"]) : $lastacc=0);
 
 if ($act=="") {
-        echo $lang[2];
-        echo $lang[3] . (($files_present==$lang[0]) ? "#00FF00" : "#FF0000") . $lang[4] . $files_present .  $lang[5];
+    echo $lang[2];
+    echo $lang[3] . (($files_present==$lang[0]) ? "#00FF00" : "#FF0000") . $lang[4] . $files_present .  $lang[5];
     if ($files_present==$lang[1]) {
         die($lang[6] . $lang[8] . $lang[9] . $lang[35]);
     }

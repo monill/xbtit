@@ -31,7 +31,7 @@
 ////////////////////////////////////////////////////////////////////////////////////
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -44,13 +44,13 @@ if (max(0, $CURUSER["downloaded"])>0) {
     $sr = $CURUSER["uploaded"]/$CURUSER["downloaded"];
     if ($sr >= 4) {
         $s = "images/smilies/thumbsup.gif";
-    } else if ($sr >= 2) {
+    } elseif ($sr >= 2) {
         $s = "images/smilies/grin.gif";
-    } else if ($sr >= 1) {
+    } elseif ($sr >= 1) {
         $s = "images/smilies/smile1.gif";
-    } else if ($sr >= 0.5) {
+    } elseif ($sr >= 0.5) {
         $s = "images/smilies/noexpression.gif";
-    } else if ($sr >= 0.25) {
+    } elseif ($sr >= 0.25) {
         $s = "images/smilies/sad.gif";
     } else {
         $s = "images/smilies/thumbsdown.gif";
@@ -85,14 +85,14 @@ if ($GLOBALS["FORUMLINK"] == '' || $GLOBALS["FORUMLINK"] == 'internal') {
     $sql = get_result("SELECT count(*) as tp FROM {$TABLE_PREFIX}posts p INNER JOIN {$TABLE_PREFIX}users u ON p.userid = u.id WHERE u.id = " . $CURUSER["uid"], true, $btit_settings['cache_duration']);
     $posts = $sql[0]['tp'];
     unset($sql);
-    $memberdays = max(1, round(( time() - $CURUSER['joined'] ) / 86400));
+    $memberdays = max(1, round((time() - $CURUSER['joined']) / 86400));
     $posts_per_day = number_format(round($posts / $memberdays, 2), 2);
     $usercptpl->set("INTERNAL_FORUM", true, true);
     $usercptpl->set("posts", $posts."&nbsp;[" . sprintf($language["POSTS_PER_DAY"], $posts_per_day) . "]");
 } elseif (substr($GLOBALS["FORUMLINK"], 0, 3)=="smf") {
     $forum=get_result("SELECT `date".(($GLOBALS["FORUMLINK"]=="smf")?"R":"_r")."egistered`, `posts` FROM `{$db_prefix}members` WHERE ".(($GLOBALS["FORUMLINK"]=="smf")?"`ID_MEMBER`":"`id_member`")."=".$CURUSER["smf_fid"], true, $btit_settings['cache_duration']);
     $forum=$forum[0];
-    $memberdays = max(1, round(( time() - (($GLOBALS["FORUMLINK"]=="smf")?$forum["dateRegistered"]:$forum["date_registered"]) ) / 86400));
+    $memberdays = max(1, round((time() - (($GLOBALS["FORUMLINK"]=="smf")?$forum["dateRegistered"]:$forum["date_registered"])) / 86400));
     $posts_per_day = number_format(round($forum["posts"] / $memberdays, 2), 2);
     $usercptpl->set("INTERNAL_FORUM", true, true);
     $usercptpl->set("posts", $forum["posts"]."&nbsp;[" . sprintf($language["POSTS_PER_DAY"], $posts_per_day) . "]");
@@ -100,7 +100,7 @@ if ($GLOBALS["FORUMLINK"] == '' || $GLOBALS["FORUMLINK"] == 'internal') {
 } elseif ($GLOBALS["FORUMLINK"]=="ipb") {
     $forum=get_result("SELECT `joined`, `posts` FROM `{$ipb_prefix}members` WHERE `member_id`=".$CURUSER["ipb_fid"], true, $btit_settings['cache_duration']);
     $forum=$forum[0];
-    $memberdays = max(1, round(( time() - $forum["joined"] ) / 86400));
+    $memberdays = max(1, round((time() - $forum["joined"]) / 86400));
     $posts_per_day = number_format(round($forum["posts"] / $memberdays, 2), 2);
     $usercptpl->set("INTERNAL_FORUM", true, true);
     $usercptpl->set("posts", $forum["posts"]."&nbsp;[" . sprintf($language["POSTS_PER_DAY"], $posts_per_day) . "]");
@@ -134,26 +134,26 @@ if ($numtorrent>0) {
     $resuploaded = get_result("SELECT f.filename, UNIX_TIMESTAMP(f.data) as added, f.size, $tseeds as seeds, $tleechs as leechers, $tcompletes as finished, f.info_hash as hash FROM $ttables WHERE uploader=$uid ORDER BY data DESC $limit", true, $btit_settings['cache_duration']);
 }
 if ($resuploaded && count($resuploaded)>0) {
-     include("include/offset.php");
-     $usercptpl->set("RESULTS", true, true);
-     $uptortpl= [];
-     $i=0;
+    include("include/offset.php");
+    $usercptpl->set("RESULTS", true, true);
+    $uptortpl= [];
+    $i=0;
     foreach ($resuploaded as $id => $rest) {
-          $uptortpl[$i]["filename"]=cut_string(unesc($rest["filename"]), ((int)$btit_settings["cut_name"]));
-          $uptortpl[$i]["added"]=date("d/m/Y", $rest["added"]-$offset);
-          $uptortpl[$i]["size"]=makesize($rest["size"]);
-          $uptortpl[$i]["seedcolor"]=linkcolor($rest["seeds"]);
-          $uptortpl[$i]["seeds"]=$rest[seeds];
-          $uptortpl[$i]["leechcolor"]=linkcolor($rest["leechers"]);
-          $uptortpl[$i]["leechers"]=$rest[leechers];
-          $uptortpl[$i]["completed"]=($rest["finished"]>0?$rest["finished"]:"---");
-          $uptortpl[$i]["editlink"]="index.php?page=edit&amp;info_hash=".$rest["hash"]."&amp;returnto=".urlencode("index.php?page=torrents")."";
-          $uptortpl[$i]["dellink"]="index.php?page=delete&amp;info_hash=".$rest["hash"]."&amp;returnto=".urlencode("index.php?page=torrents")."";
-          $uptortpl[$i]["editimg"]=image_or_link("$STYLEPATH/images/edit.png", "", $language["EDIT"]);
-          $uptortpl[$i]["delimg"]=image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"]);
-          $i++;
+        $uptortpl[$i]["filename"]=cut_string(unesc($rest["filename"]), ((int)$btit_settings["cut_name"]));
+        $uptortpl[$i]["added"]=date("d/m/Y", $rest["added"]-$offset);
+        $uptortpl[$i]["size"]=makesize($rest["size"]);
+        $uptortpl[$i]["seedcolor"]=linkcolor($rest["seeds"]);
+        $uptortpl[$i]["seeds"]=$rest[seeds];
+        $uptortpl[$i]["leechcolor"]=linkcolor($rest["leechers"]);
+        $uptortpl[$i]["leechers"]=$rest[leechers];
+        $uptortpl[$i]["completed"]=($rest["finished"]>0?$rest["finished"]:"---");
+        $uptortpl[$i]["editlink"]="index.php?page=edit&amp;info_hash=".$rest["hash"]."&amp;returnto=".urlencode("index.php?page=torrents")."";
+        $uptortpl[$i]["dellink"]="index.php?page=delete&amp;info_hash=".$rest["hash"]."&amp;returnto=".urlencode("index.php?page=torrents")."";
+        $uptortpl[$i]["editimg"]=image_or_link("$STYLEPATH/images/edit.png", "", $language["EDIT"]);
+        $uptortpl[$i]["delimg"]=image_or_link("$STYLEPATH/images/delete.png", "", $language["DELETE"]);
+        $i++;
     }
-         $usercptpl->set("uptor", $uptortpl);
+    $usercptpl->set("uptor", $uptortpl);
 } else {
     $usercptpl->set("RESULTS", false, true);
     $usercptpl->set("pagertop", "");

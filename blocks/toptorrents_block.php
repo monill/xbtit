@@ -44,8 +44,7 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
         $sql = "SELECT info_hash as hash, seeds, leechers, dlbytes AS dwned, format(finished,0) as finished, filename, url, info, UNIX_TIMESTAMP(data) AS added, c.image, c.name AS cname, category AS catid, size, external, uploader FROM {$TABLE_PREFIX}files as f LEFT JOIN {$TABLE_PREFIX}categories as c ON c.id = f.category WHERE leechers + seeds > 0 ORDER BY CAST(finished AS UNSIGNED) DESC LIMIT " .  $GLOBALS["block_mostpoplimit"];
     }
 
-     $row = get_result($sql, true, $btit_settings['cache_duration']);
-    ?>
+    $row = get_result($sql, true, $btit_settings['cache_duration']); ?>
 
         <div class="panel panel-default">
         <div class="panel-heading">
@@ -60,9 +59,8 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
     <td align="center" width="45" class="header">&nbsp;<?php echo $language["CATEGORY"]; ?>&nbsp;</td>
 <?php
 if (max(0, $CURUSER["WT"])>0) {
-    print("<td align=\"center\" width=\"20\" class=\"header\">&nbsp".$language["WT"]."&nbsp;</td>");
-}
-?>
+        print("<td align=\"center\" width=\"20\" class=\"header\">&nbsp".$language["WT"]."&nbsp;</td>");
+    } ?>
     <td align="center" width="85" class="header">&nbsp;<?php echo $language["ADDED"]; ?>&nbsp;</td>
     <td align="center" width="60" class="header">&nbsp;<?php echo $language["SIZE"]; ?>&nbsp;</td>
     <td align="center" width="30" class="header">&nbsp;<?php echo $language["SHORT_S"]; ?>&nbsp;</td>
@@ -91,28 +89,28 @@ if (max(0, $CURUSER["WT"])>0) {
 
                 echo "\t<td align=\"center\" class=\"lista\" width=\"45\" style=\"text-align: center;\"><a class=\"toptor\" href=\"index.php?page=torrents&amp;category=$data[catid]\">" . image_or_link(($data["image"] == "" ? "" : "$STYLEPATH/images/categories/" . $data["image"]), "", $data["cname"]) . "</a></td>";
 
-      //waitingtime
-      // only if current user is limited by WT
+                //waitingtime
+                // only if current user is limited by WT
                 if (max(0, $CURUSER["WT"])>0) {
-                      $wait=0;
+                    $wait=0;
                     if (max(0, $CURUSER['downloaded'])>0) {
                         $ratio=number_format($CURUSER['uploaded']/$CURUSER['downloaded'], 2);
                     } else {
                         $ratio=0.0;
                     }
-                      $vz = $data['added']; // sql_timestamp_to_unix_timestamp($added["data"]);
-                      $timer = floor((time() - $vz) / 3600);
+                    $vz = $data['added']; // sql_timestamp_to_unix_timestamp($added["data"]);
+                    $timer = floor((time() - $vz) / 3600);
                     if ($ratio<1.0 && $CURUSER['uid']!=$data["uploader"]) {
                         $wait=$CURUSER["WT"];
                     }
-                      $wait -=$timer;
+                    $wait -=$timer;
                     if ($wait<=0) {
                         $wait=0;
                     }
 
-                       echo "\t<td align=\"center\" width=\"20\" class=\"lista\" style=\"text-align: center;\">".$wait." h</td>";
+                    echo "\t<td align=\"center\" width=\"20\" class=\"lista\" style=\"text-align: center;\">".$wait." h</td>";
                 }
-      //end waitingtime
+                //end waitingtime
                 include("include/offset.php");
                 echo "\t<td nowrap=\"nowrap\" class=\"lista\" align=\"center\" width=\"85\" style=\"text-align: center;\">" . date("d/m/Y", $data["added"]-$offset) . "</td>";
                 echo "\t<td nowrap=\"nowrap\" class=\"lista\" align=\"center\" width=\"60\" style=\"text-align: center;\">" . makesize($data["size"]) . "</td>";
@@ -136,9 +134,9 @@ if (max(0, $CURUSER["WT"])>0) {
                         }
                     }
                 } else {
-                     // linkcolor
-                     echo "\t<td align=\"center\" width=\"30\" class=\"lista ".linkcolor($data["seeds"])."\" style=\"text-align: center;\">" . $data["seeds"] . "</td>";
-                     echo "\t<td align=\"center\" width=\"30\" class=\"lista ".linkcolor($data["leechers"])."\" style=\"text-align: center;\">" .$data["leechers"] . "</td>";
+                    // linkcolor
+                    echo "\t<td align=\"center\" width=\"30\" class=\"lista ".linkcolor($data["seeds"])."\" style=\"text-align: center;\">" . $data["seeds"] . "</td>";
+                    echo "\t<td align=\"center\" width=\"30\" class=\"lista ".linkcolor($data["leechers"])."\" style=\"text-align: center;\">" .$data["leechers"] . "</td>";
                     if ($data["finished"]>0) {
                         echo "\t<td align=\"center\" width=\"40\" class=\"lista\" style=\"text-align: center;\">" . $data["finished"] . "</td>";
                     } else {
@@ -154,6 +152,6 @@ if (max(0, $CURUSER["WT"])>0) {
 
     print("</table></div></div>");
 
-        block_end();
+    block_end();
 } // end if user can view
 ?>

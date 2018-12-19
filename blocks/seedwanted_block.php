@@ -45,9 +45,7 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
     $row = get_result($sql, true, $btit_settings['cache_duration']);
 
     if (count($row)>0) {
-        block_begin("Seeder Wanted");
-
-        ?>
+        block_begin("Seeder Wanted"); ?>
          <div class="panel panel-default">
          <div class="panel-heading">
              <h4><i class="fa fa-fw fa-files-o"></i>Seeders Wanted</h4>
@@ -60,8 +58,7 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
             <?php
             if (max(0, $CURUSER["WT"])>0) {
                 print("<TD align=\"center\" class=\"header\">".$language["WT"]."</TD>");
-            }
-            ?>
+            } ?>
            <td align="center" class="header">&nbsp;<?php echo $language["ADDED"] ?>&nbsp;</td>
            <td align="center" class="header">&nbsp;<?php echo $language["SIZE"] ?>&nbsp;</td>
            <td align="center" class="header">&nbsp;<?php echo $language["SHORT_S"] ?>&nbsp;</td>
@@ -81,24 +78,24 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
                         echo "<a class=seedwant href=download.php?id=".$data["hash"]."&amp;f=" . rawurlencode($data["filename"]) . ".torrent><img src='images/torrent.gif' border='0' alt='".$language["DOWNLOAD_TORRENT"]."' title='".$language["DOWNLOAD_TORRENT"]."' /></a>";
 
 
-              //waitingtime
+                        //waitingtime
                         if (max(0, $CURUSER["WT"])>0) {
                             if (max(0, $CURUSER['downloaded'])>0) {
                                 $ratio=number_format($CURUSER['uploaded']/$CURUSER['downloaded'], 2);
                             } else {
                                 $ratio=0.0;
                             }
-                              $vz = $data['added']; // sql_timestamp_to_unix_timestamp($added["data"]);
-                              $timer = floor((time() - $vz) / 3600);
+                            $vz = $data['added']; // sql_timestamp_to_unix_timestamp($added["data"]);
+                            $timer = floor((time() - $vz) / 3600);
                             if ($ratio<1.0 && $CURUSER['uid']!=$data["uploader"]) {
-                                 $wait=$CURUSER["WT"];
+                                $wait=$CURUSER["WT"];
                             }
-                              $wait -=$timer;
+                            $wait -=$timer;
                             if ($wait<=0) {
                                 $wait=0;
                             }
                         }
-              //end waitingtime
+                        //end waitingtime
 
                         echo "</td>";
                         if ($GLOBALS["usepopup"]) {
@@ -133,9 +130,9 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
                                 }
                             }
                         } else {
-                             // linkcolor
-                             echo "\t<td align=\"center\" class=\"lista ".linkcolor($data["seeds"])."\" style=\"text-align: center;\">" . $data["seeds"] . "</td>";
-                             echo "\t<td align=\"center\" class=\"lista ".linkcolor($data["leechers"])."\" style=\"text-align: center;\">" .$data["leechers"] . "</td>";
+                            // linkcolor
+                            echo "\t<td align=\"center\" class=\"lista ".linkcolor($data["seeds"])."\" style=\"text-align: center;\">" . $data["seeds"] . "</td>";
+                            echo "\t<td align=\"center\" class=\"lista ".linkcolor($data["leechers"])."\" style=\"text-align: center;\">" .$data["leechers"] . "</td>";
                             if ($data["finished"]>0) {
                                 echo "\t<td align=\"center\" class=\"lista\" style=\"text-align: center;\">" . $data["finished"] . "</td>";
                             } else {
@@ -149,9 +146,9 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
                 echo "<tr><td class=\"lista\" colspan=\"9\" align=\"center\" style=\"text-align: center;\">" . $language["NO_TORRENTS"]  . "</td></tr>";
             }
 
-            print("</table></div</div>");
+        print("</table></div</div>");
 
-            block_end();
+        block_end();
     }
 } // end if user can view
 ?>

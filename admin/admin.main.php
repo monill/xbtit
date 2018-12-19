@@ -32,11 +32,11 @@
 
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 /*
@@ -71,7 +71,7 @@ $xbt_tables= ['xbt_config','xbt_deny_from_hosts','xbt_files','xbt_files_users','
 $xbt_in_db= [];
 if ($res) {
     while ($result=mysqli_fetch_row($res)) {
-             $xbt_in_db[]=$result[0];
+        $xbt_in_db[]=$result[0];
     }
 }
  $ad=array_diff($xbt_tables, $xbt_in_db);
@@ -170,7 +170,7 @@ $sqlver=mysqli_stat($GLOBALS['conn']);
 $sqlver=explode('  ', $sqlver);
 $admin["infos"].=("\n<tr><td valign=\"top\" class=\"header\" align=\"center\">MYSQL stats</td></tr>\n");
 for ($i=0; $i<count($sqlver); $i++) {
-      $admin["infos"].=("<tr><td align=\"left\">$sqlver[$i]</td></tr>\n");
+    $admin["infos"].=("<tr><td align=\"left\">$sqlver[$i]</td></tr>\n");
 }
 $admin["infos"].=("\n</table><br />\n");
 

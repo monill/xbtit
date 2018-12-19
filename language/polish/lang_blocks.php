@@ -2,7 +2,7 @@
 $language["BLOCK_USER"]="Info o użytkowniku";
 $language["BLOCK_INFO"]="Info o trackerze";
 $language["BLOCK_MAINMENU"]="";
-# We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber 
+# We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber
 $language["BLOCK_DDMENU"]="";
 $language["BLOCK_MENU"]="Menu Główne"; # block menu needs the name
 $language["BLOCK_CALENDAR"]="Kalendarz";

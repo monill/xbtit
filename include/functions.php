@@ -78,7 +78,7 @@ if ($php_version[0]<=5 && $php_version[1]<=2) {
 
 // control if magic_quote_gpc = on
 if (get_magic_quotes_gpc()) {
-  // function which remove unwanted slashes
+    // function which remove unwanted slashes
     function remove_magic_quotes(&$array)
     {
         foreach ($array as $key => $val) {
@@ -118,7 +118,7 @@ if (!isset($TRACKER_ANNOUNCEURLS)) {
 
 function load_css($css_name)
 {
-  // control if input template name exist in current user's stylepath, else return default
+    // control if input template name exist in current user's stylepath, else return default
     global $BASEURL, $STYLEPATH, $STYLEURL;
 
     if (@file_exists($STYLEPATH.'/'.$css_name)) {
@@ -129,7 +129,7 @@ function load_css($css_name)
 
 function load_template($tpl_name)
 {
-  // control if input template name exist in current user's stylepath, else return default
+    // control if input template name exist in current user's stylepath, else return default
     global $THIS_BASEPATH, $STYLEPATH;
 
     if (@file_exists($STYLEPATH.'/'.$tpl_name)) {
@@ -140,7 +140,7 @@ function load_template($tpl_name)
 
 function load_language($mod_language_name)
 {
-  // control if input language exist in current user's language path, else return default
+    // control if input language exist in current user's language path, else return default
     global $THIS_BASEPATH, $USERLANG, $language;
 
     if (@file_exists($USERLANG.'/'.$mod_language_name)) {
@@ -233,8 +233,8 @@ function print_designer()
     global $STYLEPATH;
 
     if (file_exists($STYLEPATH.'/style_copyright.php')) {
-         include($STYLEPATH.'/style_copyright.php');
-         $design_copyright='[&nbsp;&nbsp;<u>Design By</u>: '.$design_copyright.'&nbsp;&nbsp;]&nbsp;';
+        include($STYLEPATH.'/style_copyright.php');
+        $design_copyright='[&nbsp;&nbsp;<u>Design By</u>: '.$design_copyright.'&nbsp;&nbsp;]&nbsp;';
     } else {
         $design_copyright='';
     }
@@ -304,7 +304,7 @@ function straipos($haystack, $array, $offset = 0)
     }
     ksort($occ);
     reset($occ);
-    list($key,$value) = each($occ);
+    list($key, $value) = each($occ);
     return [$key,$value];
 }
 
@@ -491,8 +491,7 @@ function userlogin()
     $nip = ip2long($ip);
     $res = get_result("SELECT * FROM {$TABLE_PREFIX}bannedip WHERE INET_ATON('".$ip."') >= first AND INET_ATON('".$ip."') <= last LIMIT 1;", true, $btit_settings['cache_duration']);
     if (count($res) > 0) {
-        header('HTTP/1.0 403 Forbidden');
-        ?>
+        header('HTTP/1.0 403 Forbidden'); ?>
         <html><body><h1>403 Forbidden</h1>Unauthorized IP address.</body></html>
         <?php
         die();
@@ -795,7 +794,7 @@ function updatedata()
         return;
     }
 
-  // get the url to scrape, take 5 torrent at a time (try to getting multiscrape)
+    // get the url to scrape, take 5 torrent at a time (try to getting multiscrape)
     $row = $res[0];
     $resurl=get_result("SELECT info_hash FROM {$TABLE_PREFIX}files WHERE external='yes' AND announce_url='".$row['announce_url']."' ORDER BY lastupdate ASC LIMIT 5", true, $btit_settings['cache_duration']);
     if (!$resurl || count($resurl)==0) {
@@ -807,7 +806,7 @@ function updatedata()
         $combinedinfohash[]=$rhash['info_hash'];
     }
 
-  //scrape($row["announce_url"],$row["info_hash"]);
+    //scrape($row["announce_url"],$row["info_hash"]);
     scrape($row[0], implode("','", $combinedinfohash));
 }
 
@@ -996,8 +995,8 @@ function rank_list()
     return get_result('SELECT * FROM '.$TABLE_PREFIX.'users_level ORDER BY id_level;', true, $CACHE_DURATION);
 }
 
-# This will show your site name & your url, where you place your tags! 
-# <tag:site_name /> and <tag:tracker_url /> . 
+# This will show your site name & your url, where you place your tags!
+# <tag:site_name /> and <tag:tracker_url /> .
 function print_sitename()
 {
     global $SITENAME;
@@ -1204,10 +1203,10 @@ function format_comment($text, $strip_html = true)
 
     $text=bbcode($text);
 
-  // [*]
+    // [*]
     $text = preg_replace('/\[\*\]/', '<li>', $text);
 
-  // Maintain spacing
+    // Maintain spacing
     $text = str_replace('  ', ' &nbsp;', $text);
 
     $smilies=array_merge($smilies, $privatesmilies);
@@ -1229,7 +1228,7 @@ function image_or_link($image, $pers_style = '', $link = '')
     if (!file_exists($image)) {
         return $link;
     }
-  // replace realpath with url
+    // replace realpath with url
     return '<img src="'.str_replace($STYLEPATH, $STYLEURL, $image).'" border="0" '.$pers_style.' alt="'.$link.'"/>';
 }
 
@@ -1256,7 +1255,7 @@ function err_msg($heading = 'Error!', $string, $close = false)
         die($heading."<br />".$string);
     }
 
-  // just in case not found the language
+    // just in case not found the language
     if (!$language['BACK']) {
         $language['BACK']='Back';
     }
@@ -1283,7 +1282,7 @@ function information_msg($heading = 'Error!', $string, $close = false)
         die($heading."<br />".$string);
     }
 
-  // just in case not found the language
+    // just in case not found the language
     if (!$language['BACK']) {
         $language['BACK']='Back';
     }
@@ -1407,7 +1406,7 @@ function redirect($redirecturl)
     global $language;
 
     if (headers_sent()) {
-    ?>
+        ?>
     <script language="javascript">
     window.location.href='<?php echo $redirecturl; ?>';
   </script>
@@ -1512,12 +1511,11 @@ function gmtime()
 
 function sqlerr($file = '', $line = '')
 {
-    $file=(($file!=''&&$line!='')? '<p>in '.$file.', line '.$line.'</p>' : '');
-?>
+    $file=(($file!=''&&$line!='')? '<p>in '.$file.', line '.$line.'</p>' : ''); ?>
   <table border="0" bgcolor="" align=left cellspacing=0 cellpadding=10 style="background: blue">
     <tr>
           <td class=embedded><span style="color: #FFFFFF; "><h1><?php echo ERR_SQL_ERR; ?></h1>
-            <b><?php echo ((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)).$file;?></b></span></td>
+            <b><?php echo((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)).$file; ?></b></span></td>
         </tr>
     </table>
 <?php

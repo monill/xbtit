@@ -39,7 +39,7 @@ function get_menu($pos)
     $blocks=get_result('SELECT title, content, cache FROM '.$TABLE_PREFIX.'blocks WHERE position="'.$pos.'" AND status=1 AND '.$CURUSER['id_level'].'>=minclassview  AND '.$CURUSER['id_level'].'<=maxclassview '.(($FORUMLINK==''||$FORUMLINK=='internal'||substr($FORUMLINK, 0, 3)=='smf'||$FORUMLINK=='ipb')?'':' AND content!="forum"').' ORDER BY sortid', true, $CACHE_DURATION);
     $return='';
     foreach ($blocks as $entry) {
-                $return.=get_block($language[$entry['title']], 'justify', $entry['content'], $entry['cache']==='yes');
+        $return.=get_block($language[$entry['title']], 'justify', $entry['content'], $entry['cache']==='yes');
     }
     return $return;
 }

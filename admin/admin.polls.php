@@ -31,11 +31,11 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -125,7 +125,7 @@ $polls= [];
 if (!isset($_POST['new']) && empty($id) && !isset($votes)) {
     $block_title=$language["POLLING_SYSTEM"] . " - ".$language["CURRENT_POLLS"];
 
-   //mysql query to select all information on polls in the database
+    //mysql query to select all information on polls in the database
     $res = do_sqlquery("SELECT p.*, username, prefixcolor, suffixcolor, COUNT(memberID) FROM {$TABLE_PREFIX}poller p LEFT JOIN {$TABLE_PREFIX}users u ON p.starterID=u.id LEFT JOIN {$TABLE_PREFIX}users_level ul on u.id_level=ul.id_level LEFT JOIN {$TABLE_PREFIX}poller_vote pv on p.id=pv.pollerID GROUP BY p.ID DESC", true);
 
     $i=0;
@@ -162,7 +162,7 @@ if (!isset($_POST['new']) && empty($id) && !isset($votes)) {
         }
 
         //votes per day
-        $elapseddays = max(1, round(( time() - $inf["startDate"] ) / 86400));
+        $elapseddays = max(1, round((time() - $inf["startDate"]) / 86400));
         $votes_per_day = number_format(round($inf["COUNT(memberID)"] / $elapseddays, 2), 2);
 
         //link for votes page
@@ -324,16 +324,16 @@ if (isset($votes) && !isset($_POST['new']) && empty($id)) {
         $i++;
     }
 
-      //Per Page Listing Limitation Start - 7:35 PM 3/22/2007
+    //Per Page Listing Limitation Start - 7:35 PM 3/22/2007
     if ($count > $perpage) {
         $admintpl->set("poll_pager_bottom", $pagerbottom);
     } else {
         $admintpl->set("poll_pager_bottom", "");
     }
-          //Per Page Listing Limitation Stop
+    //Per Page Listing Limitation Stop
 
 
-       $admintpl->set("show_poller", true, true);
-       $admintpl->set("new_poll", false, true);
-       $admintpl->set("polls", $polls);
+    $admintpl->set("show_poller", true, true);
+    $admintpl->set("new_poll", false, true);
+    $admintpl->set("polls", $polls);
 }

@@ -19,7 +19,7 @@ require_once '../PHPMailerAutoload.php';
  * PHPMailer - PHP email transport unit test class
  * Performs authentication tests
  */
-class PHPMailerLangTest extends PHPUnit_Framework_TestCase
+class phpmailerLangTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Holds a phpmailer instance.

@@ -31,12 +31,12 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
 if (!defined("IN_BTIT_FORUM")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -64,7 +64,7 @@ if ($keywords != "") {
         $forumtpl->set("NO_TOPICS", true, true);
     } else {
         $forumtpl->set("NO_TOPICS", false, true);
-        list($pagertop,$pagerbottom, $limit)=forum_pager($perpage, $hits, "index.php?page=forum&amp;action=search&amp;keywords=" . htmlspecialchars($keywords) . "&amp;");
+        list($pagertop, $pagerbottom, $limit)=forum_pager($perpage, $hits, "index.php?page=forum&amp;action=search&amp;keywords=" . htmlspecialchars($keywords) . "&amp;");
 
 
         $res = get_result("SELECT p.*, t.subject, f.id as forumid, f.name as forumname, u.username, p.added, MATCH (p.body) AGAINST ($ekeywords IN BOOLEAN MODE) as score FROM {$TABLE_PREFIX}posts p".

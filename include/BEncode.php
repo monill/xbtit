@@ -12,7 +12,7 @@ class BEncode
 {
     // Dictionary keys must be sorted. foreach tends to iterate over the order
     // the array was made, so we make a new one in sorted order. :)
-    function makeSorted($array)
+    public function makeSorted($array)
     {
         // Shouldn't happen!
         if (empty($array)) {
@@ -31,7 +31,7 @@ class BEncode
 
     // Encodes strings, integers and empty dictionaries.
     // $unstrip is set to true when decoding dictionary keys
-    function encodeEntry($entry, &$fd, $unstrip = false)
+    public function encodeEntry($entry, &$fd, $unstrip = false)
     {
         if (is_bool($entry)) {
             $fd .= 'de';
@@ -51,7 +51,7 @@ class BEncode
     }
 
     // Encodes lists
-    function encodeList($array, &$fd)
+    public function encodeList($array, &$fd)
     {
         $fd .= 'l';
         // The empty list is defined as array();
@@ -67,7 +67,7 @@ class BEncode
 
     // Passes lists and dictionaries accordingly, and has encodeEntry handle
     // the strings and integers.
-    function decideEncode($unknown, &$fd)
+    public function decideEncode($unknown, &$fd)
     {
         if (is_array($unknown)) {
             if (isset($unknown[0]) || empty($unknown)) {
@@ -80,7 +80,7 @@ class BEncode
     }
 
     // Encodes dictionaries
-    function encodeDict($array, &$fd)
+    public function encodeDict($array, &$fd)
     {
         $fd .= 'd';
         if (is_bool($array)) {

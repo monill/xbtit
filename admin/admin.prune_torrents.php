@@ -31,11 +31,11 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 
@@ -51,19 +51,19 @@ switch ($action) {
 
         $count=0;
         foreach ($_POST["hash"] as $selected => $hash) {
-               @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}files WHERE info_hash=\"$hash\"");
-               @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}timestamps WHERE info_hash=\"$hash\"");
-               @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}comments WHERE info_hash=\"$hash\"");
-               @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}ratings WHERE infohash=\"$hash\"");
-               @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}peers WHERE infohash=\"$hash\"");
-               @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}history WHERE infohash=\"$hash\"");
+            @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}files WHERE info_hash=\"$hash\"");
+            @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}timestamps WHERE info_hash=\"$hash\"");
+            @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}comments WHERE info_hash=\"$hash\"");
+            @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}ratings WHERE infohash=\"$hash\"");
+            @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}peers WHERE infohash=\"$hash\"");
+            @mysqli_query($GLOBALS['conn'], "DELETE FROM {$TABLE_PREFIX}history WHERE infohash=\"$hash\"");
 
             if ($XBTT_USE) {
                 @mysqli_query($GLOBALS['conn'], "UPDATE xbt_files SET flags=1 WHERE info_hash=UNHEX(\"$hash\")");
             }
 
-               @unlink($TORRENTSDIR."/$hash.btf");
-               $count++;
+            @unlink($TORRENTSDIR."/$hash.btf");
+            $count++;
         }
         $block_title=$language["PRUNE_TORRENTS_PRUNED"];
         $admintpl->set("prune_done_msg", "<div align=\"center\">n.$count torrents pruned!</div>");
@@ -102,12 +102,12 @@ switch ($action) {
         $tor= [];
         include("$THIS_BASEPATH/include/offset.php");
         foreach ($res as $ID => $rtorrent) {
-             $tor[$count]["filename"]=unesc($rtorrent["filename"]);
-             $tor[$count]["lastupdate"]=date("d/m/Y H:i", $rtorrent["lastupdate"]-$offset)." (".get_elapsed_time($rtorrent["lastupdate"]-$offset)." ago)";
-             $tor[$count]["seeds"]=$rtorrent["seeds"];
-             $tor[$count]["leechers"]=$rtorrent["leechers"];
-             $tor[$count]["info_hash"]=$rtorrent["info_hash"];
-             $count++;
+            $tor[$count]["filename"]=unesc($rtorrent["filename"]);
+            $tor[$count]["lastupdate"]=date("d/m/Y H:i", $rtorrent["lastupdate"]-$offset)." (".get_elapsed_time($rtorrent["lastupdate"]-$offset)." ago)";
+            $tor[$count]["seeds"]=$rtorrent["seeds"];
+            $tor[$count]["leechers"]=$rtorrent["leechers"];
+            $tor[$count]["info_hash"]=$rtorrent["info_hash"];
+            $count++;
         }
 
 
@@ -117,12 +117,12 @@ switch ($action) {
 
 
         foreach ($res as $ID => $rtorrent) {
-             $tor[$count]["filename"]=unesc($rtorrent["filename"]);
-             $tor[$count]["lastupdate"]=date("d/m/Y H:i", $rtorrent["lastupdate"]-$offset)." (".get_elapsed_time($rtorrent["lastupdate"]-$offset)." ago)";
-             $tor[$count]["seeds"]=$rtorrent["seeds"];
-             $tor[$count]["leechers"]=$rtorrent["leechers"];
-             $tor[$count]["info_hash"]=$rtorrent["info_hash"];
-             $count++;
+            $tor[$count]["filename"]=unesc($rtorrent["filename"]);
+            $tor[$count]["lastupdate"]=date("d/m/Y H:i", $rtorrent["lastupdate"]-$offset)." (".get_elapsed_time($rtorrent["lastupdate"]-$offset)." ago)";
+            $tor[$count]["seeds"]=$rtorrent["seeds"];
+            $tor[$count]["leechers"]=$rtorrent["leechers"];
+            $tor[$count]["info_hash"]=$rtorrent["info_hash"];
+            $count++;
         }
 
         $admintpl->set("language", $language);

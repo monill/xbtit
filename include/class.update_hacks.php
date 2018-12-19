@@ -34,23 +34,22 @@ use splitbrain\PHPArchive\Tar;
 
 class update_hacks
 {
+    public $file= [];
+    public $errors= [];
+    public $hack_path;
+    public $errors_count;
+    public $ftp_server;
+    public $ftp_port;
+    public $ftp_username;
+    public $ftp_password;
+    public $ftp_basedir;
+    public $rftp;
+    public $ftp_files_to_copy= [];
+    public $ftp_login_need;
+    public $ftp_files_to_chmod= [];
+    public $files_to_backup= [];
 
-      var $file= [];
-      var $errors= [];
-      var $hack_path;
-      var $errors_count;
-      var $ftp_server;
-      var $ftp_port;
-      var $ftp_username;
-      var $ftp_password;
-      var $ftp_basedir;
-      var $rftp;
-      var $ftp_files_to_copy= [];
-      var $ftp_login_need;
-      var $ftp_files_to_chmod= [];
-      var $files_to_backup= [];
-
-    function __construct()
+    public function __construct()
     {
         // reset all var
         $this->file= [];
@@ -69,8 +68,8 @@ class update_hacks
         $this->files_to_backup= [];
     }
 
-      // private
-    function _err_message($e_message, $e_file, $e_solution)
+    // private
+    public function _err_message($e_message, $e_file, $e_solution)
     {
         $this->errors[$this->errors_count]["message"]=$e_message;
         $this->errors[$this->errors_count]["file"]=$e_file;
@@ -78,7 +77,7 @@ class update_hacks
         $this->errors_count++;
     }
 
-    function ftp_open()
+    public function ftp_open()
     {
         if (!isset($this->ftp_server) || !isset($this->ftp_port) || !isset($this->ftp_username) || !isset($this->ftp_password)) {
             session_unset();
@@ -109,7 +108,7 @@ class update_hacks
         return true; // connected
     }
 
-    function ask_for_ftp_form()
+    public function ask_for_ftp_form()
     {
         global $CURUSER;
         if (isset($_POST["add_hack_folder"])) {
@@ -120,7 +119,7 @@ class update_hacks
     }
 
 
-    function ftp_session_begin()
+    public function ftp_session_begin()
     {
         if ($this->ftp_login_need==false) {
             return true;
@@ -130,20 +129,20 @@ class update_hacks
             $this->ask_for_ftp_form();
         }
 
-         $this->ftp_server=$_SESSION["ftp_data"]["server"];
-         $this->ftp_port=$_SESSION["ftp_data"]["port"];
-         $this->ftp_username=$_SESSION["ftp_data"]["username"];
-         $this->ftp_password=$_SESSION["ftp_data"]["pass"];
-         $this->ftp_basedir=$_SESSION["ftp_data"]["basedir"];
+        $this->ftp_server=$_SESSION["ftp_data"]["server"];
+        $this->ftp_port=$_SESSION["ftp_data"]["port"];
+        $this->ftp_username=$_SESSION["ftp_data"]["username"];
+        $this->ftp_password=$_SESSION["ftp_data"]["pass"];
+        $this->ftp_basedir=$_SESSION["ftp_data"]["basedir"];
 
         if ($this->ftp_basedir=="/" || $this->ftp_basedir=="./") {
             $this->ftp_basedir="";
         }
 
-         return $this->ftp_open();
+        return $this->ftp_open();
     }
 
-    function ftp_session_end()
+    public function ftp_session_end()
     {
         if ($this->ftp_login_need==false) {
             return true;
@@ -153,13 +152,12 @@ class update_hacks
             return false;
         }
 
-         return @ftp_close($this->rftp);
+        return @ftp_close($this->rftp);
     }
 
 
-    function convert_real_to_relative($realfile)
+    public function convert_real_to_relative($realfile)
     {
-
         global $THIS_BASEPATH;
         //if (strpos($realfile,":")!==false)
         //   $realfile=substr($realfile,strpos($realfile,":")+1);
@@ -172,7 +170,7 @@ class update_hacks
     }
 
 
-    function ftp_fchmod($f, $val)
+    public function ftp_fchmod($f, $val)
     {
 
         // chmod is ONLY for *nix server
@@ -197,7 +195,7 @@ class update_hacks
         return true;
     }
 
-    function ftp_fdelete($files)
+    public function ftp_fdelete($files)
     {
         if (empty($files)) {
             return;
@@ -214,7 +212,7 @@ class update_hacks
             if (is_array($files)) {
                 $this->_err_message("Ftp deleting file Failed!", $files, "don't exists!");
             }
-              return false;
+            return false;
         }
 
 
@@ -226,7 +224,7 @@ class update_hacks
         return true;
     }
 
-    function ftp_copy($ori_file, $dest_file)
+    public function ftp_copy($ori_file, $dest_file)
     {
         if (!file_exists($ori_file)) {
             $this->_err_message("Ftp copying file Failed!", $dest_file, "$ori_file exists?");
@@ -249,7 +247,7 @@ class update_hacks
         if (!ftp_fput($this->rftp, $this->convert_real_to_relative($dest_file), $fpo, $ftp_mode)) {
             $this->_err_message("Ftp copying file Failed!", $dest_file, "$ori_file is readable?");
             fclose($fpo);
-           //return false;
+            //return false;
         }
         fclose($fpo);
         // try to chmod file to 0777
@@ -264,7 +262,7 @@ class update_hacks
     }
 
 
-    function ftp_make_new_folder($folder_name)
+    public function ftp_make_new_folder($folder_name)
     {
         if (is_array($folder_name)) {
             foreach ($folder_name as $newfolder) {
@@ -286,8 +284,8 @@ class update_hacks
         return true;
     }
 
-      // open the xml input file and return the full stream
-    function open_hack($filename_and_folder)
+    // open the xml input file and return the full stream
+    public function open_hack($filename_and_folder)
     {
         // will open the main file which will contain the informations for insert hack.
         if (!file_exists($filename_and_folder)) {
@@ -302,28 +300,28 @@ class update_hacks
             return false;
         }
 
-         $fp=@fopen($filename_and_folder, "r");
+        $fp=@fopen($filename_and_folder, "r");
 
         if (!$fp) {
-           //$this->errors[]["message"]="Error reading file \"$filename_and_folder\"";
+            //$this->errors[]["message"]="Error reading file \"$filename_and_folder\"";
             $this->_err_message("Error reading file", $filename_and_folder, "Check chmod+chown for $filename_and_folder");
             return false;
         }
 
-            $full_file="";
+        $full_file="";
         while (!feof($fp)) {
             $full_file.=fread($fp, 4096);
         }
 
-            $this->hack_path=dirname($filename_and_folder);
+        $this->hack_path=dirname($filename_and_folder);
             
-            return $full_file;
+        return $full_file;
     }
 
 
-      // private
-      // used by hack_to_array, find the content in $text between <$tag> and </$tag>
-    function get_tag_value($text, $tag)
+    // private
+    // used by hack_to_array, find the content in $text between <$tag> and </$tag>
+    public function get_tag_value($text, $tag)
     {
         $StartTag = "<$tag";
         $EndTag = "</$tag";
@@ -352,34 +350,34 @@ class update_hacks
         return $text;
     }
 
-      // read xml type stream and create valid array for applying hack
-      // Array
-      // (
-      //    [0] => Array
-      //        (
-      //            [title]   => title of the hack
-      //            [version] => version number of the hack
-      //            [author]  => author's name
-      //            [file]    => Array
-      //                (
-      //                    [0] => Array
-      //                        (
-      //                            [name] => full file path to modify
-      //                            [operations] => Array
-      //                                (
-      //                                    [0] => Array
-      //                                        (
-      //                                            [search] => text to search (optional if copy)
-      //                                            [action] => add/remove/copy/sql
-      //                                            [data]   => text to insert or replace or file name (for copy)
-      //                                            [where] => after/before/path if copy (optional if remove)
-      //                                        )
-      //                                )
-      //                        )
-      //                )
-      //        )
-      // )
-    function hack_to_array($string)
+    // read xml type stream and create valid array for applying hack
+    // Array
+    // (
+    //    [0] => Array
+    //        (
+    //            [title]   => title of the hack
+    //            [version] => version number of the hack
+    //            [author]  => author's name
+    //            [file]    => Array
+    //                (
+    //                    [0] => Array
+    //                        (
+    //                            [name] => full file path to modify
+    //                            [operations] => Array
+    //                                (
+    //                                    [0] => Array
+    //                                        (
+    //                                            [search] => text to search (optional if copy)
+    //                                            [action] => add/remove/copy/sql
+    //                                            [data]   => text to insert or replace or file name (for copy)
+    //                                            [where] => after/before/path if copy (optional if remove)
+    //                                        )
+    //                                )
+    //                        )
+    //                )
+    //        )
+    // )
+    public function hack_to_array($string)
     {
         $hacks = explode('<hack>', $string);
         $i = 0;
@@ -394,11 +392,11 @@ class update_hacks
             array_shift($hack_file);
             $x=0;
             foreach ($hack_file as $hf) {
-                 $hack[$i]['file'][$x]['name']=$this->get_tag_value($hf, 'name');
-                 // split all operations on this file
-                 $hack_operations=explode('<operation>', $hf);
-                 array_shift($hack_operations);
-                 $j=0;
+                $hack[$i]['file'][$x]['name']=$this->get_tag_value($hf, 'name');
+                // split all operations on this file
+                $hack_operations=explode('<operation>', $hf);
+                array_shift($hack_operations);
+                $j=0;
                 foreach ($hack_operations as $op) {
                     $hack[$i]['file'][$x]['operations'][$j]['search']     =$this->get_tag_value($op, 'search');
                     $hack[$i]['file'][$x]['operations'][$j]['action']     =$this->get_tag_value($op, 'action');
@@ -406,7 +404,7 @@ class update_hacks
                     $hack[$i]['file'][$x]['operations'][$j]['where']      =$this->get_tag_value($op, 'where');
                     $j++;
                 }
-                 $x++;
+                $x++;
             }
             $i++;
         }
@@ -414,9 +412,9 @@ class update_hacks
         return $hack;
     }
 
-      // private:
-      // try to open input file and if success return file's stream
-    function open_read_file($file_to_hack, $ind)
+    // private:
+    // try to open input file and if success return file's stream
+    public function open_read_file($file_to_hack, $ind)
     {
         // globals var
         global $THIS_BASEPATH,$CURRENT_FOLDER;
@@ -425,13 +423,13 @@ class update_hacks
         $DEFAULT_STYLE_PATH="$THIS_BASEPATH/style/xbtit_default";
         $DEFAULT_LANGUAGE_PATH="$THIS_BASEPATH/language/english";
 
-       // file exists?
+        // file exists?
         if (!file_exists($file_to_hack)) {
             //$this->errors[]["message"]="File $file_to_hack don't exists!";
             $this->_err_message("File don't exists!", $file_to_hack, "Control if file exists");
             return false;
         }
-       // i can read it?
+        // i can read it?
         if (!is_readable($file_to_hack)) {
             // try to make it readable...
             $ok=@chmod($file_to_hack, 0755);
@@ -447,23 +445,23 @@ class update_hacks
             $ok=true;
         }
 
-       // all done return file resource id
+        // all done return file resource id
         if ($ok) {
             $stream="";
             $fp=fopen($file_to_hack, "r");
             if (!$fp) {
-                 //$this->errors[]["message"]="Error opening File ($file_to_hack)!";
-                 $this->_err_message("Error opening file!", $file_to_hack, "Check chmod+chown for $file_to_hack");
-                 return false;
+                //$this->errors[]["message"]="Error opening File ($file_to_hack)!";
+                $this->_err_message("Error opening file!", $file_to_hack, "Check chmod+chown for $file_to_hack");
+                return false;
             } else {
                 while (!feof($fp)) {
                     $stream.=fread($fp, 4096);
                 }
                 fclose($fp);
             }
-             return $stream;
+            return $stream;
         } else {
-           //$this->errors[]["message"]="File $file_to_hack is not readable!";
+            //$this->errors[]["message"]="File $file_to_hack is not readable!";
            //$this->_err_message("File seems to be not readable!",$file_to_hack,"Check chmod+chown for $file_to_hack");
            //return false;
            // we will try now using ftp...
@@ -471,8 +469,8 @@ class update_hacks
     }
 
 
-      // private, used only to set errors in sql action when it fail
-    function db_error()
+    // private, used only to set errors in sql action when it fail
+    public function db_error()
     {
         global $j;
 
@@ -482,7 +480,7 @@ class update_hacks
         $this->file[$j]["operation"]="Sql";
     }
 
-    function chmod_ftp_files()
+    public function chmod_ftp_files()
     {
         if (count($this->ftp_files_to_chmod)==0) {
             return true;
@@ -498,8 +496,8 @@ class update_hacks
                 return false;
             }
             if (!$this->ftp_fchmod($this->convert_real_to_relative($file), $mode)) {
-               //$this->errors[]["message"]="Error: $new_file_path is not writable";
-               //$this->_err_message("Error: file is not writable!",$file,"Manually set permissions (766 is good)");
+                //$this->errors[]["message"]="Error: $new_file_path is not writable";
+                //$this->_err_message("Error: file is not writable!",$file,"Manually set permissions (766 is good)");
                 $this->file[$index]["status"]="<span style=\"font-weight: bold; color:red;\">Failed</span>";
                 return false;
             } else {
@@ -509,7 +507,7 @@ class update_hacks
         return true;
     }
 
-    function copy_ftp_files()
+    public function copy_ftp_files()
     {
         if (count($this->ftp_files_to_copy)==0) {
             return true;
@@ -527,7 +525,7 @@ class update_hacks
 
             if (!file_exists($new_file_path)) {
                 if (!$this->ftp_make_new_folder($this->convert_real_to_relative($new_file_path))) {
-                   //$this->errors[]["message"]="Error: $new_file_path was not created";
+                    //$this->errors[]["message"]="Error: $new_file_path was not created";
                     $this->_err_message("Error: file was not created in $new_file_path!", $new_file_name, "Check $new_file_path Permission (766 is good)");
                     $this->file[$index]["status"]="<span style=\"font-weight: bold; color:red;\">Failed</span>";
                     return false;
@@ -538,8 +536,8 @@ class update_hacks
 
             if (!is_writable($new_file_path)) {
                 if (!$this->ftp_fchmod($this->convert_real_to_relative($new_file_path), "777")) {
-                   //$this->errors[]["message"]="Error: $new_file_path is not writable";
-                   //$this->_err_message("Error: file is not writable!",$new_file_name,"Check $new_file_path Permission (766 is good)");
+                    //$this->errors[]["message"]="Error: $new_file_path is not writable";
+                    //$this->_err_message("Error: file is not writable!",$new_file_name,"Check $new_file_path Permission (766 is good)");
                     $this->file[$index]["status"]="<span style=\"font-weight: bold; color:red;\">Failed</span>";
                     return false;
                 } else {
@@ -550,9 +548,9 @@ class update_hacks
             }
 
             if (!$this->ftp_copy($original_file, $new_file_path."/".$new_file_name)) {
-                 $this->_err_message("Can't copy file!", $new_file_name, "Check $new_file_path Permission (766 is good)");
-                 $this->file[$index]["status"]="<span style=\"font-weight: bold; color:red;\">Failed</span>";
-                 return false;
+                $this->_err_message("Can't copy file!", $new_file_name, "Check $new_file_path Permission (766 is good)");
+                $this->file[$index]["status"]="<span style=\"font-weight: bold; color:red;\">Failed</span>";
+                return false;
             }
 
             $this->file[$index]["status"]="<span style=\"font-weight: bold; color:green;\">OK</span>";
@@ -561,14 +559,14 @@ class update_hacks
         return true;
     }
 
-      // this function will apply_hack,
-      // if $test = true: just test all files and position
-      // to check if there is no errors.
-      // else will apply definitivly the hack
-      // on error put string in $errors array at the
-      // end test if any errors was found and return
-      // true if no errors or false if some errors.
-    function install_hack($hack_array, $test = false)
+    // this function will apply_hack,
+    // if $test = true: just test all files and position
+    // to check if there is no errors.
+    // else will apply definitivly the hack
+    // on error put string in $errors array at the
+    // end test if any errors was found and return
+    // true if no errors or false if some errors.
+    public function install_hack($hack_array, $test = false)
     {
         // globals var
         global $THIS_BASEPATH,$CURRENT_FOLDER,$dbhost, $dbuser, $dbpass, $database, $TABLE_PREFIX;
@@ -681,7 +679,7 @@ class update_hacks
                                                 }
                                             }
                                         } else { // we don't find the searched text
-                                        //$this->errors[]["message"]="Sorry <br />\n\"".nl2br(htmlspecialchars($string_to_search))."\"<br />\nto search was not found in file: ".$this->file[$j]["name"].".";
+                                            //$this->errors[]["message"]="Sorry <br />\n\"".nl2br(htmlspecialchars($string_to_search))."\"<br />\nto search was not found in file: ".$this->file[$j]["name"].".";
                                             $this->_err_message("Sorry search string: \"".substr(nl2br(htmlspecialchars($string_to_search)), 0, 200)."...\" (first 20 chars) was not found)", $this->file[$j]["name"], "Ask Hack's Developer");
                                         }
                                         break;
@@ -699,8 +697,8 @@ class update_hacks
                         if ((strtoupper($this->file[$j]["name"])!="DATABASE")) {
                             if ($this->save_original($this->file[$j]["name"], $test)) {
                             }
-                             // we have saved the originale
-                               {
+                            // we have saved the originale
+                            {
                                // we need to copy the file somewhere?
                                /* copy is now doing using ftp
                                if (!$test && isset($new_file_name) && isset($new_file_path))
@@ -734,7 +732,7 @@ class update_hacks
                                 $this->file[$j]["status"]="<span style=\"font-weight: bold; color:red;\">Failed</span>";
                             }
                         }
-                       // end test control :)
+                        // end test control :)
                     } // end for files
 
                   // check for ftp need
@@ -742,17 +740,17 @@ class update_hacks
                         return false;
                     }
 
-                  // any files to chmod??
+                    // any files to chmod??
                     if (!$this->chmod_ftp_files()) {
                         return false;
                     }
 
-                  // we try to copy new files using ftp
+                    // we try to copy new files using ftp
                     if (!$this->copy_ftp_files()) {
                         return false;
                     }
 
-                  // was only test??? then we deleted files copied before.
+                    // was only test??? then we deleted files copied before.
                     if ($test) {
                         @$this->ftp_fdelete($this->ftp_files_to_copy);
                     }
@@ -783,14 +781,14 @@ class update_hacks
         }
     }
 
-      // this function will remove hack,
-      // if $test = true: just test all files and position
-      // to check if there is no errors.
-      // else will remove definitivly the hack
-      // on error put string in $errors array at the
-      // end test if any errors was found and return
-      // true if no errors or false if some errors.
-    function uninstall_hack($hack_array, $test = false)
+    // this function will remove hack,
+    // if $test = true: just test all files and position
+    // to check if there is no errors.
+    // else will remove definitivly the hack
+    // on error put string in $errors array at the
+    // end test if any errors was found and return
+    // true if no errors or false if some errors.
+    public function uninstall_hack($hack_array, $test = false)
     {
         // globals var
         global $THIS_BASEPATH,$CURRENT_FOLDER,$dbhost, $dbuser, $dbpass, $database;
@@ -866,8 +864,8 @@ class update_hacks
 
                                         // not found position using "old" method, let us try with new one (without comments!)
                                         if ($pos===false) {
-                                             $string_to_search=$string_to_search_1;
-                                             $pos=@strpos($file_content, $string_to_search);
+                                            $string_to_search=$string_to_search_1;
+                                            $pos=@strpos($file_content, $string_to_search);
                                         }
 
 
@@ -875,16 +873,16 @@ class update_hacks
                                         if ($pos!==false) {
                                             $newpos=$pos+strlen($string_to_search);
                                             if ($action=="add") {
-                                              // then when uninstalling we remove ;)
+                                                // then when uninstalling we remove ;)
                                                 $file_content=substr($file_content, 0, $pos).substr($file_content, $newpos);
                                             } elseif ($action=="replace") {
-                                              // we replace the replacement with original
+                                                // we replace the replacement with original
                                                 $file_content=substr($file_content, 0, $pos).str_replace("\r\n", "\n", $hack_array[$i]["file"][$j]["operations"][$k]["search"]).substr($file_content, $newpos);
                                             } else { // we put back again the removed string
                                                 $file_content=substr($file_content, 0, $pos).str_replace("\r\n", "\n", $hack_array[$i]["file"][$j]["operations"][$k]["search"]).substr($file_content, $newpos);
                                             }
                                         } else { // we don't find the searched text
-                                        //$this->errors[]["message"]="Sorry <br />\n\"".nl2br(htmlspecialchars($string_to_search))."\"<br />\nto search was not found in file: ".$this->file[$j]["name"].".";
+                                            //$this->errors[]["message"]="Sorry <br />\n\"".nl2br(htmlspecialchars($string_to_search))."\"<br />\nto search was not found in file: ".$this->file[$j]["name"].".";
                                             $this->_err_message("Sorry search string: \"".substr(nl2br(htmlspecialchars($string_to_search)), 0, 200)."...\" (first 20 chars) was not found)", $this->file[$j]["name"], "Ask Hack's Developer");
                                         }
                                         break;
@@ -904,11 +902,11 @@ class update_hacks
                         if ((strtoupper($this->file[$j]["name"])!="DATABASE")) {
                             if ($this->save_original($this->file[$j]["name"], $test)) {
                             }
-                             // we have saved the originale
-                               {
+                            // we have saved the originale
+                            {
                                // file was copied somewhere?
                             if (!$test && isset($new_file_name) && isset($new_file_path)) {
-                              // destination is writable
+                                // destination is writable
                                 if ($this->file[$j]["status"]=="<span style=\"font-weight: bold; color:green;\">OK</span>") {
                                     if (@unlink("$new_file_path/$new_file_name")) {
                                         $this->file[$j]["status"]="<span style=\"font-weight: bold; color:green;\">OK</span>";
@@ -933,14 +931,14 @@ class update_hacks
                                 $this->file[$j]["status"]="<span style=\"font-weight: bold; color:red;\">Failed</span>";
                             }
                         }
-                       // end test control :)
+                        // end test control :)
                     } // end for files
                   
                     if (!$this->ftp_session_begin()) {
                         return false;
                     }
 
-                  // any files to chmod??
+                    // any files to chmod??
                     if (!$this->chmod_ftp_files()) {
                         return false;
                     }
@@ -970,10 +968,10 @@ class update_hacks
         }
     }
 
-      // private
-      // will write the input $new_content in $file_with_path
-      // return false in case of error
-    function write_new_file($file_with_path, $new_content, $ind, $for_test = false)
+    // private
+    // will write the input $new_content in $file_with_path
+    // return false in case of error
+    public function write_new_file($file_with_path, $new_content, $ind, $for_test = false)
     {
 
         // globals var
@@ -1017,11 +1015,11 @@ class update_hacks
         return true;
     }
 
-      // private
-      // will save the input $file_with_path in a new
-      // create folder called "backup" in folder which the
-      // script has origin, or use the already existing one
-    function save_original($file_with_path, $in_test = false, $pack = false)
+    // private
+    // will save the input $file_with_path in a new
+    // create folder called "backup" in folder which the
+    // script has origin, or use the already existing one
+    public function save_original($file_with_path, $in_test = false, $pack = false)
     {
 
         // globals var

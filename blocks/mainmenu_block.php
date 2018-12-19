@@ -38,11 +38,11 @@
 
 
 if (!$CURUSER) {
-       // anonymous=guest
+    // anonymous=guest
     print("<td class=\"lista\" align=\"center\" style=\"text-align:center;\">".$language["WELCOME"]." ".$language["GUEST"]."\n");
     print("<a class=\"mainmenu\" href=\"login.php\">(".$language["LOGIN"].")</a></td>");
 } elseif ($CURUSER["uid"]==1) {
-       // anonymous=guest
+    // anonymous=guest
     print("<td class=\"lista\" align=\"center\" style=\"text-align:center;\">".$language["WELCOME"]." " . $CURUSER["username"] ." \n");
     print("<a class=\"mainmenu\" href=\"index.php?page=login\">(".$language["LOGIN"].")</a></td>\n");
 } else {

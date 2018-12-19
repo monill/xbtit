@@ -36,9 +36,7 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
 } else {
     global $BASEURL, $STYLEPATH, $dblist, $XBTT_USE,$btit_settings;
 
-    block_begin('LAST_TORRENTS');
-
-    ?>
+    block_begin('LAST_TORRENTS'); ?>
         <div class="panel panel-default">
         <div class="panel-heading">
             <h4><i class="fa fa-fw fa-files-o"></i>Latest Torrents</h4>
@@ -53,17 +51,15 @@ if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
         $sql = "SELECT info_hash as hash, seeds, leechers, dlbytes AS dwned, format(finished,0) as finished, filename, url, info, UNIX_TIMESTAMP(data) AS added, c.image, c.name AS cname, category AS catid, size, external, uploader FROM {$TABLE_PREFIX}files as f LEFT JOIN {$TABLE_PREFIX}categories as c ON c.id = f.category WHERE leechers + seeds > 0 ORDER BY data DESC LIMIT " . $GLOBALS["block_last10limit"];
     }
 
-     $row = get_result($sql, true, $btit_settings['cache_duration']);
-    ?>
+    $row = get_result($sql, true, $btit_settings['cache_duration']); ?>
   <tr>
       <td align="center" width="20" class="header">&nbsp;<?php echo $language["DOWN"]; ?>&nbsp;</td>
     <td align="center" width="55%" class="header">&nbsp;<?php echo $language["TORRENT_FILE"]; ?>&nbsp;</td>
     <td align="center" width="45" class="header">&nbsp;<?php echo $language["CATEGORY"]; ?>&nbsp;</td>
 <?php
 if (max(0, $CURUSER["WT"])>0) {
-    print("<td align=\"center\" width=\"20\" class=\"header\">&nbsp".$language["WT"]."&nbsp;</td>");
-}
-?>
+        print("<td align=\"center\" width=\"20\" class=\"header\">&nbsp".$language["WT"]."&nbsp;</td>");
+    } ?>
     <td align="center" width="85" class="header">&nbsp;<?php echo $language["ADDED"]; ?>&nbsp;</td>
     <td align="center" width="60" class="header">&nbsp;<?php echo $language["SIZE"]; ?>&nbsp;</td>
     <td align="center" width="30" class="header">&nbsp;<?php echo $language["SHORT_S"]; ?>&nbsp;</td>
@@ -90,32 +86,32 @@ if (max(0, $CURUSER["WT"])>0) {
                 }
                 echo "\n\t<td align=\"center\" class=\"lista\" width=\"45\" style=\"text-align: center;\"><a class=\"lasttor\" href=\"index.php?page=torrents&amp;category=$data[catid]\">" . image_or_link(($data["image"] == "" ? "" : "$STYLEPATH/images/categories/" . $data["image"]), "", $data["cname"]) . "</a></td>";
 
-      //waitingtime
-      // only if current user is limited by WT
+                //waitingtime
+                // only if current user is limited by WT
                 if (max(0, $CURUSER["WT"])>0) {
-                      $wait=0;
-                      //$resuser=do_sqlquery("SELECT * FROM {$TABLE_PREFIX}users WHERE id=".$CURUSER["uid"]);
-                      //$rowuser=mysql_fetch_array($resuser);
+                    $wait=0;
+                    //$resuser=do_sqlquery("SELECT * FROM {$TABLE_PREFIX}users WHERE id=".$CURUSER["uid"]);
+                    //$rowuser=mysql_fetch_array($resuser);
                     if (max(0, $CURUSER['downloaded'])>0) {
                         $ratio=number_format($CURUSER['uploaded']/$CURUSER['downloaded'], 2);
                     } else {
                         $ratio=0.0;
                     }
-                      //$res2 =do_sqlquery("SELECT * FROM {$TABLE_PREFIX}files WHERE info_hash='".$data["hash"]."'");
+                    //$res2 =do_sqlquery("SELECT * FROM {$TABLE_PREFIX}files WHERE info_hash='".$data["hash"]."'");
                       //$added=mysql_fetch_array($res2);
                       $vz = $data['added']; //sql_timestamp_to_unix_timestamp($data["data"]);
                       $timer = floor((time() - $vz) / 3600);
                     if ($ratio<1.0 && $CURUSER['uid']!=$data["uploader"]) {
                         $wait=$CURUSER["WT"];
                     }
-                      $wait -=$timer;
+                    $wait -=$timer;
                     if ($wait<=0) {
                         $wait=0;
                     }
 
-                      echo "\n\t<td align=\"center\" width=\"20\" class=\"lista\" style=\"text-align: center;\">".$wait." h</td>";
+                    echo "\n\t<td align=\"center\" width=\"20\" class=\"lista\" style=\"text-align: center;\">".$wait." h</td>";
                 }
-      //end waitingtime
+                //end waitingtime
 
                 echo "\n\t<td nowrap=\"nowrap\" class=\"lista\" align=\"center\" width=\"85\" style=\"text-align: center;\">" . get_elapsed_time($data["added"]) . " ago</td>";
                 echo "\n\t<td nowrap=\"nowrap\" class=\"lista\" align=\"center\" width=\"60\" style=\"text-align: center;\">" . makesize($data["size"]) . "</td>";

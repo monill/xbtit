@@ -32,11 +32,11 @@
 
 error_reporting(E_ALL & ~E_NOTICE);
 if (!defined("IN_BTIT")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 if (!defined("IN_ACP")) {
-      die("non direct access!");
+    die("non direct access!");
 }
 
 function in($file, $string)
@@ -80,43 +80,43 @@ switch ($action) {
         break;
 
     case '':
-    default;
+    default:
           $new= [];
           $j=0;
           $num_lines=$btit_settings["php_log_lines"];
           $log=$btit_settings["php_log_path"]."/".$btit_settings["php_log_name"]."_".date("d.m.y")."_.log";
           $admintpl->set("language", $language);
         if (file_exists($log)) {//check first otherwise more errors
-          // Open file and read contents
+            // Open file and read contents
             $fd=fopen($log, "r");
             $data = fread($fd, filesize($log));
             fclose($fd);
-        // Create an array out of each line
+            // Create an array out of each line
             $data_array=explode("\n", $data);
-        // Find the last key in the array
+            // Find the last key in the array
             $last_key=count($data_array)-1;
-        // If the last line is empty revise the last key downwards until there's actually something there
+            // If the last line is empty revise the last key downwards until there's actually something there
             while (empty($data_array[$last_key])) {
                 $last_key-=1;
             }
-        // Figure out the first key based upon the value set for the number of lines to display
+            // Figure out the first key based upon the value set for the number of lines to display
             $first_key=$last_key-($num_lines-1);
-        // Start a new array to store the last X lines in
+            // Start a new array to store the last X lines in
             $final_array= [];
-        // Work through the array and only add the last X lines to it.
+            // Work through the array and only add the last X lines to it.
             foreach ($data_array as $key => $value) {
                 if ($key >= $first_key && $key <= $last_key) {
                     $final_array[]=$value;
                 }
             }
-       // Output the final data
+            // Output the final data
             foreach ($final_array as $value) {
-                  $new[$j]["line"]= $value."\n";
-                  $j++;
+                $new[$j]["line"]= $value."\n";
+                $j++;
             }
             $admintpl->set("error_logs", $new);
         } else {
-        //nothing
+            //nothing
         }
           global $find,$replace,$exp;
           $admintpl->set("error_log_exists", (file_exists($log)?true:false), true);

@@ -2,7 +2,7 @@
 $language['BLOCK_USER']='Info o uživateli';
 $language['BLOCK_INFO']='Info o Trackeru';
 $language['BLOCK_MAINMENU']=''; # this is the Main Menu no name needed, some dipshit took this out ... not nice!!
-# We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber 
+# We leave this name (drop down menu) blank so it doesnt use the block head showing its name, it looks unsightly and non professional imho!! TreetopClimber
 $language['BLOCK_DDMENU']='';
 $language['BLOCK_MENU']='Hlavní Menu'; # block menu needs the name
 $language['BLOCK_CALENDAR']='Kalendář';

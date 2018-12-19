@@ -19,7 +19,7 @@ require_once realpath('../PHPMailerAutoload.php');
  * PHPMailer - PHP email transport unit test class
  * Performs authentication tests
  */
-class PHPMailerTest extends PHPUnit_Framework_TestCase
+class phpmailerTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Holds the default phpmailer instance.

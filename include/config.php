@@ -42,7 +42,7 @@ function get_cached_config($qrystr, $cachetime = 0)
     $num_queries++;
     if ($cachetime>0) {
         if (file_exists($cache_file) && (time()-$cachetime) < filemtime($cache_file)) {
-              $cached_querys++;
+            $cached_querys++;
             return unserialize(file_get_contents($cache_file));
         }
     }

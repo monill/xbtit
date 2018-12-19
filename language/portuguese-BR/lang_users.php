@@ -1,6 +1,6 @@
 <?php
 
-// ARQUIVO EM PORTUGUÊS USERS.PHP 
+// ARQUIVO EM PORTUGUÊS USERS.PHP
 
 $language["FIND_USER"]       = "Localizar Usuário";
 $language["USER_LEVEL"]      = "Rank do Usuário";
