@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -44,11 +45,11 @@
 */
 function crk($l)
 {
-    $xip=$_SERVER["REMOTE_ADDR"];
+    $xip = $_SERVER['REMOTE_ADDR'];
 
     global $CURUSER,$btit_settings;
 
-    if (function_exists("write_log")) {
+    if (function_exists('write_log')) {
         write_log('Hacking Attempt! User: <a href="'.$btit_settings['url'].'/index.php?page=userdetails&amp;id='.$CURUSER['uid'].'">'.$CURUSER['username'].'</a> IP:'.$xip.' - Attempt: '.htmlspecialchars($l));
     }
 
@@ -57,46 +58,46 @@ function crk($l)
 }
 
 //the bad words...
-$ban['union']='select';
+$ban['union'] = 'select';
 //$ban['update']='set';
-$ban['set password for']='@';
+$ban['set password for'] = '@';
 
-$ban2= ['delete from','insert into','<script', '<object', '.write', '.location', '.cookie', '.open', 'vbscript:', '<iframe', '<layer', '<style', ':expression', '<base', 'id_level', 'users_level', 'xbt_', 'c99.txt', 'c99shell', 'r57.txt', 'r57shell.txt','/home/', '/var/', '/www/', '/etc/', '/bin', '/sbin/', '$_GET', '$_POST', '$_REQUEST', 'window.open', 'javascript:', 'xp_cmdshell',  '.htpasswd', '.htaccess', '<?php', '<?', '?>', '</script>'];
+$ban2 = ['delete from', 'insert into', '<script', '<object', '.write', '.location', '.cookie', '.open', 'vbscript:', '<iframe', '<layer', '<style', ':expression', '<base', 'id_level', 'users_level', 'xbt_', 'c99.txt', 'c99shell', 'r57.txt', 'r57shell.txt', '/home/', '/var/', '/www/', '/etc/', '/bin', '/sbin/', '$_GET', '$_POST', '$_REQUEST', 'window.open', 'javascript:', 'xp_cmdshell',  '.htpasswd', '.htaccess', '<?php', '<?', '?>', '</script>'];
 
-if (function_exists("dbconn")) {
+if (function_exists('dbconn')) {
     dbconn();
 }
 
 global $CURUSER;
 
-if ($CURUSER["admin_access"]=="yes" && $_SERVER["QUERY_STRING"]=="page=admin&user=".$CURUSER["uid"]."&code=".$CURUSER["random"]."&do=config&action=write" && strpos(strtolower($_REQUEST["tracker_announceurl"]), "tracker.opentrackr.org")) {
+if ($CURUSER['admin_access'] == 'yes' && $_SERVER['QUERY_STRING'] == 'page=admin&user='.$CURUSER['uid'].'&code='.$CURUSER['random'].'&do=config&action=write' && strpos(strtolower($_REQUEST['tracker_announceurl']), 'tracker.opentrackr.org')) {
     unset($ban2[7]);
 }
-if ($CURUSER["admin_access"]=="yes" && $_SERVER["QUERY_STRING"]=="page=admin&user=".$CURUSER["uid"]."&code=".$CURUSER["random"]."&do=config&action=write" && strpos(strtolower($_REQUEST["tracker_announceurl"]), "tracker.openbittorrent.com")) {
+if ($CURUSER['admin_access'] == 'yes' && $_SERVER['QUERY_STRING'] == 'page=admin&user='.$CURUSER['uid'].'&code='.$CURUSER['random'].'&do=config&action=write' && strpos(strtolower($_REQUEST['tracker_announceurl']), 'tracker.openbittorrent.com')) {
     unset($ban2[7]);
 }
-if ($CURUSER["admin_access"]=="yes" && $_SERVER["QUERY_STRING"]=="page=admin&user=".$CURUSER["uid"]."&code=".$CURUSER["random"]."&do=config&action=write" && strpos(strtolower($_REQUEST["tracker_announceurl"]), "opensharing.com")) {
+if ($CURUSER['admin_access'] == 'yes' && $_SERVER['QUERY_STRING'] == 'page=admin&user='.$CURUSER['uid'].'&code='.$CURUSER['random'].'&do=config&action=write' && strpos(strtolower($_REQUEST['tracker_announceurl']), 'opensharing.com')) {
     unset($ban2[7]);
 }
-if ($CURUSER["admin_access"]=="yes" && $_SERVER["QUERY_STRING"]=="page=admin&user=".$CURUSER["uid"]."&code=".$CURUSER["random"]."&do=security_suite") {
-    $ban2= ['delete from','insert into','<script', '<object', '.write', '.location', '.cookie', 'vbscript:', '<iframe', '<layer', '<style', ':expression', '<base', 'id_level', 'users_level', 'xbt_', 'c99.txt', 'c99shell', 'r57.txt', 'r57shell.txt', '$_GET', '$_POST', '$_REQUEST', 'window.open', 'javascript:', 'xp_cmdshell',  '.htpasswd', '.htaccess', '</script>'];
+if ($CURUSER['admin_access'] == 'yes' && $_SERVER['QUERY_STRING'] == 'page=admin&user='.$CURUSER['uid'].'&code='.$CURUSER['random'].'&do=security_suite') {
+    $ban2 = ['delete from', 'insert into', '<script', '<object', '.write', '.location', '.cookie', 'vbscript:', '<iframe', '<layer', '<style', ':expression', '<base', 'id_level', 'users_level', 'xbt_', 'c99.txt', 'c99shell', 'r57.txt', 'r57shell.txt', '$_GET', '$_POST', '$_REQUEST', 'window.open', 'javascript:', 'xp_cmdshell',  '.htpasswd', '.htaccess', '</script>'];
 }
-if ($CURUSER["admin_access"]=="yes" && $_SERVER["QUERY_STRING"]=="page=admin&user=".$CURUSER["uid"]."&code=".$CURUSER["random"]."&do=php_log&action=save") {
-    $ban2= ['delete from','insert into','<script', '<object', '.write', '.location', '.cookie', 'vbscript:', '<iframe', '<layer', '<style', ':expression', '<base', 'id_level', 'users_level', 'xbt_', 'c99.txt', 'c99shell', 'r57.txt', 'r57shell.txt', '$_GET', '$_POST', '$_REQUEST', 'window.open', 'javascript:', 'xp_cmdshell',  '.htpasswd', '.htaccess', '</script>'];
+if ($CURUSER['admin_access'] == 'yes' && $_SERVER['QUERY_STRING'] == 'page=admin&user='.$CURUSER['uid'].'&code='.$CURUSER['random'].'&do=php_log&action=save') {
+    $ban2 = ['delete from', 'insert into', '<script', '<object', '.write', '.location', '.cookie', 'vbscript:', '<iframe', '<layer', '<style', ':expression', '<base', 'id_level', 'users_level', 'xbt_', 'c99.txt', 'c99shell', 'r57.txt', 'r57shell.txt', '$_GET', '$_POST', '$_REQUEST', 'window.open', 'javascript:', 'xp_cmdshell',  '.htpasswd', '.htaccess', '</script>'];
 }
 
-$host=false;
-$host=@getenv("SERVER_NAME");
-if ($host===false) {
-    $host=$_SERVER["SERVER_NAME"];
+$host = false;
+$host = @getenv('SERVER_NAME');
+if ($host === false) {
+    $host = $_SERVER['SERVER_NAME'];
 }
 
-$url=explode(".", $host);
+$url = explode('.', $host);
 unset($url[0]);
-if (count($url)>0) {
+if (count($url) > 0) {
     foreach ($url as $urlpart) {
-        if (in_array(".".$urlpart, $ban2)) {
-            $remove[]=array_search(".".$urlpart, $ban2);
+        if (in_array('.'.$urlpart, $ban2)) {
+            $remove[] = array_search('.'.$urlpart, $ban2);
         }
     }
 }
@@ -109,70 +110,68 @@ if (isset($remove) && is_array($remove)) {
 
 // Check
 
-
 //checking the bad words
-$cepl=$_SERVER['QUERY_STRING'];
+$cepl = $_SERVER['QUERY_STRING'];
 if (!empty($cepl)) {
-    $cepl=preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
-    $cepl=urldecode($cepl);
-    $cepl=strtolower($cepl);
+    $cepl = preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
+    $cepl = urldecode($cepl);
+    $cepl = strtolower($cepl);
 }
 foreach ($ban as $k => $l) {
-    if (str_replace($k, '', $cepl)!=$cepl&&str_replace($l, '', $cepl)!=$cepl) {
+    if (str_replace($k, '', $cepl) != $cepl && str_replace($l, '', $cepl) != $cepl) {
         crk(($cepl));
     }
 }
-if (str_replace($ban2, '', $cepl)!=$cepl) {
+if (str_replace($ban2, '', $cepl) != $cepl) {
     crk(($cepl));
 }
-  
 
-if (is_array($_GET) && count($_GET)>0) {
-    $cepl=implode(' ', $_GET);
+if (is_array($_GET) && count($_GET) > 0) {
+    $cepl = implode(' ', $_GET);
 
     if (!empty($cepl)) {
-        $cepl=preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
-        $cepl=urldecode($cepl);
-        $cepl=strtolower($cepl);
+        $cepl = preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
+        $cepl = urldecode($cepl);
+        $cepl = strtolower($cepl);
     }
     foreach ($ban as $k => $l) {
-        if (str_replace($k, '', $cepl)!=$cepl&&str_replace($l, '', $cepl)!=$cepl) {
+        if (str_replace($k, '', $cepl) != $cepl && str_replace($l, '', $cepl) != $cepl) {
             crk(($cepl));
         }
     }
-    if (str_replace($ban2, '', $cepl)!=$cepl) {
+    if (str_replace($ban2, '', $cepl) != $cepl) {
         crk(($cepl));
     }
 }
-if (is_array($_POST) && count($_POST)>0) {
-    $cepl=implode(' ', $_POST);
+if (is_array($_POST) && count($_POST) > 0) {
+    $cepl = implode(' ', $_POST);
 
     if (!empty($cepl)) {
-        $cepl=preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
-        $cepl=urldecode($cepl);
-        $cepl=strtolower($cepl);
+        $cepl = preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
+        $cepl = urldecode($cepl);
+        $cepl = strtolower($cepl);
     }
     foreach ($ban as $k => $l) {
-        if (str_replace($k, '', $cepl)!=$cepl&&str_replace($l, '', $cepl)!=$cepl) {
+        if (str_replace($k, '', $cepl) != $cepl && str_replace($l, '', $cepl) != $cepl) {
             crk(($cepl));
         }
     }
-    if (str_replace($ban2, '', $cepl)!=$cepl) {
+    if (str_replace($ban2, '', $cepl) != $cepl) {
         crk(($cepl));
     }
 }
 
-$cepl=implode(' ', $_COOKIE);
+$cepl = implode(' ', $_COOKIE);
 if (!empty($cepl)) {
-    $cepl=preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
-    $cepl=urldecode($cepl);
-    $cepl=strtolower($cepl);
+    $cepl = preg_replace('/([\x00-\x08][\x0b-\x0c][\x0e-\x20])/', '', $cepl);
+    $cepl = urldecode($cepl);
+    $cepl = strtolower($cepl);
 }
 foreach ($ban as $k => $l) {
-    if (str_replace($k, '', $cepl)!=$cepl&&str_replace($l, '', $cepl)!=$cepl) {
+    if (str_replace($k, '', $cepl) != $cepl && str_replace($l, '', $cepl) != $cepl) {
         crk(($cepl));
     }
 }
-if (str_replace($ban2, '', $cepl)!=$cepl) {
+if (str_replace($ban2, '', $cepl) != $cepl) {
     crk(($cepl));
 }

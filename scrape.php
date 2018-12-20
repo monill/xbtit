@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,14 +31,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
+$BASEPATH = __DIR__;
 
-$BASEPATH=__DIR__;
-
-require("$BASEPATH/include/config.php");
-require("$BASEPATH/include/common.php");
-# protection against sql injection, xss attack
+require "$BASEPATH/include/config.php";
+require "$BASEPATH/include/common.php";
+// protection against sql injection, xss attack
 require_once $BASEPATH.'/include/crk_protection.php';
-
 
 // check if we are using standard php tracker or xbtt backend
 // if using xbbt we will make a redirect to xbtt announce using
@@ -48,25 +47,25 @@ if ($XBTT_USE) {
     {
         $output = [];
         foreach ($array as $key => $item) {
-            $output[] = $key . "=" . $item;
+            $output[] = $key.'='.$item;
         }
 
         return implode($glue, $output);
     }
 
-    if (isset($_GET["pid"])) {
-        $pid = $_GET["pid"];
-        unset($_GET["pid"]);
+    if (isset($_GET['pid'])) {
+        $pid = $_GET['pid'];
+        unset($_GET['pid']);
     } else {
-        $pid = "";
+        $pid = '';
     }
 
-    $query_string=implode_with_keys("&", $_GET);
+    $query_string = implode_with_keys('&', $_GET);
 
-    if ($pid!="") { // private announce
-        header("Location: $XBTT_URL/$pid/scrape?" . $query_string);
+    if ($pid != '') { // private announce
+        header("Location: $XBTT_URL/$pid/scrape?".$query_string);
     } else { // public
-        header("Location: $XBTT_URL/scrape?" . $query_string);
+        header("Location: $XBTT_URL/scrape?".$query_string);
     }
 
     exit;
@@ -74,13 +73,11 @@ if ($XBTT_USE) {
 
 // not using xbtt, let us go ;)
 
-
-
 // controll if client can handle gzip
 if ($GZIP_ENABLED) {
-    if (stristr($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip") && extension_loaded('zlib') && ini_get("zlib.output_compression") == 0) {
-        if (ini_get('output_handler')!='ob_gzhandler') {
-            ob_start("ob_gzhandler");
+    if (stristr($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') && extension_loaded('zlib') && ini_get('zlib.output_compression') == 0) {
+        if (ini_get('output_handler') != 'ob_gzhandler') {
+            ob_start('ob_gzhandler');
         } else {
             ob_start();
         }
@@ -93,49 +90,48 @@ if ($GZIP_ENABLED) {
 error_reporting(0);
 
 // connect to db
-if ($GLOBALS["persist"]) {
-    $conres=($GLOBALS['conn'] = mysqli_connect($dbhost, $dbuser, $dbpass)) or show_error("Tracker errore - mysql_connect: " . ((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+if ($GLOBALS['persist']) {
+    $conres = ($GLOBALS['conn'] = mysqli_connect($dbhost, $dbuser, $dbpass)) or show_error('Tracker errore - mysql_connect: '.((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 } else {
-    $conres=($GLOBALS['conn'] = mysqli_connect($dbhost, $dbuser, $dbpass)) or show_error("Tracker errore - mysql_connect: " . ((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+    $conres = ($GLOBALS['conn'] = mysqli_connect($dbhost, $dbuser, $dbpass)) or show_error('Tracker errore - mysql_connect: '.((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 }
 
-    ((bool)mysqli_query($GLOBALS['conn'], "USE $database")) or show_error("Tracker errore - $database - ".((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+    ((bool) mysqli_query($GLOBALS['conn'], "USE $database")) or show_error("Tracker errore - $database - ".((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-if (isset($_GET["pid"])) {
-    $pid = $_GET["pid"];
+if (isset($_GET['pid'])) {
+    $pid = $_GET['pid'];
 } else {
-    $pid = "";
+    $pid = '';
 }
 
-if (strpos($pid, "?")) {
-    $tmp = substr($pid, strpos($pid, "?"));
-    $pid  = substr($pid, 0, strpos($pid, "?"));
-    $tmpname = substr($tmp, 1, strpos($tmp, "=")-1);
-    $tmpvalue = substr($tmp, strpos($tmp, "=")+1);
+if (strpos($pid, '?')) {
+    $tmp = substr($pid, strpos($pid, '?'));
+    $pid = substr($pid, 0, strpos($pid, '?'));
+    $tmpname = substr($tmp, 1, strpos($tmp, '=') - 1);
+    $tmpvalue = substr($tmp, strpos($tmp, '=') + 1);
     $_GET[$tmpname] = $tmpvalue;
 }
 
 $usehash = false;
 
-$pid = AddSlashes($pid);
+$pid = addslashes($pid);
 
 // if private announce turned on and PID empty string or not send by client
-if (($pid=="" || !$pid) && $PRIVATE_SCRAPE) {
-    show_error("Sorry. Private scrape is ON and PID system is required");
+if (($pid == '' || !$pid) && $PRIVATE_SCRAPE) {
+    show_error('Sorry. Private scrape is ON and PID system is required');
 }
 
-
-if (isset($_GET["info_hash"])) {
-    if ($pid!="") {
-        $qryStr=substr($_SERVER["QUERY_STRING"], strlen("?pid=$pid"));
+if (isset($_GET['info_hash'])) {
+    if ($pid != '') {
+        $qryStr = substr($_SERVER['QUERY_STRING'], strlen("?pid=$pid"));
     } else {
-        $qryStr=$_SERVER["QUERY_STRING"];
+        $qryStr = $_SERVER['QUERY_STRING'];
     }
     // support for multi-scrape
     // more info @ http://wiki.depthstrike.com/index.php/P2P:Programming:Trackers:PHP:Multiscrape
-    foreach (explode("&", $qryStr) as $item) {
-        if (substr($item, 0, 10) == "info_hash=") {
-            $ihash=urldecode(substr($item, 10));
+    foreach (explode('&', $qryStr) as $item) {
+        if (substr($item, 0, 10) == 'info_hash=') {
+            $ihash = urldecode(substr($item, 10));
 
             if (strlen($ihash) == 20) {
                 $ihash = bin2hex($ihash);
@@ -147,15 +143,15 @@ if (isset($_GET["info_hash"])) {
                 }
             }
 
-            $newmatches[]=$ihash;
+            $newmatches[] = $ihash;
         }
     }
 
     if (get_magic_quotes_gpc()) {
         //$info_hash = stripslashes($_GET["info_hash"]);
-        $info_hash = stripslashes(join($newmatches, "','"));
+        $info_hash = stripslashes(implode($newmatches, "','"));
     } else { // $info_hash = $_GET["info_hash"];
-        $info_hash = join($newmatches, "','");
+        $info_hash = implode($newmatches, "','");
     }
 
     $info_hash = strtolower("('$info_hash')");
@@ -175,27 +171,26 @@ while ($row = mysqli_fetch_row($query)) {
 }
 
 if ($usehash) {
-    $query = mysqli_query($GLOBALS['conn'], "SELECT f.info_hash, f.seeds, f.leechers, f.finished FROM {$TABLE_PREFIX}files f WHERE external='no' AND info_hash IN $info_hash") or show_error("Database error. Cannot complete request.");
+    $query = mysqli_query($GLOBALS['conn'], "SELECT f.info_hash, f.seeds, f.leechers, f.finished FROM {$TABLE_PREFIX}files f WHERE external='no' AND info_hash IN $info_hash") or show_error('Database error. Cannot complete request.');
 } else {
-    $query = mysqli_query($GLOBALS['conn'], "SELECT f.info_hash, f.seeds, f.leechers, f.finished FROM {$TABLE_PREFIX}files f WHERE external='no' ORDER BY info_hash") or show_error("Database error. Cannot complete request.");
+    $query = mysqli_query($GLOBALS['conn'], "SELECT f.info_hash, f.seeds, f.leechers, f.finished FROM {$TABLE_PREFIX}files f WHERE external='no' ORDER BY info_hash") or show_error('Database error. Cannot complete request.');
 }
 
-
-$result="d5:filesd";
+$result = 'd5:filesd';
 
 while ($row = mysqli_fetch_row($query)) {
     $hash = hex2bin($row[0]);
-    $result.="20:".$hash."d";
-    $result.="8:completei".$row[1]."e";
-    $result.="10:downloadedi".$row[3]."e";
-    $result.="10:incompletei".$row[2]."e";
+    $result .= '20:'.$hash.'d';
+    $result .= '8:completei'.$row[1].'e';
+    $result .= '10:downloadedi'.$row[3].'e';
+    $result .= '10:incompletei'.$row[2].'e';
     if (isset($namemap[$row[0]])) {
-        $result.="4:name".strlen($namemap[$row[0]]).":".$namemap[$row[0]];
+        $result .= '4:name'.strlen($namemap[$row[0]]).':'.$namemap[$row[0]];
     }
-    $result.="e";
+    $result .= 'e';
 }
 
-$result.="ee";
+$result .= 'ee';
 
 echo $result;
 

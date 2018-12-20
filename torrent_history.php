@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,29 +31,27 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-
-if (!defined("IN_BTIT")) {
-    die("non direct access!");
+if (!defined('IN_BTIT')) {
+    die('non direct access!');
 }
 
-
-$id = AddSlashes($_GET["id"]);
+$id = addslashes($_GET['id']);
 if (!isset($id) || !$id) {
-    die("Error ID");
+    die('Error ID');
 }
-$scriptname = htmlspecialchars($_SERVER["PHP_SELF"]."?history&id=$id");
-$addparam = "";
+$scriptname = htmlspecialchars($_SERVER['PHP_SELF']."?history&id=$id");
+$addparam = '';
 
 // control if torrent exist in our db
 $res = get_result("SELECT size FROM {$TABLE_PREFIX}files WHERE info_hash='$id'", true, $btit_settings['cache_duration']);
 
 if ($res) {
-    $row=$res[0];
+    $row = $res[0];
     if ($row) {
-        $tsize=0+$row["size"];
+        $tsize = 0 + $row['size'];
     }
 } else {
-    die("Error ID");
+    die('Error ID');
 }
 
 if ($XBTT_USE) {
@@ -61,56 +60,55 @@ if ($XBTT_USE) {
     $res = get_result("SELECT h.*, u.username, c.name AS country, c.flagpic, ul.level, ul.prefixcolor, ul.suffixcolor FROM {$TABLE_PREFIX}history h LEFT JOIN {$TABLE_PREFIX}users u ON h.uid=u.id LEFT JOIN {$TABLE_PREFIX}countries c ON u.flag=c.id LEFT JOIN {$TABLE_PREFIX}users_level ul ON u.id_level=ul.id WHERE h.infohash='$id' AND h.date IS NOT NULL ORDER BY date DESC LIMIT 0,30", true, $btit_settings['cache_duration']);
 }
 
+require load_language('lang_history.php');
 
-require(load_language("lang_history.php"));
+$historytpl = new bTemplate();
+$historytpl->set('language', $language);
+$historytpl->set('history_script', 'index.php');
 
-$historytpl=new bTemplate();
-$historytpl->set("language", $language);
-$historytpl->set("history_script", "index.php");
-
-if (count($res)==0) {
-    $historytpl->set("NOHISTORY", true, true);
+if (count($res) == 0) {
+    $historytpl->set('NOHISTORY', true, true);
 } else {
-    $historytpl->set("NOHISTORY", false, true);
+    $historytpl->set('NOHISTORY', false, true);
 
     foreach ($res as $id => $row) {
-        if ($GLOBALS["usepopup"]) {
-            $history[$i]["USERNAME"]="<a href=\"javascript: windowunder('index.php?page=userdetails&amp;id=".$row["uid"]."')\">".unesc($row["username"])."</a>";
-            $history[$i]["PM"]=(strtolower($row["username"])=="guest"?"":"<a href=\"javascript: windowunder('index.php?page=usercp&amp;do=pm&action=edit&uid=$CURUSER[uid]&what=new&to=".urlencode(unesc($row["username"]))."')\">".image_or_link("$STYLEPATH/images/pm.png", "", "PM")."</a>");
+        if ($GLOBALS['usepopup']) {
+            $history[$i]['USERNAME'] = "<a href=\"javascript: windowunder('index.php?page=userdetails&amp;id=".$row['uid']."')\">".unesc($row['username']).'</a>';
+            $history[$i]['PM'] = (strtolower($row['username']) == 'guest' ? '' : "<a href=\"javascript: windowunder('index.php?page=usercp&amp;do=pm&action=edit&uid=$CURUSER[uid]&what=new&to=".urlencode(unesc($row['username']))."')\">".image_or_link("$STYLEPATH/images/pm.png", '', 'PM').'</a>');
         } else {
-            $history[$i]["USERNAME"]="<a href=\"index.php?page=userdetails&amp;id=".$row["uid"]."\">".unesc($row["username"])."</a>";
-            $history[$i]["PM"]=(strtolower($row["username"])=="guest"?"":"<a href=\"index.php?page=usercp&amp;do=pm&action=edit&uid=$CURUSER[uid]&what=new&to=".urlencode(unesc($row["username"]))."\">".image_or_link("$STYLEPATH/images/pm.png", "", "PM")."</a>");
+            $history[$i]['USERNAME'] = '<a href="index.php?page=userdetails&amp;id='.$row['uid'].'">'.unesc($row['username']).'</a>';
+            $history[$i]['PM'] = (strtolower($row['username']) == 'guest' ? '' : "<a href=\"index.php?page=usercp&amp;do=pm&action=edit&uid=$CURUSER[uid]&what=new&to=".urlencode(unesc($row['username'])).'">'.image_or_link("$STYLEPATH/images/pm.png", '', 'PM').'</a>');
         }
-        if ($row["flagpic"]!="") {
-            $history[$i]["FLAG"]="<img src=images/flag/".$row["flagpic"]." alt=".$row["country"]." />";
+        if ($row['flagpic'] != '') {
+            $history[$i]['FLAG'] = '<img src=images/flag/'.$row['flagpic'].' alt='.$row['country'].' />';
         } else {
-            $history[$i]["FLAG"]="<img src=images/flag/unknown.gif alt=".$language["UNKNOWN"]." />";
+            $history[$i]['FLAG'] = '<img src=images/flag/unknown.gif alt='.$language['UNKNOWN'].' />';
         }
-        $history[$i]["ACTIVE"]=$row["active"];
-        $history[$i]["CLIENT"]=htmlspecialchars($row["agent"]);
-        $dled=makesize($row["downloaded"]);
-        $upld=makesize($row["uploaded"]);
-        $history[$i]["DOWNLOADED"]=$dled;
-        $history[$i]["UPLOADED"]=$upld;
+        $history[$i]['ACTIVE'] = $row['active'];
+        $history[$i]['CLIENT'] = htmlspecialchars($row['agent']);
+        $dled = makesize($row['downloaded']);
+        $upld = makesize($row['uploaded']);
+        $history[$i]['DOWNLOADED'] = $dled;
+        $history[$i]['UPLOADED'] = $upld;
         //Peer Ratio
-        if (((int)$row["downloaded"])>0) {
-            $ratio=number_format($row["uploaded"]/$row["downloaded"], 2);
+        if (((int) $row['downloaded']) > 0) {
+            $ratio = number_format($row['uploaded'] / $row['downloaded'], 2);
         } else {
-            $ratio='&#8734;';
+            $ratio = '&#8734;';
         }
-        $history[$i]["RATIO"]=$ratio;
+        $history[$i]['RATIO'] = $ratio;
         //End Peer Ratio
 
-        $history[$i]["FINISHED"]=get_elapsed_time($row["date"])." ago";
+        $history[$i]['FINISHED'] = get_elapsed_time($row['date']).' ago';
         $i++;
     }
 }
 
-if ($GLOBALS["usepopup"]) {
-    $historytpl->set("BACK2", "<br /><br /><center><a href=\"javascript:window.close()\"><tag:language.CLOSE /></a></center>");
+if ($GLOBALS['usepopup']) {
+    $historytpl->set('BACK2', '<br /><br /><center><a href="javascript:window.close()"><tag:language.CLOSE /></a></center>');
 } else {
-    $historytpl->set("BACK2", "</div><br /><br /><center><a href=\"javascript: history.go(-1);\"><tag:language.BACK /></a>");
+    $historytpl->set('BACK2', '</div><br /><br /><center><a href="javascript: history.go(-1);"><tag:language.BACK /></a>');
 }
-$historytpl->set("XBTT", !$XBTT_USE, true);
-$historytpl->set("XBTT2", !$XBTT_USE, true);
-$historytpl->set("history", $history);
+$historytpl->set('XBTT', !$XBTT_USE, true);
+$historytpl->set('XBTT2', !$XBTT_USE, true);
+$historytpl->set('history', $history);

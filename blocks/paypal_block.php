@@ -30,7 +30,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-block_begin("Donate");
+block_begin('Donate');
 ?>
 <table width="100%" align="center" border="0" cellspacing="1" cellpadding="4">
 <tr>

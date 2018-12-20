@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,94 +31,88 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-
 error_reporting(E_ALL & ~E_NOTICE);
-if (!defined("IN_BTIT")) {
-    die("non direct access!");
+if (!defined('IN_BTIT')) {
+    die('non direct access!');
 }
 
-
-$scriptname = htmlspecialchars($_SERVER["PHP_SELF"]."?page=torrents");
-$addparam = "";
-
+$scriptname = htmlspecialchars($_SERVER['PHP_SELF'].'?page=torrents');
+$addparam = '';
 
 if ($XBTT_USE) {
-    $tseeds="f.seeds+ifnull(x.seeders,0)";
-    $tleechs="f.leechers+ifnull(x.leechers,0)";
-    $tcompletes="f.finished+ifnull(x.completed,0)";
-    $ttables="{$TABLE_PREFIX}files f LEFT JOIN xbt_files x ON x.info_hash=f.bin_hash";
+    $tseeds = 'f.seeds+ifnull(x.seeders,0)';
+    $tleechs = 'f.leechers+ifnull(x.leechers,0)';
+    $tcompletes = 'f.finished+ifnull(x.completed,0)';
+    $ttables = "{$TABLE_PREFIX}files f LEFT JOIN xbt_files x ON x.info_hash=f.bin_hash";
 } else {
-    $tseeds="f.seeds";
-    $tleechs="f.leechers";
-    $tcompletes="f.finished";
-    $ttables="{$TABLE_PREFIX}files f";
+    $tseeds = 'f.seeds';
+    $tleechs = 'f.leechers';
+    $tcompletes = 'f.finished';
+    $ttables = "{$TABLE_PREFIX}files f";
 }
 
-
-if (!$CURUSER || $CURUSER["view_torrents"]!="yes") {
-    err_msg($language["ERROR"], $language["NOT_AUTHORIZED"]." ".$language["MNU_TORRENT"]."!<br />\n".$language["SORRY"]."...");
+if (!$CURUSER || $CURUSER['view_torrents'] != 'yes') {
+    err_msg($language['ERROR'], $language['NOT_AUTHORIZED'].' '.$language['MNU_TORRENT']."!<br />\n".$language['SORRY'].'...');
     stdfoot();
     exit();
 }
 
-
-if (isset($_GET["search"])) {
-    $trova = htmlspecialchars(str_replace("+", " ", $_GET["search"]));
+if (isset($_GET['search'])) {
+    $trova = htmlspecialchars(str_replace('+', ' ', $_GET['search']));
 } else {
-    $trova = "";
+    $trova = '';
 }
- 
-$category = (!isset($_GET["category"])?0:explode(";", $_GET["category"]));
+
+$category = (!isset($_GET['category']) ? 0 : explode(';', $_GET['category']));
 // sanitize categories id
 if (is_array($category)) {
-    $category = array_map("intval", $category);
+    $category = array_map('intval', $category);
 } else {
     $category = 0;
 }
 
-$combo_categories=categories($category[0]);
+$combo_categories = categories($category[0]);
 
-(isset($_GET["active"]) && is_numeric($_GET["active"]) && $_GET["active"]>=0 && $_GET["active"]<=2) ? $active=((int)$_GET["active"]) : $active=1;
+(isset($_GET['active']) && is_numeric($_GET['active']) && $_GET['active'] >= 0 && $_GET['active'] <= 2) ? $active = ((int) $_GET['active']) : $active = 1;
 
-if ($active==0) {
-    $where = " WHERE 1=1";
-    $addparam.="active=0";
+if ($active == 0) {
+    $where = ' WHERE 1=1';
+    $addparam .= 'active=0';
 } // active only
-elseif ($active==1) {
+elseif ($active == 1) {
     $where = " WHERE $tleechs+$tseeds > 0";
-    $addparam.="active=1";
+    $addparam .= 'active=1';
 } // dead only
-elseif ($active==2) {
+elseif ($active == 2) {
     $where = " WHERE $tleechs+$tseeds = 0";
-    $addparam.="active=2";
+    $addparam .= 'active=2';
 }
 
 /* Rewrite, part 1: encode "WHERE" statement only. */
 
 // selezione categoria
-if ($category[0]>0) {
-    $where .= " AND category IN (".implode(",", $category).")"; // . $_GET["category"];
-    $addparam.="&amp;category=".implode(";", $category); // . $_GET["category"];
+if ($category[0] > 0) {
+    $where .= ' AND category IN ('.implode(',', $category).')'; // . $_GET["category"];
+    $addparam .= '&amp;category='.implode(';', $category); // . $_GET["category"];
 }
 
-
 // Search
-if (isset($_GET["search"])) {
-    $testocercato = trim($_GET["search"]);
-    $testocercato = explode(" ", $testocercato);
-    if ($_GET["search"]!="") {
-        $search = "search=" . implode("+", $testocercato);
+if (isset($_GET['search'])) {
+    $testocercato = trim($_GET['search']);
+    $testocercato = explode(' ', $testocercato);
+    if ($_GET['search'] != '') {
+        $search = 'search='.implode('+', $testocercato);
     }
-    for ($k=0; $k < count($testocercato); $k++) {
+    for ($k = 0; $k < count($testocercato); $k++) {
         if (isset($query_select)) {
-            $query_select .= " filename LIKE '%" .  mysqli_query($GLOBALS['conn'], $testocercato[$k]) . "%'";
+            $query_select .= " filename LIKE '%".mysqli_query($GLOBALS['conn'], $testocercato[$k])."%'";
         }
-        if ($k<count($testocercato)-1) {
-            $query_select .= " AND ";
+        if ($k < count($testocercato) - 1) {
+            $query_select .= ' AND ';
         }
     }
     if (isset($query_select)) {
-        $where .= " AND " . $query_select;
+        $where .= ' AND '.$query_select;
     }
 }
 
@@ -127,82 +122,81 @@ if (isset($_GET["search"])) {
 
 $res = get_result("SELECT COUNT(*) as torrents FROM $ttables $where", true, $btit_settings['cache_duration']);
 
-$count = $res[0]["torrents"];
+$count = $res[0]['torrents'];
 if (!isset($search)) {
-    $search = "";
+    $search = '';
 }
 
-if ($count>0) {
-    if ($addparam != "") {
-        if ($search != "") {
-            $addparam .= "&amp;" . $search . "&amp;";
+if ($count > 0) {
+    if ($addparam != '') {
+        if ($search != '') {
+            $addparam .= '&amp;'.$search.'&amp;';
         }
         //else
           //$addparam .= "&";
     } else {
-        if ($search != "") {
-            $addparam .=  $search . "&amp;";
+        if ($search != '') {
+            $addparam .= $search.'&amp;';
         } else {
-            $addparam .= ""; //$scriptname . "?";
+            $addparam .= ''; //$scriptname . "?";
         }
     }
 
-    $torrentperpage=((int)$CURUSER["torrentsperpage"]);
-    if ($torrentperpage==0) {
-        $torrentperpage=($ntorrents==0?15:$ntorrents);
+    $torrentperpage = ((int) $CURUSER['torrentsperpage']);
+    if ($torrentperpage == 0) {
+        $torrentperpage = ($ntorrents == 0 ? 15 : $ntorrents);
     }
 
     // getting order
-    $order_param=3;
-    if (isset($_GET["order"])) {
-        $order_param=(int)$_GET["order"];
+    $order_param = 3;
+    if (isset($_GET['order'])) {
+        $order_param = (int) $_GET['order'];
         switch ($order_param) {
             case 1:
-                $order="cname";
+                $order = 'cname';
                 break;
             case 2:
-                $order="filename";
+                $order = 'filename';
                 break;
             case 3:
-                $order="data";
+                $order = 'data';
                 break;
             case 4:
-                $order="size";
+                $order = 'size';
                 break;
             case 5:
-                $order="seeds";
+                $order = 'seeds';
                 break;
             case 6:
-                $order="leechers";
+                $order = 'leechers';
                 break;
             case 7:
-                $order="finished";
+                $order = 'finished';
                 break;
             case 8:
-                $order="dwned";
+                $order = 'dwned';
                 break;
             case 9:
-                $order="speed";
+                $order = 'speed';
                 break;
             default:
-                $order="data";
+                $order = 'data';
         }
     } else {
-        $order="data";
+        $order = 'data';
     }
 
-    $qry_order=str_replace(["leechers","seeds","finished"], [$tleechs,$tseeds, $tcompletes], $order);
+    $qry_order = str_replace(['leechers', 'seeds', 'finished'], [$tleechs, $tseeds, $tcompletes], $order);
 
-    $by_param=2;
-    if (isset($_GET["by"])) {
-        $by_param=(int)$_GET["by"];
-        $by=($by_param==1?"ASC":"DESC");
+    $by_param = 2;
+    if (isset($_GET['by'])) {
+        $by_param = (int) $_GET['by'];
+        $by = ($by_param == 1 ? 'ASC' : 'DESC');
     } else {
-        $by="DESC";
+        $by = 'DESC';
     }
 
-
-    list($pagertop, $pagerbottom, $limit) = pager($torrentperpage, $count, $scriptname."&amp;" . $addparam.(strlen($addparam)>0?"&amp;":"")."order=$order_param&amp;by=$by_param&amp;");
+    list($pagertop, $pagerbottom, $limit) = pager($torrentperpage, $count, $scriptname.'&amp;'.$addparam.(strlen($addparam) > 0 ? '&amp;' : '')."order=$order_param&amp;by=$by_param&amp;");
 
     // Do the query with the uploader nickname
     if ($SHOW_UPLOADER) {
@@ -215,229 +209,225 @@ if ($count>0) {
     $results = get_result($query, true, $btit_settings['cache_duration']);
 }
 
-
 if (isset($by)) {
-    if ($by=="ASC") {
-        $mark="&nbsp;&uarr;";
+    if ($by == 'ASC') {
+        $mark = '&nbsp;&uarr;';
     } else {
-        $mark="&nbsp;&darr;";
+        $mark = '&nbsp;&darr;';
     }
 }
 
 // load language file
-require(load_language("lang_torrents.php"));
+require load_language('lang_torrents.php');
 
+$torrenttpl = new bTemplate();
+$torrenttpl->set('language', $language);
+$torrenttpl->set('torrent_script', 'index.php');
+$torrenttpl->set('torrent_search', $trova);
+$torrenttpl->set('torrent_categories_combo', $combo_categories);
+$torrenttpl->set('torrent_selected_all', ($active == 0 ? 'selected="selected"' : ''));
+$torrenttpl->set('torrent_selected_active', ($active == 1 ? 'selected="selected"' : ''));
+$torrenttpl->set('torrent_selected_dead', ($active == 2 ? 'selected="selected"' : ''));
 
-$torrenttpl=new bTemplate();
-$torrenttpl->set("language", $language);
-$torrenttpl->set("torrent_script", "index.php");
-$torrenttpl->set("torrent_search", $trova);
-$torrenttpl->set("torrent_categories_combo", $combo_categories);
-$torrenttpl->set("torrent_selected_all", ($active==0?"selected=\"selected\"":""));
-$torrenttpl->set("torrent_selected_active", ($active==1?"selected=\"selected\"":""));
-$torrenttpl->set("torrent_selected_dead", ($active==2?"selected=\"selected\"":""));
-
-$torrenttpl->set("torrent_pagertop", $pagertop);
-$torrenttpl->set("torrent_header_category", "<a href=\"$scriptname&amp;$addparam".(strlen($addparam)>0?"&amp;":"")."order=1&amp;by=".($order=="cname" && $by=="ASC"?"2":"1")."\">".$language["CATEGORY"]."</a>".($order=="cname"?$mark:""));
-$torrenttpl->set("torrent_header_filename", "<a href=\"$scriptname&amp;$addparam".(strlen($addparam)>0?"&amp;":"")."order=2&amp;by=".($order=="filename" && $by=="ASC"?"2":"1")."\">".$language["FILE"]."</a>".($order=="filename"?$mark:""));
-$torrenttpl->set("torrent_header_comments", $language["COMMENT"]);
-$torrenttpl->set("torrent_header_rating", $language["RATING"]);
-$torrenttpl->set("WT", ((int)$CURUSER["WT"])>0, true);
-$torrenttpl->set("torrent_header_waiting", $language["WT"]);
-$torrenttpl->set("torrent_header_download", $language["DOWN"]);
-$torrenttpl->set("torrent_header_added", "<a href=\"$scriptname&amp;$addparam".(strlen($addparam)>0?"&amp;":"")."order=3&amp;by=".($order=="data" && $by=="ASC"?"2":"1")."\">".$language["ADDED"]."</a>".($order=="data"?$mark:""));
-$torrenttpl->set("torrent_header_size", "<a href=\"$scriptname&amp;$addparam".(strlen($addparam)>0?"&amp;":"")."order=4&amp;by=".($order=="size" && $by=="DESC"?"1":"2")."\">".$language["SIZE"]."</a>".($order=="size"?$mark:""));
-$torrenttpl->set("uploader", $SHOW_UPLOADER, true);
-$torrenttpl->set("torrent_header_uploader", $language["UPLOADER"]);
-$torrenttpl->set("torrent_header_seeds", "<a href=\"$scriptname&amp;$addparam".(strlen($addparam)>0?"&amp;":"")."order=5&amp;by=".($order=="seeds" && $by=="DESC"?"1":"2")."\">".$language["SHORT_S"]."</a>".($order=="seeds"?$mark:""));
-$torrenttpl->set("torrent_header_leechers", "<a href=\"$scriptname&amp;$addparam".(strlen($addparam)>0?"&amp;":"")."order=6&amp;by=".($order=="leechers" && $by=="DESC"?"1":"2")."\">".$language["SHORT_L"]."</a>".($order=="leechers"?$mark:""));
-$torrenttpl->set("torrent_header_complete", "<a href=\"$scriptname&amp;$addparam".(strlen($addparam)>0?"&amp;":"")."order=7&amp;by=".($order=="finished" && $by=="ASC"?"2":"1")."\">".$language["SHORT_C"]."</a>".($order=="finished"?$mark:""));
-$torrenttpl->set("torrent_header_downloaded", "<a href=\"$scriptname&amp;$addparam".(strlen($addparam)>0?"&amp;":"")."order=8&amp;by=".($order=="dwned" && $by=="ASC"?"2":"1")."\">".$language["DOWNLOADED"]."</a>".($order=="dwned"?$mark:""));
-$torrenttpl->set("torrent_header_speed", "<a href=\"$scriptname&amp;$addparam".(strlen($addparam)>0?"&amp;":"")."order=9&amp;by=".($order=="speed" && $by=="ASC"?"2":"1")."\">".$language["SPEED"]."</a>".($order=="speed"?$mark:""));
-$torrenttpl->set("torrent_header_average", $language["AVERAGE"]);
-if ($btit_settings["comment"]==false) {
-    $torrenttpl->set("COM", false, true);
+$torrenttpl->set('torrent_pagertop', $pagertop);
+$torrenttpl->set('torrent_header_category', "<a href=\"$scriptname&amp;$addparam".(strlen($addparam) > 0 ? '&amp;' : '').'order=1&amp;by='.($order == 'cname' && $by == 'ASC' ? '2' : '1').'">'.$language['CATEGORY'].'</a>'.($order == 'cname' ? $mark : ''));
+$torrenttpl->set('torrent_header_filename', "<a href=\"$scriptname&amp;$addparam".(strlen($addparam) > 0 ? '&amp;' : '').'order=2&amp;by='.($order == 'filename' && $by == 'ASC' ? '2' : '1').'">'.$language['FILE'].'</a>'.($order == 'filename' ? $mark : ''));
+$torrenttpl->set('torrent_header_comments', $language['COMMENT']);
+$torrenttpl->set('torrent_header_rating', $language['RATING']);
+$torrenttpl->set('WT', ((int) $CURUSER['WT']) > 0, true);
+$torrenttpl->set('torrent_header_waiting', $language['WT']);
+$torrenttpl->set('torrent_header_download', $language['DOWN']);
+$torrenttpl->set('torrent_header_added', "<a href=\"$scriptname&amp;$addparam".(strlen($addparam) > 0 ? '&amp;' : '').'order=3&amp;by='.($order == 'data' && $by == 'ASC' ? '2' : '1').'">'.$language['ADDED'].'</a>'.($order == 'data' ? $mark : ''));
+$torrenttpl->set('torrent_header_size', "<a href=\"$scriptname&amp;$addparam".(strlen($addparam) > 0 ? '&amp;' : '').'order=4&amp;by='.($order == 'size' && $by == 'DESC' ? '1' : '2').'">'.$language['SIZE'].'</a>'.($order == 'size' ? $mark : ''));
+$torrenttpl->set('uploader', $SHOW_UPLOADER, true);
+$torrenttpl->set('torrent_header_uploader', $language['UPLOADER']);
+$torrenttpl->set('torrent_header_seeds', "<a href=\"$scriptname&amp;$addparam".(strlen($addparam) > 0 ? '&amp;' : '').'order=5&amp;by='.($order == 'seeds' && $by == 'DESC' ? '1' : '2').'">'.$language['SHORT_S'].'</a>'.($order == 'seeds' ? $mark : ''));
+$torrenttpl->set('torrent_header_leechers', "<a href=\"$scriptname&amp;$addparam".(strlen($addparam) > 0 ? '&amp;' : '').'order=6&amp;by='.($order == 'leechers' && $by == 'DESC' ? '1' : '2').'">'.$language['SHORT_L'].'</a>'.($order == 'leechers' ? $mark : ''));
+$torrenttpl->set('torrent_header_complete', "<a href=\"$scriptname&amp;$addparam".(strlen($addparam) > 0 ? '&amp;' : '').'order=7&amp;by='.($order == 'finished' && $by == 'ASC' ? '2' : '1').'">'.$language['SHORT_C'].'</a>'.($order == 'finished' ? $mark : ''));
+$torrenttpl->set('torrent_header_downloaded', "<a href=\"$scriptname&amp;$addparam".(strlen($addparam) > 0 ? '&amp;' : '').'order=8&amp;by='.($order == 'dwned' && $by == 'ASC' ? '2' : '1').'">'.$language['DOWNLOADED'].'</a>'.($order == 'dwned' ? $mark : ''));
+$torrenttpl->set('torrent_header_speed', "<a href=\"$scriptname&amp;$addparam".(strlen($addparam) > 0 ? '&amp;' : '').'order=9&amp;by='.($order == 'speed' && $by == 'ASC' ? '2' : '1').'">'.$language['SPEED'].'</a>'.($order == 'speed' ? $mark : ''));
+$torrenttpl->set('torrent_header_average', $language['AVERAGE']);
+if ($btit_settings['comment'] == false) {
+    $torrenttpl->set('COM', false, true);
 }
-if ($btit_settings["rating"]==false) {
-    $torrenttpl->set("RAT", false, true);
+if ($btit_settings['rating'] == false) {
+    $torrenttpl->set('RAT', false, true);
 }
-$torrenttpl->set("XBTT", $XBTT_USE, true);
-$torrenttpl->set("torrent_pagerbottom", $pagerbottom);
+$torrenttpl->set('XBTT', $XBTT_USE, true);
+$torrenttpl->set('torrent_pagerbottom', $pagerbottom);
 
+$torrents = [];
+$i = 0;
 
-$torrents= [];
-$i=0;
-
-if ($count>0) {
+if ($count > 0) {
     foreach ($results as $tid => $data) {
-        $torrenttpl->set("WT1", ((int)$CURUSER["WT"])>0, true);
-        $torrenttpl->set("uploader1", $SHOW_UPLOADER, true);
-        $torrenttpl->set("XBTT1", $XBTT_USE, true);
-        if ($btit_settings["comment"]==false) {
-            $torrenttpl->set("COM", false, true);
+        $torrenttpl->set('WT1', ((int) $CURUSER['WT']) > 0, true);
+        $torrenttpl->set('uploader1', $SHOW_UPLOADER, true);
+        $torrenttpl->set('XBTT1', $XBTT_USE, true);
+        if ($btit_settings['comment'] == false) {
+            $torrenttpl->set('COM', false, true);
         }
-        if ($btit_settings["rating"]==false) {
-            $torrenttpl->set("RAT", false, true);
+        if ($btit_settings['rating'] == false) {
+            $torrenttpl->set('RAT', false, true);
         }
 
-        $data["filename"]=unesc($data["filename"]);
-        $filename=cut_string($data["filename"], ((int)$btit_settings["cut_name"]));
+        $data['filename'] = unesc($data['filename']);
+        $filename = cut_string($data['filename'], ((int) $btit_settings['cut_name']));
 
-        $torrents[$i]["category"]="<a href=\"index.php?page=torrents&amp;category=$data[catid]\">".image_or_link(($data["image"]==""?"":"$STYLEPATH/images/categories/" . $data["image"]), "", $data["cname"])."</a>";
-        if ($GLOBALS["usepopup"]) {
-            $torrents[$i]["filename"]="<a href=\"javascript:popdetails('index.php?page=torrent-details&amp;id=".$data["hash"]."');\" title=\"".$language["VIEW_DETAILS"].": ".($data["filename"]!=""?$filename:$data["hash"])."\">".$data["filename"]."</a>".($data["external"]=="no"?"":" (<span style=\"color:red\">EXT</span>)");
+        $torrents[$i]['category'] = "<a href=\"index.php?page=torrents&amp;category=$data[catid]\">".image_or_link(($data['image'] == '' ? '' : "$STYLEPATH/images/categories/".$data['image']), '', $data['cname']).'</a>';
+        if ($GLOBALS['usepopup']) {
+            $torrents[$i]['filename'] = "<a href=\"javascript:popdetails('index.php?page=torrent-details&amp;id=".$data['hash']."');\" title=\"".$language['VIEW_DETAILS'].': '.($data['filename'] != '' ? $filename : $data['hash']).'">'.$data['filename'].'</a>'.($data['external'] == 'no' ? '' : ' (<span style="color:red">EXT</span>)');
         } else {
-            $torrents[$i]["filename"]="<a href=\"index.php?page=torrent-details&amp;id=".$data["hash"]."\" title=\"".$language["VIEW_DETAILS"].": ".$data["filename"]."\">".($data["filename"]!=""?$filename:$data["hash"])."</a>".($data["external"]=="no"?"":" (<span style=\"color:red\">EXT</span>)");
+            $torrents[$i]['filename'] = '<a href="index.php?page=torrent-details&amp;id='.$data['hash'].'" title="'.$language['VIEW_DETAILS'].': '.$data['filename'].'">'.($data['filename'] != '' ? $filename : $data['hash']).'</a>'.($data['external'] == 'no' ? '' : ' (<span style="color:red">EXT</span>)');
         }
 
         // search for comments
-        if ($btit_settings["comment"]==true) {
-            $commentres = get_result("SELECT COUNT(*) as comments FROM {$TABLE_PREFIX}comments WHERE info_hash='" . $data["hash"] . "'", true);
+        if ($btit_settings['comment'] == true) {
+            $commentres = get_result("SELECT COUNT(*) as comments FROM {$TABLE_PREFIX}comments WHERE info_hash='".$data['hash']."'", true);
             $commentdata = $commentres[0];
 
-            if ($commentdata["comments"]>0) {
-                if ($GLOBALS["usepopup"]) {
-                    $torrents[$i]["comments"]="<a href=\"javascript:popdetails('index.php?page=torrent-details&amp;id=".$data["hash"]."#comments');\" title=\"".$language["VIEW_DETAILS"].": ".$data["filename"]."\">" . $commentdata["comments"] . "</a>";
+            if ($commentdata['comments'] > 0) {
+                if ($GLOBALS['usepopup']) {
+                    $torrents[$i]['comments'] = "<a href=\"javascript:popdetails('index.php?page=torrent-details&amp;id=".$data['hash']."#comments');\" title=\"".$language['VIEW_DETAILS'].': '.$data['filename'].'">'.$commentdata['comments'].'</a>';
                 } else {
-                    $torrents[$i]["comments"]="<a href=\"index.php?page=torrent-details&amp;id=".$data["hash"]."#comments\" title=\"".$language["VIEW_DETAILS"].": ".$data["filename"]."\">".$commentdata["comments"]."</a>";
+                    $torrents[$i]['comments'] = '<a href="index.php?page=torrent-details&amp;id='.$data['hash'].'#comments" title="'.$language['VIEW_DETAILS'].': '.$data['filename'].'">'.$commentdata['comments'].'</a>';
                 }
             } else {
-                $torrents[$i]["comments"]="---";
+                $torrents[$i]['comments'] = '---';
             }
         }
 
         // Rating
-        if ($btit_settings["rating"]==true) {
-            $vres = get_result("SELECT sum(rating) as totrate, count(*) as votes FROM {$TABLE_PREFIX}ratings WHERE infohash = '" . $data["hash"] . "'", true);
+        if ($btit_settings['rating'] == true) {
+            $vres = get_result("SELECT sum(rating) as totrate, count(*) as votes FROM {$TABLE_PREFIX}ratings WHERE infohash = '".$data['hash']."'", true);
             $vrow = $vres[0];
-            if ($vrow && $vrow["votes"]>=1) {
-                $totrate=round($vrow["totrate"]/$vrow["votes"], 1);
-                if ($totrate==5) {
-                    $totrate="<img src=\"$STYLEURL/images/5.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\" alt=\"\" />";
-                } elseif ($totrate>4.4 && $totrate<5) {
-                    $totrate="<img src=\"$STYLEURL/images/4.5.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\" alt=\"\" />";
-                } elseif ($totrate>3.9 && $totrate<4.5) {
-                    $totrate="<img src=\"$STYLEURL/images/4.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\" alt=\"\" />";
-                } elseif ($totrate>3.4 && $totrate<4) {
-                    $totrate="<img src=\"$STYLEURL/images/3.5.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\" alt=\"\" />";
-                } elseif ($totrate>2.9 && $totrate<3.5) {
-                    $totrate="<img src=\"$STYLEURL/images/3.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\"  alt=\"\" />";
-                } elseif ($totrate>2.4 && $totrate<3) {
-                    $totrate="<img src=\"$STYLEURL/images/2.5.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\"  alt=\"\" />";
-                } elseif ($totrate>1.9 && $totrate<2.5) {
-                    $totrate="<img src=\"$STYLEURL/images/2.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\"  alt=\"\" />";
-                } elseif ($totrate>1.4 && $totrate<2) {
-                    $totrate="<img src=\"$STYLEURL/images/1.5.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\"  alt=\"\" />";
+            if ($vrow && $vrow['votes'] >= 1) {
+                $totrate = round($vrow['totrate'] / $vrow['votes'], 1);
+                if ($totrate == 5) {
+                    $totrate = "<img src=\"$STYLEURL/images/5.gif\" title=\"$vrow[votes] ".$language['VOTES_RATING'].": $totrate/5.0)\" alt=\"\" />";
+                } elseif ($totrate > 4.4 && $totrate < 5) {
+                    $totrate = "<img src=\"$STYLEURL/images/4.5.gif\" title=\"$vrow[votes] ".$language['VOTES_RATING'].": $totrate/5.0)\" alt=\"\" />";
+                } elseif ($totrate > 3.9 && $totrate < 4.5) {
+                    $totrate = "<img src=\"$STYLEURL/images/4.gif\" title=\"$vrow[votes] ".$language['VOTES_RATING'].": $totrate/5.0)\" alt=\"\" />";
+                } elseif ($totrate > 3.4 && $totrate < 4) {
+                    $totrate = "<img src=\"$STYLEURL/images/3.5.gif\" title=\"$vrow[votes] ".$language['VOTES_RATING'].": $totrate/5.0)\" alt=\"\" />";
+                } elseif ($totrate > 2.9 && $totrate < 3.5) {
+                    $totrate = "<img src=\"$STYLEURL/images/3.gif\" title=\"$vrow[votes] ".$language['VOTES_RATING'].": $totrate/5.0)\"  alt=\"\" />";
+                } elseif ($totrate > 2.4 && $totrate < 3) {
+                    $totrate = "<img src=\"$STYLEURL/images/2.5.gif\" title=\"$vrow[votes] ".$language['VOTES_RATING'].": $totrate/5.0)\"  alt=\"\" />";
+                } elseif ($totrate > 1.9 && $totrate < 2.5) {
+                    $totrate = "<img src=\"$STYLEURL/images/2.gif\" title=\"$vrow[votes] ".$language['VOTES_RATING'].": $totrate/5.0)\"  alt=\"\" />";
+                } elseif ($totrate > 1.4 && $totrate < 2) {
+                    $totrate = "<img src=\"$STYLEURL/images/1.5.gif\" title=\"$vrow[votes] ".$language['VOTES_RATING'].": $totrate/5.0)\"  alt=\"\" />";
                 } else {
-                    $totrate="<img src=$STYLEURL/images/1.gif\" title=\"$vrow[votes] ".$language["VOTES_RATING"].": $totrate/5.0)\"  alt=\"\" />";
+                    $totrate = "<img src=$STYLEURL/images/1.gif\" title=\"$vrow[votes] ".$language['VOTES_RATING'].": $totrate/5.0)\"  alt=\"\" />";
                 }
             } else {
-                $totrate=$language["NA"];
+                $totrate = $language['NA'];
             }
 
-            $torrents[$i]["rating"]="$totrate";
+            $torrents[$i]['rating'] = "$totrate";
         }
         // end rating
 
         //waitingtime
         // display only if the curuser have some WT restriction
-        if (((int)$CURUSER["WT"])>0) {
-            $wait=0;
+        if (((int) $CURUSER['WT']) > 0) {
+            $wait = 0;
             //$resuser=get_result("SELECT * FROM {$TABLE_PREFIX}users WHERE id=".$CURUSER["uid"],true,$CACHE_DURATION);
             //$rowuser=$resuser[0];
-            $wait=0;
-            if (((int)$CURUSER['downloaded'])>0) {
-                $ratio=number_format($CURUSER['uploaded']/$CURUSER['downloaded'], 2);
+            $wait = 0;
+            if (((int) $CURUSER['downloaded']) > 0) {
+                $ratio = number_format($CURUSER['uploaded'] / $CURUSER['downloaded'], 2);
             } else {
-                $ratio=0.0;
+                $ratio = 0.0;
             }
-            $vz = $data["added"];
+            $vz = $data['added'];
             $timer = floor((time() - $vz) / 3600);
-            if ($ratio<1.0 && $CURUSER['uid']!=$data["uploader"]) {
-                $wait=$CURUSER["WT"];
+            if ($ratio < 1.0 && $CURUSER['uid'] != $data['uploader']) {
+                $wait = $CURUSER['WT'];
             }
-            $wait -=$timer;
+            $wait -= $timer;
 
-            if ($wait<=0) {
-                $wait=0;
+            if ($wait <= 0) {
+                $wait = 0;
             }
-            if (strlen($data["hash"]) > 0) {
-                $torrents[$i]["waiting"]=($wait>0?$wait." h":"---");
+            if (strlen($data['hash']) > 0) {
+                $torrents[$i]['waiting'] = ($wait > 0 ? $wait.' h' : '---');
             }
             //end waitingtime
         } else {
-            $torrents[$i]["waiting"]="";
+            $torrents[$i]['waiting'] = '';
         }
 
+        $torrents[$i]['download'] = '<a href="download.php?id='.$data['hash'].'&amp;f='.urlencode($data['filename']).'.torrent">'.image_or_link('images/download.gif', '', 'torrent')."</a>\n";
 
-        $torrents[$i]["download"]="<a href=\"download.php?id=".$data["hash"]."&amp;f=" . urlencode($data["filename"]) . ".torrent\">".image_or_link("images/download.gif", "", "torrent")."</a>\n";
-
-        include("include/offset.php");
-        $torrents[$i]["added"]=date("d/m/Y", $data["added"]-$offset); // data
-        $torrents[$i]["size"]=makesize($data["size"]);
+        include 'include/offset.php';
+        $torrents[$i]['added'] = date('d/m/Y', $data['added'] - $offset); // data
+        $torrents[$i]['size'] = makesize($data['size']);
 
         //Uploaders nick details
-        if ($SHOW_UPLOADER && $data["anonymous"] == "true") {
-            $torrents[$i]["uploader"]=$language["ANONYMOUS"];
-        } elseif ($SHOW_UPLOADER && $data["anonymous"] == "false") {
-            $torrents[$i]["uploader"]="<a href=\"index.php?page=userdetails&amp;id=" . $data["upname"] . "\">".StripSlashes($data['prefixcolor'].$data["uploader"].$data['suffixcolor'])."</a>";
+        if ($SHOW_UPLOADER && $data['anonymous'] == 'true') {
+            $torrents[$i]['uploader'] = $language['ANONYMOUS'];
+        } elseif ($SHOW_UPLOADER && $data['anonymous'] == 'false') {
+            $torrents[$i]['uploader'] = '<a href="index.php?page=userdetails&amp;id='.$data['upname'].'">'.stripslashes($data['prefixcolor'].$data['uploader'].$data['suffixcolor']).'</a>';
         }
         //Uploaders nick details
 
-        if ($data["external"]=="no") {
-            if ($GLOBALS["usepopup"]) {
-                $torrents[$i]["classe_seeds"]=linkcolor($data["seeds"]);
-                $torrents[$i]["seeds"]="<a href=\"javascript:poppeer('index.php?page=peers&amp;id=".$data["hash"]."');\" title=\"".$language["PEERS_DETAILS"]."\">" . $data["seeds"] . "</a>";
-                $torrents[$i]["classe_leechers"]=linkcolor($data["leechers"]);
-                $torrents[$i]["leechers"]="<a href=\"javascript:poppeer('index.php?page=peers&amp;id=".$data["hash"]."');\" title=\"".$language["PEERS_DETAILS"]."\">" .$data["leechers"] . "</a>";
-                if ($data["finished"]>0) {
-                    $torrents[$i]["complete"]="<a href=\"javascript:poppeer('index.php?page=torrent_history&amp;id=".$data["hash"]."');\" title=\"History - ".$data["filename"]."\">" . $data["finished"] . "</a>";
+        if ($data['external'] == 'no') {
+            if ($GLOBALS['usepopup']) {
+                $torrents[$i]['classe_seeds'] = linkcolor($data['seeds']);
+                $torrents[$i]['seeds'] = "<a href=\"javascript:poppeer('index.php?page=peers&amp;id=".$data['hash']."');\" title=\"".$language['PEERS_DETAILS'].'">'.$data['seeds'].'</a>';
+                $torrents[$i]['classe_leechers'] = linkcolor($data['leechers']);
+                $torrents[$i]['leechers'] = "<a href=\"javascript:poppeer('index.php?page=peers&amp;id=".$data['hash']."');\" title=\"".$language['PEERS_DETAILS'].'">'.$data['leechers'].'</a>';
+                if ($data['finished'] > 0) {
+                    $torrents[$i]['complete'] = "<a href=\"javascript:poppeer('index.php?page=torrent_history&amp;id=".$data['hash']."');\" title=\"History - ".$data['filename'].'">'.$data['finished'].'</a>';
                 } else {
-                    $torrents[$i]["complete"]="---";
+                    $torrents[$i]['complete'] = '---';
                 }
             } else {
-                $torrents[$i]["classe_seeds"]=linkcolor($data["seeds"]);
-                $torrents[$i]["seeds"]="<a href=\"index.php?page=peers&amp;id=".$data["hash"]."\" title=\"".$language["PEERS_DETAILS"]."\">" . $data["seeds"] . "</a>";
-                $torrents[$i]["classe_leechers"]=linkcolor($data["leechers"]);
-                $torrents[$i]["leechers"]="<a href=\"index.php?page=peers&amp;id=".$data["hash"]."\" title=\"".$language["PEERS_DETAILS"]."\">" .$data["leechers"] . "</a>";
-                if ($data["finished"]>0) {
-                    $torrents[$i]["complete"]="<a href=\"index.php?page=torrent_history&amp;id=".$data["hash"]."\" title=\"History - ".$data["filename"]."\">" . $data["finished"] . "</a>";
+                $torrents[$i]['classe_seeds'] = linkcolor($data['seeds']);
+                $torrents[$i]['seeds'] = '<a href="index.php?page=peers&amp;id='.$data['hash'].'" title="'.$language['PEERS_DETAILS'].'">'.$data['seeds'].'</a>';
+                $torrents[$i]['classe_leechers'] = linkcolor($data['leechers']);
+                $torrents[$i]['leechers'] = '<a href="index.php?page=peers&amp;id='.$data['hash'].'" title="'.$language['PEERS_DETAILS'].'">'.$data['leechers'].'</a>';
+                if ($data['finished'] > 0) {
+                    $torrents[$i]['complete'] = '<a href="index.php?page=torrent_history&amp;id='.$data['hash'].'" title="History - '.$data['filename'].'">'.$data['finished'].'</a>';
                 } else {
-                    $torrents[$i]["complete"]="---";
+                    $torrents[$i]['complete'] = '---';
                 }
             }
         } else {
             // linkcolor
-            $torrents[$i]["classe_seeds"]=linkcolor($data["seeds"]);
-            $torrents[$i]["seeds"]=$data["seeds"];
-            $torrents[$i]["classe_leechers"]=linkcolor($data["leechers"]);
-            $torrents[$i]["leechers"]=$data["leechers"];
-            if ($data["finished"]>0) {
-                $torrents[$i]["complete"]=$data["finished"];
+            $torrents[$i]['classe_seeds'] = linkcolor($data['seeds']);
+            $torrents[$i]['seeds'] = $data['seeds'];
+            $torrents[$i]['classe_leechers'] = linkcolor($data['leechers']);
+            $torrents[$i]['leechers'] = $data['leechers'];
+            if ($data['finished'] > 0) {
+                $torrents[$i]['complete'] = $data['finished'];
             } else {
-                $torrents[$i]["complete"]="---";
+                $torrents[$i]['complete'] = '---';
             }
         }
-        if ($data["dwned"]>0) {
-            $torrents[$i]["downloaded"]=makesize($data["dwned"]);
+        if ($data['dwned'] > 0) {
+            $torrents[$i]['downloaded'] = makesize($data['dwned']);
         } else {
-            $torrents[$i]["downloaded"]=$language["NA"];
+            $torrents[$i]['downloaded'] = $language['NA'];
         }
 
         if (!$XBTT_USE) {
-            if ($data["speed"] < 0 || $data["external"]=="yes") {
-                $speed = $language["NA"];
-            } elseif ($data["speed"] > 2097152) {
-                $speed = round($data["speed"]/1048576, 2) . " MB/sec";
+            if ($data['speed'] < 0 || $data['external'] == 'yes') {
+                $speed = $language['NA'];
+            } elseif ($data['speed'] > 2097152) {
+                $speed = round($data['speed'] / 1048576, 2).' MB/sec';
             } else {
-                $speed = round($data["speed"] / 1024, 2) . " KB/sec";
+                $speed = round($data['speed'] / 1024, 2).' KB/sec';
             }
         }
-        $torrents[$i]["speed"]=$speed;
+        $torrents[$i]['speed'] = $speed;
 
         // progress
-        if ($data["external"]=="yes") {
-            $prgsf=$language["NA"];
+        if ($data['external'] == 'yes') {
+            $prgsf = $language['NA'];
         } else {
             $id = $data['hash'];
             if ($XBTT_USE) {
@@ -448,18 +438,18 @@ if ($count>0) {
             $subres2 = get_result("SELECT size FROM {$TABLE_PREFIX}files WHERE info_hash ='$id'", true, $btit_settings['cache_duration']);
             $torrent = $subres2[0];
             $subrow = $subres[0];
-            $tmp=0+$subrow["numpeers"];
-            if ($tmp>0) {
-                $tsize=(0+$torrent["size"])*$tmp;
-                $tbyte=0+$subrow["to_go"];
-                $prgs=(($tsize-$tbyte)/$tsize) * 100; //100 * (1-($tbyte/$tsize));
-                $prgsf=floor($prgs);
+            $tmp = 0 + $subrow['numpeers'];
+            if ($tmp > 0) {
+                $tsize = (0 + $torrent['size']) * $tmp;
+                $tbyte = 0 + $subrow['to_go'];
+                $prgs = (($tsize - $tbyte) / $tsize) * 100; //100 * (1-($tbyte/$tsize));
+                $prgsf = floor($prgs);
             } else {
-                $prgsf=0;
+                $prgsf = 0;
             }
-            $prgsf.="%";
+            $prgsf .= '%';
         }
-        $torrents[$i]["average"]=$prgsf;
+        $torrents[$i]['average'] = $prgsf;
 
         $i++;
     }
@@ -467,4 +457,4 @@ if ($count>0) {
 
 // assign array to loop tag
 
-$torrenttpl->set("torrents", $torrents);
+$torrenttpl->set('torrents', $torrents);

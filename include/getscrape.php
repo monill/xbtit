@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,39 +31,40 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-$BASEDIR=__DIR__;
+$BASEDIR = __DIR__;
 
-require_once($BASEDIR."/functions.php");
+require_once $BASEDIR.'/functions.php';
 
 function scrape($url, $infohash = '')
 {
     global $TABLE_PREFIX, $BASEDIR;
 
     if (isset($url)) {
-        $url_c=parse_url($url);
+        $url_c = parse_url($url);
 
-        if (!isset($url_c["port"]) || empty($url_c["port"])) {
-            $url_c["port"]=80;
+        if (!isset($url_c['port']) || empty($url_c['port'])) {
+            $url_c['port'] = 80;
         }
 
-        require_once($BASEDIR.'/phpscraper/'.$url_c['scheme'].'tscraper.php');
+        require_once $BASEDIR.'/phpscraper/'.$url_c['scheme'].'tscraper.php';
+
         try {
             $timeout = 5;
-            if ($url_c['scheme']==='udp') {
+            if ($url_c['scheme'] === 'udp') {
                 $scraper = new udptscraper($timeout);
             } else {
                 $scraper = new httptscraper($timeout);
             }
 
-            $ret = $scraper->scrape($url_c["scheme"]."://".$url_c["host"].":".$url_c["port"].(($url_c["scheme"]=="udp")?"":"/announce"), [$infohash]);
-            do_sqlquery("UPDATE `{$TABLE_PREFIX}files` SET `lastupdate`=NOW(), `lastsuccess`=NOW(), `seeds`=".$ret[$infohash]["seeders"].", `leechers`=".$ret[$infohash]["leechers"].", `finished`=".$ret[$infohash]["completed"]." WHERE `announce_url` = '".$url."'".($infohash==""?"":" AND `info_hash`='".$infohash."'"), true);
-            if (mysqli_affected_rows($GLOBALS['conn'])==1) {
+            $ret = $scraper->scrape($url_c['scheme'].'://'.$url_c['host'].':'.$url_c['port'].(($url_c['scheme'] == 'udp') ? '' : '/announce'), [$infohash]);
+            do_sqlquery("UPDATE `{$TABLE_PREFIX}files` SET `lastupdate`=NOW(), `lastsuccess`=NOW(), `seeds`=".$ret[$infohash]['seeders'].', `leechers`='.$ret[$infohash]['leechers'].', `finished`='.$ret[$infohash]['completed']." WHERE `announce_url` = '".$url."'".($infohash == '' ? '' : " AND `info_hash`='".$infohash."'"), true);
+            if (mysqli_affected_rows($GLOBALS['conn']) == 1) {
                 write_log('SUCCESS update external torrent from '.$url.' tracker (infohash: '.$infohash.')', '');
             }
         } catch (ScraperException $e) {
-            write_log("FAILED update external torrent ".($infohash==""?"":"(infohash: ".$infohash.")")." from ".$url." tracker (".$e->getMessage()."))", "");
+            write_log('FAILED update external torrent '.($infohash == '' ? '' : '(infohash: '.$infohash.')').' from '.$url.' tracker ('.$e->getMessage().'))', '');
         }
+
         return;
     }
-    return;
 }

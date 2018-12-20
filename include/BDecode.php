@@ -52,11 +52,11 @@ class BDecode
             if ($wholefile[$offset] === ':' || $wholefile[$offset] === 'e') {
                 return [0, ++$offset];
             }
-                
+
             return [false];
         }
         $ret[0] = 0;
-        for (;;) {
+        for (; ;) {
             if ($wholefile[$offset] >= '0' && $wholefile[$offset] <= '9') {
                 $ret[0] *= 10;
                 //Added 2005.02.21 - VisiGod
@@ -67,13 +67,14 @@ class BDecode
                 $offset++;
             } elseif ($wholefile[$offset] == 'e' || $wholefile[$offset] == ':') {
                 // Tolerate : or e because this is a multiuse function
-                $ret[1] = $offset+1;
+                $ret[1] = $offset + 1;
                 if ($negative) {
                     if ($ret[0] == 0) {
                         return [false];
                     }
-                    $ret[0] = - $ret[0];
+                    $ret[0] = -$ret[0];
                 }
+
                 return $ret;
             } else {
                 return [false];
@@ -100,9 +101,8 @@ class BDecode
             return [false];
         }
         $ret[0] = substr($wholefile, $info[1], $info[0]);
-        $ret[1] = $info[1]+strlen($ret[0]);
-        
-        
+        $ret[1] = $info[1] + strlen($ret[0]);
+
         return $ret;
     }
 
@@ -113,7 +113,7 @@ class BDecode
         }
         $offset++;
         $ret = [];
-        for ($i=0;; $i++) {
+        for ($i = 0; ; $i++) {
             if ($wholefile[$offset] == 'e') {
                 break;
             }
@@ -137,26 +137,27 @@ class BDecode
         if ($wholefile[$offset] != 'd') {
             return false;
         }
-        $ret= [];
+        $ret = [];
         $offset++;
-        for (;;) {
+        for (; ;) {
             if ($wholefile[$offset] == 'e') {
                 $offset++;
                 break;
             }
             $left = $this->decodeEntry($wholefile, $offset);
-            if ($left[0]===false) {
-                die("stop...".$left[1]);
+            if ($left[0] === false) {
+                die('stop...'.$left[1]);
+
                 return false;
             }
-            
+
             $offset = $left[1];
             if ($wholefile[$offset] == 'd') {
                 // Recurse
                 $value = $this->decodedict($wholefile, $offset);
                 if ($value[0]) {
                     $ret[addslashes($left[0])] = $value[0];
-                    $offset= $value[1];
+                    $offset = $value[1];
                 }
                 continue;
             }
@@ -176,15 +177,16 @@ class BDecode
             $ret[addslashes($left[0])] = $value[0];
             $offset = $value[1];
         }
-        
-        return [0=>(empty($ret)?true:$ret), 1=>$offset];
+
+        return [0=>(empty($ret) ? true : $ret), 1=>$offset];
     }
 } // End of class declaration.
 
 // Use this function. eg:  BDecode("d8:announce44:http://www. ... e");
 function BDecode($wholefile)
 {
-    $decoder = new BDecode;
+    $decoder = new BDecode();
     $return = $decoder->decodeEntry($wholefile);
+
     return $return[0];
 }

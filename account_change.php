@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,12 +31,12 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-require_once(__DIR__.'/include/functions.php');
-include(__DIR__.'/btemplate/bTemplate.php');
+require_once __DIR__.'/include/functions.php';
+include __DIR__.'/btemplate/bTemplate.php';
 
-$style = isset($_GET['style']) ? ((int)$_GET['style']) : 0;
+$style = isset($_GET['style']) ? ((int) $_GET['style']) : 0;
 $url = isset($_GET['returnto']) ? urldecode($_GET['returnto']) : 'index.php';
-$langue = isset($_GET['langue']) ? ((int)$_GET['langue']) : 0;
+$langue = isset($_GET['langue']) ? ((int) $_GET['langue']) : 0;
 
 $url = $BASEURL.'/'.$url;
 
@@ -44,16 +45,16 @@ session_name('xbtit');
 session_start();
 
 // guest don't need to change language!
-if (!$CURUSER || $CURUSER['uid']===1) {
+if (!$CURUSER || $CURUSER['uid'] === 1) {
     redirect($url);
     exit;
 }
 
-if ($style!=0) {
-    do_sqlquery("UPDATE {$TABLE_PREFIX}users SET style=$style WHERE id=".(int)$CURUSER['uid'], true);
+if ($style != 0) {
+    do_sqlquery("UPDATE {$TABLE_PREFIX}users SET style=$style WHERE id=".(int) $CURUSER['uid'], true);
 }
-if ($langue!=0) {
-    do_sqlquery("UPDATE {$TABLE_PREFIX}users SET language=$langue WHERE id=".(int)$CURUSER['uid'], true);
+if ($langue != 0) {
+    do_sqlquery("UPDATE {$TABLE_PREFIX}users SET language=$langue WHERE id=".(int) $CURUSER['uid'], true);
 }
 unset($_SESSION['CURUSER'], $_SESSION['CURUSER_EXPIRE']);
 redirect($url);
