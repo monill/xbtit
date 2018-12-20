@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,11 +31,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-require_once("include/blocks.php");
+require_once 'include/blocks.php';
 if (!isset($CURUSER)) {
     global $CURUSER;
 }
-if (!$CURUSER || $CURUSER["view_news"]=="no") {
+if (!$CURUSER || $CURUSER['view_news'] == 'no') {
     //err_msg(ERROR,NOT_AUTH_VIEW_NEWS."!");
        //stdfoot();
        //exit;
@@ -42,8 +43,8 @@ if (!$CURUSER || $CURUSER["view_news"]=="no") {
        // do nothing - the exit terminate the script, not really good
 } else {
     global $USERLANG,$THIS_BASEPATH,$BASEURL;
-    $limit=$GLOBALS["block_newslimit"];
-    $root_path=realpath(__DIR__."/../");
-    require("$root_path/viewnews.php");
-    echo $viewnewstpl->fetch(load_template("viewnews.tpl"));
+    $limit = $GLOBALS['block_newslimit'];
+    $root_path = realpath(__DIR__.'/../');
+    require "$root_path/viewnews.php";
+    echo $viewnewstpl->fetch(load_template('viewnews.tpl'));
 }

@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,106 +31,101 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-
-
-if (!defined("IN_BTIT")) {
-    die("non direct access!");
+if (!defined('IN_BTIT')) {
+    die('non direct access!');
 }
 
-
-if (!defined("IN_BTIT_FORUM")) {
-    die("non direct access!");
+if (!defined('IN_BTIT_FORUM')) {
+    die('non direct access!');
 }
-
 
 switch ($action) {
     case 'catchup':
         // we will update the readposts table with max post id for each topic
-        $rtopics = get_result("SELECT t.id FROM {$TABLE_PREFIX}topics t LEFT JOIN {$TABLE_PREFIX}forums f ON t.forumid=f.id WHERE IFNULL(f.minclassread,999)<=".$CURUSER["id_level"], true);
+        $rtopics = get_result("SELECT t.id FROM {$TABLE_PREFIX}topics t LEFT JOIN {$TABLE_PREFIX}forums f ON t.forumid=f.id WHERE IFNULL(f.minclassread,999)<=".$CURUSER['id_level'], true);
         // check if record exist in readposts table
 
         foreach ($rtopics as $id => $rt) {
-            $rp=get_result("SELECT id FROM {$TABLE_PREFIX}readposts WHERE topicid=".$rt["id"]." AND userid=".$CURUSER["uid"]);
-            if (count($rp)>0) {
-                do_sqlquery("UPDATE {$TABLE_PREFIX}readposts SET lastpostread=(SELECT MAX(id) FROM {$TABLE_PREFIX}posts WHERE topicid=".$rt["id"].") WHERE topicid=".$rt["id"]." AND userid=".$CURUSER["uid"], true);
+            $rp = get_result("SELECT id FROM {$TABLE_PREFIX}readposts WHERE topicid=".$rt['id'].' AND userid='.$CURUSER['uid']);
+            if (count($rp) > 0) {
+                do_sqlquery("UPDATE {$TABLE_PREFIX}readposts SET lastpostread=(SELECT MAX(id) FROM {$TABLE_PREFIX}posts WHERE topicid=".$rt['id'].') WHERE topicid='.$rt['id'].' AND userid='.$CURUSER['uid'], true);
             } else {
-                do_sqlquery("INSERT INTO {$TABLE_PREFIX}readposts SET lastpostread=(SELECT MAX(id) FROM {$TABLE_PREFIX}posts WHERE topicid=".$rt["id"]."), topicid=".$rt["id"].", userid=".$CURUSER["uid"], true);
+                do_sqlquery("INSERT INTO {$TABLE_PREFIX}readposts SET lastpostread=(SELECT MAX(id) FROM {$TABLE_PREFIX}posts WHERE topicid=".$rt['id'].'), topicid='.$rt['id'].', userid='.$CURUSER['uid'], true);
             }
         }
-        redirect("index.php?page=forum");
+        redirect('index.php?page=forum');
         die();
       break;
 
     case 'deletetopic':
-        $topicid = ((int)0+$_GET["topicid"]);
-        $forumid = ((int)0+$_GET["forumid"]);
+        $topicid = ((int) 0 + $_GET['topicid']);
+        $forumid = ((int) 0 + $_GET['forumid']);
 
-        if (!is_valid_id($topicid) || $CURUSER["delete_forum"] != "yes") {
-            stderr($language["ERROR"], $language["BAD_TOPIC_ID"]);
+        if (!is_valid_id($topicid) || $CURUSER['delete_forum'] != 'yes') {
+            stderr($language['ERROR'], $language['BAD_TOPIC_ID']);
         }
 
-        if (isset($_GET["sure"]) && $_GET["sure"]) {
-            $sure = htmlspecialchars($_GET["sure"]);
+        if (isset($_GET['sure']) && $_GET['sure']) {
+            $sure = htmlspecialchars($_GET['sure']);
         } else {
-            $sure = "";
+            $sure = '';
         }
 
         if (!$sure) {
-            information_msg($language["FRM_CONFIRM"]."?", $language["ERR_DELETE_TOPIC"]."&nbsp;<a href=\"index.php?page=forum&amp;action=deletetopic&amp;topicid=$topicid&amp;sure=1&amp;forumid=$forumid\">".$language["HERE"]."</a>&nbsp;".$language["IF_YOU_ARE_SURE"]."<br />");
+            information_msg($language['FRM_CONFIRM'].'?', $language['ERR_DELETE_TOPIC']."&nbsp;<a href=\"index.php?page=forum&amp;action=deletetopic&amp;topicid=$topicid&amp;sure=1&amp;forumid=$forumid\">".$language['HERE'].'</a>&nbsp;'.$language['IF_YOU_ARE_SURE'].'<br />');
         }
 
         do_sqlquery("DELETE FROM {$TABLE_PREFIX}topics WHERE id=$topicid", true);
-        $numtopic=mysqli_affected_rows($GLOBALS['conn']);
+        $numtopic = mysqli_affected_rows($GLOBALS['conn']);
         do_sqlquery("DELETE FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid", true);
-        $numposts=mysqli_affected_rows($GLOBALS['conn']);
+        $numposts = mysqli_affected_rows($GLOBALS['conn']);
         do_sqlquery("DELETE FROM {$TABLE_PREFIX}readposts WHERE topicid=$topicid", true);
 
         do_sqlquery("UPDATE {$TABLE_PREFIX}forums SET topiccount=topiccount-$numtopic,postcount=postcount-$numposts WHERE id=$forumid", true);
 
         redirect("index.php?page=forum&action=viewforum&forumid=$forumid");
-    
+
         die();
 
       break;
 
-
     case 'movetopic':
-        $forumid = ((int)0 + $_POST["forumid"]);
-        $topicid = ((int)0 + $_GET["topicid"]);
+        $forumid = ((int) 0 + $_POST['forumid']);
+        $topicid = ((int) 0 + $_GET['topicid']);
 
-        if (!is_valid_id($forumid) || !is_valid_id($topicid) || $CURUSER["edit_forum"] != "yes") {
-            stderr($language["ERROR"], $language["BAD_TOPIC_ID"]);
+        if (!is_valid_id($forumid) || !is_valid_id($topicid) || $CURUSER['edit_forum'] != 'yes') {
+            stderr($language['ERROR'], $language['BAD_TOPIC_ID']);
         }
 
         $res = do_sqlquery("SELECT minclasswrite FROM {$TABLE_PREFIX}forums WHERE id=$forumid", true);
 
         if (mysqli_num_rows($res) != 1) {
-            stderr($language["ERROR"], $language["ERR_FORUM_NOT_FOUND"]);
+            stderr($language['ERROR'], $language['ERR_FORUM_NOT_FOUND']);
         }
 
         $arr = mysqli_fetch_row($res);
 
-        if ($CURUSER["id_level"] < $arr[0]) {
-            stderr($language["ERROR"], $language["BAD_TOPIC_ID"]);
+        if ($CURUSER['id_level'] < $arr[0]) {
+            stderr($language['ERROR'], $language['BAD_TOPIC_ID']);
         }
 
         $res = do_sqlquery("SELECT subject,forumid FROM {$TABLE_PREFIX}topics WHERE id=$topicid", true);
 
         if (mysqli_num_rows($res) != 1) {
-            stderr($language["ERROR"], $language["TOPIC_NOT_FOUND"]);
+            stderr($language['ERROR'], $language['TOPIC_NOT_FOUND']);
         }
 
         $arr = mysqli_fetch_assoc($res);
 
-        if ($arr["forumid"] != $forumid) {
+        if ($arr['forumid'] != $forumid) {
             do_sqlquery("UPDATE {$TABLE_PREFIX}topics SET forumid=$forumid WHERE id=$topicid", true);
         }
 
         // modifying count topics & post
-        $res=do_sqlquery("SELECT count(*) as numposts FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid", true);
-        $numposts=mysql_result($res, 0, 0);
+        $res = do_sqlquery("SELECT count(*) as numposts FROM {$TABLE_PREFIX}posts WHERE topicid=$topicid", true);
+        $numposts = mysql_result($res, 0, 0);
 
-        do_sqlquery("UPDATE {$TABLE_PREFIX}forums SET topiccount=topiccount-1, postcount=postcount-$numposts WHERE id=".$arr["forumid"]);
+        do_sqlquery("UPDATE {$TABLE_PREFIX}forums SET topiccount=topiccount-1, postcount=postcount-$numposts WHERE id=".$arr['forumid']);
         do_sqlquery("UPDATE {$TABLE_PREFIX}forums SET topiccount=topiccount+1, postcount=postcount+$numposts WHERE id=$forumid");
 
         // Redirect to forum page
@@ -140,29 +136,29 @@ switch ($action) {
       break;
 
     case 'setlocked':
-        $topicid = ((int)0 + $_POST["topicid"]);
+        $topicid = ((int) 0 + $_POST['topicid']);
 
-        if (!$topicid || $CURUSER["edit_forum"] != "yes") {
-            stderr($language["ERROR"], $language["BAD_TOPIC_ID"]);
+        if (!$topicid || $CURUSER['edit_forum'] != 'yes') {
+            stderr($language['ERROR'], $language['BAD_TOPIC_ID']);
         }
 
-        $locked = sqlesc($_POST["locked"]);
+        $locked = sqlesc($_POST['locked']);
         do_sqlquery("UPDATE {$TABLE_PREFIX}topics SET locked=$locked WHERE id=$topicid") or sqlerr(__FILE__, __LINE__);
 
-        redirect(urldecode($_POST["returnto"]));
+        redirect(urldecode($_POST['returnto']));
 
         die();
 
       break;
 
     case 'setsticky':
-        $topicid = ((int)0 + $_POST["topicid"]);
+        $topicid = ((int) 0 + $_POST['topicid']);
 
-        if (!$topicid || $CURUSER["edit_forum"] != "yes") {
-            stderr($language["ERROR"], $language["BAD_TOPIC_ID"]);
+        if (!$topicid || $CURUSER['edit_forum'] != 'yes') {
+            stderr($language['ERROR'], $language['BAD_TOPIC_ID']);
         }
 
-        $sticky = sqlesc($_POST["sticky"]);
+        $sticky = sqlesc($_POST['sticky']);
         do_sqlquery("UPDATE {$TABLE_PREFIX}topics SET sticky=$sticky WHERE id=$topicid", true);
 
         redirect(urldecode($_POST[returnto]));
@@ -171,20 +167,20 @@ switch ($action) {
       break;
 
     case 'rename':
-        if ($CURUSER["edit_forum"] != "yes") {
-            stderr($language["ERROR"], $language["ERR_NOT_AUTH"]);
+        if ($CURUSER['edit_forum'] != 'yes') {
+            stderr($language['ERROR'], $language['ERR_NOT_AUTH']);
         }
 
-        $topicid = ((int)0+$_POST['topicid']);
+        $topicid = ((int) 0 + $_POST['topicid']);
 
         if (!is_valid_id($topicid)) {
-            stderr($language["ERROR"], $language["BAD_TOPIC_ID"]);
+            stderr($language['ERROR'], $language['BAD_TOPIC_ID']);
         }
 
         $subject = $_POST['subject'];
 
         if ($subject == '') {
-            stderr($language["ERROR"], $language["ERR_ENTER_NEW_TITLE"]);
+            stderr($language['ERROR'], $language['ERR_ENTER_NEW_TITLE']);
         }
 
         $subject = sqlesc($subject);
@@ -201,37 +197,37 @@ switch ($action) {
       break;
 
     case 'deletepost':
-        $postid = ((int)0+$_GET["postid"]);
-        $forumid = ((int)0+$_GET["forumid"]);
+        $postid = ((int) 0 + $_GET['postid']);
+        $forumid = ((int) 0 + $_GET['forumid']);
 
-        if (isset($_GET["sure"]) && $_GET["sure"]) {
-            $sure = htmlspecialchars($_GET["sure"]);
+        if (isset($_GET['sure']) && $_GET['sure']) {
+            $sure = htmlspecialchars($_GET['sure']);
         } else {
-            $sure = "";
+            $sure = '';
         }
 
-        if ($CURUSER["delete_forum"] != "yes" || !is_valid_id($postid)) {
-            stderr($language["ERROR"], $language["ERR_FORUM_TOPIC"]);
+        if ($CURUSER['delete_forum'] != 'yes' || !is_valid_id($postid)) {
+            stderr($language['ERROR'], $language['ERR_FORUM_TOPIC']);
         }
 
       //------- Get topic id
 
         $res = do_sqlquery("SELECT (SELECT COUNT(*) FROM {$TABLE_PREFIX}posts WHERE topicid=p.topicid) as total_posts,topicid FROM {$TABLE_PREFIX}posts p WHERE id=$postid", true);
-        $arr = mysqli_fetch_assoc($res) or stderr($language["ERROR"], $language["ERR_POST_NOT_FOUND"]);
-        $topicid = ((int)$arr["topicid"]);
+        $arr = mysqli_fetch_assoc($res) or stderr($language['ERROR'], $language['ERR_POST_NOT_FOUND']);
+        $topicid = ((int) $arr['topicid']);
 
-        if ($arr["total_posts"] < 2) {
-            information_msg($language["FRM_CONFIRM"]."?", $language["ERR_POST_UNIQUE"]."&nbsp;<a href=\"index.php?page=forum&amp;action=deletetopic&amp;topicid=$topicid&amp;sure=1&amp;forumid=$forumid\">".$language["ERR_POST_UNIQUE_2"]."</a>&nbsp;".$language["ERR_POST_UNIQUE_3"]);
+        if ($arr['total_posts'] < 2) {
+            information_msg($language['FRM_CONFIRM'].'?', $language['ERR_POST_UNIQUE']."&nbsp;<a href=\"index.php?page=forum&amp;action=deletetopic&amp;topicid=$topicid&amp;sure=1&amp;forumid=$forumid\">".$language['ERR_POST_UNIQUE_2'].'</a>&nbsp;'.$language['ERR_POST_UNIQUE_3']);
         }
 
         if (!$sure) {
-            information_msg($language["FRM_CONFIRM"]."?", $language["ERR_DELETE_POST"]."&nbsp;<a href=\"index.php?page=forum&amp;action=deletepost&amp;postid=$postid&amp;sure=1&amp;forumid=$forumid\">".$language["HERE"]."</a>&nbsp;".$language["IF_YOU_ARE_SURE"]."<br />");
+            information_msg($language['FRM_CONFIRM'].'?', $language['ERR_DELETE_POST']."&nbsp;<a href=\"index.php?page=forum&amp;action=deletepost&amp;postid=$postid&amp;sure=1&amp;forumid=$forumid\">".$language['HERE'].'</a>&nbsp;'.$language['IF_YOU_ARE_SURE'].'<br />');
         }
 
       //------- Delete post
         do_sqlquery("DELETE FROM {$TABLE_PREFIX}posts WHERE id=$postid", true);
-        $numposts=mysqli_affected_rows($GLOBALS['conn']);
-    
+        $numposts = mysqli_affected_rows($GLOBALS['conn']);
+
       // update post's count
         do_sqlquery("UPDATE {$TABLE_PREFIX}forums SET postcount=postcount-$numposts WHERE id=$forumid");
 

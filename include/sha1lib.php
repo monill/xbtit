@@ -17,8 +17,8 @@ class sha1lib
      * the server-side, but the defaults work in most cases.
      */
     public $hexcase = 0; /* hex output format. 0 - lowercase; 1 - uppercase      */
-    public $b64pad  =''; /* base-64 pad character. "=" for strict RFC compliance */
-    public $chrsz   = 8; /* bits per input character. 8 - ASCII; 16 - Unicode    */
+    public $b64pad = ''; /* base-64 pad character. "=" for strict RFC compliance */
+    public $chrsz = 8; /* bits per input character. 8 - ASCII; 16 - Unicode    */
 
     /*
      * These are the functions you'll usually want to call
@@ -28,22 +28,27 @@ class sha1lib
     {
         return $this->binb2hex($this->core_sha1($this->str2binb($s), strlen($s) * $this->chrsz));
     }
+
     public function b64_sha1($s)
     {
         return $this->binb2b64($this->core_sha1($this->str2binb($s), strlen($s) * $this->chrsz));
     }
+
     public function str_sha1($s)
     {
         return $this->binb2str($this->core_sha1($this->str2binb($s), strlen($s) * $this->chrsz));
     }
+
     public function hex_hmac_sha1($key, $data)
     {
         return $this->binb2hex($this->core_hmac_sha1($key, $data));
     }
+
     public function b64_hmac_sha1($key, $data)
     {
         return $this->binb2b64($this->core_hmac_sha1($key, $data));
     }
+
     public function str_hmac_sha1($key, $data)
     {
         return $this->binb2str($this->core_hmac_sha1($key, $data));
@@ -67,23 +72,23 @@ class sha1lib
         $x[(($len + 64 >> 9) << 4) + 15] = $len;
 
         $w = [];
-        $a =  1732584193;
+        $a = 1732584193;
         $b = -271733879;
         $c = -1732584194;
-        $d =  271733878;
+        $d = 271733878;
         $e = -1009589776;
 
-        for ($i=0,$count=sizeof($x); $i<$count; $i+=16) {
+        for ($i = 0,$count = count($x); $i < $count; $i += 16) {
             $olda = $a;
             $oldb = $b;
             $oldc = $c;
             $oldd = $d;
             $olde = $e;
 
-            for ($j=0; $j < 80; $j++) {
-                $w[$j]=($j<16)?$x[$i + $j]:($this->rol($w[$j-3]^$w[$j-8]^$w[$j-14]^$w[$j-16], 1));
+            for ($j = 0; $j < 80; $j++) {
+                $w[$j] = ($j < 16) ? $x[$i + $j] : ($this->rol($w[$j - 3] ^ $w[$j - 8] ^ $w[$j - 14] ^ $w[$j - 16], 1));
 
-                $t=$this->safe_add($this->safe_add($this->rol($a, 5), $this->sha1_ft($j, $b, $c, $d)), $this->safe_add($this->safe_add($e, $w[$j]), $this->sha1_kt($j)));
+                $t = $this->safe_add($this->safe_add($this->rol($a, 5), $this->sha1_ft($j, $b, $c, $d)), $this->safe_add($this->safe_add($e, $w[$j]), $this->sha1_kt($j)));
                 $e = $d;
                 $d = $c;
                 $c = $this->rol($b, 30);
@@ -110,12 +115,13 @@ class sha1lib
         $z = hexdec(80000000);
         if ($z & $a) {
             $a >>= 1;
-            $a &= (~ $z);
+            $a &= (~$z);
             $a |= 0x40000000;
-            $a >>= ($b-1);
+            $a >>= ($b - 1);
         } else {
             $a >>= $b;
         }
+
         return $a;
     }
 
@@ -134,6 +140,7 @@ class sha1lib
         if ($t < 60) {
             return ($b & $c) | ($b & $d) | ($c & $d);
         }
+
         return $b ^ $c ^ $d;
     }
 
@@ -144,7 +151,7 @@ class sha1lib
      */
     public function sha1_kt($t)
     {
-        return ($t < 20) ?  1518500249 : (($t < 40) ?   1859775393 :
+        return ($t < 20) ? 1518500249 : (($t < 40) ? 1859775393 :
                 (($t < 60) ? -1894007588 : -899497514));
     }
 
@@ -154,8 +161,8 @@ class sha1lib
     public function core_hmac_sha1($key, $data)
     {
         $bkey = $this->str2binb($key);
-        if (sizeof($bkey) > 16) {
-            $bkey = $this->core_sha1($bkey, sizeof($key) * $this->chrsz);
+        if (count($bkey) > 16) {
+            $bkey = $this->core_sha1($bkey, count($key) * $this->chrsz);
         }
 
         for ($i = 0; $i < 16; $i++) {
@@ -163,7 +170,7 @@ class sha1lib
             $opad[$i] = $bkey[$i] ^ 0x5C5C5C5C;
         }
 
-        return $this->core_sha1(array_merge($opad, $this->core_sha1(array_merge($ipad, $this->str2binb($data)), 512 + sizeof($data) * $this->chrsz)), 512 + 160);
+        return $this->core_sha1(array_merge($opad, $this->core_sha1(array_merge($ipad, $this->str2binb($data)), 512 + count($data) * $this->chrsz)), 512 + 160);
     }
 
     /*
@@ -191,8 +198,8 @@ class sha1lib
     {
         $bin = [];
         $mask = (1 << $this->chrsz) - 1;
-        for ($i=0, $len=strlen($str) * $this->chrsz; $i < $len; $i += $this->chrsz) {
-            $bin[$i >> 5] |= (ord($str{$i / $this->chrsz}) & $mask) << (24 - $i%32);
+        for ($i = 0, $len = strlen($str) * $this->chrsz; $i < $len; $i += $this->chrsz) {
+            $bin[$i >> 5] |= (ord($str[$i / $this->chrsz]) & $mask) << (24 - $i % 32);
         }
 
         return $bin;
@@ -205,9 +212,10 @@ class sha1lib
     {
         $str = '';
         $mask = (1 << $this->chrsz) - 1;
-        for ($i=0, $len=sizeof($bin)*32; $i<$len; $i+=$this->chrsz) {
-            $str .= chr($this->zerofill_rightshift($bin[$i>>5], 24 - $i%32) & $mask);
+        for ($i = 0, $len = count($bin) * 32; $i < $len; $i += $this->chrsz) {
+            $str .= chr($this->zerofill_rightshift($bin[$i >> 5], 24 - $i % 32) & $mask);
         }
+
         return $str;
     }
 
@@ -216,11 +224,11 @@ class sha1lib
      */
     public function binb2hex($binarray)
     {
-        $hex_tab = $this->hexcase ? '0123456789ABCDEF':'0123456789abcdef';
+        $hex_tab = $this->hexcase ? '0123456789ABCDEF' : '0123456789abcdef';
         $str = '';
-        for ($i=0, $len=sizeof($binarray)*4; $i<$len; $i++) {
-            $str .= $hex_tab{($binarray[$i>>2] >> ((3 - $i%4)*8+4)) & 0xF} .
-                    $hex_tab{($binarray[$i>>2] >> ((3 - $i%4)*8)) & 0xF};
+        for ($i = 0, $len = count($binarray) * 4; $i < $len; $i++) {
+            $str .= $hex_tab[($binarray[$i >> 2] >> ((3 - $i % 4) * 8 + 4)) & 0xF].
+                    $hex_tab[($binarray[$i >> 2] >> ((3 - $i % 4) * 8)) & 0xF];
         }
 
         return $str;
@@ -231,20 +239,21 @@ class sha1lib
      */
     public function binb2b64($binarray)
     {
-        $tab='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-        $str='';
-        for ($i=0, $len=sizeof($binarray)*4; i<$len; $i+=3) {
-            $triplet = ((($binarray[$i   >> 2] >> 8 * (3 -  $i   %4)) & 0xFF) << 16)
-                             | ((($binarray[$i+1 >> 2] >> 8 * (3 - ($i+1)%4)) & 0xFF) << 8)
-                             |  (($binarray[$i+2 >> 2] >> 8 * (3 - ($i+2)%4)) & 0xFF);
-            for ($j=0; $j<4; $j++) {
-                if ($i*8+$j*6 > sizeof($binarray)*32) {
+        $tab = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+        $str = '';
+        for ($i = 0, $len = count($binarray) * 4; i < $len; $i += 3) {
+            $triplet = ((($binarray[$i >> 2] >> 8 * (3 - $i % 4)) & 0xFF) << 16)
+                             | ((($binarray[$i + 1 >> 2] >> 8 * (3 - ($i + 1) % 4)) & 0xFF) << 8)
+                             | (($binarray[$i + 2 >> 2] >> 8 * (3 - ($i + 2) % 4)) & 0xFF);
+            for ($j = 0; $j < 4; $j++) {
+                if ($i * 8 + $j * 6 > count($binarray) * 32) {
                     $str .= $this->b64pad;
                 } else {
-                    $str .= $tab{($triplet >> 6*(3-j)) & 0x3F};
+                    $str .= $tab[($triplet >> 6 * (3 - j)) & 0x3F];
                 }
             }
         }
+
         return $str;
     }
 }
@@ -253,6 +262,7 @@ if (!function_exists('sha1')) {
     function sha1($string, $raw_output = false)
     {
         $library = new Sha1Lib();
+
         return $raw_output ? $library->str_sha1($string) : $library->hex_sha1($string);
     }
 }

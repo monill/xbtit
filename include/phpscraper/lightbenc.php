@@ -72,101 +72,105 @@ class lightbenc
 {
     public function bdecode($s, &$pos = 0)
     {
-        if ($pos>=strlen($s)) {
-            return null;
+        if ($pos >= strlen($s)) {
+            return;
         }
         switch ($s[$pos]) {
             case 'd':
                 $pos++;
-                $retval= [];
-                while ($s[$pos]!='e') {
-                    $key=self::bdecode($s, $pos);
-                    $val=self::bdecode($s, $pos);
-                    if ($key===null || $val===null) {
+                $retval = [];
+                while ($s[$pos] != 'e') {
+                    $key = self::bdecode($s, $pos);
+                    $val = self::bdecode($s, $pos);
+                    if ($key === null || $val === null) {
                         break;
                     }
-                    $retval[$key]=$val;
+                    $retval[$key] = $val;
                 }
-                $retval["isDct"]=true;
+                $retval['isDct'] = true;
                 $pos++;
+
                 return $retval;
-    
+
             case 'l':
                 $pos++;
-                $retval= [];
-                while ($s[$pos]!='e') {
-                    $val=self::bdecode($s, $pos);
-                    if ($val===null) {
+                $retval = [];
+                while ($s[$pos] != 'e') {
+                    $val = self::bdecode($s, $pos);
+                    if ($val === null) {
                         break;
                     }
-                    $retval[]=$val;
+                    $retval[] = $val;
                 }
                 $pos++;
+
                 return $retval;
-    
+
             case 'i':
                 $pos++;
-                $digits=strpos($s, 'e', $pos)-$pos;
-                $val=(int)substr($s, $pos, $digits);
-                $pos+=$digits+1;
+                $digits = strpos($s, 'e', $pos) - $pos;
+                $val = (int) substr($s, $pos, $digits);
+                $pos += $digits + 1;
+
                 return $val;
-    
+
     //	case "0": case "1": case "2": case "3": case "4":
     //	case "5": case "6": case "7": case "8": case "9":
             default:
-                $digits=strpos($s, ':', $pos)-$pos;
-                if ($digits<0 || $digits >20) {
-                    return null;
+                $digits = strpos($s, ':', $pos) - $pos;
+                if ($digits < 0 || $digits > 20) {
+                    return;
                 }
-                $len=(int)substr($s, $pos, $digits);
-                $pos+=$digits+1;
-                $str=substr($s, $pos, $len);
-                $pos+=$len;
+                $len = (int) substr($s, $pos, $digits);
+                $pos += $digits + 1;
+                $str = substr($s, $pos, $len);
+                $pos += $len;
                 //echo "pos: $pos str: [$str] len: $len digits: $digits\n";
-                return (string)$str;
+                return (string) $str;
         }
-        return null;
     }
-    
+
     public function bencode(&$d)
     {
         if (is_array($d)) {
-            $ret="l";
-            if ($d["isDct"]) {
-                $isDict=1;
-                $ret="d";
+            $ret = 'l';
+            if ($d['isDct']) {
+                $isDict = 1;
+                $ret = 'd';
                 // this is required by the specs, and BitTornado actualy chokes on unsorted dictionaries
                 ksort($d, SORT_STRING);
             }
             foreach ($d as $key => $value) {
                 if ($isDict) {
                     // skip the isDct element, only if it's set by us
-                    if ($key=="isDct" and is_bool($value)) {
+                    if ($key == 'isDct' and is_bool($value)) {
                         continue;
                     }
-                    $ret.=strlen($key).":".$key;
+                    $ret .= strlen($key).':'.$key;
                 }
                 if (is_string($value)) {
-                    $ret.=strlen($value).":".$value;
+                    $ret .= strlen($value).':'.$value;
                 } elseif (is_int($value)) {
-                    $ret.="i${value}e";
+                    $ret .= "i${value}e";
                 } else {
-                    $ret.=self::bencode($value);
+                    $ret .= self::bencode($value);
                 }
             }
-            return $ret."e";
+
+            return $ret.'e';
         } elseif (is_string($d)) { // fallback if we're given a single bencoded string or int
-            return strlen($d).":".$d;
+            return strlen($d).':'.$d;
         } elseif (is_int($d)) {
             return "i${d}e";
         } else {
-            return null;
+            return;
         }
     }
-    
+
     public function bdecode_file($filename)
     {
-        $f=file_get_contents($filename, FILE_BINARY);
+        $f = file_get_contents($filename, FILE_BINARY);
+
         return bdecode($f);
     }
 }

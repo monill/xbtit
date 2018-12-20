@@ -3,7 +3,7 @@
 // Woohoo! Who needs mhash or PHP 4.3?
 // Don't require it. Still recommended, but not mandatory.
 if (!function_exists('sha1')) {
-    @include_once('sha1lib.php');
+    @include_once 'sha1lib.php';
 }
 
 // We'll protect the namespace of our code
@@ -23,9 +23,10 @@ class BEncode
             $keys[$i++] = stripslashes($key);
         }
         sort($keys);
-        for ($i=0; isset($keys[$i]); $i++) {
+        for ($i = 0; isset($keys[$i]); $i++) {
             $return[addslashes($keys[$i])] = $array[addslashes($keys[$i])];
         }
+
         return $return;
     }
 
@@ -35,10 +36,12 @@ class BEncode
     {
         if (is_bool($entry)) {
             $fd .= 'de';
+
             return;
         }
         if (is_int($entry) || is_float($entry)) {
             $fd .= 'i'.$entry.'e';
+
             return;
         }
         if ($unstrip) {
@@ -57,6 +60,7 @@ class BEncode
         // The empty list is defined as array();
         if (empty($array)) {
             $fd .= 'e';
+
             return;
         }
         for ($i = 0; isset($array[$i]); $i++) {
@@ -85,6 +89,7 @@ class BEncode
         $fd .= 'd';
         if (is_bool($array)) {
             $fd .= 'e';
+
             return;
         }
         // NEED TO SORT!
@@ -101,7 +106,8 @@ class BEncode
 function BEncode($array)
 {
     $string = '';
-    $encoder = new BEncode;
+    $encoder = new BEncode();
     $encoder->decideEncode($array, $string);
+
     return $string;
 }
