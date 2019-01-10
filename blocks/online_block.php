@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -31,45 +32,44 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 global $CURUSER,$btit_settings;
-if (!$CURUSER || $CURUSER["view_users"]=="no") {
+if (!$CURUSER || $CURUSER['view_users'] == 'no') {
     // do nothing
 } else {
-     print("<div class=\"panel panel-default\"><div class=\"panel-heading\"><h4><i class=\"fa fa-fw fa-users\"></i>Who's Online</h4></div><div class=\"panel-body\" align=\"center\">");
+    echo "<div class=\"panel panel-default\"><div class=\"panel-heading\"><h4><i class=\"fa fa-fw fa-users\"></i>Who's Online</h4></div><div class=\"panel-body\" align=\"center\">";
 
-     //block_begin("Online Users");
-     print("\n<table class=\"lista\" width=\"100%\">\n");
+    //block_begin("Online Users");
+    echo "\n<table class=\"lista\" width=\"100%\">\n";
 
-     $u_online= [];
-     $group= [];
-     $u_online=get_result("SELECT * FROM {$TABLE_PREFIX}online ol", true, $btit_settings['cache_duration']);
+    $u_online = [];
+    $group = [];
+    $u_online = get_result("SELECT * FROM {$TABLE_PREFIX}online ol", true, $btit_settings['cache_duration']);
 
-     $total_online=count($u_online);
-     $uo= [];
+    $total_online = count($u_online);
+    $uo = [];
     foreach ($u_online as $id => $users_online) {
-        if (isset($group[unesc(ucfirst($users_online["user_group"]))])) {
-            $group[unesc(ucfirst($users_online["user_group"]))]++;
+        if (isset($group[unesc(ucfirst($users_online['user_group']))])) {
+            $group[unesc(ucfirst($users_online['user_group']))]++;
         } else {
-            $group[unesc(ucfirst($users_online["user_group"]))]=1;
+            $group[unesc(ucfirst($users_online['user_group']))] = 1;
         }
-        if ($users_online["user_id"]>1) {
-            $uo[]="<a class=\"online\" href=\"index.php?page=userdetails&amp;id=".$users_online["user_id"]."\" title=\"".unesc(ucfirst($users_online["location"]))."\">".
-                   unesc($users_online["prefixcolor"]).unesc($users_online["user_name"]).unesc($users_online["suffixcolor"])."</a>";
+        if ($users_online['user_id'] > 1) {
+            $uo[] = '<a class="online" href="index.php?page=userdetails&amp;id='.$users_online['user_id'].'" title="'.unesc(ucfirst($users_online['location'])).'">'.
+                   unesc($users_online['prefixcolor']).unesc($users_online['user_name']).unesc($users_online['suffixcolor']).'</a>';
         }
     }
 
-     print("<tr><td class=\"header\" align=\"center\" width=\"85%\">".$language["GROUP"]."</td><td class=\"header\" align=\"center\" width=\"15%\">".$language["NUMBER_SHORT"]."</td></tr>\n");
+    echo '<tr><td class="header" align="center" width="85%">'.$language['GROUP'].'</td><td class="header" align="center" width="15%">'.$language['NUMBER_SHORT']."</td></tr>\n";
 
     foreach ($group as $gname => $gnumber) {
-        print("<tr>\n");
-        print("<td class=\"blocklist\" align=\"left\">$gname</td><td class=\"blocklist\" align=\"right\">$gnumber</td>\n");
-        print("</tr>\n");
+        echo "<tr>\n";
+        echo "<td class=\"blocklist\" align=\"left\">$gname</td><td class=\"blocklist\" align=\"right\">$gnumber</td>\n";
+        echo "</tr>\n";
     }
 
-     print("<tr><td class=\"blocklist\" align=\"left\">Total</td><td class=\"blocklist\" align=\"right\">$total_online</td>\n</tr>\n");
-     print("<tr><td colspan=\"2\" class=\"blocklist\">".$language["REGISTERED"].": ".implode(", ", $uo)."</td>\n</tr>\n");
+    echo "<tr><td class=\"blocklist\" align=\"left\">Total</td><td class=\"blocklist\" align=\"right\">$total_online</td>\n</tr>\n";
+    echo '<tr><td colspan="2" class="blocklist">'.$language['REGISTERED'].': '.implode(', ', $uo)."</td>\n</tr>\n";
 
-
-     //print($print. $gueststr . ($guest_num>0 && $regusers>0?" ".$language["WORD_AND"]." ":"") . ($regusers>0?"$regusers ".($regusers>1?$language["MEMBERS"]:$language["MEMBER"])."): ":")") . $users ."\n</td></tr>");
-     block_end();
-     print("</table></div></div>\n");
+    //print($print. $gueststr . ($guest_num>0 && $regusers>0?" ".$language["WORD_AND"]." ":"") . ($regusers>0?"$regusers ".($regusers>1?$language["MEMBERS"]:$language["MEMBER"])."): ":")") . $users ."\n</td></tr>");
+    block_end();
+    echo "</table></div></div>\n";
 } // end if user can view

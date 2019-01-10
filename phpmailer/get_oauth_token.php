@@ -32,7 +32,7 @@ $redirectUri = isset($_SERVER['HTTPS']) ? 'https://' : 'http://' . $_SERVER['HTT
 $clientId = 'RANDOMCHARS-----duv1n2.apps.googleusercontent.com';
 $clientSecret = 'RANDOMCHARS-----lGyjPcRtvP';
 
-class Google extends AbstractProvider
+class get_oauth_token extends AbstractProvider
 {
     use BearerAuthorizationTrait;
 

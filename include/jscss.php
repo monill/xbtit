@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,7 +31,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-$morescript='
+$morescript = '
     <!--[if lt IE 7.]>
     <script defer type="text/javascript" src="'.$BASEURL.'/jscript/pngfix.js"></script>
     <![endif]-->
@@ -40,4 +41,4 @@ $morescript='
     <script type="text/javascript" src="'.$BASEURL.'/jscript/xbtit.js"></script>
 ';
 
-$morecss='';
+$morecss = '';

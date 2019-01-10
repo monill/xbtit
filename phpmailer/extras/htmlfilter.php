@@ -390,7 +390,7 @@ function tln_getnxtag($body, $offset)
                         }
                         list($pos, $attval, $match) = $regary;
                         $pos++;
-                            $attary{$attname} = '"' . $attval . '"';
+                        $attary{$attname} = '"' . $attval . '"';
                     } else {
                         /**
                      * These are hateful. Look for \s, or >.
@@ -1013,7 +1013,6 @@ function tln_sanitize(
 
 function HTMLFilter($body, $trans_image_path, $block_external_images = false)
 {
-
     $tag_list = [
         false,
         "object",

@@ -1,5 +1,5 @@
 <?php
-//中文翻译:ziggear 
+//中文翻译:ziggear
 //你可以自由修改和发布，但不要删除注释和作者信息。
 $language['ERR_NO_EMAIL']='你需要提供你注册时使用的email地址';
 $language['ERR_INV_EMAIL']='email地址不合法';

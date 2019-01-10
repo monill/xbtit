@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,41 +31,40 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-if (!defined("IN_BTIT")) {
-      die("non direct access!");
+if (!defined('IN_BTIT')) {
+    die('non direct access!');
 }
 
-
-$usercp_menu= [
+$usercp_menu = [
 0=> [
-        "title"=>$language["MNU_UCP_HOME"],
-        "menu"=> [0=> [
-                "url"=>"index.php?page=usercp&amp;uid=".$uid."" ,
-                "description"=>$language["MNU_UCP_HOME"]]]
+        'title'=> $language['MNU_UCP_HOME'],
+        'menu' => [0=> [
+                'url'        => 'index.php?page=usercp&amp;uid='.$uid.'',
+                'description'=> $language['MNU_UCP_HOME'], ]],
 ],
 1=> [
-        "title"=>$language["MNU_UCP_PM"],
-        "menu"=> [0=> [
-                "url"=>"index.php?page=usercp&amp;uid=".$uid."&amp;do=pm&amp;action=list&amp;what=inbox" ,
-                "description"=>$language["MNU_UCP_PM"]],
+        'title'=> $language['MNU_UCP_PM'],
+        'menu' => [0=> [
+                'url'        => 'index.php?page=usercp&amp;uid='.$uid.'&amp;do=pm&amp;action=list&amp;what=inbox',
+                'description'=> $language['MNU_UCP_PM'], ],
                       1=> [
-                "url"=>"index.php?page=usercp&amp;uid=".$uid."&amp;do=pm&amp;action=list&amp;what=outbox" ,
-                "description"=>$language["MNU_UCP_OUT"]],
+                'url'        => 'index.php?page=usercp&amp;uid='.$uid.'&amp;do=pm&amp;action=list&amp;what=outbox',
+                'description'=> $language['MNU_UCP_OUT'], ],
 
                       2=> [
-                "url"=>"index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid=".$uid."&amp;what=new" ,
-                "description"=>$language["MNU_UCP_NEWPM"]],
-        ]],
+                'url'        => 'index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid='.$uid.'&amp;what=new',
+                'description'=> $language['MNU_UCP_NEWPM'], ],
+        ], ],
 2=> [
-        "title"=>$language["MNU_UCP_INFO"],
-        "menu"=> [0=> [
-                "url"=>"index.php?page=usercp&amp;do=user&amp;action=change&amp;uid=".$uid."" ,
-                "description"=>$language["MNU_UCP_INFO"]],
+        'title'=> $language['MNU_UCP_INFO'],
+        'menu' => [0=> [
+                'url'        => 'index.php?page=usercp&amp;do=user&amp;action=change&amp;uid='.$uid.'',
+                'description'=> $language['MNU_UCP_INFO'], ],
                       1=> [
-                "url"=>"index.php?page=usercp&amp;do=pwd&amp;action=change&amp;uid=".$uid."" ,
-                "description"=>$language["MNU_UCP_CHANGEPWD"]],
+                'url'        => 'index.php?page=usercp&amp;do=pwd&amp;action=change&amp;uid='.$uid.'',
+                'description'=> $language['MNU_UCP_CHANGEPWD'], ],
                       2=> [
-                "url"=>"index.php?page=usercp&amp;do=pid_c&amp;action=change&amp;uid=".$uid."" ,
-                "description"=>$language["CHANGE_PID"]],
-        ]],
+                'url'        => 'index.php?page=usercp&amp;do=pid_c&amp;action=change&amp;uid='.$uid.'',
+                'description'=> $language['CHANGE_PID'], ],
+        ], ],
 ];

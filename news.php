@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,119 +31,118 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 error_reporting(E_ALL & ~E_NOTICE);
-if (!defined("IN_BTIT")) {
-      die("non direct access!");
+if (!defined('IN_BTIT')) {
+    die('non direct access!');
 }
 
-
-require_once(load_language("lang_news.php"));
+require_once load_language('lang_news.php');
 
 global $CURUSER, $language, $newstpl;
 
-if (isset($_GET["act"])) {
-    $action=$_GET["act"];
+if (isset($_GET['act'])) {
+    $action = $_GET['act'];
 } else {
-    $action ="viewnews";
+    $action = 'viewnews';
 }
 
-if ($CURUSER["edit_news"]!="yes") {
-    err_msg($language["ERROR"], $language["ERR_NOT_AUTH"]);
+if ($CURUSER['edit_news'] != 'yes') {
+    err_msg($language['ERROR'], $language['ERR_NOT_AUTH']);
     stdfoot();
     exit();
 }
 
-if ($action=="del") {
-    if ($CURUSER["delete_news"]=="yes") {
-        do_sqlquery("DELETE FROM {$TABLE_PREFIX}news WHERE id=".$_GET["id"], true);
-        redirect("index.php");
+if ($action == 'del') {
+    if ($CURUSER['delete_news'] == 'yes') {
+        do_sqlquery("DELETE FROM {$TABLE_PREFIX}news WHERE id=".$_GET['id'], true);
+        redirect('index.php');
         exit();
     } else {
-        stderr($language["ERROR"], $language["CANT_DELETE_NEWS"]);
+        stderr($language['ERROR'], $language['CANT_DELETE_NEWS']);
         stdfoot();
         exit();
     }
-} elseif ($action=="edit") {
-    if ($CURUSER["edit_news"]=="yes") {
-        $rnews=get_result("SELECT * FROM {$TABLE_PREFIX}news WHERE id=".((int)$_GET["id"]), true, $btit_settings['cache_duration']);
+} elseif ($action == 'edit') {
+    if ($CURUSER['edit_news'] == 'yes') {
+        $rnews = get_result("SELECT * FROM {$TABLE_PREFIX}news WHERE id=".((int) $_GET['id']), true, $btit_settings['cache_duration']);
         if (!$rnews) {
-            stderr($language["ERROR"], $language["ERR_BAD_NEWS_ID"]);
+            stderr($language['ERROR'], $language['ERR_BAD_NEWS_ID']);
             stdfoot();
             exit();
         }
-        $row=$rnews[0];
+        $row = $rnews[0];
         if ($row) {
-            $news=unesc($row["news"]);
-            $title=unesc($row["title"]);
+            $news = unesc($row['news']);
+            $title = unesc($row['title']);
         } else {
-            stderr($language["ERROR"], $language["ERR_NO_NEWS_ID"]);
+            stderr($language['ERROR'], $language['ERR_NO_NEWS_ID']);
             stdfoot();
             exit();
         }
     } else {
-        stderr($language["ERROR"], $language["CANT_DELETE_NEWS"]);
+        stderr($language['ERROR'], $language['CANT_DELETE_NEWS']);
         stdfoot();
         exit();
     }
 
     global $language, $newstpl;
 
-    $newstpl=new bTemplate();
-    $newstpl->set("language", $language);
+    $newstpl = new bTemplate();
+    $newstpl->set('language', $language);
 
-    $newstpl->set("ADD_EDIT", true, true);
+    $newstpl->set('ADD_EDIT', true, true);
 
-    $tplnews= [];
-    $tplnews["action"]="index.php?page=news&amp;act=confirm";
-    $tplnews["hidden_action"]=$action;
-    $tplnews["hidden_id"] = htmlentities($_GET["id"], ENT_QUOTES);
-    $tplnews["news_title"] = htmlentities($title, ENT_QUOTES);
-    $tplnews["bbcode"]=textbbcode("news", "news", $news);
-    $newstpl->set("news", $tplnews);
-} elseif ($action=="add") {
+    $tplnews = [];
+    $tplnews['action'] = 'index.php?page=news&amp;act=confirm';
+    $tplnews['hidden_action'] = $action;
+    $tplnews['hidden_id'] = htmlentities($_GET['id'], ENT_QUOTES);
+    $tplnews['news_title'] = htmlentities($title, ENT_QUOTES);
+    $tplnews['bbcode'] = textbbcode('news', 'news', $news);
+    $newstpl->set('news', $tplnews);
+} elseif ($action == 'add') {
     global $news, $title, $CURUSER, $language, $newstpl;
 
-    $newstpl=new bTemplate();
-    $newstpl->set("language", $language);
+    $newstpl = new bTemplate();
+    $newstpl->set('language', $language);
 
-    $newstpl->set("ADD_EDIT", true, true);
+    $newstpl->set('ADD_EDIT', true, true);
 
-    $tplnews= [];
-    $tplnews["action"]="index.php?page=news&amp;act=confirm";
-    $tplnews["hidden_action"]=$action;
-    $tplnews["hidden_id"] = htmlentities($_GET["id"], ENT_QUOTES);
-    $tplnews["news_title"] = htmlentities($title, ENT_QUOTES);
-    $tplnews["bbcode"]=textbbcode("news", "news", $news);
-    $newstpl->set("news", $tplnews);
-} elseif ($action=="confirm") {
-    if (!isset($_POST["conferma"])) {
-    } elseif ($_POST["conferma"] == $language["FRM_CONFIRM"]) {
-        if (isset($_POST["news"]) && isset($_POST["title"])) {
-             $news=$_POST["news"];
-             $uid=$CURUSER["uid"];
-             $title=$_POST["title"];
-            if ($news=="" || $title=="") {
-                err_msg($language["ERROR"], $language["ERR_INS_TITLE_NEWS"]);
+    $tplnews = [];
+    $tplnews['action'] = 'index.php?page=news&amp;act=confirm';
+    $tplnews['hidden_action'] = $action;
+    $tplnews['hidden_id'] = htmlentities($_GET['id'], ENT_QUOTES);
+    $tplnews['news_title'] = htmlentities($title, ENT_QUOTES);
+    $tplnews['bbcode'] = textbbcode('news', 'news', $news);
+    $newstpl->set('news', $tplnews);
+} elseif ($action == 'confirm') {
+    if (!isset($_POST['conferma'])) {
+    } elseif ($_POST['conferma'] == $language['FRM_CONFIRM']) {
+        if (isset($_POST['news']) && isset($_POST['title'])) {
+            $news = $_POST['news'];
+            $uid = $CURUSER['uid'];
+            $title = $_POST['title'];
+            if ($news == '' || $title == '') {
+                err_msg($language['ERROR'], $language['ERR_INS_TITLE_NEWS']);
             } else {
-                $news=sqlesc($news);
-                $title=sqlesc($title);
-                $nid=((int)$_POST["id"]);
-                $action=$_POST['action'];
-                if ($action=="edit") {
+                $news = sqlesc($news);
+                $title = sqlesc($title);
+                $nid = ((int) $_POST['id']);
+                $action = $_POST['action'];
+                if ($action == 'edit') {
                     do_sqlquery("UPDATE {$TABLE_PREFIX}news SET news=$news, title=$title WHERE id=$nid", true);
                 } else {
                     do_sqlquery("INSERT INTO {$TABLE_PREFIX}news (news,title,user_id,date) VALUES ($news, $title, $uid, NOW())", true);
                 }
-                redirect("index.php");
+                redirect('index.php');
                 exit();
             }
         }
-    } elseif ($_POST["conferma"] == $language["FRM_CANCEL"]) {
-        redirect("index.php");
+    } elseif ($_POST['conferma'] == $language['FRM_CANCEL']) {
+        redirect('index.php');
         exit();
     } else {
-        $title="";
-        $news="";
+        $title = '';
+        $news = '';
     }
 } else {
-    header("Location: index.php?page=viewnews");
+    header('Location: index.php?page=viewnews');
 }

@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -36,5 +37,5 @@ require_once 'functions.php';
 dbconn();
 global $CURUSER;
 
-$now=time();
-$offset=(date('I', $now)===1)?(date('Z', $now)-3600):(date('Z', $now))-($CURUSER['time_offset']*3600);
+$now = time();
+$offset = (date('I', $now) === 1) ? (date('Z', $now) - 3600) : (date('Z', $now)) - ($CURUSER['time_offset'] * 3600);

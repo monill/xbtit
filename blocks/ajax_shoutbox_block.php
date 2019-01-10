@@ -1,5 +1,5 @@
 <?php
- 
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -31,50 +31,46 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-  #################################################################
-  #
-  #         Ajax MySQL shoutbox for btit
-  #         Version 1.0
-  #         Author: miskotes
-  #         Created: 11/07/2007
-  #         Contact: miskotes [at] yahoo.co.uk
-  #         Website: http://www.yu-corner.com
-  #         Credits: linuxuser.at, plasticshore.com
-  #
-  #################################################################
-
+  //################################################################
+  //
+  //         Ajax MySQL shoutbox for btit
+  //         Version 1.0
+  //         Author: miskotes
+  //         Created: 11/07/2007
+  //         Contact: miskotes [at] yahoo.co.uk
+  //         Website: http://www.yu-corner.com
+  //         Credits: linuxuser.at, plasticshore.com
+  //
+  //################################################################
 
 block_begin('SHOUTBOX');
-    
-if ($CURUSER["uid"] > 1) {
-    require_once("include/smilies.php");
+
+if ($CURUSER['uid'] > 1) {
+    require_once 'include/smilies.php';
     if (!isset($CURUSER)) {
         global $CURUSER;
     }
 
     global $tpl;
 
-    print "<script src='ajaxchat/scripts.js' language='JavaScript' type='text/javascript'></script>";
+    echo "<script src='ajaxchat/scripts.js' language='JavaScript' type='text/javascript'></script>";
 
     function smile()
     {
+        echo "<div align='center'><table cellpadding='1' cellspacing='1'><tr>";
 
-          print "<div align='center'><table cellpadding='1' cellspacing='1'><tr>";
+        global $smilies, $count;
+        reset($smilies);
 
-          global $smilies, $count;
-          reset($smilies);
+        while ((list($code, $url) = each($smilies)) && $count < 16) {
+            echo "\n<td><a href=\"javascript: SmileIT('".str_replace("'", "\'", $code)."')\">
+               <img border=\"0\" src=\"images/smilies/$url\" alt=\"$code\" /></a></td>";
 
-        while ((list($code, $url) = each($smilies)) && $count<16) {
-            print("\n<td><a href=\"javascript: SmileIT('".str_replace("'", "\'", $code)."')\">
-               <img border=\"0\" src=\"images/smilies/$url\" alt=\"$code\" /></a></td>");
-               
-                $count++;
+            $count++;
         }
-  
-          print "</tr></table></div>";
-    }
 
-?>
+        echo '</tr></table></div>';
+    } ?>
 
 <div style="text-align: center;">
 
@@ -85,7 +81,7 @@ if ($CURUSER["uid"] > 1) {
   <ul id="outputList">
 
     <li>
-      <span class="name">BTIT SHOUT:</span><h2 style='padding-left:20px;'><?php echo $language["WELCOME"] ?></h2>
+      <span class="name">BTIT SHOUT:</span><h2 style='padding-left:20px;'><?php echo $language['WELCOME'] ?></h2>
           
         <div style="text-align: center;"><div class="loader"></div></div>
 
@@ -102,10 +98,10 @@ if ($CURUSER["uid"] > 1) {
      
 <form id="chatForm" name="chatForm" onsubmit="return false;" action="">
     
-  <input type="hidden" name="name" id="name" value="<?php echo $CURUSER["username"] ?>" />
-  <input type="hidden" name="uid" id="uid" value="<?php echo $CURUSER["uid"] ?>" />
+  <input type="hidden" name="name" id="name" value="<?php echo $CURUSER['username'] ?>" />
+  <input type="hidden" name="uid" id="uid" value="<?php echo $CURUSER['uid'] ?>" />
   <input type="text" size="45" maxlength="500" name="chatbarText" id="chatbarText" onblur="checkStatus('');" onfocus="checkStatus('active');" /> 
-  <input onclick="sendComment();" type="submit" id="submit" name="submit" value="<?php echo $language["FRM_CONFIRM"]; ?>" />
+  <input onclick="sendComment();" type="submit" id="submit" name="submit" value="<?php echo $language['FRM_CONFIRM']; ?>" />
   &nbsp;
   <a href="javascript: PopMoreSmiles('chatForm','chatbarText');">
   <img src="images/smile.gif" border="0" class="form" title="<?php echo $language['MORE_SMILES']; ?>" align="top" alt="" /></a>
@@ -129,9 +125,9 @@ if ($CURUSER["uid"] > 1) {
 
 <?php
 } else {
-    print("<div align=\"center\">\n
-           <br />".$language["ERR_MUST_BE_LOGGED_SHOUT"]."</div>");
-}
+        echo "<div align=\"center\">\n
+           <br />".$language['ERR_MUST_BE_LOGGED_SHOUT'].'</div>';
+    }
 
     block_end();
 ?>

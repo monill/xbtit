@@ -20,33 +20,33 @@ class phpmailerTest extends TestCase
      * @private
      * @type object
      */
-    var $Mail = false;
+    public $Mail = false;
 
     /**
      * Holds the SMTP mail host.
      * @public
      * @type string
      */
-    var $Host = "";
+    public $Host = "";
     
     /**
      * Holds the change log.
      * @private
      * @type string array
      */
-    var $ChangeLog = [];
+    public $ChangeLog = [];
     
-     /**
-     * Holds the note log.
-     * @private
-     * @type string array
-     */
-    var $NoteLog = [];
+    /**
+    * Holds the note log.
+    * @private
+    * @type string array
+    */
+    public $NoteLog = [];
 
     /**
      * Class constuctor.
      */
-    function phpmailerTest($name)
+    public function phpmailerTest($name)
     {
         /* must define this constructor */
         $this->TestCase($name);
@@ -55,7 +55,7 @@ class phpmailerTest extends TestCase
     /**
      * Run before each test is started.
      */
-    function setUp()
+    public function setUp()
     {
         global $global_vars;
         global $INCLUDE_DIR;
@@ -99,7 +99,7 @@ class phpmailerTest extends TestCase
     /**
      * Run after each test is completed.
      */
-    function tearDown()
+    public function tearDown()
     {
         // Clean global variables
         $this->Mail = null;
@@ -113,7 +113,7 @@ class phpmailerTest extends TestCase
      * @private
      * @returns void
      */
-    function BuildBody()
+    public function BuildBody()
     {
         $this->CheckChanges();
         
@@ -188,7 +188,7 @@ class phpmailerTest extends TestCase
      * @private
      * @returns void
      */
-    function CheckChanges()
+    public function CheckChanges()
     {
         if ($this->Mail->Priority != 3) {
             $this->AddChange("Priority", $this->Mail->Priority);
@@ -224,7 +224,7 @@ class phpmailerTest extends TestCase
      * @private
      * @returns void
      */
-    function AddChange($sName, $sNewValue)
+    public function AddChange($sName, $sNewValue)
     {
         $cur = count($this->ChangeLog);
         $this->ChangeLog[$cur][0] = $sName;
@@ -236,7 +236,7 @@ class phpmailerTest extends TestCase
      * @public
      * @returns void
      */
-    function AddNote($sValue)
+    public function AddNote($sValue)
     {
         $this->NoteLog[] = $sValue;
     }
@@ -246,7 +246,7 @@ class phpmailerTest extends TestCase
      * @public
      * @returns void
      */
-    function SetAddress($sAddress, $sName = "", $sType = "to")
+    public function SetAddress($sAddress, $sName = "", $sType = "to")
     {
         switch ($sType) {
             case "to":
@@ -268,9 +268,8 @@ class phpmailerTest extends TestCase
     /**
      * Try a plain message.
      */
-    function test_WordWrap()
+    public function test_WordWrap()
     {
-
         $this->Mail->WordWrap = 40;
         $my_body = "Here is the main body of this message.  It should " .
                    "be quite a few lines.  It should be wrapped at the " .
@@ -288,9 +287,8 @@ class phpmailerTest extends TestCase
     /**
      * Try a plain message.
      */
-    function test_Low_Priority()
+    public function test_Low_Priority()
     {
-    
         $this->Mail->Priority = 5;
         $this->Mail->Body = "Here is the main body.  There should be " .
                             "a reply to address in this message.";
@@ -304,9 +302,8 @@ class phpmailerTest extends TestCase
     /**
      * Simple plain file attachment test.
      */
-    function test_Multiple_Plain_FileAttachment()
+    public function test_Multiple_Plain_FileAttachment()
     {
-
         $this->Mail->Body = "Here is the text body";
         $this->Mail->Subject .= ": Plain + Multiple FileAttachments";
 
@@ -327,9 +324,8 @@ class phpmailerTest extends TestCase
     /**
      * Simple plain string attachment test.
      */
-    function test_Plain_StringAttachment()
+    public function test_Plain_StringAttachment()
     {
-
         $this->Mail->Body = "Here is the text body";
         $this->Mail->Subject .= ": Plain + StringAttachment";
         
@@ -346,9 +342,8 @@ class phpmailerTest extends TestCase
     /**
      * Plain quoted-printable message.
      */
-    function test_Quoted_Printable()
+    public function test_Quoted_Printable()
     {
-
         $this->Mail->Body = "Here is the main body";
         $this->Mail->Subject .= ": Plain + Quoted-printable";
         $this->Mail->Encoding = "quoted-printable";
@@ -360,9 +355,8 @@ class phpmailerTest extends TestCase
     /**
      * Try a plain message.
      */
-    function test_Html()
+    public function test_Html()
     {
-    
         $this->Mail->IsHTML(true);
         $this->Mail->Subject .= ": HTML only";
         
@@ -378,9 +372,8 @@ class phpmailerTest extends TestCase
     /**
      * Simple HTML and attachment test
      */
-    function test_HTML_Attachment()
+    public function test_HTML_Attachment()
     {
-
         $this->Mail->Body = "This is the <b>HTML</b> part of the email.";
         $this->Mail->Subject .= ": HTML + Attachment";
         $this->Mail->IsHTML(true);
@@ -397,9 +390,8 @@ class phpmailerTest extends TestCase
     /**
      * An embedded attachment test.
      */
-    function test_Embedded_Image()
+    public function test_Embedded_Image()
     {
-
         $this->Mail->Body = "Embedded Image: <img alt=\"phpmailer\" src=\"cid:my-attach\">" .
                      "Here is an image!</a>";
         $this->Mail->Subject .= ": Embedded Image";
@@ -423,9 +415,8 @@ class phpmailerTest extends TestCase
     /**
      * An embedded attachment test.
      */
-    function test_Multi_Embedded_Image()
+    public function test_Multi_Embedded_Image()
     {
-
         $this->Mail->Body = "Embedded Image: <img alt=\"phpmailer\" src=\"cid:my-attach\">" .
                      "Here is an image!</a>";
         $this->Mail->Subject .= ": Embedded Image + Attachment";
@@ -454,9 +445,8 @@ class phpmailerTest extends TestCase
     /**
      * Simple multipart/alternative test.
      */
-    function test_AltBody()
+    public function test_AltBody()
     {
-
         $this->Mail->Body = "This is the <b>HTML</b> part of the email.";
         $this->Mail->AltBody = "Here is the text body of this message.  " .
                    "It should be quite a few lines.  It should be wrapped at the " .
@@ -472,9 +462,8 @@ class phpmailerTest extends TestCase
     /**
      * Simple HTML and attachment test
      */
-    function test_AltBody_Attachment()
+    public function test_AltBody_Attachment()
     {
-
         $this->Mail->Body = "This is the <b>HTML</b> part of the email.";
         $this->Mail->AltBody = "This is the text part of the email.";
         $this->Mail->Subject .= ": AltBody + Attachment";
@@ -493,7 +482,7 @@ class phpmailerTest extends TestCase
         fclose($fp);
     }
 
-    function test_MultipleSend()
+    public function test_MultipleSend()
     {
         $this->Mail->Body = "Sending two messages without keepalive";
         $this->BuildBody();
@@ -506,7 +495,7 @@ class phpmailerTest extends TestCase
         $this->assert($this->Mail->Send(), $this->Mail->ErrorInfo);
     }
 
-    function test_SmtpKeepAlive()
+    public function test_SmtpKeepAlive()
     {
         $this->Mail->Body = "This was done using the SMTP keep-alive.";
         $this->BuildBody();
@@ -525,7 +514,7 @@ class phpmailerTest extends TestCase
      * Tests this denial of service attack:
      *    http://www.cybsec.com/vuln/PHPMailer-DOS.pdf
      */
-    function test_DenialOfServiceAttack()
+    public function test_DenialOfServiceAttack()
     {
         $this->Mail->Body = "This should no longer cause a denial of service.";
         $this->BuildBody();
@@ -534,7 +523,7 @@ class phpmailerTest extends TestCase
         $this->assert($this->Mail->Send(), $this->Mail->ErrorInfo);
     }
     
-    function test_Error()
+    public function test_Error()
     {
         $this->Mail->Subject .= ": This should be sent";
         $this->BuildBody();

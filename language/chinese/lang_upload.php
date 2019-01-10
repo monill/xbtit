@@ -1,5 +1,5 @@
 <?php
-//中文翻译:ziggear 
+//中文翻译:ziggear
 //你可以自由修改和发布，但不要删除注释和作者信息。
 $language['NOT_SHA']='SHA1 不可用. 你需要 PHP 4.3.0 或更高版本.';
 $language['NOT_AUTHORIZED_UPLOAD']='你没有上传权限!';

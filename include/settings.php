@@ -5,4 +5,4 @@ $dbuser = '';
 $dbpass = '';
 $database = '';
 $TABLE_PREFIX = '';
-$mySecret  = '';
+$mySecret = '';

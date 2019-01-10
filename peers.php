@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -30,29 +31,26 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-
-if (!defined("IN_BTIT")) {
-      die("non direct access!");
+if (!defined('IN_BTIT')) {
+    die('non direct access!');
 }
 
-
-$i=0;
-$scriptname = htmlspecialchars($_SERVER["PHP_SELF"]."?page=peers&amp;id=$_GET[id]");
-$addparam = "";
-$id = AddSlashes($_GET["id"]);
+$i = 0;
+$scriptname = htmlspecialchars($_SERVER['PHP_SELF']."?page=peers&amp;id=$_GET[id]");
+$addparam = '';
+$id = addslashes($_GET['id']);
 if (!isset($id) || !$id) {
-    die("Error ID");
+    die('Error ID');
 }
-
 
 $res = get_result("SELECT size FROM {$TABLE_PREFIX}files WHERE info_hash='$id'", true);
 if ($res) {
-    $row=$res[0];
+    $row = $res[0];
     if ($row) {
-        $tsize=0+$row["size"];
+        $tsize = 0 + $row['size'];
     }
 } else {
-    die("Error ID");
+    die('Error ID');
 }
 
 if ($XBTT_USE) {
@@ -61,101 +59,100 @@ if ($XBTT_USE) {
     $res = get_result("SELECT * FROM {$TABLE_PREFIX}peers p LEFT JOIN {$TABLE_PREFIX}countries c ON p.dns=c.domain WHERE infohash='$id' ORDER BY bytes ASC, status DESC, lastupdate DESC", true, $btit_settings['cache_duration']);
 }
 
-require(load_language("lang_peers.php"));
+require load_language('lang_peers.php');
 
-$peerstpl=new bTemplate();
-$peerstpl->set("language", $language);
-$peerstpl->set("peers_script", "index.php");
+$peerstpl = new bTemplate();
+$peerstpl->set('language', $language);
+$peerstpl->set('peers_script', 'index.php');
 
-if (count($res)==0) {
-    $peerstpl->set("NOPEERS", true, true);
+if (count($res) == 0) {
+    $peerstpl->set('NOPEERS', true, true);
 } else {
-    $peerstpl->set("NOPEERS", false, true);
+    $peerstpl->set('NOPEERS', false, true);
 
     foreach ($res as $id => $row) {
-      // for user name instead of peer
+        // for user name instead of peer
         if ($XBTT_USE) {
-            $resu=true;
+            $resu = true;
         } elseif ($PRIVATE_ANNOUNCE) {
-            $resu=get_result("SELECT u.username,u.id,c.flagpic,c.name FROM {$TABLE_PREFIX}users u LEFT JOIN {$TABLE_PREFIX}countries c ON c.id=u.flag WHERE u.pid='".$row["pid"]."' LIMIT 1", true, $btit_settings['cache_duration']);
+            $resu = get_result("SELECT u.username,u.id,c.flagpic,c.name FROM {$TABLE_PREFIX}users u LEFT JOIN {$TABLE_PREFIX}countries c ON c.id=u.flag WHERE u.pid='".$row['pid']."' LIMIT 1", true, $btit_settings['cache_duration']);
         } else {
-            $resu=get_result("SELECT u.username,u.id,c.flagpic,c.name FROM {$TABLE_PREFIX}users u LEFT JOIN {$TABLE_PREFIX}countries c ON c.id=u.flag WHERE u.cip='".$row["ip"]."' LIMIT 1", true, $btit_settings['cache_duration']);
+            $resu = get_result("SELECT u.username,u.id,c.flagpic,c.name FROM {$TABLE_PREFIX}users u LEFT JOIN {$TABLE_PREFIX}countries c ON c.id=u.flag WHERE u.cip='".$row['ip']."' LIMIT 1", true, $btit_settings['cache_duration']);
         }
 
         if ($resu) {
             if ($XBTT_USE) {
-                $rowuser["username"]=$row["username"];
-                $rowuser["id"]=$row["uid"];
-                $rowuser["flagpic"]=$row["flagpic"];
-                $rowuser["name"]=$row["name"];
+                $rowuser['username'] = $row['username'];
+                $rowuser['id'] = $row['uid'];
+                $rowuser['flagpic'] = $row['flagpic'];
+                $rowuser['name'] = $row['name'];
             } else {
-                $rowuser=$resu[0];
+                $rowuser = $resu[0];
             }
 
-            if ($rowuser && $rowuser["id"]>1) {
-                if ($GLOBALS["usepopup"]) {
-                    $peers[$i]["USERNAME"]="<a href=\"javascript: windowunder('index.php?page=userdetails&amp;id=".$rowuser["id"]."')\">".unesc($rowuser["username"])."</a>";
-                    $peers[$i]["PM"]="<a href=\"javascript: windowunder('index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid=$CURUSER[uid]&amp;what=new&amp;to=".urlencode(unesc($rowuser["username"]))."')\">".image_or_link("$STYLEPATH/images/pm.png", "", "PM")."</a>";
+            if ($rowuser && $rowuser['id'] > 1) {
+                if ($GLOBALS['usepopup']) {
+                    $peers[$i]['USERNAME'] = "<a href=\"javascript: windowunder('index.php?page=userdetails&amp;id=".$rowuser['id']."')\">".unesc($rowuser['username']).'</a>';
+                    $peers[$i]['PM'] = "<a href=\"javascript: windowunder('index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid=$CURUSER[uid]&amp;what=new&amp;to=".urlencode(unesc($rowuser['username']))."')\">".image_or_link("$STYLEPATH/images/pm.png", '', 'PM').'</a>';
                 } else {
-                       $peers[$i]["USERNAME"]="<a href=\"index.php?page=userdetails&amp;id=".$rowuser["id"]."\">".unesc($rowuser["username"])."</a>";
-                       $peers[$i]["PM"]="<a href=\"index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid=".$CURUSER["uid"]."&amp;what=new&amp;to=".urlencode(unesc($rowuser["username"]))."\">".image_or_link("$STYLEPATH/images/pm.png", "", "PM")."</a>";
+                    $peers[$i]['USERNAME'] = '<a href="index.php?page=userdetails&amp;id='.$rowuser['id'].'">'.unesc($rowuser['username']).'</a>';
+                    $peers[$i]['PM'] = '<a href="index.php?page=usercp&amp;do=pm&amp;action=edit&amp;uid='.$CURUSER['uid'].'&amp;what=new&amp;to='.urlencode(unesc($rowuser['username'])).'">'.image_or_link("$STYLEPATH/images/pm.png", '', 'PM').'</a>';
                 }
             } else {
-                $peers[$i]["USERNAME"]=$language["GUEST"];
-                $peers[$i]["PM"]="";
+                $peers[$i]['USERNAME'] = $language['GUEST'];
+                $peers[$i]['PM'] = '';
             }
         } else {
-             $peers[$i]["USERNAME"]=$language["GUEST"];
-             $peers[$i]["PM"]="";
+            $peers[$i]['USERNAME'] = $language['GUEST'];
+            $peers[$i]['PM'] = '';
         }
 
-        if ($row["flagpic"]!="" && $row["flagpic"]!="unknown.gif") {
-            $peers[$i]["FLAG"]="<img src=\"images/flag/".$row["flagpic"]."\" alt=\"".unesc($row["name"])."\" />";
-        } elseif ($rowuser["flagpic"]!="" && !empty($rowuser["flagpic"])) {
-            $peers[$i]["FLAG"]="<img src=\"images/flag/".$rowuser["flagpic"]."\" alt=\"".unesc($rowuser["name"])."\" />";
+        if ($row['flagpic'] != '' && $row['flagpic'] != 'unknown.gif') {
+            $peers[$i]['FLAG'] = '<img src="images/flag/'.$row['flagpic'].'" alt="'.unesc($row['name']).'" />';
+        } elseif ($rowuser['flagpic'] != '' && !empty($rowuser['flagpic'])) {
+            $peers[$i]['FLAG'] = '<img src="images/flag/'.$rowuser['flagpic'].'" alt="'.unesc($rowuser['name']).'" />';
         } else {
-            $peers[$i]["FLAG"]="<img src=\"images/flag/unknown.gif\" alt=\"".$language["UNKNOWN"]."\" />";
+            $peers[$i]['FLAG'] = '<img src="images/flag/unknown.gif" alt="'.$language['UNKNOWN'].'" />';
         }
 
         if (!$XBTT_USE) {
-            $peers[$i]["PORT"]=$row["port"];
+            $peers[$i]['PORT'] = $row['port'];
         }
-        $stat=floor((($tsize - $row["bytes"]) / $tsize) *100);
-        $progress="<table width=\"100\" cellspacing=\"0\" cellpadding=\"0\"><tr><td class=\"progress\" align=\"left\">";
-        $progress.="<img height=\"10\" width=\"".number_format($stat, 0)."\" src=\"$STYLEURL/images/progress.jpg\" alt=\"\" /></td></tr></table>";
-        $peers[$i]["PROGRESS"]=$stat."%<br />" . $progress;
+        $stat = floor((($tsize - $row['bytes']) / $tsize) * 100);
+        $progress = '<table width="100" cellspacing="0" cellpadding="0"><tr><td class="progress" align="left">';
+        $progress .= '<img height="10" width="'.number_format($stat, 0)."\" src=\"$STYLEURL/images/progress.jpg\" alt=\"\" /></td></tr></table>";
+        $peers[$i]['PROGRESS'] = $stat.'%<br />'.$progress;
 
-        $peers[$i]["STATUS"]=$row["status"];
+        $peers[$i]['STATUS'] = $row['status'];
         if (!$XBTT_USE) {
-            $peers[$i]["CLIENT"]=htmlspecialchars(getagent(unesc($row["client"]), unesc($row["peer_id"])));
+            $peers[$i]['CLIENT'] = htmlspecialchars(getagent(unesc($row['client']), unesc($row['peer_id'])));
         }
-        $dled=makesize($row["downloaded"]);
-        $upld=makesize($row["uploaded"]);
-        $peers[$i]["DOWNLOADED"]=$dled;
-        $peers[$i]["UPLOADED"]=$upld;
+        $dled = makesize($row['downloaded']);
+        $upld = makesize($row['uploaded']);
+        $peers[$i]['DOWNLOADED'] = $dled;
+        $peers[$i]['UPLOADED'] = $upld;
 
-    //Peer Ratio
-        if (((int)$row["downloaded"])>0) {
-             $ratio=number_format($row["uploaded"]/$row["downloaded"], 2);
+        //Peer Ratio
+        if (((int) $row['downloaded']) > 0) {
+            $ratio = number_format($row['uploaded'] / $row['downloaded'], 2);
         } else {
-            $ratio='&#8734;';
+            $ratio = '&#8734;';
         }
-        $peers[$i]["RATIO"]=$ratio;
-    //End Peer Ratio
+        $peers[$i]['RATIO'] = $ratio;
+        //End Peer Ratio
 
-        $peers[$i]["SEEN"]=get_elapsed_time($row["lastupdate"])." ago";
+        $peers[$i]['SEEN'] = get_elapsed_time($row['lastupdate']).' ago';
         $i++;
     }
 }
 
-
-if ($GLOBALS["usepopup"]) {
-    $peerstpl->set("BACK2", "<br /><br /><center><a href=\"javascript:window.close()\"><tag:language.CLOSE /></a></center>");
+if ($GLOBALS['usepopup']) {
+    $peerstpl->set('BACK2', '<br /><br /><center><a href="javascript:window.close()"><tag:language.CLOSE /></a></center>');
 } else {
-    $peerstpl->set("BACK2", "<br /><br /><center><a href=\"javascript: history.go(-1);\"><tag:language.BACK /></a></center>");
+    $peerstpl->set('BACK2', '<br /><br /><center><a href="javascript: history.go(-1);"><tag:language.BACK /></a></center>');
 }
-$peerstpl->set("XBTT", $XBTT_USE, true);
-$peerstpl->set("XBTT2", $XBTT_USE, true);
-$peerstpl->set("XBTT3", $XBTT_USE, true);
-$peerstpl->set("XBTT4", $XBTT_USE, true);
-$peerstpl->set("peers", $peers);
+$peerstpl->set('XBTT', $XBTT_USE, true);
+$peerstpl->set('XBTT2', $XBTT_USE, true);
+$peerstpl->set('XBTT3', $XBTT_USE, true);
+$peerstpl->set('XBTT4', $XBTT_USE, true);
+$peerstpl->set('peers', $peers);

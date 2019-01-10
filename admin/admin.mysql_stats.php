@@ -30,22 +30,20 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
-if (!defined("IN_BTIT")) {
-      die("non direct access!");
+if (!defined('IN_BTIT')) {
+    die('non direct access!');
 }
 
-if (!defined("IN_ACP")) {
-      die("non direct access!");
+if (!defined('IN_ACP')) {
+    die('non direct access!');
 }
-
-
 
 /* $Id: mysql_stats.php,v 1.0 2005/06/20 22:52:24 CoLdFuSiOn Exp $ */
 // vim: expandtab sw=4 ts=4 sts=4:
 
 ob_start();
 
-$GLOBALS["byteUnits"] = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB'];
+$GLOBALS['byteUnits'] = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB'];
 
 $day_of_week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 $month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -54,30 +52,29 @@ $month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 
 $datefmt = '%B %d, %Y at %I:%M %p';
 $timespanfmt = '%s days, %s hours, %s minutes and %s seconds';
 ////////////////// FUNCTION LIST /////////////////////////
-    /**
-     * Formats $value to byte view
-     *
-     * @param    double   the value to format
-     * @param    integer  the sensitiveness
-     * @param    integer  the number of decimals to retain
-     *
-     * @return   array    the formatted value and its unit
-     *
-     * @access  public
-     *
-     * @author   staybyte
-     * @version  1.0 - 20 July 2005
-     */
+/**
+ * Formats $value to byte view.
+ *
+ * @param    float   the value to format
+ * @param    int  the sensitiveness
+ * @param    int  the number of decimals to retain
+ *
+ * @return array the formatted value and its unit
+ *
+ * @author   staybyte
+ *
+ * @version  1.0 - 20 July 2005
+ */
 function formatByteDown($value, $limes = 6, $comma = 0)
 {
-    $dh           = pow(10, $comma);
-    $li           = pow(10, $limes);
+    $dh = pow(10, $comma);
+    $li = pow(10, $limes);
     $return_value = $value;
-    $unit         = $GLOBALS['byteUnits'][0];
+    $unit = $GLOBALS['byteUnits'][0];
 
-    for ($d = 6, $ex = 15; $d >= 1; $d--, $ex-=3) {
+    for ($d = 6, $ex = 15; $d >= 1; $d--, $ex -= 3) {
         if (isset($GLOBALS['byteUnits'][$d]) && $value >= $li * pow(10, $ex)) {
-            $value = round($value / ( pow(1024, $d) / $dh)) /$dh;
+            $value = round($value / (pow(1024, $d) / $dh)) / $dh;
             $unit = $GLOBALS['byteUnits'][$d];
             break 1;
         } // end if
@@ -92,13 +89,13 @@ function formatByteDown($value, $limes = 6, $comma = 0)
     return [$return_value, $unit];
 } // end of the 'formatByteDown' function
 
-    /**
-     * Returns a given timespan value in a readable format.
-     *
-     * @param  int     the timespan
-     *
-     * @return string  the formatted value
-     */
+/**
+ * Returns a given timespan value in a readable format.
+ *
+ * @param  int     the timespan
+ *
+ * @return string the formatted value
+ */
 function timespanFormat($seconds)
 {
     $return_string = '';
@@ -114,19 +111,17 @@ function timespanFormat($seconds)
     if ($days > 0 || $hours > 0 || $minutes > 0) {
         $seconds -= $minutes * 60;
     }
-    return (string)$days." Days ". (string)$hours." Hours ". (string)$minutes." Minutes ". (string)$seconds." Seconds ";
+
+    return (string) $days.' Days '.(string) $hours.' Hours '.(string) $minutes.' Minutes '.(string) $seconds.' Seconds ';
 }
 
-
-   /**
-     * Writes localised date
-     *
-     * @param   string   the current timestamp
-     *
-     * @return  string   the formatted date
-     *
-     * @access  public
-     */
+/**
+ * Writes localised date.
+ *
+ * @param   string   the current timestamp
+ *
+ * @return string the formatted date
+ */
 function localisedDate($timestamp = -1, $format = '')
 {
     global $datefmt, $month, $day_of_week;
@@ -139,33 +134,30 @@ function localisedDate($timestamp = -1, $format = '')
         $timestamp = time();
     }
 
-    $date = preg_replace('@%[aA]@', $day_of_week[(int)strftime('%w', $timestamp)], $format);
-    $date = preg_replace('@%[bB]@', $month[(int)strftime('%m', $timestamp)-1], $date);
+    $date = preg_replace('@%[aA]@', $day_of_week[(int) strftime('%w', $timestamp)], $format);
+    $date = preg_replace('@%[bB]@', $month[(int) strftime('%m', $timestamp) - 1], $date);
 
     return strftime($date, $timestamp);
 } // end of the 'localisedDate()' function
 
 ////////////////////// END FUNCTION LIST /////////////////////////////////////
 
-
-
 /**
- * Sends the query and buffers the result
+ * Sends the query and buffers the result.
  */
 $res = @mysqli_query($GLOBALS['conn'], 'SHOW STATUS') or die(((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 while ($row = mysqli_fetch_row($res)) {
     $serverStatus[$row[0]] = $row[1];
 }
-@((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
+@((mysqli_free_result($res) || (is_object($res) && (get_class($res) == 'mysqli_result'))) ? true : false);
 unset($res);
 unset($row);
 
-
 /**
- * Displays the page
+ * Displays the page.
  */
 //Uptime calculation
-$res = @mysqli_query($GLOBALS['conn'], 'SELECT UNIX_TIMESTAMP() - ' . $serverStatus['Uptime']);
+$res = @mysqli_query($GLOBALS['conn'], 'SELECT UNIX_TIMESTAMP() - '.$serverStatus['Uptime']);
 $row = mysqli_fetch_row($res);
 //echo sprintf("Server Status Uptime", timespanFormat($serverStatus['Uptime']), localisedDate($row[0])) . "\n";
 ?>
@@ -175,7 +167,7 @@ $row = mysqli_fetch_row($res);
       <tr>
         <td style="padding-left:40px;"><b>
 <?php
-print("\tThis MySQL server has been running for ". timespanFormat($serverStatus['Uptime']) .". It started up on ". localisedDate($row[0])) . "\n";
+echo("\tThis MySQL server has been running for ".timespanFormat($serverStatus['Uptime']).'. It started up on '.localisedDate($row[0]))."\n";
 ?>
         </b></td>
       </tr>
@@ -183,7 +175,7 @@ print("\tThis MySQL server has been running for ". timespanFormat($serverStatus[
 
 <?php
 
-((mysqli_free_result($res) || (is_object($res) && (get_class($res) == "mysqli_result"))) ? true : false);
+((mysqli_free_result($res) || (is_object($res) && (get_class($res) == 'mysqli_result'))) ? true : false);
 unset($res);
 unset($row);
 //Get query statistics
@@ -220,18 +212,18 @@ unset($tmp_array);
                         </tr>
                         <tr>
                             <td class="lista">&nbsp;Received&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo join(' ', formatByteDown($serverStatus['Bytes_received'])); ?>&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo join(' ', formatByteDown($serverStatus['Bytes_received'] * 3600 / $serverStatus['Uptime'])); ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo implode(' ', formatByteDown($serverStatus['Bytes_received'])); ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo implode(' ', formatByteDown($serverStatus['Bytes_received'] * 3600 / $serverStatus['Uptime'])); ?>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="lista" >&nbsp;Sent&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo join(' ', formatByteDown($serverStatus['Bytes_sent'])); ?>&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo join(' ', formatByteDown($serverStatus['Bytes_sent'] * 3600 / $serverStatus['Uptime'])); ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo implode(' ', formatByteDown($serverStatus['Bytes_sent'])); ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo implode(' ', formatByteDown($serverStatus['Bytes_sent'] * 3600 / $serverStatus['Uptime'])); ?>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="lista">&nbsp;Total&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo join(' ', formatByteDown($serverStatus['Bytes_received'] + $serverStatus['Bytes_sent'])); ?>&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo join(' ', formatByteDown(($serverStatus['Bytes_received'] + $serverStatus['Bytes_sent']) * 3600 / $serverStatus['Uptime'])); ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo implode(' ', formatByteDown($serverStatus['Bytes_received'] + $serverStatus['Bytes_sent'])); ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo implode(' ', formatByteDown(($serverStatus['Bytes_received'] + $serverStatus['Bytes_sent']) * 3600 / $serverStatus['Uptime'])); ?>&nbsp;</td>
                         </tr>
                     </table>
                 </td>
@@ -246,13 +238,13 @@ unset($tmp_array);
                             <td class="lista">&nbsp;Failed Attempts&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format($serverStatus['Aborted_connects'], 0, '.', ','); ?>&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format(($serverStatus['Aborted_connects'] * 3600 / $serverStatus['Uptime']), 2, '.', ','); ?>&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0 ) ? number_format(($serverStatus['Aborted_connects'] * 100 / $serverStatus['Connections']), 2, '.', ',') . '&nbsp;%' : '---'; ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0) ? number_format(($serverStatus['Aborted_connects'] * 100 / $serverStatus['Connections']), 2, '.', ',').'&nbsp;%' : '---'; ?>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="lista">&nbsp;Aborted Clients&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format($serverStatus['Aborted_clients'], 0, '.', ','); ?>&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format(($serverStatus['Aborted_clients'] * 3600 / $serverStatus['Uptime']), 2, '.', ','); ?>&nbsp;</td>
-                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0 ) ? number_format(($serverStatus['Aborted_clients'] * 100 / $serverStatus['Connections']), 2, '.', ',') . '&nbsp;%' : '---'; ?>&nbsp;</td>
+                            <td class="lista" align="right">&nbsp;<?php echo ($serverStatus['Connections'] > 0) ? number_format(($serverStatus['Aborted_clients'] * 100 / $serverStatus['Connections']), 2, '.', ',').'&nbsp;%' : '---'; ?>&nbsp;</td>
                         </tr>
                         <tr>
                             <td class="lista">&nbsp;Total&nbsp;</td>
@@ -271,7 +263,7 @@ unset($tmp_array);
 <ul>
     <li>
         <!-- Queries -->
-        <?php print("<b>Query Statistics:</b> Since its start up ". number_format($serverStatus['Questions'], 0, '.', ',')." queries have been sent to the server.\n"); ?></li></ul>
+        <?php echo '<b>Query Statistics:</b> Since its start up '.number_format($serverStatus['Questions'], 0, '.', ',')." queries have been sent to the server.\n"; ?></li></ul>
                 </div>
                 
         </td>
@@ -310,10 +302,9 @@ unset($tmp_array);
 $useBgcolorOne = true;
 $countRows = 0;
 foreach ($queryStats as $name => $value) {
-// For the percentage column, use Questions - Connections, because
-// the number of connections is not an item of the Query types
-// but is included in Questions. Then the total of the percentages is 100.
-?>
+    // For the percentage column, use Questions - Connections, because
+    // the number of connections is not an item of the Query types
+    // but is included in Questions. Then the total of the percentages is 100.?>
                         <tr>
                             <td class="lista">&nbsp;<?php echo htmlspecialchars($name); ?>&nbsp;</td>
                             <td class="lista" align="right">&nbsp;<?php echo number_format($value, 0, '.', ','); ?>&nbsp;</td>
@@ -322,9 +313,8 @@ foreach ($queryStats as $name => $value) {
                         </tr>
 <?php
     $useBgcolorOne = !$useBgcolorOne;
-if (++$countRows == ceil(count($queryStats) / 2)) {
-    $useBgcolorOne = true;
-?>
+    if (++$countRows == ceil(count($queryStats) / 2)) {
+        $useBgcolorOne = true; ?>
             </table>
         </td>
         <td valign="top">
@@ -335,7 +325,7 @@ if (++$countRows == ceil(count($queryStats) / 2)) {
                     <td class="header">&nbsp;%&nbsp;</td>
                 </tr>
 <?php
-}
+    }
 }
 unset($countRows);
 unset($useBgcolorOne);
@@ -356,7 +346,7 @@ unset($serverStatus['Questions']);
 unset($serverStatus['Uptime']);
 
 if (!empty($serverStatus)) {
-?>
+    ?>
     <table align="center" width="96%" class="lista" border="0" cellpadding="4" cellspacing="1">
       <tr>
         <td>
@@ -382,17 +372,16 @@ if (!empty($serverStatus)) {
 <?php
     $useBgcolorOne = true;
     $countRows = 0;
-foreach ($serverStatus as $name => $value) {
-?>
+    foreach ($serverStatus as $name => $value) {
+        ?>
                 <tr>
                     <td class="lista">&nbsp;<?php echo htmlspecialchars(str_replace('_', ' ', $name)); ?>&nbsp;</td>
                     <td class="lista" align="right">&nbsp;<?php echo htmlspecialchars($value); ?>&nbsp;</td>
                 </tr>
 <?php
 $useBgcolorOne = !$useBgcolorOne;
-if (++$countRows == ceil(count($serverStatus) / 3) || $countRows == ceil(count($serverStatus) * 2 / 3)) {
-    $useBgcolorOne = true;
-?>
+        if (++$countRows == ceil(count($serverStatus) / 3) || $countRows == ceil(count($serverStatus) * 2 / 3)) {
+            $useBgcolorOne = true; ?>
         </table>
     </td>
     <td valign="top">
@@ -402,10 +391,9 @@ if (++$countRows == ceil(count($serverStatus) / 3) || $countRows == ceil(count($
                 <td class="header">&nbsp;Value&nbsp;</td>
             </tr>
 <?php
-}
-}
-    unset($useBgcolorOne);
-?>
+        }
+    }
+    unset($useBgcolorOne); ?>
                     </table>
                 </td>
             </tr>
@@ -431,7 +419,7 @@ if (++$countRows == ceil(count($serverStatus) / 3) || $countRows == ceil(count($
     </table>
 <?php
 
-$content=ob_get_contents();
+$content = ob_get_contents();
 ob_end_clean();
 
 ?>

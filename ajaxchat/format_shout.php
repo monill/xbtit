@@ -32,7 +32,6 @@
 
 function format_shout($text, $strip_html = true)
 {
-
     global $smilies, $BASEURL, $privatesmilies;
 
     $s = $text;

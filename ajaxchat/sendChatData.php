@@ -44,7 +44,7 @@
 
 # emulate register_globals on
 if (!ini_get('register_globals')) {
-        extract($_POST, EXTR_SKIP);
+    extract($_POST, EXTR_SKIP);
 }
 $name = $n; # name from the form
 $text = $c; # comment from the form
@@ -108,7 +108,7 @@ if (strlen($text) > 500) {
 /*
 # the name is shortened to 30 letters
 if (strlen($name) > 30) {
-    $name = substr($name, 0,30); 
+    $name = substr($name, 0,30);
 }
 */
 

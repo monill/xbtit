@@ -81,7 +81,6 @@ function shoutError()
  
 function smile()
 {
-
     global $smilies;
     reset($smilies);
   
@@ -96,7 +95,7 @@ function smile()
 
  
 if (isset($_POST["confirm"]) && $_POST["confirm"]==$language["FRM_CANCEL"]) {
-      header("Location: index.php?page=allshout");
+    header("Location: index.php?page=allshout");
 }
 
 
@@ -135,9 +134,7 @@ header("Content-Type: text/html; charset=UTF-8");
 
 
 if (isset($edit)) {
-    print "<script type='text/javascript' language='javascript' src='ajaxchat/functions.js' ></script>";
-
-    ?>
+    print "<script type='text/javascript' language='javascript' src='ajaxchat/functions.js' ></script>"; ?>
   <script type="text/javascript">
  
   // inserts smilies into form
@@ -148,7 +145,7 @@ if (isset($edit)) {
   </script>
 
     <?php
- 
+
 
     $query = "SELECT * FROM {$TABLE_PREFIX}chat WHERE id = $sid";
     $res = mysqli_query($conn, $query);
@@ -161,7 +158,7 @@ if (isset($edit)) {
     else {
         print "<span class='name'>".date("d/m/Y H:i:s", $row["time"] - $offset)." | <a href=javascript:windowunder('index.php?page=userdetails&amp;id=".$row[uid]."')>".$row[name]."</a>:</span>";
         
-                        print "
+        print "
                             <div style='text-align:right;
                                   margin-top:-13px;
                                   margin-bottom:-3.5px;
@@ -171,7 +168,7 @@ if (isset($edit)) {
 
                             </div>";
                             
-                        print "
+        print "
                             <div style='text-align:right;
                                   margin-top:-15px;
                                   margin-bottom:2px;
@@ -214,25 +211,24 @@ if (isset($edit)) {
                                                   
                             
         if (isset($_POST["confirm"]) && $_POST["confirm"]==$language["FRM_CONFIRM"]) {
-              #################################################
+            #################################################
  
-                $sql = "UPDATE {$TABLE_PREFIX}chat SET text = '".$post."' WHERE id = '".$sid."'";
-                  $conn = his_getDBConnection();
-                  $results = mysqli_query($conn, $sql);
+            $sql = "UPDATE {$TABLE_PREFIX}chat SET text = '".$post."' WHERE id = '".$sid."'";
+            $conn = his_getDBConnection();
+            $results = mysqli_query($conn, $sql);
 
             if (!$results || empty($results)) {
-           # echo 'There was an error creating the entry';
+                # echo 'There was an error creating the entry';
                 end;
             }
    
-                       redirect("index.php?page=allshout");
+            redirect("index.php?page=allshout");
    
-                    ############################################################
+            ############################################################
         }
 
 
-        print  "<div align='center'>$edit_text</div>";
-    ?>        
+        print  "<div align='center'>$edit_text</div>"; ?>        
     <div id='ihtr20' align='center' style='border:1px solid #CECECE; display:none; margin-top:5px;
     
     overflow: auto; /* this makes our div to have scrolls */
@@ -261,17 +257,16 @@ if (!$lastID) {
     $lastID = 0;
 } # we treat 0 (zero) as null point, sorry...
 
-# call to retrieve all messages with an id greater than $lastID which is NOT zero 
+# call to retrieve all messages with an id greater than $lastID which is NOT zero
 getData($lastID);
 
 # function that do retrieve all messages with a set id
 function getData($lastID)
 {
-
     include("include/settings.php");  # getting table prefix
     include("include/offset.php");
 
-  # discard it if we are editing
+    # discard it if we are editing
     $sid = isset($_GET["sid"])?$_GET["sid"]:0; # get shout id (sid)and set it to zero for bool
 
   
@@ -281,7 +276,7 @@ function getData($lastID)
     
     # getting the data array
     while ($row = mysqli_fetch_array($results)) {
-    # creating and naming array
+        # creating and naming array
         $id   = $row[id];
         $uid  = $row[uid];
         $time = $row[time];
@@ -292,16 +287,16 @@ function getData($lastID)
         # we assume all must be ok, othervise no post will be made by javascript check
         # if ($name == '') { $name = 'Anonymous'; $text = 'No message'; }
   
-      # we lego put together our chat using some conditions and css and javascript this time
+        # we lego put together our chat using some conditions and css and javascript this time
 
         print "<span class='name'>".date("d/m/Y H:i:s", $time - $offset)." | <a href=\"javascript:windowunder('index.php?page=userdetails&amp;id=".$uid."')\">".$name."</a>:</span>";
 
-          global $CURUSER;
+        global $CURUSER;
           
         if ($CURUSER["admin_access"]!="yes" && $CURUSER["uid"]!="".$uid."") {
         } else {
-               # edit/delete buttons -->
-                 print "<div style='text-align:right;
+            # edit/delete buttons -->
+            print "<div style='text-align:right;
                              margin-top:-13px;
                              margin-bottom:-3.5px;
                              '>
@@ -311,8 +306,8 @@ function getData($lastID)
                  </div>";
         }
                       
-                 # chat output -->
-                 print "<div class='chatoutput'>".format_shout($text)."</div>";
+        # chat output -->
+        print "<div class='chatoutput'>".format_shout($text)."</div>";
     }
 }
 ?>

@@ -1,4 +1,5 @@
 <?php
+
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
@@ -31,54 +32,51 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 error_reporting(E_ALL & ~E_NOTICE);
-if (!defined("IN_BTIT")) {
-      die("non direct access!");
+if (!defined('IN_BTIT')) {
+    die('non direct access!');
 }
 
-
 global $btit_settings;
-if ($CURUSER["view_news"]=="no") {
-       err_msg($language["ERROR"], $language["NOT_AUTHORIZED"]."!");
-       stdfoot();
-       exit;
+if ($CURUSER['view_news'] == 'no') {
+    err_msg($language['ERROR'], $language['NOT_AUTHORIZED'].'!');
+    stdfoot();
+    exit;
 }
 
 //     global $CURUSER, $limitqry, $adm_menu, $CURRENTPATH, $TABLE_PREFIX;
 //     $output="";
 
-if ($limit>0) {
-    $limitqry="LIMIT $limit";
+if ($limit > 0) {
+    $limitqry = "LIMIT $limit";
 }
-$res=get_result("SELECT n.id, n.title, n.news,UNIX_TIMESTAMP(n.date) as news_date, u.username FROM {$TABLE_PREFIX}news n INNER JOIN {$TABLE_PREFIX}users u on u.id=n.user_id ORDER BY date DESC $limitqry", true, $btit_settings['cache_duration']);
-
+$res = get_result("SELECT n.id, n.title, n.news,UNIX_TIMESTAMP(n.date) as news_date, u.username FROM {$TABLE_PREFIX}news n INNER JOIN {$TABLE_PREFIX}users u on u.id=n.user_id ORDER BY date DESC $limitqry", true, $btit_settings['cache_duration']);
 
 // load language file
-require(load_language("lang_viewnews.php"));
+require load_language('lang_viewnews.php');
 
 $viewnewstpl = new bTemplate();
-$viewnewstpl -> set("language", $language);
-$viewnewstpl -> set("can_edit_news", $CURUSER["edit_news"]=="yes", true);
-$viewnewstpl -> set("can_edit_news_1", $CURUSER["edit_news"]=="yes", true);
-$viewnewstpl -> set("can_delete_news", $CURUSER["delete_news"]=="yes", true);
+$viewnewstpl->set('language', $language);
+$viewnewstpl->set('can_edit_news', $CURUSER['edit_news'] == 'yes', true);
+$viewnewstpl->set('can_edit_news_1', $CURUSER['edit_news'] == 'yes', true);
+$viewnewstpl->set('can_delete_news', $CURUSER['delete_news'] == 'yes', true);
 
-$viewnews= [];
-$i=0;
+$viewnews = [];
+$i = 0;
 
-$viewnewstpl -> set("news_exists", (count($res) > 0), true);
-$viewnewstpl -> set("insert_news_link", (count($res) == 0?"<a href=\"index.php?page=news&amp;act=add\"><img border=\"0\" alt=\"".$language["ADD"]."\" src=\"$BASEURL/images/new.gif\" /></a>":""));
+$viewnewstpl->set('news_exists', (count($res) > 0), true);
+$viewnewstpl->set('insert_news_link', (count($res) == 0 ? '<a href="index.php?page=news&amp;act=add"><img border="0" alt="'.$language['ADD']."\" src=\"$BASEURL/images/new.gif\" /></a>" : ''));
 
-include("$THIS_BASEPATH/include/offset.php");
-
+include "$THIS_BASEPATH/include/offset.php";
 
 foreach ($res as $rows) {
-      $viewnews[$i]["add_edit_news"] = "<a href=\"index.php?page=news&amp;act=add\">".$language["ADD"]."</a>&nbsp;&nbsp;&nbsp;<a href=\"index.php?page=news&amp;act=edit&amp;id=".$rows["id"]."\">".$language["EDIT"]."</a>";
-      $viewnews[$i]["delete_news"] = "&nbsp;&nbsp;&nbsp;<a onclick=\"return confirm('". str_replace("'", "\'", $language["DELETE_CONFIRM"])."')\" href=\"index.php?page=news&amp;act=del&amp;id=".$rows["id"]."\">".$language["DELETE"]."</a>";
-      $viewnews[$i]["user_posted"] = unesc($rows["username"]);
-      $viewnews[$i]["posted_date"] = date("d/m/Y H:i", $rows["news_date"]-$offset);
-      $viewnews[$i]["news_title"] = htmlentities($rows["title"], ENT_QUOTES);
-      $viewnews[$i]["news"] = format_comment($rows["news"]);
-    
-      $i++;
+    $viewnews[$i]['add_edit_news'] = '<a href="index.php?page=news&amp;act=add">'.$language['ADD'].'</a>&nbsp;&nbsp;&nbsp;<a href="index.php?page=news&amp;act=edit&amp;id='.$rows['id'].'">'.$language['EDIT'].'</a>';
+    $viewnews[$i]['delete_news'] = "&nbsp;&nbsp;&nbsp;<a onclick=\"return confirm('".str_replace("'", "\'", $language['DELETE_CONFIRM'])."')\" href=\"index.php?page=news&amp;act=del&amp;id=".$rows['id'].'">'.$language['DELETE'].'</a>';
+    $viewnews[$i]['user_posted'] = unesc($rows['username']);
+    $viewnews[$i]['posted_date'] = date('d/m/Y H:i', $rows['news_date'] - $offset);
+    $viewnews[$i]['news_title'] = htmlentities($rows['title'], ENT_QUOTES);
+    $viewnews[$i]['news'] = format_comment($rows['news']);
+
+    $i++;
 }
 
-$viewnewstpl -> set("viewnews", $viewnews);
+$viewnewstpl->set('viewnews', $viewnews);

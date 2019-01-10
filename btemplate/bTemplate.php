@@ -8,32 +8,32 @@
 class bTemplate
 {
     // Configuration variables
-    var $base_path = '';
-    var $reset_vars = true;
+    public $base_path = '';
+    public $reset_vars = true;
 
     // Delimeters for regular tags
-    var $ldelim = '<';
-    var $rdelim = ' />';
+    public $ldelim = '<';
+    public $rdelim = ' />';
 
     // Delimeters for beginnings of loops
-    var $BAldelim = '<';
-    var $BArdelim = '>';
+    public $BAldelim = '<';
+    public $BArdelim = '>';
 
     // Delimeters for ends of loops
-    var $EAldelim = '</';
-    var $EArdelim = '>';
+    public $EAldelim = '</';
+    public $EArdelim = '>';
 
     // Internal variables
-    var $scalars = [];
-    var $arrays  = [];
-    var $carrays = [];
-    var $ifs     = [];
+    public $scalars = [];
+    public $arrays  = [];
+    public $carrays = [];
+    public $ifs     = [];
 
     /*--------------------------------------------------------------*\
         Method: bTemplate()
         Simply sets the base path (if you don't set the default).
     \*--------------------------------------------------------------*/
-    function __construct($base_path = null, $reset_vars = true)
+    public function __construct($base_path = null, $reset_vars = true)
     {
         if ($base_path) {
             $this->base_path = $base_path;
@@ -45,7 +45,7 @@ class bTemplate
         Method: set()
         Sets all types of variables (scalar, loop, hash).
     \*--------------------------------------------------------------*/
-    function set($tag, $var, $if = null)
+    public function set($tag, $var, $if = null)
     {
         if (is_array($var)) {
             $this->arrays[$tag] = $var;
@@ -66,7 +66,7 @@ class bTemplate
         Method: set_cloop()
         Sets a cloop (case loop).
     \*--------------------------------------------------------------*/
-    function set_cloop($tag, $array, $cases)
+    public function set_cloop($tag, $array, $cases)
     {
         $this->carrays[$tag] = [
             'array' => $array,
@@ -77,7 +77,7 @@ class bTemplate
         Method: reset_vars()
         Resets the template variables.
     \*--------------------------------------------------------------*/
-    function reset_vars($scalars, $arrays, $carrays, $ifs)
+    public function reset_vars($scalars, $arrays, $carrays, $ifs)
     {
         if ($scalars) {
             $this->scalars = [];
@@ -97,7 +97,7 @@ class bTemplate
         Method: get_tags()
         Formats the tags & returns a two-element array.
     \*--------------------------------------------------------------*/
-    function get_tags($tag, $directive)
+    public function get_tags($tag, $directive)
     {
         $tags['b'] = $this->BAldelim . $directive . $tag . $this->BArdelim;
         $tags['e'] = $this->EAldelim . $directive . $tag . $this->EArdelim;
@@ -108,7 +108,7 @@ class bTemplate
         Method: get_tag()
         Formats a tag for a scalar.
     \*--------------------------------------------------------------*/
-    function get_tag($tag)
+    public function get_tag($tag)
     {
         return $this->ldelim . 'tag:' . $tag . $this->rdelim;
     }
@@ -117,7 +117,7 @@ class bTemplate
         Method: get_statement()
         Extracts a portion of a template.
     \*--------------------------------------------------------------*/
-    function get_statement($t, &$contents)
+    public function get_statement($t, &$contents)
     {
         // Locate the statement
         $tag_length = strlen($t['b']);
@@ -133,7 +133,7 @@ class bTemplate
         Method: parse()
         Parses all variables into the template.
     \*--------------------------------------------------------------*/
-    function parse($contents)
+    public function parse($contents)
     {
         // Process the ifs
         if (!empty($this->ifs)) {
@@ -172,7 +172,7 @@ class bTemplate
         the <else:tag> tag doesn't conform to convention, so some
         things have to be done manually.
     \*--------------------------------------------------------------*/
-    function parse_if($tag, $contents)
+    public function parse_if($tag, $contents)
     {
         // Get the tags
         $t = $this->get_tags($tag, 'if:');
@@ -207,7 +207,7 @@ class bTemplate
         Method: parse_loop()
         Parses a loop (recursive function).
     \*--------------------------------------------------------------*/
-    function parse_loop($tag, $array, $contents)
+    public function parse_loop($tag, $array, $contents)
     {
         // Get the tags & loop
         $t = $this->get_tags($tag, 'loop:');
@@ -247,7 +247,7 @@ class bTemplate
         Method: parse_cloop()
         Parses a cloop (case loop) (recursive function).
     \*--------------------------------------------------------------*/
-    function parse_cloop($tag, $array, $contents)
+    public function parse_cloop($tag, $array, $contents)
     {
         // Get the tags & loop
         $t = $this->get_tags($tag, 'cloop:');
@@ -294,7 +294,7 @@ class bTemplate
         Method: fetch()
         Returns the parsed contents of the specified template.
     \*--------------------------------------------------------------*/
-    function fetch($file_name)
+    public function fetch($file_name)
     {
         // Prepare the path
         $file = $this->base_path . $file_name;

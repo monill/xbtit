@@ -31,65 +31,64 @@
 ////////////////////////////////////////////////////////////////////////////////////
 
 global $CURUSER, $XBTT_USE,$TABLE_PREFIX,$btit_settings;
-if (!$CURUSER || $CURUSER["view_torrents"]=="no") {
+if (!$CURUSER || $CURUSER['view_torrents'] == 'no') {
     // do nothing
 } else {
     if ($XBTT_USE) {
-        $res=get_result("select count(*) as tot, sum(f.seeds)+sum(ifnull(x.seeders,0)) as seeds, sum(f.leechers)+sum(ifnull(x.leechers,0)) as leechs  FROM {$TABLE_PREFIX}files f LEFT JOIN xbt_files x ON f.bin_hash=x.info_hash", true, $btit_settings['cache_duration']);
+        $res = get_result("select count(*) as tot, sum(f.seeds)+sum(ifnull(x.seeders,0)) as seeds, sum(f.leechers)+sum(ifnull(x.leechers,0)) as leechs  FROM {$TABLE_PREFIX}files f LEFT JOIN xbt_files x ON f.bin_hash=x.info_hash", true, $btit_settings['cache_duration']);
     } else {
-        $res=get_result("select count(*) as tot, sum(seeds) as seeds, sum(leechers) as leechs  FROM {$TABLE_PREFIX}files", true, $btit_settings['cache_duration']);
+        $res = get_result("select count(*) as tot, sum(seeds) as seeds, sum(leechers) as leechs  FROM {$TABLE_PREFIX}files", true, $btit_settings['cache_duration']);
     }
     if ($res) {
-        $row=$res[0];
-        $torrents=$row["tot"];
-        $seeds=0+$row["seeds"];
-        $leechers=0+$row["leechs"];
+        $row = $res[0];
+        $torrents = $row['tot'];
+        $seeds = 0 + $row['seeds'];
+        $leechers = 0 + $row['leechs'];
     } else {
-        $seeds=0;
-        $leechers=0;
-        $torrents=0;
+        $seeds = 0;
+        $leechers = 0;
+        $torrents = 0;
     }
 
-    $res=get_result("select count(*) as tot FROM {$TABLE_PREFIX}users where id>1", true, $btit_settings['cache_duration']);
+    $res = get_result("select count(*) as tot FROM {$TABLE_PREFIX}users where id>1", true, $btit_settings['cache_duration']);
     if ($res) {
-        $row=$res[0];
-        $users=$row["tot"];
+        $row = $res[0];
+        $users = $row['tot'];
     } else {
-        $users=0;
+        $users = 0;
     }
 
-    if ($leechers>0) {
-        $percent=number_format(($seeds/$leechers)*100, 0);
+    if ($leechers > 0) {
+        $percent = number_format(($seeds / $leechers) * 100, 0);
     } else {
-        $percent=number_format($seeds*100, 0);
+        $percent = number_format($seeds * 100, 0);
     }
 
-    $peers=$seeds+$leechers;
+    $peers = $seeds + $leechers;
 
     if ($XBTT_USE) {
-        $res=get_result("select sum(u.downloaded+x.downloaded) as dled, sum(u.uploaded+x.uploaded) as upld FROM {$TABLE_PREFIX}users u LEFT JOIN xbt_users x ON x.uid=u.id", true, $btit_settings['cache_duration']);
+        $res = get_result("select sum(u.downloaded+x.downloaded) as dled, sum(u.uploaded+x.uploaded) as upld FROM {$TABLE_PREFIX}users u LEFT JOIN xbt_users x ON x.uid=u.id", true, $btit_settings['cache_duration']);
     } else {
-        $res=get_result("select sum(downloaded) as dled, sum(uploaded) as upld FROM {$TABLE_PREFIX}users", true, $btit_settings['cache_duration']);
+        $res = get_result("select sum(downloaded) as dled, sum(uploaded) as upld FROM {$TABLE_PREFIX}users", true, $btit_settings['cache_duration']);
     }
-    $row=$res[0];
-    $dled=0+$row["dled"];
-    $upld=0+$row["upld"];
-    $traffic=makesize($dled+$upld);
-?>
+    $row = $res[0];
+    $dled = 0 + $row['dled'];
+    $upld = 0 + $row['upld'];
+    $traffic = makesize($dled + $upld); ?>
        <div class="row">
        <div class="col-md-6">
        <div class="panel panel-default">
        <div class="panel-heading">
-          <h4><i class="fa fa-fw fa-files-o"></i><?php echo $language["BLOCK_INFO"]; ?> </h4>
+          <h4><i class="fa fa-fw fa-files-o"></i><?php echo $language['BLOCK_INFO']; ?> </h4>
        </div>
        <div class="panel-body" align="center">
-<b><?php echo $language["MEMBERS"]; ?>:</b>&nbsp;&nbsp;<?php echo $users; ?>&nbsp;||&nbsp;
-<b><?php echo $language["TORRENTS"]; ?>:</b>&nbsp;&nbsp;<?php echo $torrents; ?>&nbsp;||&nbsp;
-<b><?php echo $language["SEEDERS"]; ?>:</b>&nbsp;&nbsp;<?php echo $seeds; ?>&nbsp;||&nbsp;
-<b><?php echo $language["LEECHERS"]; ?>:</b>&nbsp;&nbsp;<?php echo $leechers; ?>&nbsp;||&nbsp;
-<b><?php echo $language["PEERS"]; ?>:</b>&nbsp;&nbsp;<?php echo $peers; ?><br />
-<b><?php echo $language["SEEDERS"]."/".$language["LEECHERS"]; ?>:&nbsp;&nbsp;</b><?php echo $percent."%"; ?>&nbsp;||&nbsp;
-<b><?php echo $language["TRAFFIC"]; ?>:</b>&nbsp;&nbsp;<?php echo $traffic; ?>
+<b><?php echo $language['MEMBERS']; ?>:</b>&nbsp;&nbsp;<?php echo $users; ?>&nbsp;||&nbsp;
+<b><?php echo $language['TORRENTS']; ?>:</b>&nbsp;&nbsp;<?php echo $torrents; ?>&nbsp;||&nbsp;
+<b><?php echo $language['SEEDERS']; ?>:</b>&nbsp;&nbsp;<?php echo $seeds; ?>&nbsp;||&nbsp;
+<b><?php echo $language['LEECHERS']; ?>:</b>&nbsp;&nbsp;<?php echo $leechers; ?>&nbsp;||&nbsp;
+<b><?php echo $language['PEERS']; ?>:</b>&nbsp;&nbsp;<?php echo $peers; ?><br />
+<b><?php echo $language['SEEDERS'].'/'.$language['LEECHERS']; ?>:&nbsp;&nbsp;</b><?php echo $percent.'%'; ?>&nbsp;||&nbsp;
+<b><?php echo $language['TRAFFIC']; ?>:</b>&nbsp;&nbsp;<?php echo $traffic; ?>
         </div>
     </div>
 </div>
