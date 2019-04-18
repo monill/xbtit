@@ -13,7 +13,3 @@ $language['MUST_ENTER_PASSWORD']='<br /><font color="#FF0000"><strong>你必须�
 $language['ERR_PASS_WRONG']='密码为空或密码错误, 无法更新用户资料.';
 $language['MSG_DEL_ALL_PM']='你选择了未读站内信, 他们将会在你读之前被删除';
 $language['ERR_PM_GUEST']='对不起你不能给访客或你自己发站内信!';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

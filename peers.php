@@ -3,11 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-<<<<<<< HEAD
 // Copyright (C) 2004 - 2016  Btiteam
-=======
-// Copyright (C) 2004 - 2019  Btiteam
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -160,7 +156,3 @@ $peerstpl->set('XBTT2', $XBTT_USE, true);
 $peerstpl->set('XBTT3', $XBTT_USE, true);
 $peerstpl->set('XBTT4', $XBTT_USE, true);
 $peerstpl->set('peers', $peers);
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

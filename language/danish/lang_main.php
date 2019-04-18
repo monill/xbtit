@@ -544,7 +544,3 @@ $language["IMDB_DETAILS"] = "Details";
 $language["IMDB_PERF_SEARCH"] = "Performing IMDB search for";
 $language["IMDB_NAME"] = "Name";
 $language["VISITS"]="Visitors";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

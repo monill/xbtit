@@ -8,7 +8,3 @@ $language["PEER_PORT"]="c&#7893;ng, c&#7917;a";
 $language["PEER_STATUS"]=" t&#236;nh tr&#7841;ng";
 $language["PEER_CLIENT"]=" ng&#432;&#7901;i tham d&#7921; ";
 $language["NO_PEERS"]=" kh&#244;ng c&#243; ng&#432;&#7901;i tham d&#7921; ";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

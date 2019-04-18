@@ -11,7 +11,3 @@ $language["MUST_ENTER_PASSWORD"]="<br /><font color='#FF0000'><strong>Vous devez
 $language["ERR_PASS_WRONG"]="Mot de passe vide ou incorrect, impossible de mettre à jour le profil.";
 $language["MSG_DEL_ALL_PM"]="Si vous sélectionnez des MP qui ne sont pas lus, ils ne seront pas supprimés";
 $language["ERR_PM_GUEST"]="Désolé, vous ne pouvez pas envoyer de MP à un invité ou à vous-même !";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

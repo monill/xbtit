@@ -15,7 +15,3 @@ $language['EDIT']='Editează';
 $language['DELETE']='Şterge';
 $language['NO_USERS_FOUND']='Nici un utilizatoe găsit!';
 $language['UNKNOWN']='Necunoscută';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

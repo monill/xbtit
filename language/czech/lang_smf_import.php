@@ -45,7 +45,3 @@ $lang[35]='</body>'."\n".'</html>'."\n";
 $lang[36]='<center>Nemůžu zapisovat do:<br /><br /><b>';
 $lang[37]='</b><br /><br />Prosím ujistěte se, že tento soubor je zapisovatelný a a spusťte skript znovu.</center>';
 $lang[38]='<center><br /><font color="red" size="4"><b>Přístup odepřen</b></font></center>';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

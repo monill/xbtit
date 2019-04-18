@@ -378,7 +378,3 @@ $language["IPB_AUTO_ID"] = "IPB ID за автоматични постове";
 $language["IPB_MIRROR"] = "IPB съответствие";
 $language["GROUP_IPB_MIRROR"] = "Съответстващо ниво от IPB форума";
 $language["IPB_LIST"] = "<b><u>Текущ списък с Групи от базата данни</u></b><br />";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

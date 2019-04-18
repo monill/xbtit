@@ -24,7 +24,3 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP iïnkao l, fkdyl.';
 $PHPMAILER_LANG['smtp_error']           = 'SMTP fodihls:: ';
 $PHPMAILER_LANG['variable_set']         = 'úp,h ilia lr fkdu;: ';
 $PHPMAILER_LANG['extension_missing']    = 'l%shd lrúh fkdyl: ';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

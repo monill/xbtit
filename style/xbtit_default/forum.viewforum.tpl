@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-users"></i><tag:forum_name /></h4>
   </div>
   <div class="panel-body">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <if:HAS_SUBFORUMS>
 <br />
 <table class="lista" border="0" width="100%" cellspacing="1" cellpadding="4">
@@ -38,23 +35,13 @@
     </td>
     <if:can_create>
     <td align="right" valign="middle">
-<<<<<<< HEAD
       <span class="btn btn-default"><a href="<tag:forum_action />"><tag:language.NEW_TOPIC /></a></span>
-=======
-      <span class="pager"><a href="<tag:forum_action />"><tag:language.NEW_TOPIC /></a></span>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
     </td>
     </if:can_create>
   </tr>
 </table>
 <table class="lista" border="0" width="100%" cellspacing="1" cellpadding="4">
-<<<<<<< HEAD
 
-=======
-  <tr>
-    <td class="header" align="center" colspan="7"><tag:forum_name /></td>
-  </tr>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
   <tr>
     <td class="header" align="center" width="2%">&nbsp;</td>
     <td class="header" align="center"><tag:language.TOPIC /></td>
@@ -101,10 +88,7 @@
     </tr>
   </table>
 </div>
-<<<<<<< HEAD
     </div>
   </div>
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <br />
 

@@ -2,11 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-<<<<<<< HEAD
 // Copyright (C) 2004 - 2016  Btiteam
-=======
-// Copyright (C) 2004 - 2019  Btiteam
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -235,11 +231,7 @@ function print_version()
 {
     global $tracker_version;
 
-<<<<<<< HEAD
     return '[&nbsp;&nbsp;<u>xbtit '.$tracker_version.' By</u>: <a href="http://www.btiteam.org/" target="_blank">Btiteam</a>&nbsp;]';
-=======
-    return '[&nbsp;&nbsp;<u>xbtit '.$tracker_version.' By</u>: <a href="http://www.btiteam.eu/" target="_blank">Btiteam</a>&nbsp;Copyright &copy; 2004 - 2019 &nbsp;]';
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 }
 
 function print_designer()
@@ -1972,8 +1964,4 @@ function ipb_make_post($forum_id, $forum_subj, $forum_post, $poster_id = 0, $upd
 }
 
 // EOF
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

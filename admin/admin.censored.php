@@ -3,11 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-<<<<<<< HEAD
 // Copyright (C) 2004 - 2016  Btiteam
-=======
-// Copyright (C) 2004 - 2019  Btiteam
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -64,7 +60,3 @@ switch ($action) {
         $admintpl->set('censored_text', $badwords);
         $admintpl->set('frm_action', 'index.php?page=admin&amp;user='.$CURUSER['uid'].'&amp;code='.$CURUSER['random'].'&amp;do=badwords&amp;action=write');
 }
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

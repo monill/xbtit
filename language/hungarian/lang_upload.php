@@ -25,7 +25,3 @@ $language["ERR_MOVING_TORR"]="Hiba a torrent mozgatásakor...";
 $language["ERR_ALREADY_EXIST"]="Már van ilyen torrent!";
 $language["MSG_DOWNLOAD_PID"]="Azonosítókulcs aktív a torrent elérése a azonosítókulccsal";
 $language["MSG_UP_SUCCESS"]="Feltöltés kész! A torrent hozzáadva.";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

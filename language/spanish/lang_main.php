@@ -429,7 +429,3 @@ $language['FIRST_UNREAD']='Ir al primer post sin leer';
 $language['MODULE_UNACTIVE']='El módulo requerido no esta activo!';
 $language['MODULE_NOT_PRESENT']='El módulo requerido no existe!';
 $language['MODULE_LOAD_ERROR']='El módulo requerido parece estar corrupto!';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

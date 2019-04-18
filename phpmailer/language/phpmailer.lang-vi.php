@@ -24,7 +24,3 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'Lỗi kết nối với SMTP';
 $PHPMAILER_LANG['smtp_error']           = 'Lỗi máy chủ smtp ';
 $PHPMAILER_LANG['variable_set']         = 'Không thể thiết lập hoặc thiết lập lại biến: ';
 //$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

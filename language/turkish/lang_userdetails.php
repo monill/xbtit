@@ -34,7 +34,3 @@ $language['PM']                 = 'ÖM';
 $language['BACK']               = 'Geri';
 $language['NO_HISTORY']         = 'Görüntülenecek geçmiş yok...';
 $language['GUEST_DETAILS']      = 'Ziyaretçi hesabının detaylarını görüntüleyemezsiniz!';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

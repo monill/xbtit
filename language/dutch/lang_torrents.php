@@ -33,7 +33,3 @@ $language["RATING"]="Kwaliteit";
 $language["ERR_NO_VOTE"]="U moet een waarde kiezen om te stemmen.";
 $language["VOTES"]="Stemmen";
 $language["SHOW_HIDE"]="Bestanden Laten Zien/Verbergen";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

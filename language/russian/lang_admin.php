@@ -267,7 +267,3 @@ $language["HACK_UNINSTALLED_OK"]="Хак был удачно удален!<br />
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="Вы не можете удалить гостя или себя самого!";
 $language["USER_NOT_EDIT"]="Вы не можете редактировать гостя или себя самого!";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

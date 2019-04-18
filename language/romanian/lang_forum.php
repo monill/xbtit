@@ -33,7 +33,3 @@ $language['POST']='Mesaj';
 $language['SEARCH_AGAIN']='Caută din nou';
 $language['SEARCH_HELP']='Introdu unul sau mai multe cuvinte pentru căutare.<br />Cuvintele foarte comune şi cele care au sub 3 caractere vor fi ignorate.';
 $language['SEARCHED_FOR']='Căutare după';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -25,7 +25,3 @@ $language['ERR_MOVING_TORR']='Torrent taşıma hatası...';
 $language['ERR_ALREADY_EXIST']='Bu torrent zaten veritabanımızda mevcut olabilir..';
 $language['MSG_DOWNLOAD_PID']='PID sistemi aktif olduğundan PID&#39;inizi içeren torrentini indiriniz.';
 $language['MSG_UP_SUCCESS']='Yükleme başarılı! Torrent veritabanına eklendi.';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

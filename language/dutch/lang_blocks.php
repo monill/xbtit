@@ -20,7 +20,3 @@ $language["BLOCK_MAINTRACKERTOOLBAR"]="Main Tracker Toolbar";
 $language["BLOCK_MAINUSERTOOLBAR"]="Main User Toolbar";
 $language["BLOCK_MINCLASSVIEW"]="Minimum level dat het blok kan zien";
 $language["BLOCK_MAXCLASSVIEW"]="Maximum level dat het blok kan zien";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

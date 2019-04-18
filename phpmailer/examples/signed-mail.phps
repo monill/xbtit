@@ -86,8 +86,4 @@ if (!$mail->send()) {
  * If your email client does not support S/MIME it will most likely just show an attachment smime.p7s which is the signature contained in the email.
  * Other clients, such as Thunderbird support S/MIME natively and will validate the signature automatically and report the result in some way.
  */
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

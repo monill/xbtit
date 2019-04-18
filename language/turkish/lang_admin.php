@@ -398,7 +398,3 @@ $language["PET_STYLE"]="Petr1fied'ın tema sistemi";
 
 $language["SECURITY_SUITE"]="Güvenlik Katmanı";
 $language["IF_CHECKED"]="Seçilileri";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

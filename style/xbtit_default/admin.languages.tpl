@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Language Settings</h4>
   </div>
   <div class="panel-body" align="center">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <if:language_add>
   <form name="language_add_new" action="<tag:frm_action />" method="post">
     <table class="lista">
@@ -51,10 +48,6 @@
     <td class="header" align="center" colspan="3"><tag:lang_add_new /></td>
   </tr>
   </table>
-<<<<<<< HEAD
 </if:language_add>
     </div>
   </div>
-=======
-</if:language_add>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

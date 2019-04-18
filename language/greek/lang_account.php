@@ -19,7 +19,3 @@ $language["WEEK"]="Αδύναμος";
 $language["MEDIUM"]="Μεσαίος";
 $language["SAFE"]="Ασφαλής";
 $language["STRONG"]="Ισχυρός";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

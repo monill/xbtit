@@ -9,15 +9,11 @@ function update_cat(newimage,blank)
 }
 //-->
 </script>
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Manage Categories</h4>
   </div>
   <div class="panel-body">
-=======
-
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <if:category_add>
   <form name="category_add_new" action="<tag:frm_action />" method="post">
     <table class="lista">
@@ -66,10 +62,6 @@ function update_cat(newimage,blank)
     <td class="header" align="center" colspan="5"><tag:category_add_new /></td>
   </tr>
   </table>
-<<<<<<< HEAD
 </if:category_add>
     </div>
   </div>
-=======
-</if:category_add>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

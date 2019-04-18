@@ -24,7 +24,3 @@ $PHPMAILER_LANG['recipients_failed']    = 'SMTP fel: Följande mottagare är fel
 //$PHPMAILER_LANG['smtp_error']           = 'SMTP server error: ';
 //$PHPMAILER_LANG['variable_set']         = 'Cannot set or reset variable: ';
 //$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

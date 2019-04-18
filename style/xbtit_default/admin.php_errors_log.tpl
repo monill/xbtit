@@ -3,11 +3,7 @@ textarea#glow{
 color:#666;
 font-size:14px;
 -moz-border-radius: 8px; -webkit-border-radius: 8px;
-<<<<<<< HEAD
 margin:5px 0 10px 0;
-=======
-margin:5px 0px 10px 0px;
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 padding:10px;
 height:300px;
 width:95%;
@@ -43,11 +39,7 @@ input#glow{
 color:#666;
 font-size:14px;
 -moz-border-radius: 8px; -webkit-border-radius: 8px;
-<<<<<<< HEAD
 margin:5px 0 10px 0;
-=======
-margin:5px 0px 10px 0px;
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 padding:10px;
 height:16px;
 width:92%;
@@ -75,14 +67,11 @@ table#inputs
 table-layout:fixed;
 }
 </style>
-<<<<<<< HEAD
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h4><i class="fa fa-fw fa-cogs"></i>Site Error Logs</h4>
 	</div>
 	<div class="panel-body" align="center">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <table width="100%" valign="top">
 <tr>
 <td align="center" class="lista">
@@ -134,10 +123,6 @@ table-layout:fixed;
 	  </table>
 </td>
 </tr>
-<<<<<<< HEAD
 </table>
 		</div>
 	</div>
-=======
-</table>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

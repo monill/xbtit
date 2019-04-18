@@ -1,13 +1,10 @@
 <!-- VIEWNEWS.PHP Template - Just plain HTML and CSS + Template TAGS-->
 
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-newspaper-o"></i><tag:language.MNU_NEWS /></h4>
   </div>
   <div class="panel-body">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <table cellpadding="4" cellspacing="1" border="0" width="100%" style="font-family:Verdana;font-size:10px">
   <if:news_exists>
   <loop:viewnews>
@@ -44,10 +41,6 @@
       </td>
     </tr>
   </if:news_exists>
-<<<<<<< HEAD
 </table>
   </div>
 </div>
-=======
-</table>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

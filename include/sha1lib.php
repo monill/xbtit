@@ -266,7 +266,3 @@ if (!function_exists('sha1')) {
         return $raw_output ? $library->str_sha1($string) : $library->hex_sha1($string);
     }
 }
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

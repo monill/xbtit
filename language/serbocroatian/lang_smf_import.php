@@ -38,7 +38,3 @@ $lang[32]="<center><u><strong><font size='4' face='Arial'>Kopiranje kompletno</f
 $lang[33]="<center><font face=\"Arial\" size=\"2\">Molimo <a target='_new' href='smf/index.php?action=login'>prijavite se na vas novi SMF forum</a> koristeci vase Tracker detalje i posjetite<br />the <strong>Forum Administraciju</strong> zatim odaberite <strong>Odrzavanje Foruma</strong> i pokrenite<br /><strong>Pronadjite i popravite greske za Bazu Podataka.</strong> propraceno sa <strong>prebrojte forum statistike<br />i postove</strong> da malo optimiziramo Bazu Podataka i popravime greske ukoliko ih ima itd.<br /><br /><strong><font color='#0000FF'>Vas integrisani SMF Forum ce tada biti u potpunosti spreman za upotrebu!</font></strong></font></center>";
 $lang[34]="<center><u><strong><font size=\"4\" face=\"Arial\" color=\"#FF0000\">ERROR!</font></strong></u></center><br />\n<br />\n<center><font face=\"Arial\" size=\"3\">Ukucali ste netacnu lozinku ili niste Tracker vlasnik!<br />\nVasa IP adresa je zabiljezena za analizu.</font></center>";
 $lang[35]="</body>\n</html>\n";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

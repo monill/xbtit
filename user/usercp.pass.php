@@ -3,11 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-<<<<<<< HEAD
 // Copyright (C) 2004 - 2016  Btiteam
-=======
-// Copyright (C) 2004 - 2019  Btiteam
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -136,7 +132,3 @@ switch ($action) {
         $usercptpl->set('pass_sym_set', (($pass_min_req[4] > 0) ? true : false), true);
         break;
 }
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

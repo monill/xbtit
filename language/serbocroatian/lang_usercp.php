@@ -11,7 +11,3 @@ $language["MUST_ENTER_PASSWORD"]="<br /><font color='#FF0000'><strong>Morate unj
 $language["ERR_PASS_WRONG"]="Lozinka je prazna ili netacna, ne mozemo izmijeniti profil.";
 $language["MSG_DEL_ALL_PM"]="Ukoliko odaberete Privatne Poruke koje nisu procitane, one ce takodje biti obrisane";
 $language["ERR_PM_GUEST"]="Oprostite, ne mozete poslati poruku Gostu ili sami sebi!";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

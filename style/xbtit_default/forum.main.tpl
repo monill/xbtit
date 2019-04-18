@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-users"></i>Forums</h4>
@@ -6,9 +5,6 @@
   <div class="panel-body">
 
   <table class="lista" border="0" width="100%" cellspacing="1" cellpadding="4">
-=======
-<table class="lista" border="0" width="100%" cellspacing="1" cellpadding="4">
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
   <tr>
     <td class="header" align="center" width="2%">&nbsp;</td>
     <td class="header" align="center"><tag:language.FORUM /></td>
@@ -37,9 +33,6 @@
 <a href="index.php?page=forum&amp;action=search"><b><tag:language.SEARCH /></b></a> | <a href="index.php?page=forum&amp;action=viewunread"><b><tag:language.VIEW_UNREAD /></b></a> | <a href="index.php?page=forum&amp;action=catchup"><b><tag:language.CATCHUP /></b></a>
 </div>
 <br />
-<<<<<<< HEAD
 </div>
   </div>
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 

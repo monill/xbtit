@@ -36,7 +36,3 @@ $language["POST"]="th&#432;, b&#224;i g&#7903;i";
 $language["SEARCH_AGAIN"]="T&#236;m ki&#7871;m l&#7841;i";
 $language["SEARCH_HELP"]="&#273;i&#7873;n v&#224;o m&#7897;t hay nhi&#7873;u ch&#7917; &#273;&#7875; ki&#7871;m cho.<br />nh&#7919;ng ch&#7917; th&#244;ng d&#7909;ng v&#224; nh&#7919;ng ch&#7917; &#237;t h&#417;n 3 t&#7915; se b&#7883; kh&#244;ng ki&#7871;m &#273;&#432;&#7907;c.";
 $language["SEARCHED_FOR"]="T&#236;m ki&#7871;m cho";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -3,11 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-<<<<<<< HEAD
 // Copyright (C) 2004 - 2016  Btiteam
-=======
-// Copyright (C) 2004 - 2019  Btiteam
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -221,7 +217,3 @@ else
 //$admintpl->set("btit_news",set_block("BtiTacker Lastest News","left",$btit_news));
 $admintpl->set('language', $language);
 $admintpl->set('admin', $admin);
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

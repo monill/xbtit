@@ -33,7 +33,3 @@ $language['RATING']='Hodnocení';
 $language['ERR_NO_VOTE']='K hlasování vyberte hodnotu.';
 $language['VOTES']='Hlasy';
 $language['SHOW_HIDE']='Zobrazit/skrýt soubory';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

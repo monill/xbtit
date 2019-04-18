@@ -6,7 +6,3 @@ $language["IMAGE_CODE"]="código da Imagem";
 $language["SECURITY_CODE"]="Responda a pergunta";
 $language["RECOVER_EMAIL_1"]="\nAlguém, esperamos que você, solicitou que a senha para a conta associada a este endereço de e-mail (%s) Ser redefinidos.\n\nO pedido originalmente de %s.\n\nSe você não fez ignore este e-mail. Não responda..\n\nSSe você quiser confirmar este pedido, siga este link:\n\n%s\n\n	Depois que você fizer isso, sua senha será reinicializada e enviada de volta para você.\n--\n%s";
 $language["RECOVER_EMAIL_2"]="\nConforme seu pedido, foi gerado uma nova senha para a sua conta.\n\nVeja aqui as informações que temos agora em arquivo para esta conta:\n\n    Nome de Usuário: %s\n    Senha: %s\n\nVocê pode entrar em %s\n\n--\n%s";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

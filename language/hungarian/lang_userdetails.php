@@ -33,7 +33,3 @@ $language["DELETE"]             = "Töröl";
 $language["PM"]                 = "PM";
 $language["BACK"]               = "Vissza";
 $language["NO_HISTORY"]         = "Nincs történet...";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

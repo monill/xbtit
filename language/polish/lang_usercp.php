@@ -11,7 +11,3 @@ $language["MUST_ENTER_PASSWORD"]="<br /><font color=\"#FF0000\"><strong>Musisz w
 $language["ERR_PASS_WRONG"]="Hasło puste lub nieprawidłowe, nie można uaktualnić profilu.";
 $language["MSG_DEL_ALL_PM"]="Jeżeli wybierzesz PM-y, które nie zostały przeczytane, nie zostaną one usunięte.";
 $language["ERR_PM_GUEST"]="Przepraszamy, nie można wysyłać PM do konta gościa lub samego siebie!";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

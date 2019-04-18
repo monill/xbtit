@@ -17,7 +17,3 @@ $language["ERR_HASH"]="Greska u info hashu torrenta, napravite novi";
 $language["ERR_EXTERNAL_NOT_ALLOWED"]="Samo privatni announce je dozvoljen, spoljasnji su zabranjeni";
 $language["ERR_MOVING_TORR"]="Greska zapisa torrenta u torrent direktorijum...";
 $language["ERR_ALREADY_EXIST"]="Cini se da ovaj torrent vec postoji u nasoj arhivi.";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -2,11 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-<<<<<<< HEAD
 // Copyright (C) 2004 - 2015  DPWS Media LTD
-=======
-// Copyright (C) 2004 - 2019  btiteam
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -136,7 +132,3 @@ $install_lang["succes_upgrade3"]        = "<p>L'&eacute;quipe BTIT vous souhaite
 $install_lang['error_mysql_database']   = "L'installation n'est pas en mesure d'acc&eacute;der &agrave; la base de donn&eacute;es &quot;<i>%s</i>&quot;. Chez certains h&eacute;bergeurs, vous devez cr&eacute;er la base de donn&eacute;es via le panneau d'administration avant que xBtit puisse l'utiliser. Certains ajoutent aussi des pr&eacute;fixes - comme votre pseudo - dans le nom des bases de donn&eacute;es.";
 $install_lang['error_message_click']    = "Cliquez icie";
 $install_lang['error_message_try_again']= "pour r&eacute;essayez";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

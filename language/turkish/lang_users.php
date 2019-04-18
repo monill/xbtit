@@ -17,7 +17,3 @@ $language['EDIT']            = 'Düzenle';
 $language['DELETE']          = 'Sil';
 $language['NO_USERS_FOUND']  = 'Kullanıcı bulunamadı!';
 $language['UNKNOWN']         = 'Bilinmeyen';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

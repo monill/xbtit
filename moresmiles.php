@@ -3,11 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-<<<<<<< HEAD
 // Copyright (C) 2004 - 2016  Btiteam
-=======
-// Copyright (C) 2004 - 2019  Btiteam
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -92,7 +88,3 @@ foreach ($privatesmilies as $code => $url) {
 $moresmiles_tpl = new bTemplate();
 $moresmiles_tpl->set('language', $language);
 $moresmiles_tpl->set('smiles', $all_smiles);
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

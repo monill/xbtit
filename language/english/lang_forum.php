@@ -33,7 +33,3 @@ $language['POST']='Post';
 $language['SEARCH_AGAIN']='Search Again';
 $language['SEARCH_HELP']='Enter one or more words to search for.<br />Very common words and words with less than 3 characters are ignored.';
 $language['SEARCHED_FOR']='Searched for';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

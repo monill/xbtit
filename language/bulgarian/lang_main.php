@@ -469,7 +469,3 @@ $language["SECSUI_ACC_PWD_7"]="цифра";
 $language["SECSUI_ACC_PWD_7A"]="цифри";
 $language["SECSUI_ACC_PWD_8"]="символ";
 $language["SECSUI_ACC_PWD_8A"]="символа";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

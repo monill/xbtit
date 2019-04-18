@@ -11,20 +11,12 @@
         <if:newtopic_1>
         <tr>
           <td class="header"><tag:language.SUBJECT /></td>
-<<<<<<< HEAD
           <td align="left" style="padding: 0" class="header"><input type="text" size="60" maxlength="40" name="subject" value="<tag:post_subject />" /></td>
-=======
-          <td align="left" style="padding: 0px" class="header"><input type="text" size="60" maxlength="40" name="subject" value="<tag:post_subject />" /></td>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
         </tr>
         </if:newtopic_1>
         <tr>
           <td class="lista"><tag:language.BODY /></td>
-<<<<<<< HEAD
           <td align="left" style="padding: 0" class="lista"><tag:post_bbcode /></td>
-=======
-          <td align="left" style="padding: 0px" class="lista"><tag:post_bbcode /></td>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
         </tr>
         <tr>
           <td colspan="2" align="center" class="header">

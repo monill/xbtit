@@ -33,7 +33,3 @@ $language["POST"]="Verstuur";
 $language["SEARCH_AGAIN"]="Zoek Opnieuw";
 $language["SEARCH_HELP"]="Vul &eacute;&eacute;n of meer woorden in om naar te zoeken.<br />Vaak voorkomende woorden en woorden met minder dan 3 karakters worden genegeerd.";
 $language["SEARCHED_FOR"]="Gezocht naar";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

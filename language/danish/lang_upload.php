@@ -35,7 +35,3 @@ $language["CHECK_FOLDERS_PERM"]="Check venligst bibliotekets tilladelser og prø
 $language["ILEGAL_UPLOAD"]="Ilegal upload!! Dette er ikke et billede<br>Prøv venligst igen";
 $language["IMAGE"]="Billede";
 $language["SCREEN"]="Screenshots";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

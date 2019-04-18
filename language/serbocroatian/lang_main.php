@@ -425,7 +425,3 @@ $language["FIRST_UNREAD"]="Idi na prvi ne procitan post";
 $language["MODULE_UNACTIVE"]="Potreban modul nije aktivan!";
 $language["MODULE_NOT_PRESENT"]="Potreban modul ne postoji!";
 $language["MODULE_LOAD_ERROR"]="Potreban modul se cini da ima gresku!";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

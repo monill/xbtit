@@ -24,7 +24,3 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'Памылка сувязі з SMTP-�
 $PHPMAILER_LANG['smtp_error']           = 'Памылка SMTP: ';
 $PHPMAILER_LANG['variable_set']         = 'Нельга ўстанавіць або перамяніць значэнне пераменнай: ';
 //$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

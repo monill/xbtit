@@ -18,7 +18,3 @@ $language["EDIT"]            = "Bearbeiten";
 $language["DELETE"]          = "Löschen";
 $language["NO_USERS_FOUND"]  = "Keine Benutzer gefunden!";
 $language["UNKNOWN"]         = "Unbekannt";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

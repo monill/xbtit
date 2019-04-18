@@ -53,7 +53,3 @@ $lang[46]="nepropojené účty trackeru a";
 $lang[47]="ovojené účty fóra.</span></b><br /><br />Měl byste se pokusit je opravit ručně porovnáním detailů účtu v phpMyAdmin.<br />Použijte následující příkazy query:<br /><br />Tracker:<br /><textarea rows='1' cols='80'>SELECT * FROM `{$TABLE_PREFIX}users` WHERE `ipb_fid`=0 AND `id`>1 ORDER BY `id` ASC;</textarea><br /><br />Forum:<br /><textarea rows='1' cols='80'>SELECT * FROM `{$ipb_prefix}members` WHERE `member_group_id`=0 ORDER BY `id_member` ASC;</textarea><br /><br />Jakmile naleznete shodu, měl byste updatovat \"ipb_fid\" pole na trackerovém účtě<br />s hodnotou od \"id_member\" pole s příslušným záznamem fóra.<br /><br />Poté updatujte \"member_group_id\" pole v záznamu fóra s hodnotu z \"id_level\" pole ze záznamu trackeru.<br /><br />Je doporučeno smazat všechny zbývající osvojené IPB účty následujícím příkazem query:<br /><textarea rows='1' cols='80'>DELETE FROM `{$ipb_prefix}members` WHERE `member_group_id`=0;</textarea><br /><br /></center>";
 $lang[48]="<center>Importování a propojení úspěšně dokončeno";
 $lang[49]="<center><b><span style=\"color:#0000FF;\">Vaše integrované IPB Fórum je nyní připraveno k použití!</span></b></center>";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

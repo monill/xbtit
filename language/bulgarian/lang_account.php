@@ -20,7 +20,3 @@ $language["MEDIUM"]="Средна";
 $language["SAFE"]="Сигурна";
 $language["STRONG"]="Силна";
 $language["ERR_GENERIC"]="Нестандартна грешка: ".((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

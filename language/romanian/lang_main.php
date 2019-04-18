@@ -422,7 +422,3 @@ $language['WT']='WT';
 $language['X_TIMES']='time(s)';
 $language['YES']='Da';
 $language['LAST_IP']='Ultimul IP';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

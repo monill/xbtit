@@ -38,7 +38,3 @@ $lang[32]="<center><u><strong><font size='4' face='Arial'>Εισαγωγή ολ�
 $lang[33]="<center><font face=\"Arial\" size=\"2\">Παρακαλώ <a target='_new' href='smf/index.php?action=συνδεθείτε'>συνδεθείτε στο νέο σας SMF forum</a> χρησιμοποιήστε τις πληροφορίες του Tracker σας και πηγαίνετε στο <br />το <strong>Κέντρο Διαχείρησης</strong> μετά επιλέξτε <strong>Forum συντήρηση</strong> και τρέξτε<br /><strong>Βρέστε και επιδιορθώστε οπιαδήποτε λάθη.</strong> ακολουθούμενα απο  <strong>Ξαναμετρήστε όλα τα σύνολα του forum<br />και τα στατιστικά.</strong> για να συμμαζέψετε την εισαγωγή και να διωρθώσετε το μέτρημα του post κτλ.<br /><br /><strong><font color='#0000FF'>Το ενσωματωμένο σας SMF Forum θα πρέπει να είναι έτοιμο για να χρησιμοποιηθή!</font></strong></font></center>";
 $lang[34]="<center><u><strong><font size=\"4\" face=\"Arial\" color=\"#FF0000\">ERROR!</font></strong></u></center><br />\n<br />\n<center><font face=\"Arial\" size=\"3\">Πληκτρολογήσατε λάθος κωδικό ή δεν είστε ο κάτοχος αυτού του  tracker!<br />\nΠαρακαλώ σημειώστε οτι η IP συνδέθηκε.</font></center>";
 $lang[35]="</body>\n</html>\n";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -254,7 +254,3 @@ $language['HACK_UNINSTALL']='Dezinstalează';
 $language['HACK_INSTALLED_OK']='Instalarea Hack-ului s-a realizat cu succes!<br />'."\n".'Pentru a vedea lista completă cu Hack-uri instalate du-te la <a href="index.php?page=admin&amp;user='.$CURUSER['uid'].'&amp;code='.$CURUSER['random'].'&amp;do=hacks&amp;action=read">Panoul de Administrare (Hack-uri)</a>';
 $language['HACK_BAD_ID']='Eroare, nu s-a putut obţine nici o informaţie pe baza ID-ului.';
 $language['HACK_UNINSTALLED_OK']='Dezinstalarea Hack-ului s-a realizat cu succes!<br />'."\n".'Pentru a vedea lista completă cu Hack-uri instalate du-te la <a href="index.php?page=admin&amp;user='.$CURUSER['uid'].'&amp;code='.$CURUSER['random'].'&amp;do=hacks&amp;action=read">Panoul de Administrare (Hack-uri)</a>';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

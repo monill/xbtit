@@ -427,7 +427,3 @@ $language["FIRST_UNREAD"]="Πήγαινε στο πρώτο μη-αναγνωσ�
 $language["MODULE_UNACTIVE"]="Η μέθοδος που χρειάζεται δεν είναι ενεργή!";
 $language["MODULE_NOT_PRESENT"]="Η μέθοδος που χρειάζεται δεν υπάρχει!";
 $language["MODULE_LOAD_ERROR"]="Η μέθοδος που χρειάζεται φαίνεται να είναι λαθος!";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

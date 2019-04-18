@@ -18,7 +18,7 @@ To upgrade your modified Btit 1.4.x to xbtit it is necessary to upgrade your cur
 xbtit has two bittorrent tracker systems - a PHP tracker and xbtt. The PHP tracker is designed for platforms without access to the system root, or where your tracker is not expected to run with greater than 5-10,000 peers. A PHP tracker can generate a high volume of TCP traffic, potentially millions of hits per day on port 80, you have been cautioned. The second tracker system is xbtt by Olaf van der Spek. xbtt is an efficient C++ tracker capable of running millions of peers at very low overhead, you are recommended in all cases to use the xbtt system
 
 The opensource free support forum is
-BTITeam http://www.btiteam.eu
+BTITeam http://www.btiteam.org
 
 ## <a name="features"></a> 💎 Some Features
 
@@ -35,7 +35,7 @@ BTITeam http://www.btiteam.eu
 - XSS/SQL injection protection with log insertion (thank you cobracrk)
 - new AJAX polls system (thank you to Ripper)
 - new design (4 styles provided by TreepTopClimber)
-- RSS reader (only class, with example in admincp for btiteam.eu latest news)
+- RSS reader (only class, with example in admincp for btiteam.org latest news)
 - basic cache system
 - new language system (array is used instead of constant)
 - smf_import script to import standard internal forum and users to smf (thank you again to petr1fied)
@@ -44,8 +44,8 @@ BTITeam http://www.btiteam.eu
 ## <a name="requirements"></a> :white_check_mark: Requirements
 
 - Web server with Apache or Lighttp installed and running
-- PHP 5.5 or higher (If you use php 4, you'll have to rename the phpmailer's folder phpmailer->phpmailer5 and phpmailer4->phpmailer)
-- Mysql 5.6 or higher
+- PHP 5.4 or higher (If you use php 4, you'll have to rename the phpmailer's folder phpmailer->phpmailer5 and phpmailer4->phpmailer)
+- Mysql 5.6
 
 ## <a name="credits"></a> :muscle: Credits
 
@@ -72,11 +72,7 @@ Thanks to style maker:
 TreeTopClimber
 
 Founders: Lupin
-<<<<<<< HEAD
 Maintainers: Gh0st4unt3r, King Cobra
-=======
-Maintainers: King Cobra
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 
 Many thanks to all guys who participated for the testing and for addons/styles etc.
 

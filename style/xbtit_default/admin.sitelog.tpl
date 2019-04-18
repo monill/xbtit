@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Site Log</h4>
   </div>
   <div class="panel-body" align="center">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <table class="lista" width="100%" align="center">
   <tr>
     <td class="lista" colspan="3"><tag:pager_top /></td>
@@ -25,10 +22,6 @@
   <tr>
     <td class="lista" colspan="3"><tag:pager_bottom /></td>
   </tr>
-<<<<<<< HEAD
 </table>
     </div>
   </div>
-=======
-</table>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

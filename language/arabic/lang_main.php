@@ -412,7 +412,3 @@ $language['ADMIN_ACCESS']='دخول المشرف';
 $language['STAFF_ACCESS']='الادارة';
 $language['UPLOAD_LINK']='رفع التورينت';
 # End
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

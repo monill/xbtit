@@ -22,7 +22,3 @@ $language["BLOCK_MAINUSERTOOLBAR"]="Barra principale utenti";
 $language["WELCOME_LASTUSER"]=" Benvenuto nel Tracker ";
 $language["BLOCK_MINCLASSVIEW"]="Classe minima per vedere";
 $language["BLOCK_MAXCLASSVIEW"]="Classe massima per vedere";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -25,7 +25,3 @@ $language["ERR_MOVING_TORR"]="Ошибка перемещения торрент
 $language["ERR_ALREADY_EXIST"]="Похоже такой торрент уже есть в нашей БД.";
 $language["MSG_DOWNLOAD_PID"]="PID система активна, скачайте торрент с Вашим PID";
 $language["MSG_UP_SUCCESS"]="Загрузка прошла успешно! Торрент был добавлен.";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

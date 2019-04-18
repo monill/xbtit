@@ -25,7 +25,3 @@ $language["ERR_MOVING_TORR"]="Erro movendo torrent...";
 $language["ERR_ALREADY_EXIST"]="Este torrent pode já existir em nosso banco de dados.";
 $language["MSG_DOWNLOAD_PID"]="Sistema PID ativo obter seu torrent com seu PID";
 $language["MSG_UP_SUCCESS"]="Enviado com sucesso! O torrente foi adicionado.";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

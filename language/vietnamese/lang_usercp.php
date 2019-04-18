@@ -14,7 +14,3 @@ $language["MUST_ENTER_PASSWORD"]="<br /><font color='#FF0000'><strong>B&#7841;n 
 $language["ERR_PASS_WRONG"]="M&#7853;t m&#7843; tr&#7889;ng r&#7895;ng hay kh&#244;ng &#273;&#250;ng, kh&#244;ng th&#7875; c&#7853;p nh&#7853;t h&#243;a s&#417; l&#432;&#7907;c ti&#7875;u s&#7917;.";
 $language["MSG_DEL_ALL_PM"]="N&#7871;u b&#7841;n ch&#7885;n PMs nh&#7919;ng th&#432; ch&#432;a c&#243; &#273;&#7885;c, s&#7867; kh&#244;ng x&#243;a b&#7887; &#273;&#432;&#7907;c";
 $language["ERR_PM_GUEST"]="Xin l&#7893;i, b&#7841;n kh&#244;ng th&#7875; g&#7903;i PM cho kh&#225;ch hay cho ch&#237;nh b&#7841;n &#273;&#432;&#7907;c!";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

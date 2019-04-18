@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i><tag:language.MNU_UCP_INFO /></h4>
   </div>
   <div class="panel-body" align="center">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <form name="utente" method="post" action="<tag:profile.frm_action />">
   <table width="100%" border="0" class="lista">
     <tr>
@@ -76,10 +73,6 @@
       </td>
     </tr>
   </table>
-<<<<<<< HEAD
 </form>
     </div>
   </div>
-=======
-</form>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

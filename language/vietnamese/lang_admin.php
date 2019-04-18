@@ -270,7 +270,3 @@ $language["HACK_UNINSTALLED_OK"]="ch&#432;&#417;ng trình m&#7899;i vi&#7871;t &#
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="B&#7841;n không th&#7875; xóa b&#7887; cho chính b&#7841;n hay là tài li&#7879;u c&#7911;a Khách!";
 $language["USER_NOT_EDIT"]="B&#7841;n không th&#7875; thay &#273;&#7893;i cho chính b&#7841;n hay là tài li&#7879;u c&#7911;a Khách!";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

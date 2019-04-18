@@ -17,14 +17,11 @@ function windowunder(link)
   window.close();
 }
 </script>
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-files-o"></i>Torrents Details</h4>
   </div>
   <div class="panel-body">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
     <div align="center">
       <table width="100%" class="lista" border="0" cellspacing="5" cellpadding="5">
         <tr>
@@ -61,11 +58,7 @@ function windowunder(link)
         </tr>
         <if:DISPLAY_FILES>
         <tr>
-<<<<<<< HEAD
         <td align="right" class="header" valign="top"><a name="expand" onclick="javascript:ShowHide('files','msgfile');"><tag:language.SHOW_HIDE /></a></td>
-=======
-        <td align="right" class="header" valign="top"><a name="expand" href="#expand" onclick="javascript:ShowHide('files','msgfile');"><tag:language.SHOW_HIDE /></a></td>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
         <td align="left" class="lista">
         <div style="display:none" id="files">
           <table class="lista">
@@ -120,7 +113,6 @@ function windowunder(link)
         </tr>
         </if:EXTERNAL>
       </table>
-<<<<<<< HEAD
       </div>
     </div>
   </div>
@@ -129,8 +121,6 @@ function windowunder(link)
       <h4><i class="fa fa-fw fa-files-o"></i>Torrents Comments</h4>
     </div>
     <div class="panel-body">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
       <a name="comments" />
       <br />
       <br />
@@ -159,7 +149,6 @@ function windowunder(link)
         </loop:comments>
         </if:NO_COMMENTS>
       </table>
-<<<<<<< HEAD
       </div>
     </div>
 
@@ -167,11 +156,3 @@ function windowunder(link)
     <div align="center">
       <tag:torrent_footer />
     </div>
-=======
-    </div>
-    <br />
-    <br />
-    <div align="center">
-      <tag:torrent_footer />
-    </div>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

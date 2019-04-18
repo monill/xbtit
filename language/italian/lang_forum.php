@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <?php
-=======
-?><?php
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 // Traduzione eseguita da mOOn, con il QCheck di Laurianti.
 //Un grazie anche a Confe, e a chi si è prodigato nel testare il Tracker
 // Per qualsiasi info ci trovate su http://dpwsmedia.com

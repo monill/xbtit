@@ -42,7 +42,3 @@ $lang[35]="</body>\n</html>\n";
 $lang[36]="<center>Não é possível escrever a:<br /><br /><b>";
 $lang[37]="</b><br /><br />Certifique se este arquivo é gravável, em seguida, executar este script novamente.</center>";
 $lang[38]="<center><br /><font color=red size=4><b>Acesso Negado</b></font></center>";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

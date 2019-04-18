@@ -8,7 +8,3 @@ $baseDir = dirname($vendorDir);
 return array(
     'splitbrain\\PHPArchive\\' => array($vendorDir . '/splitbrain/php-archive/src'),
 );
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -279,7 +279,3 @@ $language['USER_NOT_EDIT']='No puedes editar el usuario Guest o a ti mismo!';
 $language['USER_NOT_DELETE_HIGHER']='No puedes eliminar usuarios con un rango superior.';
 $language['USER_NOT_EDIT_HIGHER']='No puedes editar usuarios con un rango superior.';
 $language['USER_NO_CHANGE']='No se ha realizado ningún cambio.';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

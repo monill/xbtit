@@ -34,7 +34,3 @@ $language['PM']                 = '站内信';
 $language['BACK']               = '返回';
 $language['NO_HISTORY']         = '暂时没有历史';
 $language['GUEST_DETAILS']      = '访客没有查看用户资料的权限!';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

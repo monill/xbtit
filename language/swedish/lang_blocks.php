@@ -21,10 +21,5 @@ $language['WELCOME_LASTUSER'] = ' Välkommen till våran tracker ';
 $language['BLOCK_MINCLASSVIEW'] = 'Minsta rank som kan visa detta';
 $language['BLOCK_MAXCLASSVIEW'] = 'Högsta rank som Kan Visa detta';
 $language["BLOCK_CAT"]="Kategori";
-<<<<<<< HEAD
 
 $language["BLOCK_FEATURED"]="Favorit Torrent";
-=======
-$language["BLOCK_FEATURED"]="Favorit Torrent";
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

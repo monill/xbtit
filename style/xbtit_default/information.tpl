@@ -11,12 +11,7 @@
         <img src="<tag:information_image />" alt="" style="float:left; margin:5px" />
         <br />
         <tag:information_message />
-<<<<<<< HEAD
 
-=======
-        <br />
-        <br />        
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
       </td>
     </tr>
   </table>

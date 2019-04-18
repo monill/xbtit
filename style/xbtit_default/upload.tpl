@@ -54,16 +54,12 @@ function CheckForm()
 }
 
 </script>
-<<<<<<< HEAD
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4><i class="fa fa-fw fa-files-o"></i>Upload Torrent</h4>
     </div>
     <div class="panel-body" align="center">
 <tag:language.INSERT_DATA /><br /><br /><tag:language.ANNOUNCE_URL /><br /><b><tag:upload.announces /></b><br />
-=======
-<center><tag:language.INSERT_DATA /><br /><br /><tag:language.ANNOUNCE_URL /><br /><b><tag:upload.announces /></b><br /></center>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <form name="upload" method="post" onsubmit="return CheckForm();" action="index.php?page=upload" enctype="multipart/form-data">
 <input type="hidden" name="user_id" size="50" value="" />
   <table class="lista" border="0" width="96%" cellspacing="1" cellpadding="2">
@@ -93,9 +89,5 @@ function CheckForm()
     </tr>
   </table>
 </form>
-<<<<<<< HEAD
 </div>
     </div>
-=======
-
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

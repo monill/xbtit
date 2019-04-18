@@ -33,7 +33,3 @@ $language["POST"]="Post";
 $language["SEARCH_AGAIN"]="Trazi ponovo";
 $language["SEARCH_HELP"]="Unesite jednu ili vise rijeci za pretragu.<br />Veznici i rijeci sa manje od 3 karaktera su zanemareni.";
 $language["SEARCHED_FOR"]="Pretraga za";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

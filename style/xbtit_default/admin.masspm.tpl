@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Mass Private Mmail</h4>
   </div>
   <div class="panel-body" align="center">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <if:masspm_post>
 <table class="lista" width="100%" align="center" cellpadding="2">
   <tr>
@@ -67,10 +64,6 @@
     </tr>
   </table>
 </form>
-<<<<<<< HEAD
 </if:masspm_post>
     </div>
   </div>
-=======
-</if:masspm_post>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

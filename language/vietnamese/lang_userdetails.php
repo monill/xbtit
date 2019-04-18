@@ -33,7 +33,3 @@ $language["DELETE"]             = "x&#243;a b&#7887;";
 $language["PM"]                 = "g&#7917;i th&#432;";
 $language["BACK"]               = "tr&#7903; l&#7841;i";
 $language["NO_HISTORY"]         = "kh&#244;ng c&#243; l&#7883;ch s&#7917;";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

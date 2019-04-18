@@ -27,7 +27,3 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'Échec de la connexion SMTP.';
 $PHPMAILER_LANG['smtp_error']           = 'Erreur du serveur SMTP : ';
 $PHPMAILER_LANG['variable_set']         = 'Impossible d\'initialiser ou de réinitialiser une variable : ';
 $PHPMAILER_LANG['extension_missing']    = 'Extension manquante : ';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

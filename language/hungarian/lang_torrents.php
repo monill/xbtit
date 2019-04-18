@@ -33,7 +33,3 @@ $language["RATING"]="Értékelés";
 $language["ERR_NO_VOTE"]="Választanál egy értéket.";
 $language["VOTES"]="Szavazatok";
 $language["SHOW_HIDE"]="Fájlt mutat/elrejt";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

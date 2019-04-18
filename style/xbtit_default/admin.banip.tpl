@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Ban IP</h4>
   </div>
   <div class="panel-body">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <form action="<tag:frm_action />" name="ban" method="post">
   <div align="center"><tag:language.BAN_NOTE /></div>
   <table class="lista" width="100%" align="center">
@@ -58,10 +55,6 @@
   </table>
   <br />
   <br />
-<<<<<<< HEAD
 </form>
     </div>
   </div>
-=======
-</form>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

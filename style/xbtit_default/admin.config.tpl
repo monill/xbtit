@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Tracker Settings</h4>
   </div>
   <div class="panel-body">
-=======
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <script type="text/javascript" src="jscript/btit_functions.js"></script>
 <form action="<tag:frm_action />" name="config" method="post" onsubmit="return test_smtp_password()">
   <table class="lista" width="100%" align="center">
@@ -212,10 +209,6 @@
       <td align="center" class="header" colspan="2"><input type="submit" name="cancel" class="btn" value="<tag:language.FRM_CANCEL />" /></td>
     </tr>
   </table>
-<<<<<<< HEAD
 </form>
     </div>
   </div>
-=======
-</form>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

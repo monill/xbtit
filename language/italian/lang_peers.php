@@ -8,7 +8,3 @@ $language["PEER_PORT"]="Porta";
 $language["PEER_STATUS"]="Stato";
 $language["PEER_CLIENT"]="Client";
 $language["NO_PEERS"]="Nessun Nodo";
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

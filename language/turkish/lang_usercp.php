@@ -11,7 +11,3 @@ $language['MUST_ENTER_PASSWORD']='<br /><font color="#FF0000"><strong>Yukarıdak
 $language['ERR_PASS_WRONG']='Şifre boş veya hatalı, profil güncellenemiyor.';
 $language['MSG_DEL_ALL_PM']='Eğer okunmamış ÖM&#39;ları seçerseniz, silinmeyecekler';
 $language['ERR_PM_GUEST']='Üzgünüz, kendinize ya da ziyaretçilere ÖM gönderemezsiniz!';
-<<<<<<< HEAD
-=======
-?>
->>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
