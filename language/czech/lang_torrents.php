@@ -33,3 +33,4 @@ $language['RATING']='Hodnocení';
 $language['ERR_NO_VOTE']='K hlasování vyberte hodnotu.';
 $language['VOTES']='Hlasy';
 $language['SHOW_HIDE']='Zobrazit/skrýt soubory';
+?>

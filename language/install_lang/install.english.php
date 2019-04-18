@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2007  DPWS Media LTD
+// Copyright (C) 2004 - 2019  btiteam
 //
 //    This file is part of xbtit.
 //
@@ -45,7 +45,7 @@ $install_lang["back"]                   = "Back";
 $install_lang["requirements_check"]     = "Requirements Check";
 $install_lang["reqcheck"]               = "Req.Check";
 $install_lang["settings"]               = "Settings";
-$install_lang["system_req"]             = "<p>".$GLOBALS["btit-tracker"]."&nbsp;".$GLOBALS["current_btit_version"]." requires PHP 4.1.2 or better and an MYSQL database.</p>";
+$install_lang["system_req"]             = "<p>".$GLOBALS["btit-tracker"]."&nbsp;".$GLOBALS["current_btit_version"]." requires PHP 5.5 or better and MySQL 5.6 or better.</p>";
 $install_lang["list_chmod"]             = "<p>Before we go any further, please ensure that all the files have been uploaded, and that the following files have suitable permissions to allow this script to write to it (0777 should be sufficient).</p>";
 $install_lang["view_log"]               = "You can view full changelog";
 $install_lang["here"]                   = "here";
@@ -146,3 +146,4 @@ $install_lang["ipb_err_4a"]             = "IPB English language file (<b>";
 $install_lang["ipb_err_4b"]             = "</b>) doesn't exist, cannot proceed.<br /><br />Click <a href=\"javascript: history.go(-1);\">here</a> to return to the previous page.";
 $install_lang["ipb_err_5"]             = "Unable to write to the IPB Config file (<b>";
 $install_lang["ipb_err_6"]             = "Unable to write to the Tracker Config file (<b>";
+?>

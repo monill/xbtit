@@ -49,3 +49,4 @@ class TextTestResult extends TestResult
         flush();
     }
 }
+?>

@@ -19,3 +19,4 @@ $language["WEEK"]="Zwak";
 $language["MEDIUM"]="Normaal";
 $language["SAFE"]="Veilig";
 $language["STRONG"]="Sterk";
+?>

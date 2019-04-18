@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtitFM.
 //
@@ -379,3 +379,4 @@ $admintpl->set('pass_min_lct', $pass_min_req[1]);
 $admintpl->set('pass_min_uct', $pass_min_req[2]);
 $admintpl->set('pass_min_num', $pass_min_req[3]);
 $admintpl->set('pass_min_sym', $pass_min_req[4]);
+?>

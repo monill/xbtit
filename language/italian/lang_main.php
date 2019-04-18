@@ -425,3 +425,4 @@ $language["X_TIMES"]="tempo";
 $language["YES"]="Si";
 $language["LAST_IP"]="Ultimo IP";
 $language["FIRST_UNREAD"]="Vai al primo messaggio non letto";
+?>

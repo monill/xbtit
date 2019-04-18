@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -324,3 +324,4 @@ if (isset($votes) && !isset($_POST['new']) && empty($id)) {
     $admintpl->set('new_poll', false, true);
     $admintpl->set('polls', $polls);
 }
+?>

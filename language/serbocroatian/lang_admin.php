@@ -267,3 +267,4 @@ $language["HACK_UNINSTALLED_OK"]="Hack je uklonjen uspjesno!<br />\nZa pregled i
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="Ne mozete obrisati Guest racun ili svoj vlastiti!";
 $language["USER_NOT_EDIT"]="Ne mozete izmjeniti Guest racun ili svoj vlastiti!";
+?>

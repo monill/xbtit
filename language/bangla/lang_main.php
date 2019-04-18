@@ -441,3 +441,4 @@ $language['ADMIN_ACCESS']='এডমিন অপশন';
 $language['STAFF_ACCESS']='সদস্যগণ';
 $language['UPLOAD_LINK']='টোরেন্ট Upload';
 # End
+?>

@@ -22,3 +22,4 @@ $language["BLOCK_MINCLASSVIEW"]="Ansicht tiefste Einstufung";
 $language["BLOCK_MAXCLASSVIEW"]="Ansicht höchste Einstufung";
 $language["BLOCK_SPONSORS"]="Sponsoren";
 $language["BLOCK_PAYPAL"]="Spenden";
+?>

@@ -20,3 +20,4 @@ $language['WEEK'] = 'Svagt';
 $language['MEDIUM'] = 'Medium';
 $language['SAFE'] = 'Säkert Lösenord';
 $language['STRONG'] = 'Starkt Lösenord';
+?>

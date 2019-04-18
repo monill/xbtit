@@ -170,3 +170,4 @@ function dehtml($content)
 
     return str_replace(['<', '>', '\'', '"'], ['&lt;', '&gt;', '&#39;', '&quot;'], $content);
 }
+?>

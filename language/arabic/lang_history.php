@@ -5,3 +5,4 @@ $language['PEER_PORT']='المنفذ';
 $language['PEER_STATUS']='الحالة';
 $language['PEER_CLIENT']='البرنامج';
 $language['NO_HISTORY']='لا يوجد تاريخ للعرض';
+?>

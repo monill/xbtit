@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2007  DPWS Media LTD
+// Copyright (C) 2004 - 2019  btiteam
 //
 //    This file is part of xbtit.
 //
@@ -146,3 +146,4 @@ $install_lang["ipb_err_4a"]             = "IPB English jazykový soubor (<b>";
 $install_lang["ipb_err_4b"]             = "</b>) neexistuje, nelze pokračovat.<br /><br />Klikněte <a href=\"javascript: history.go(-1);\">zde</a> pro návrat na předchozí stránku.";
 $install_lang["ipb_err_5"]             = "Nelze zapisovat do souboru IPB Config (<b>";
 $install_lang["ipb_err_6"]             = "Nelze zapisovat do souboru Tracker Config (<b>";
+?>

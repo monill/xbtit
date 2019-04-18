@@ -20,3 +20,4 @@ $language["BLOCK_MAINUSERTOOLBAR"]="Felhasználói Eszköztá";
 $language["WELCOME_LASTUSER"]="Köszöntelek az oldalon";
 $language["BLOCK_MINCLASSVIEW"]="Minimális jogosultság";
 $language["BLOCK_MAXCLASSVIEW"]="Maximális jogosultság";
+?>

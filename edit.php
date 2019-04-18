@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -125,3 +125,4 @@ if (isset($_GET['info_hash'])) {
         ((mysqli_free_result($res) || (is_object($res) && (get_class($res) == 'mysqli_result'))) ? true : false);
     }
 }
+?>

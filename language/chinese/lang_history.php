@@ -7,3 +7,4 @@ $language['PEER_PORT']='端口';
 $language['PEER_STATUS']='状态';
 $language['PEER_CLIENT']='客户端版本';
 $language['NO_HISTORY']='无历史数据...';
+?>

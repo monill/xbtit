@@ -1,8 +1,3 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4><i class="fa fa-fw fa-cogs"></i>Database Utilities</h4>
-    </div>
-    <div class="panel-body">
 <if:db_status>
 <script type="text/javascript">
 <!--
@@ -84,5 +79,3 @@
 </table>
 </if:table_result>
 </if:db_status>
-        </div>
-    </div>

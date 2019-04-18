@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -217,3 +217,4 @@ if ($CURUSER['view_users'] == 'no') {    // start 'view_users'
 
     $userstpl->set('users', $users);
 }     // end 'view_users'
+?>

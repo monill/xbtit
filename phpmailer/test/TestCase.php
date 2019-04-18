@@ -102,3 +102,4 @@ class TestCase extends Assert /* implements Test */
         $this->tearDown();
     }
 }
+?>

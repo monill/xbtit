@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -337,3 +337,4 @@ if ($act=="") {
 
     echo $lang[32] . $lang[43] . " <b>". $counter . "</b> " . $lang[44] . (($row["tracker_unbridged"]>0 || $row["forum_orphaned"]>0)?$lang[45] . " <span style='color:blue;'>".$row["tracker_unbridged"]."</span> ".$lang[46]." <span style='color:blue;'>".$row["forum_orphaned"]."</span> ".$lang[47]:"") . $lang[42] . $lang[35];
 }
+?>

@@ -1,9 +1,8 @@
 <?php
-
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -33,30 +32,29 @@
 
 global $CURUSER, $FORUMLINK, $language;
 
-   echo "<table class=\"lista\" width=\"100%\" cellspacing=\"0\">\n<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"index.php\">".$language['MNU_INDEX']."</a></td></tr>\n";
+   print("<table class=\"lista\" width=\"100%\" cellspacing=\"0\">\n<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"index.php\">".$language["MNU_INDEX"]."</a></td></tr>\n");
 
-if ($CURUSER['view_torrents'] == 'yes') {
-    echo '<tr><td class="blocklist" align="center"><a class="menu" href="index.php?page=torrents">'.$language['MNU_TORRENT']."</a></td></tr>\n";
-    echo '<tr><td class="blocklist" align="center"><a class="menu" href="index.php?page=extra-stats">'.$language['MNU_STATS']."</a></td></tr>\n";
-}
-if ($CURUSER['can_upload'] == 'yes') {
-    echo '<tr><td class="blocklist" align="center"><a class="menu" href="index.php?page=upload">'.$language['MNU_UPLOAD']."</a></td></tr>\n";
-}
-if ($CURUSER['view_users'] == 'yes') {
-    echo '<tr><td class="blocklist" align="center"><a class="menu" href="index.php?page=users">'.$language['MNU_MEMBERS']."</a></td></tr>\n";
-}
-if ($CURUSER['view_news'] == 'yes') {
-    echo '<tr><td class="blocklist" align="center"><a class="menu" href="index.php?page=viewnews">'.$language['MNU_NEWS']."</a></td></tr>\n";
-}
-if ($CURUSER['view_forum'] == 'yes') {
-    if ($FORUMLINK == '' || $FORUMLINK == 'internal' || substr($FORUMLINK, 0, 3) == 'smf' || $FORUMLINK == 'ipb') {
-        echo '<tr><td class="blocklist" align="center"><a class="menu" href="index.php?page=forum">'.$language['MNU_FORUM']."</a></td></tr>\n";
-    } else {
-        echo '<tr><td class="blocklist" align="center"><a class="menu" href="'.$FORUMLINK.'">'.$language['MNU_FORUM']."</a></td></tr>\n";
-    }
-}
-if ($CURUSER['uid'] == 1 || !$CURUSER) {
-    echo '<tr><td class="blocklist" align="center"><a class="menu" href="index.php?page=login">'.$language['LOGIN']."</a></td></tr>\n</table>\n";
-} else {
-    echo '<tr><td class="blocklist" align="center"><a class="menu" href="logout.php">'.$language['LOGOUT']."</a></td></tr>\n</table>\n";
-}
+   if ($CURUSER["view_torrents"]=="yes")
+      {
+      print("<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"index.php?page=torrents\">".$language["MNU_TORRENT"]."</a></td></tr>\n");
+      print("<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"index.php?page=extra-stats\">".$language["MNU_STATS"]."</a></td></tr>\n");
+      }
+   if ($CURUSER["can_upload"]=="yes")
+      print("<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"index.php?page=upload\">".$language["MNU_UPLOAD"]."</a></td></tr>\n");
+   if ($CURUSER["view_users"]=="yes")
+      print("<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"index.php?page=users\">".$language["MNU_MEMBERS"]."</a></td></tr>\n");
+   if ($CURUSER["view_news"]=="yes")
+      print("<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"index.php?page=viewnews\">".$language["MNU_NEWS"]."</a></td></tr>\n");
+   if ($CURUSER["view_forum"]=="yes")
+      {
+        if ($FORUMLINK=="" || $FORUMLINK=="internal" || substr($FORUMLINK,0,3)=="smf" || $FORUMLINK=="ipb")
+           print("<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"index.php?page=forum\">".$language["MNU_FORUM"]."</a></td></tr>\n");
+        else
+            print("<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"".$FORUMLINK."\">".$language["MNU_FORUM"]."</a></td></tr>\n");
+      }
+   if ($CURUSER["uid"]==1 || !$CURUSER)
+      print("<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"index.php?page=login\">".$language["LOGIN"]."</a></td></tr>\n</table>\n");
+   else
+       print("<tr><td class=\"blocklist\" align=\"center\"><a class=\"menu\" href=\"logout.php\">".$language["LOGOUT"]."</a></td></tr>\n</table>\n");
+
+?>

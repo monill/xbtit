@@ -49,3 +49,4 @@ $language["HOURS"]="godzin(y)";
 $language["MINUTES"]="minut(y)";
 $language["SECONDS"]="sekund(y)";
 //AJAX Poll System Hack Stop
+?>

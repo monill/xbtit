@@ -17,3 +17,4 @@ $language["EDIT"]="Edytuj";
 $language["DELETE"]="Usuń";
 $language["NO_USERS_FOUND"]="Nie znaleziono użytkownika!";
 $language["UNKNOWN"]="Nieznany";
+?>

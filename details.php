@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -314,3 +314,4 @@ if ($GLOBALS['usepopup']) {
 $torrenttpl->set('torrent', $row);
 $torrenttpl->set('comments', $comments);
 $torrenttpl->set('files', $dfiles);
+?>

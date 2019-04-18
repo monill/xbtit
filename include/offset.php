@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -39,3 +39,4 @@ global $CURUSER;
 
 $now = time();
 $offset = (date('I', $now) === 1) ? (date('Z', $now) - 3600) : (date('Z', $now)) - ($CURUSER['time_offset'] * 3600);
+?>

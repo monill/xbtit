@@ -33,3 +33,4 @@ $language['RATING']='Rating';
 $language['ERR_NO_VOTE']='Pentru a vota trebuie să alegi o valoare.';
 $language['VOTES']='Voturi';
 $language['SHOW_HIDE']='Ascunde/Arata Fişierele';
+?>

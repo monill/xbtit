@@ -33,3 +33,4 @@ $language["RATING"]="Ocjena";
 $language["ERR_NO_VOTE"]="Odaberite ocjenu.";
 $language["VOTES"]="Glasova";
 $language["SHOW_HIDE"]="Pokazi/sakrij fajlove";
+?>

@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -32,46 +32,50 @@
    global $CURUSER, $FORUMLINK, $language;
 
 ?>
-<table cellpadding="4" cellspacing="1" width="100%" border="0" align="center" style="border-bottom:0 solid;">
+<table cellpadding="4" cellspacing="1" width="100%" border="0" align="center" style="border-bottom:0px solid;">
   <tr>
 <?php
 
 
-if (!$CURUSER) {
-    // anonymous=guest
-    echo '<td class="lista" align="center" style="text-align:center;">'.$language['WELCOME'].' '.$language['GUEST']."\n";
-    echo '<a class="mainmenu" href="login.php">('.$language['LOGIN'].')</a></td>';
-} elseif ($CURUSER['uid'] == 1) {
-    // anonymous=guest
-    echo '<td class="lista" align="center" style="text-align:center;">'.$language['WELCOME'].' '.$CURUSER['username']." \n";
-    echo '<a class="mainmenu" href="index.php?page=login">('.$language['LOGIN'].")</a></td>\n";
-} else {
-    echo '<td class="lista" align="center" style="text-align:center;"><a class="mainmenu" href="logout.php">('.$language['LOGOUT'].")</a></td>\n";
-}
+if (!$CURUSER)
+   {
 
-echo '<td class="header" align="center"><a class="mainmenu" href="index.php">'.$language['MNU_INDEX']."</a></td>\n";
-
-if ($CURUSER['view_torrents'] == 'yes') {
-    echo '<td class="header" align="center"><a class="mainmenu" href="index.php?page=torrents">'.$language['MNU_TORRENT']."</a></td>\n";
-    echo '<td class="header" align="center"><a class="mainmenu" href="index.php?page=extra-stats">'.$language['MNU_STATS']."</a></td>\n";
-}
-if ($CURUSER['can_upload'] == 'yes') {
-    echo '<td class="header" align="center"><a class="mainmenu" href="index.php?page=upload">'.$language['MNU_UPLOAD']."</a></td>\n";
-}
-if ($CURUSER['view_users'] == 'yes') {
-    echo '<td class="header" align="center"><a class="mainmenu" href="index.php?page=users">'.$language['MNU_MEMBERS']."</a></td>\n";
-}
-if ($CURUSER['view_news'] == 'yes') {
-    echo '<td class="header" align="center"><a class="mainmenu" href="index.php?page=viewnews">'.$language['MNU_NEWS']."</a></td>\n";
-}
-if ($CURUSER['view_forum'] == 'yes') {
-    if ($FORUMLINK == '' || $FORUMLINK == 'internal' || substr($FORUMLINK, 0, 3) == 'smf' || $FORUMLINK == 'ipb') {
-        echo '<td class="header" align="center"><a class="mainmenu" href="index.php?page=forum">'.$language['MNU_FORUM']."</a></td>\n";
-    } else {
-        echo '<td class="header" align="center"><a class="mainmenu" href="'.$FORUMLINK.'">'.$language['MNU_FORUM']."</a></td>\n";
+       // anonymous=guest
+   print("<td class=\"lista\" align=\"center\" style=\"text-align:center;\">".$language["WELCOME"]." ".$language["GUEST"]."\n");
+   print("<a class=\"mainmenu\" href=\"login.php\">(".$language["LOGIN"].")</a></td>");
+   }
+elseif ($CURUSER["uid"]==1)
+       // anonymous=guest
+    {
+   print("<td class=\"lista\" align=\"center\" style=\"text-align:center;\">".$language["WELCOME"]." " . $CURUSER["username"] ." \n");
+   print("<a class=\"mainmenu\" href=\"index.php?page=login\">(".$language["LOGIN"].")</a></td>\n");
     }
-}
+else
+    {
+    print("<td class=\"lista\" align=\"center\" style=\"text-align:center;\"><a class=\"mainmenu\" href=\"logout.php\">(".$language["LOGOUT"].")</a></td>\n");
+    }
 
+print("<td class=\"header\" align=\"center\"><a class=\"mainmenu\" href=\"index.php\">".$language["MNU_INDEX"]."</a></td>\n");
+
+if ($CURUSER["view_torrents"]=="yes")
+    {
+    print("<td class=\"header\" align=\"center\"><a class=\"mainmenu\" href=\"index.php?page=torrents\">".$language["MNU_TORRENT"]."</a></td>\n");
+    print("<td class=\"header\" align=\"center\"><a class=\"mainmenu\" href=\"index.php?page=extra-stats\">".$language["MNU_STATS"]."</a></td>\n");
+   }
+if ($CURUSER["can_upload"]=="yes")
+   print("<td class=\"header\" align=\"center\"><a class=\"mainmenu\" href=\"index.php?page=upload\">".$language["MNU_UPLOAD"]."</a></td>\n");
+if ($CURUSER["view_users"]=="yes")
+   print("<td class=\"header\" align=\"center\"><a class=\"mainmenu\" href=\"index.php?page=users\">".$language["MNU_MEMBERS"]."</a></td>\n");
+if ($CURUSER["view_news"]=="yes")
+   print("<td class=\"header\" align=\"center\"><a class=\"mainmenu\" href=\"index.php?page=viewnews\">".$language["MNU_NEWS"]."</a></td>\n");
+if ($CURUSER["view_forum"]=="yes")
+   {
+   if ($FORUMLINK=="" || $FORUMLINK=="internal" || substr($FORUMLINK,0,3)=="smf" || $FORUMLINK=="ipb")
+      print("<td class=\"header\" align=\"center\"><a class=\"mainmenu\" href=\"index.php?page=forum\">".$language["MNU_FORUM"]."</a></td>\n");
+   else
+       print("<td class=\"header\" align=\"center\"><a class=\"mainmenu\" href=\"".$FORUMLINK."\">".$language["MNU_FORUM"]."</a></td>\n");
+    }
+ 
 ?>
   </tr>
    </table>

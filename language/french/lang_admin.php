@@ -394,3 +394,4 @@ $language["SECSUI_PASS_ERR_2"] = "que vous avez pour le nombre de caract&egrave;
 //  AJOUTS MANQUANT
 $language["USERNAME"]="Nom d'utilisateur ";
 $language["SUBMIT"]="Valider";
+?>

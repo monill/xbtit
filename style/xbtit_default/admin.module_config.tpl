@@ -1,8 +1,3 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><i class="fa fa-fw fa-cogs"></i>Module Settings</h4>
-  </div>
-  <div class="panel-body" align="center">
 <table class="lista" width="100%" cellspacing="1" cellpadding="6">
   <tr>
     <td class="header" width="25"><tag:language.ID_MODULE /></td>
@@ -54,5 +49,3 @@
   </tr>
 </table>
 </form>
-    </div>
-  </div>

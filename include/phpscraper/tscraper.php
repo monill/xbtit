@@ -9,3 +9,4 @@ abstract class tscraper
         $this->timeout = $timeout;
     }
 }
+?>

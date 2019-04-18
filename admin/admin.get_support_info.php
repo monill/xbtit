@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -135,3 +135,4 @@ if ($btit_url_rss != '') {
 $btit_news = set_block('Btiteam Latest News', 'center', $btit_news);
 
 echo $your_version.$btit_news;
+?>

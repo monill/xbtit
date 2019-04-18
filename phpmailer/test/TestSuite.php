@@ -70,3 +70,4 @@ class TestSuite /* implements Test */
         return $count;
     }
 }
+?>

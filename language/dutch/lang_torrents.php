@@ -33,3 +33,4 @@ $language["RATING"]="Kwaliteit";
 $language["ERR_NO_VOTE"]="U moet een waarde kiezen om te stemmen.";
 $language["VOTES"]="Stemmen";
 $language["SHOW_HIDE"]="Bestanden Laten Zien/Verbergen";
+?>

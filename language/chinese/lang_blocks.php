@@ -25,3 +25,4 @@ $language['BLOCK_MAINUSERTOOLBAR']='用户工具栏';
 $language['WELCOME_LASTUSER']=' 欢迎新成员: ';
 $language['BLOCK_MINCLASSVIEW']='最小可见用户组';
 $language['BLOCK_MAXCLASSVIEW']='最大可见用户组';
+?>

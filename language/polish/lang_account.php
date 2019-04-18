@@ -21,3 +21,4 @@ $language["SAFE"]="Bezpieczne";
 $language["STRONG"]="Mocne";
 
 $language["ERR_GENERIC"]="Błąd ogólny: ".((is_object($GLOBALS['conn'])) ? mysqli_error($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
+?>

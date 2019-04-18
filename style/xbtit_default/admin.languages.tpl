@@ -1,8 +1,3 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><i class="fa fa-fw fa-cogs"></i>Language Settings</h4>
-  </div>
-  <div class="panel-body" align="center">
 <if:language_add>
   <form name="language_add_new" action="<tag:frm_action />" method="post">
     <table class="lista">
@@ -49,5 +44,3 @@
   </tr>
   </table>
 </if:language_add>
-    </div>
-  </div>

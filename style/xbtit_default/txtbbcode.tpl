@@ -148,10 +148,10 @@ function BBTag(opentag, closetag, textarea)
       </td>
     </tr>
 		<tr>
-      <td><div style="text-align: center;">
-      <tag:smilies_table /></div>
-      <div style="text-align: center;">
-      <a href="javascript: PopMoreSmiles('<tag:form_name />','<tag:object_name />')"><tag:language.MORE_SMILES /></a></div>
+      <td><center>
+      <tag:smilies_table /></center>
+      <center>
+      <a href="javascript: PopMoreSmiles('<tag:form_name />','<tag:object_name />')"><tag:language.MORE_SMILES /></a></center>
       </td>
     </tr>
   </table>

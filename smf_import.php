@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -648,3 +648,4 @@ if ($act=="") {
     @mysqli_query($GLOBALS['conn'], "UPDATE `{$TABLE_PREFIX}users` SET `random`=54345 WHERE `id`=1");
     echo $lang[32] . $lang[33] . $lang[35];
 }
+?>

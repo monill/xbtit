@@ -190,3 +190,4 @@ function BDecode($wholefile)
 
     return $return[0];
 }
+?>

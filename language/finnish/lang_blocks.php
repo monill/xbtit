@@ -20,3 +20,4 @@ $language["BLOCK_MAINUSERTOOLBAR"]="K&auml;ytt&auml;j&auml;n p&auml;&auml;valikk
 $language["WELCOME_LASTUSER"]=" Tervetuloa (SIVUN NIMI) ";
 $language["BLOCK_MINCLASSVIEW"]="Matalin arvo jolle n&auml;ytet&auml;&auml;n";
 $language["BLOCK_MAXCLASSVIEW"]="Korkein arvo jolle n&auml;ytet&auml;&auml;n";
+?>

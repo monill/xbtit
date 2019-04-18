@@ -17,3 +17,4 @@ $language['BLOCK_PAYPAL']='Sprijiniţi-ne';
 $language['BLOCK_MAINTRACKERTOOLBAR']='Main Tracker Toolbar';
 $language['BLOCK_MAINUSERTOOLBAR']='Main User Toolbar';
 $language['WELCOME_LASTUSER']=' Bun venit pe Tracker-ul nostru ';
+?>

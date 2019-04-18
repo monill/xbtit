@@ -37,3 +37,4 @@ $language['GUEST_DETAILS']      = 'Du kan ikke se gæsters information!';
 // INVITATION SYSTEM
 $language['USER_INVITATIONS']   = 'Invitationer';
 $language['USER_INVITED_BY']    = 'Inviteret af';
+?>

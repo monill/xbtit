@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -34,18 +34,25 @@
 require_once __DIR__.'/include/functions.php';
 include __DIR__.'/btemplate/bTemplate.php';
 
-$style = isset($_GET['style']) ? ((int) $_GET['style']) : 0;
-$url = isset($_GET['returnto']) ? urldecode($_GET['returnto']) : 'index.php';
-$langue = isset($_GET['langue']) ? ((int) $_GET['langue']) : 0;
-
-$url = $BASEURL.'/'.$url;
+if (isset($_GET["style"]))
+    $style=intval($_GET["style"]);
+else
+    $style=0;
+if (isset($_GET["returnto"]))
+    $url=urldecode($_GET["returnto"]);
+else
+    $url="index.php";
+if (isset($_GET["langue"]))
+    $langue=intval($_GET["langue"]);
+else
+    $langue=0;
 
 dbconn();
 session_name('xbtit');
 session_start();
 
 // guest don't need to change language!
-if (!$CURUSER || $CURUSER['uid'] === 1) {
+if (!$CURUSER || $CURUSER['uid'] === 0) {
     redirect($url);
     exit;
 }
@@ -58,3 +65,4 @@ if ($langue != 0) {
 }
 unset($_SESSION['CURUSER'], $_SESSION['CURUSER_EXPIRE']);
 redirect($url);
+?>

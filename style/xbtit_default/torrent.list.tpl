@@ -1,10 +1,4 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><i class="fa fa-fw fa-files-o"></i>Torrents</h4>
-  </div>
-  <div class="panel-body">
-
-  <div align="center">
+<div align="center">
 <form action="<tag:torrent_script />" method="get" name="torrent_search">
   <input type="hidden" name="page" value="torrents" />
   <table border="0" class="lista" align="center">
@@ -79,7 +73,7 @@
           <td align="center" width="30" class="lista <tag:torrents[].classe_leechers />" style="text-align: center;"><tag:torrents[].leechers /></td>
           <td align="center" width="30" class="lista" style="text-align: center;"><tag:torrents[].complete /></td>
            <if:COM1>
-          <td align="center" width="30" class="lista" style="text-align: center;"><tag:torrents[].comments /></td>
+          <td align="center" width="30" class="lista" style="text-align: center;"><tag:torrents[].coments /></td>
           </if:COM1>
           <else:COM1>
            <if:RAT1>
@@ -100,5 +94,3 @@
     <td colspan="2" align="center"> <tag:torrent_pagerbottom /></td>
   </tr>
 </table>
-    </div>
-  </div>

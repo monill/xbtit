@@ -280,3 +280,4 @@ $language['USER_NOT_EDIT']='Du kan inte ändra  Gäst eller dig själv!';
 $language['USER_NOT_DELETE_HIGHER']='Du kan inte radera medlemmar med högre ranking än du själv.';
 $language['USER_NOT_EDIT_HIGHER']='Du kan inte ändra medlemmar med högre ranking än du själv.';
 $language['USER_NO_CHANGE']='Ingen förändring genomförd.';
+?>

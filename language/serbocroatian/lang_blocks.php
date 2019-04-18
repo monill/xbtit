@@ -19,3 +19,4 @@ $language["BLOCK_MAINTRACKERTOOLBAR"]="Glavni tracker alati/meni/stat";
 $language["BLOCK_MAINUSERTOOLBAR"]="Korisnicki alati/meni/stat";
 $language["WELCOME_LASTUSER"]=" Dobrodosli na nas tracker ";
 $language["BLOCK_MINCLASSVIEW"]="Minimum rang koji moze vidjeti";
+?>

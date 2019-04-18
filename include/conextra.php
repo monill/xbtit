@@ -31,3 +31,4 @@ function getPrefix()
 
     return $TABLE_PREFIX;
 }
+?>

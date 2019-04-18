@@ -34,3 +34,4 @@ $language['PM']                 = 'PM';
 $language['BACK']               = 'Zpět';
 $language['NO_HISTORY']         = 'Žádná historie k zobrazení...';
 $language['GUEST_DETAILS']      = 'Nemůžete vidět detaily účtu hosta!';
+?>

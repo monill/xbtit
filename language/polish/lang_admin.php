@@ -394,3 +394,4 @@ $language["STYLE_TYPE"]="Typ stylu";
 $language["CLA_STYLE"]="System styli xbtit classic";
 $language["ATM_STYLE"]="System styli atmoner'a";
 $language["PET_STYLE"]="System styli Petr1fied";
+?>

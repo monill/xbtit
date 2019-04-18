@@ -23,3 +23,4 @@ $language['BLOCK_MAINUSERTOOLBAR']='Main User Toolbar';
 $language['WELCOME_LASTUSER']=' স্বাগতম আমাদের সাইটে ';
 $language['BLOCK_MINCLASSVIEW']='নিম্মস্তর এর বাবহারকারী থেকে';
 $language['BLOCK_MAXCLASSVIEW']='উচ্চওস্তর এর বাবহারকারী পর্যন্ত';
+?>

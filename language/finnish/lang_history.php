@@ -5,3 +5,4 @@ $language["PEER_PORT"]="Portti";
 $language["PEER_STATUS"]="Tila";
 $language["PEER_CLIENT"]="Clientti";
 $language["NO_HISTORY"]="Ei n&auml;ytett&auml;v&auml;&auml; historiaa";
+?>

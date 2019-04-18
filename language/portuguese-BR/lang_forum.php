@@ -33,3 +33,4 @@ $language["POST"]="Mensagens";
 $language["SEARCH_AGAIN"]="Procurar Novamente";
 $language["SEARCH_HELP"]="Entre com uma ou mais palavras para pesquisar.<br />Palavras muito comuns, e as palavras com menos de 3 caracteres são ignorados.";
 $language["SEARCHED_FOR"]="Procurar Por";
+?>

@@ -174,3 +174,4 @@ class lightbenc
         return bdecode($f);
     }
 }
+?>

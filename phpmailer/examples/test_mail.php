@@ -25,3 +25,4 @@ if (!$mail->Send()) {
 } else {
     echo "Message sent!";
 }
+?>

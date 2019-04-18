@@ -1,8 +1,10 @@
 <?php
 
-$dbhost = 'localhost';
-$dbuser = '';
-$dbpass = '';
-$database = '';
-$TABLE_PREFIX = '';
-$mySecret = '';
+$dbhost = "";
+$dbuser = "";
+$dbpass = "";
+$database = "";
+$TABLE_PREFIX = "";
+$mySecret  = "";
+
+?>

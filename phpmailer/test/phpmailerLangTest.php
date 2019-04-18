@@ -74,3 +74,4 @@ class phpmailerLangTest extends PHPUnit_Framework_TestCase
         $this->assertEmpty($err, $err);
     }
 }
+?>

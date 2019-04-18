@@ -28,3 +28,4 @@ $language["ERR_MOVING_TORR"]="Tr&#7909;c tr&#7863;c trong l&#250;c t&#7843;i tor
 $language["ERR_ALREADY_EXIST"]="Torrent n&#224;y &#273;&#227; c&#243; s&#7861;n trong kho d&#7917; li&#7879;u c&#7911;a ch&#250;ng t&#244;i.";
 $language["MSG_DOWNLOAD_PID"]="H&#7879; th&#7889;ng PID &#273;&#227; nh&#7853;n torrent v&#7899;i PID c&#7911;a b&#7841;n";
 $language["MSG_UP_SUCCESS"]="T&#7843;i l&#234;n th&#224;nh c&#244;ng! Torrent &#273;&#227; &#273;&#432;&#7907;c th&#234;m v&#224;o.";
+?>

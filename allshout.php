@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -154,3 +154,4 @@ unset($msg2);
 $tpl_shout = new bTemplate();
 $tpl_shout->set('chat', $shout);
 $tpl_shout->set('script', '<a href="javascript: window.close()">'.$language['CLOSE'].'</a>');
+?>

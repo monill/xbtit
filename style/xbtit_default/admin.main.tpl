@@ -9,6 +9,8 @@ function update_cat(newimage)
      document.cat_image.src = "";
 }
 
+
+
 var anb=new sack();
 
 function show_wait()
@@ -39,11 +41,6 @@ function Show_News()
 
 //-->
 </script>
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4><i class="fa fa-fw fa-users"></i>Admin Panel</h4>
-    </div>
-    <div class="panel-body">
 <b><tag:language.ADMINCP_NOTES /></b>
 <table border="0" class="lista" align="center" width="100%">
 <tr>
@@ -61,21 +58,8 @@ function Show_News()
        </tr>
      </table>
   </td>
-  <td valign="top" width="250">
+  <td valign="top" width="250"><br />
     <table border="0" class="lista" align="center" width="100%">
-           <tr><td class="block" align="center"><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                       <input type="hidden" name="cmd" value="_donations">
-                       <input type="hidden" name="business" value="paypal@btiteam.org">
-                       <input type="hidden" name="lc" value="GB">
-                       <input type="hidden" name="item_name" value="BTITeam/XBTIT Donation">
-                       <input type="hidden" name="no_note" value="0">
-                       <input type="hidden" name="currency_code" value="EUR">
-                       <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
-                       <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
-                       <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-                   </form>
-               </td></tr>
-           <tr><td class="lista" align="center">Please feel free to donate to btiteam to help ongoing support development of XBTIT</td></tr><br />
            <tr><td class="block" align="center"><b>Some statistic/system info:</b></td></tr>
            <tr><td class="lista"><tag:admin.lastsanity /></td></tr>
            <tr><td class="lista"><tag:admin.lastscrape /></td></tr>
@@ -90,6 +74,4 @@ function Show_News()
   </td>
   </tr>
 </table>
- </div>
-    </div>
 <script type="text/javascript">Show_News();</script>

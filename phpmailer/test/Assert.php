@@ -37,3 +37,4 @@ class Assert
         $this->fail($str);
     }
 }
+?>

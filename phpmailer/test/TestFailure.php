@@ -21,3 +21,4 @@ class TestFailure
         return $this->fFailedTestName;
     }
 }
+?>

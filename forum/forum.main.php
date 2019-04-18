@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -125,3 +125,4 @@ if (mysqli_num_rows($forums_res) == 0) {
     $forumtpl->set('NO_FORUMS', false, true);
     $forumtpl->set('forums', $forums);
 }
+?>

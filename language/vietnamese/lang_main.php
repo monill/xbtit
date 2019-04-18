@@ -437,3 +437,4 @@ $language["ARCADE"]="tr&#242; ch&#417;i";
 $language["GALLERY"]="h&#236;nh &#7843;nh";
 $language["SPEEDTEST"]="th&#7917; &#273;&#7897; nhanh internet";
 $language["chess"]="c&#7901; t&#432;&#7899;ng";
+?>

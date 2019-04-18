@@ -1,4 +1,3 @@
-
 <if:NOPEERS>
 <table width="100%" class="lista" border="0">
        <tr>

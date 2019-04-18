@@ -1,8 +1,4 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><i class="fa fa-fw fa-cogs"></i>Censored Words</h4>
-  </div>
-  <div class="panel-body">
+
 <form action="<tag:frm_action />" method="post" enctype="multipart/form-data">
   <table class="lista" width="100%" align="center">
     <tr>
@@ -19,5 +15,4 @@
     </tr>
   </table>
 </form>
-</div>
-  </div>
+

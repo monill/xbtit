@@ -24,3 +24,4 @@ $language['WELCOME_LASTUSER']='Velkommen til';
 $language['BLOCK_MINCLASSVIEW']='Minimum rank der kan se';
 $language['BLOCK_MAXCLASSVIEW']='Maximum rank der kan se';
 $language["BLOCK_CAT"]="Kategorier";
+?>

@@ -115,3 +115,4 @@ class udptscraper extends tscraper
         return $torrents;
     }
 }
+?>

@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -112,3 +112,4 @@ if ($GLOBALS['usepopup']) {
 $historytpl->set('XBTT', !$XBTT_USE, true);
 $historytpl->set('XBTT2', !$XBTT_USE, true);
 $historytpl->set('history', $history);
+?>

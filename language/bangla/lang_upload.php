@@ -25,3 +25,4 @@ $language['ERR_MOVING_TORR']='Error moving torrent...';
 $language['ERR_ALREADY_EXIST']='আপনার দাওয়া টরেন্ট আমাদের কাছে আগে থেকে আছে।ধন্যবাদ.';
 $language['MSG_DOWNLOAD_PID']='PID system active get your torrent with your PID';
 $language['MSG_UP_SUCCESS']='Upload সফল হয়েছে! আপনার টোরেন্ট যোগ করা হয়েছে.';
+?>

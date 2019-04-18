@@ -63,3 +63,4 @@ class TestResult
         return count($this->fFailures);
     }
 }
+?>

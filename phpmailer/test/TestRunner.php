@@ -9,3 +9,4 @@ class TestRunner
         $result->report();
     }
 }
+?>

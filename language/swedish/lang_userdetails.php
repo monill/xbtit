@@ -31,3 +31,4 @@ $language['DELETE'] = 'Radera';
 $language['PM'] = 'PM';
 $language['BACK'] = 'Tillbaka';
 $language['NO_HISTORY'] = 'Ingen historik att visa...';
+?>

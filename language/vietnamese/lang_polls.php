@@ -51,3 +51,4 @@ $language["HOURS"]="nh&#7919;ng gi&#7901;";
 $language["MINUTES"]="nh&#7919;ng ph&#250;t";
 $language["SECONDS"]="nh&#7919;ng gi&#226;y";
 //AJAX Poll System Hack Stop
+?>

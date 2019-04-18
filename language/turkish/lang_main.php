@@ -504,3 +504,4 @@ $language['TORRENT_COMMENTS']="Torrent Yorumları";
 $language['TORRENT_DETAILS']="Torrent Detayları";
 $language['FORUM_SETTINGS']="Forum Ayarları";
 $language['FORUMS']='Forumlar';
+?>

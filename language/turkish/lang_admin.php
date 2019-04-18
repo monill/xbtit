@@ -398,3 +398,4 @@ $language["PET_STYLE"]="Petr1fied'ın tema sistemi";
 
 $language["SECURITY_SUITE"]="Güvenlik Katmanı";
 $language["IF_CHECKED"]="Seçilileri";
+?>

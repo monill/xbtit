@@ -33,3 +33,4 @@ $language["POST"]="Beitrag";
 $language["SEARCH_AGAIN"]="Erneut suchen";
 $language["SEARCH_HELP"]="Gib ein oder mehrere Wörter zum suchen ein<br />Einfache Wörter, oder solche mit weniger als 3 Buchstaben werden ignoriert";
 $language["SEARCHED_FOR"]="Gesucht nach";
+?>

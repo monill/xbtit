@@ -428,3 +428,4 @@ $language["MODULE_UNACTIVE"]="Le module nécessaire n'est pas activé !";
 $language["MODULE_NOT_PRESENT"]="Le module nécessaire n'existe pas !";
 $language["MODULE_LOAD_ERROR"]="Le module nécessaire semble être incorrecte !";
 $language['BACK_TO_TOP']='Retour en haut';
+?>

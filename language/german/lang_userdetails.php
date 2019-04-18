@@ -34,3 +34,4 @@ $language["DELETE"]             = "Löschen";
 $language["PM"]                 = "PM";
 $language["BACK"]               = "Zurück";
 $language["NO_HISTORY"]         = "Keine Statistik vorhanden...";
+?>

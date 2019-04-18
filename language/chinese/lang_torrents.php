@@ -35,3 +35,4 @@ $language['RATING']='评级';
 $language['ERR_NO_VOTE']='必须选择一个投票选项.';
 $language['VOTES']='得票数';
 $language['SHOW_HIDE']='显示/隐藏资源';
+?>

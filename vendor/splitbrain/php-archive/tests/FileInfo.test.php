@@ -97,3 +97,4 @@ class FileInfoTest extends PHPUnit_Framework_TestCase
         $this->assertSame(0, $fileinfo->getSize());
     }
 }
+?>

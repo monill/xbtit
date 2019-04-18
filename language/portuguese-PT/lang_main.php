@@ -436,3 +436,4 @@ $language["SIGNATURE"]="Assinatura no Fórum";
 // end modification
 // hack: Signature on (Internal) Forum
 // operation #0
+?>

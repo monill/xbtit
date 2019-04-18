@@ -49,3 +49,4 @@ $language["DAYS"]="giorni";
 $language["HOURS"]="ore";
 $language["MINUTES"]="minuti";
 $language["SECONDS"]="secondi";
+?>

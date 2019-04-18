@@ -33,3 +33,4 @@ $language['POST']='পোস্ট';
 $language['SEARCH_AGAIN']='পুনরায় খুঁজুন';
 $language['SEARCH_HELP']='Enter one or more words to search for.<br />Very common words and words with less than 3 characters are ignored.';
 $language['SEARCHED_FOR']='খোজ শুরু করুন';
+?>

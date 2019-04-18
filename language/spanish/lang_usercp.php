@@ -11,3 +11,4 @@ $language['MUST_ENTER_PASSWORD']='<br /><font color="#FF0000"><strong>Debes pone
 $language['ERR_PASS_WRONG']='Contraseña vacia o incorrecta, no se puede actualizar tu perfil.';
 $language['MSG_DEL_ALL_PM']='Si seleccionas mensajes no leidos, estos no se eliminaran';
 $language['ERR_PM_GUEST']='No puedes enviar mensajes privados a invitados o a ti mismo!';
+?>

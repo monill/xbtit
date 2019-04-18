@@ -17,3 +17,4 @@ $language['EDIT']            = 'Upravit';
 $language['DELETE']          = 'Smazat';
 $language['NO_USERS_FOUND']  = 'Žádný uživatel nenalezen!';
 $language['UNKNOWN']         = 'Unknown';
+?>

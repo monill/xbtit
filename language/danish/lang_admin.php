@@ -350,3 +350,4 @@ $language['RECYCLE_EXPL']='<i>Periode i <u>dage</u> hvorefter inviationer vil bl
 $language["SETTING_MIN_DLRATIO"]="Minimum ratio for at kunne downloade torrents";
 $language["SETTING_CUSTOM_SETTINGS"]="Custom indstilinger";
 $language["BYPASS_DLCHECK"]="Bypass download check";
+?>

@@ -23,3 +23,4 @@ $language['BLOCK_MAINUSERTOOLBAR']='شريط المستخدم الرسمي';
 $language['WELCOME_LASTUSER']=' مرحبا بك الى المتتبع ';
 $language['BLOCK_MINCLASSVIEW']='ادنى رتبه من الاعضاء يمكنها مشاهدة البلوك';
 $language['BLOCK_MAXCLASSVIEW']='اعلى رتبه من الاعضاء يمكنها مشاهدة البلوك';
+?>

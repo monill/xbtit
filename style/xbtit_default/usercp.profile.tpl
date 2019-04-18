@@ -1,8 +1,3 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><i class="fa fa-fw fa-cogs"></i><tag:language.MNU_UCP_INFO /></h4>
-  </div>
-  <div class="panel-body" align="center">
 <form name="utente" method="post" action="<tag:profile.frm_action />">
   <table width="100%" border="0" class="lista">
     <tr>
@@ -74,5 +69,3 @@
     </tr>
   </table>
 </form>
-    </div>
-  </div>

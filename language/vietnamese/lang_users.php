@@ -16,3 +16,4 @@ $language["EDIT"]            = "thay &#273;&#7893;i";
 $language["DELETE"]          = "x&#243;a b&#7887;";
 $language["NO_USERS_FOUND"]  = "kh&#244;ng t&#236;m &#273;&#432;&#7907;c th&#224;nh vi&#234;n";
 $language["UNKNOWN"]         = "kh&#244;ng bi&#7871;t";
+?>

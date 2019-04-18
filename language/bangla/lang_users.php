@@ -17,3 +17,4 @@ $language['EDIT']            = 'সম্পাদন';
 $language['DELETE']          = 'মুছেফেলো';
 $language['NO_USERS_FOUND']  = 'কেউ নেই!';
 $language['UNKNOWN']         = 'অপরিচিত';
+?>

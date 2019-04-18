@@ -18,3 +18,4 @@ $language["EDIT"]            = "Bearbeiten";
 $language["DELETE"]          = "Löschen";
 $language["NO_USERS_FOUND"]  = "Keine Benutzer gefunden!";
 $language["UNKNOWN"]         = "Unbekannt";
+?>

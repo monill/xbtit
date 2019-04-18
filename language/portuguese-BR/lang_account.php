@@ -19,3 +19,4 @@ $language["WEEK"]="Fraco";
 $language["MEDIUM"]="Media";
 $language["SAFE"]="Segura";
 $language["STRONG"]="Forte";
+?>

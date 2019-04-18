@@ -497,3 +497,4 @@ $language["LOGS_COOLY_PATHS"]="Zalecana ścieżka:";
 $language["LOGS_COOLY_NOTE"]="<b>Jeśli zmienisz ścieżkę na inny katalog główny, pamiętaj o skopiowaniu do niego pliku .htaccess.</b>";
 $language["LOGS_COOLY_LIST"]="Lista starych logów w folderze.";
 $language["LOGS_COOLY_FLUSH"]="Wykasuj</a> stare logi";
+?>

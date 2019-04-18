@@ -25,3 +25,4 @@ $language['WELCOME_LASTUSER']=' Sitemize hoş geldiniz ';
 $language['BLOCK_MINCLASSVIEW']='Görüntüleyebilecek minimum seviye';
 $language['BLOCK_MAXCLASSVIEW']='Görüntüleyebilecek maksimum seviye';
 $language['BLOCK_TOTAL']='Toplam';
+?>

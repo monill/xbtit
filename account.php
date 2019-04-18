@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -570,3 +570,4 @@ function aggiungiutente()
 
     return (is_object($GLOBALS['conn'])) ? mysqli_errno($GLOBALS['conn']) : (($___mysqli_res = mysqli_connect_errno()) ? $___mysqli_res : false);
 }
+?>

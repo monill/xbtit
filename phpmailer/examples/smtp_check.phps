@@ -53,3 +53,4 @@ try {
 }
 //Whatever happened, close the connection.
 $smtp->quit(true);
+?>

@@ -20,3 +20,4 @@ $language["BLOCK_MAINUSERTOOLBAR"]="Главно потребителско ме
 $language["WELCOME_LASTUSER"]=" Добре дошли в нашия тракер, ";
 $language["BLOCK_MINCLASSVIEW"]="Минимален ранг";
 $language["BLOCK_MAXCLASSVIEW"]="Максимален ранг";
+?>

@@ -11,3 +11,4 @@ $language["MUST_ENTER_PASSWORD"]="<br /><font color='#FF0000'><strong>Sy&ouml;t&
 $language["ERR_PASS_WRONG"]="Salasana v&auml;&auml;rin, profiilia ei p&auml;ivitetty.";
 $language["MSG_DEL_ALL_PM"]="Vain luetut viestit voidaan poistaa";
 $language["ERR_PM_GUEST"]="Et voi l&auml;hett&auml;&auml; yksityisviesti&auml; vieraalle tai itsellesi!";
+?>

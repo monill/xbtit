@@ -18,3 +18,4 @@ $language["ERR_HASH"]="L'info hash DOIT être exactement de 40 hex octets.";
 $language["ERR_EXTERNAL_NOT_ALLOWED"]="Les torrents externes ne sont pas acceptés";
 $language["ERR_MOVING_TORR"]=" Erreur de déplacement du torrent...";
 $language["ERR_ALREADY_EXIST"]="Ce torrent existent peut-être déja.";
+?>

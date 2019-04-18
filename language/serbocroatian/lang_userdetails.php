@@ -33,3 +33,4 @@ $language["DELETE"]             = "Izbrisi";
 $language["PM"]                 = "PM";
 $language["BACK"]               = "natrag";
 $language["NO_HISTORY"]         = "Nema download istorije...";
+?>

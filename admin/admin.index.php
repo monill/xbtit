@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -224,3 +224,4 @@ switch ($do) {
         $tpl->set('main_content', set_block($language['WELCOME_ADMINCP'], 'center', $admintpl->fetch(load_template('admin.main.tpl'))));
         break;
 }
+?>

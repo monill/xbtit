@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2015  DPWS Media LTD
+// Copyright (C) 2004 - 2019  btiteam
 //
 //    This file is part of xbtit.
 //
@@ -141,3 +141,4 @@ $install_lang["ipb_err_4a"]             = "IPB English language file (<b>";
 $install_lang["ipb_err_4b"]             = "</b>) doesn't exist, cannot proceed.<br /><br />Click <a href=\"javascript: history.go(-1);\">here</a> to return to the previous page.";
 $install_lang["ipb_err_5"]             = "Unable to write to the IPB Config file (<b>";
 $install_lang["ipb_err_6"]             = "Unable to write to the Tracker Config file (<b>";
+?>

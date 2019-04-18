@@ -7,15 +7,6 @@ function popusers(url)
   if (window.focus) {newwindow.focus()}
 }
 </script>
-
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><i class="fa fa-fw fa-users"></i><tag:language.USER_CP /></h4>
-  </div>
-  <div class="panel-body">
-
-
 <table border="0" width="100%" class="lista">
   <tr>
     <td align="center" class="lista" colspan="3"><br /><tag:language.UCP_NOTE_1 /><br /><tag:language.UCP_NOTE_2 /><br /><br /></td>
@@ -108,5 +99,3 @@ function popusers(url)
   </tr>
 </if:RESULTS>
 </table>
-    </div>
-  </div>

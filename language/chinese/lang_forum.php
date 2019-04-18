@@ -35,3 +35,4 @@ $language['POST']='Post';//此处依位置而定 暂无较好的翻译
 $language['SEARCH_AGAIN']='重新搜索';
 $language['SEARCH_HELP']='请输入一个字以上的关键词以搜索主题.<br />大部分少于3个字符的关键词会被忽略.';
 $language['SEARCHED_FOR']='搜索主题';
+?>

@@ -33,3 +33,4 @@ $language["DELETE"]             = "Διαγραφή";
 $language["PM"]                 = "Προσωπικό μήνυμα";
 $language["BACK"]               = "Πίσω";
 $language["NO_HISTORY"]         = "Δεν υπάρχει ιστορικό για να προβληθεί...";
+?>

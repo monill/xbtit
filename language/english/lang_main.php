@@ -229,7 +229,7 @@ $language['MINIMUM_5_SEED']='with minimum 5 seeders';
 $language['MKTOR_INVALID_HASH']='makeTorrent: Received an invalid hash';
 $language['MNU_ADMINCP']='Admin Panel';
 $language['MNU_FORUM']='Forum';
-$language['MNU_INDEX']='Index';
+$language['MNU_INDEX']='Home';
 $language['MNU_MEMBERS']='Members';
 $language['MNU_NEWS']='News';
 $language['MNU_STATS']='Extra Stats';
@@ -497,3 +497,4 @@ $language["LOGS_COOLY_PATHS"]="Recommended:";
 $language["LOGS_COOLY_NOTE"]="<b>If u change path to another doc root dir be sure to copy the .htaccess to the new dir.</b>";
 $language["LOGS_COOLY_LIST"]="The list of old logs in your folder.";
 $language["LOGS_COOLY_FLUSH"]="Flush out</a> old logs";
+?>

@@ -33,3 +33,4 @@ $language['RATING']='Rating';
 $language['ERR_NO_VOTE']='Du skal vælge en værdi.';
 $language['VOTES']='Stemmer';
 $language['SHOW_HIDE']='Vis/Luk filer';
+?>

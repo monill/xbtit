@@ -33,3 +33,4 @@ $language["DELETE"]             = "Poista";
 $language["PM"]                 = "PM";
 $language["BACK"]               = "Takaisin";
 $language["NO_HISTORY"]         = "Ei n&auml;ytett&auml;v&auml;&auml; historiaa...";
+?>

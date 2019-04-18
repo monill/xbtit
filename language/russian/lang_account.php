@@ -19,3 +19,4 @@ $language["WEEK"]="Слабый";
 $language["MEDIUM"]="Средний";
 $language["SAFE"]="Безопасный";
 $language["STRONG"]="Строгий";
+?>

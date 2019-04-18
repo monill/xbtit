@@ -33,3 +33,4 @@ $language['POST']='Přirat příspěvek';
 $language['SEARCH_AGAIN']='Vyhledat znova';
 $language['SEARCH_HELP']='Zadejte jedno nebo více slov pro vyhledání.<br />Velmi častá slova a slova o 3 a méně znacích jsou ignorována.';
 $language['SEARCHED_FOR']='Vyhledáno pro';
+?>

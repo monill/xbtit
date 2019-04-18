@@ -469,3 +469,4 @@ $language["SECSUI_ACC_PWD_7"]="цифра";
 $language["SECSUI_ACC_PWD_7A"]="цифри";
 $language["SECSUI_ACC_PWD_8"]="символ";
 $language["SECSUI_ACC_PWD_8A"]="символа";
+?>

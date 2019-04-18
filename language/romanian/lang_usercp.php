@@ -7,3 +7,4 @@ $language['STOP_PEER']='Trebuie să-ţi opreşti clientul.';
 $language['USER_PWD_AGAIN']='Repetă parola';
 $language['EMAIL_FAILED']='Expedierea mesajului e-mail a eşuat!';
 $language['NO_SUBJECT']='Nici un subiect';
+?>

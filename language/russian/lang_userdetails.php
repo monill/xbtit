@@ -33,3 +33,4 @@ $language["DELETE"]             = "Удалить";
 $language["PM"]                 = "ЛС";
 $language["BACK"]               = "Назад";
 $language["NO_HISTORY"]         = "Нет истории для отображения...";
+?>

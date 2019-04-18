@@ -10,3 +10,4 @@ $language["NO_SUBJECT"]="Nessun soggetto";
 $language["MUST_ENTER_PASSWORD"]="<br /><font color='#FF0000'><strong>Devi inserire la tua password per cambiare i settaggi soprastanti.</strong></font>";
 $language["ERR_PASS_WRONG"]="Password vuota o errata, non posso aggiornare il profilo.";
 $language["MSG_DEL_ALL_PM"]="Se selezioni i PM che non sono letti, non verranno cancellati";
+?>

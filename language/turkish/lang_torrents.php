@@ -33,3 +33,4 @@ $language['RATING']='Değerlendirme';
 $language['ERR_NO_VOTE']='Oylama için bir değer seçmelisniz.';
 $language['VOTES']='Oy';
 $language['SHOW_HIDE']='Dosyaları Göster/Gizle';
+?>

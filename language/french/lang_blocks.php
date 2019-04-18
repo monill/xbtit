@@ -20,3 +20,4 @@ $language["BLOCK_MAINUSERTOOLBAR"]="Barre d'outils";
 $language["WELCOME_LASTUSER"]=" Bienvenue sur notre tracker ";
 $language["BLOCK_MINCLASSVIEW"]="Rang minimum qui peut être vu";
 $language["BLOCK_MAXCLASSVIEW"]="Rang maximum qui peut être vu";
+?>

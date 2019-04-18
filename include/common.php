@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -1026,3 +1026,4 @@ function sqlesc($x)
 {
     return '\''.mysqli_real_escape_string($GLOBALS['conn'], $x).'\'';
 }
+?>

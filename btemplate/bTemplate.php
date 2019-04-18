@@ -315,3 +315,4 @@ class bTemplate
         return $this->parse($contents);
     }
 }
+?>

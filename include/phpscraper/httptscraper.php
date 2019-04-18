@@ -104,3 +104,4 @@ class httptscraper extends tscraper
         return $torrents;
     }
 }
+?>

@@ -25,3 +25,4 @@ $language["ERR_MOVING_TORR"]="VIRHE torrentin siirrossa...";
 $language["ERR_ALREADY_EXIST"]="T&auml;m&auml; torrentti on jo tietokannassa.";
 $language["MSG_DOWNLOAD_PID"]="PID-j&auml;rjestelm&auml; aktiivinen, lataa torrent omalla PIDill&auml;si samaan kansioon missä jaettava tiedosto sijaitsee";
 $language["MSG_UP_SUCCESS"]="Julkaiseminen onnistunut! Torrentti lis&auml;tty.";
+?>

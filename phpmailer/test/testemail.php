@@ -45,3 +45,4 @@ try {
 } catch (phpmailerException $e) {
     echo $e->errorMessage();
 }
+?>

@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -190,3 +190,4 @@ if ($CURUSER['view_torrents'] == 'yes') {
 unset($r);
 
 write_cached_version('extra-stats'.$CURUSER['id_level'], $out);
+?>

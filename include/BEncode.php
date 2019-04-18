@@ -111,3 +111,4 @@ function BEncode($array)
 
     return $string;
 }
+?>

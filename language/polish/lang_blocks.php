@@ -24,3 +24,4 @@ $language["BLOCK_MAINUSERTOOLBAR"]="Główny pasek narzędzi użytkownika";
 $language["WELCOME_LASTUSER"]=" Witamy na naszym trackerze ";
 $language["BLOCK_MINCLASSVIEW"]="Minimalna ranga do przeglądania";
 $language["BLOCK_MAXCLASSVIEW"]="Maksymalna ranga do przeglądania";
+?>

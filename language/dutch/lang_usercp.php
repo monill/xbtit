@@ -11,3 +11,4 @@ $language["MUST_ENTER_PASSWORD"]="<br /><font color='#FF0000'><strong>U moet uw 
 $language["ERR_PASS_WRONG"]="Wachtwoord is leeg of incorrect, uw profiel kan niet worden geupdate.";
 $language["MSG_DEL_ALL_PM"]="Als u PMs selecteert die nog niet gelezen zijn, zullen ze niet verwijdert worden";
 $language["ERR_PM_GUEST"]="U kunt geen Gast een PM sturen of naar uzelf!";
+?>
