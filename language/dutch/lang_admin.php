@@ -267,3 +267,7 @@ $language["HACK_UNINSTALLED_OK"]="Hack is met succes verwijderd!<br />\nOm te zi
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="U kunt niet het Gast account of uzelf verwijderen!";
 $language["USER_NOT_EDIT"]="U kunt niet het Gast account of uzelf veranderen!";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

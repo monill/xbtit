@@ -24,3 +24,7 @@ $language['BLOCK_MAINUSERTOOLBAR']='Main User Toolbar';
 $language['WELCOME_LASTUSER']=' Welcome to our Tracker ';
 $language['BLOCK_MINCLASSVIEW']='Minimum rank that can view';
 $language['BLOCK_MAXCLASSVIEW']='Maximum rank that can view';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

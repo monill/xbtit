@@ -11,3 +11,7 @@ $language['MUST_ENTER_PASSWORD']='<br /><font color="#FF0000"><strong>Pro proved
 $language['ERR_PASS_WRONG']='Heslo nezadáno nebo je chybné, profil nelze aktualizovat.';
 $language['MSG_DEL_ALL_PM']='Jestliže vyberete zprávy (PMs), které nebyly přečteny, nebudou smazány';
 $language['ERR_PM_GUEST']='Nelze odeslat zprávu (PM) sám sobě nebo uživateli hosta!';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

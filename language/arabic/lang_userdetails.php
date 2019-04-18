@@ -34,3 +34,7 @@ $language['PM']                 = 'رخ';
 $language['BACK']               = 'الخلف';
 $language['NO_HISTORY']         = 'لا يوجد تاريخ للعرض';
 $language['GUEST_DETAILS']      = 'لا يمكنك عرض تفاصيل حساب الزائر';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

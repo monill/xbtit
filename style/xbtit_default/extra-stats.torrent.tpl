@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <table width="100%" class="" align="center">
+=======
+<table width="98%" class="lista" align="center">
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
     <tr>
       <td class="header" align="center"><tag:language.RANK /></td>
       <td class="header"><tag:language.FILE_NAME /></td>

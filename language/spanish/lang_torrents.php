@@ -33,3 +33,7 @@ $language['RATING']='Calificación';
 $language['ERR_NO_VOTE']='Debes elegir un valor a votar.';
 $language['VOTES']='Votos';
 $language['SHOW_HIDE']='Mostrar/Ocultar Archivos';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

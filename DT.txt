@@ -1,0 +1,29 @@
+13/01/2015 Started with XBTIT R 757 2.3.0
+
+Used the converted tool to change 90 % of the files to MYSQLI by Flier
+Version to 2.4.0
+Added better php error handling with acp switch ( for coders to see the errors )by DiemThuy
+File copyrights to 2015
+Added cache files protection by Petr1fied
+Security fix of torrents Folder by Lupin
+Moved captcha images to own folder by Lupin
+Fixed the 10% remaining files with new functions to work with MYSQLI by DiemThuy
+Changed install to also delete upgrade.php after install by King Cobra
+Added Int. forum sort in forum admin by DiemThuy
+Added max torrents per page in account.php by DiemThuy
+Added acces_folder to chmod info in install.php
+Added acp switch to show comments & rating in torrent list by DiemThuy
+Removed unneeded php 4 mailer folder
+Added XBTIT favicon by DJplamen
+Added last phpmailer rev
+added XBTIT image/BTITEAM link in acp
+
+
+20/04/2015 
+
+added function mysqli_result
+
+25/05/2015
+
+fixed error in installer 
+

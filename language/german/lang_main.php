@@ -427,3 +427,7 @@ $language["FIRST_UNREAD"]="Gehe zum ersten ungelesenen Beitrag";
 $language["MODULE_UNACTIVE"]="Das benötigte Modul ist nicht aktiv!";
 $language["MODULE_NOT_PRESENT"]="Das benötigte Modul ist nicht vorhanden!";
 $language["MODULE_LOAD_ERROR"]="Das benötigte Modul ist falsch!";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -11,3 +11,7 @@ $language["MUST_ENTER_PASSWORD"]="<br /><font color='#FF0000'><strong>Трябв
 $language["ERR_PASS_WRONG"]="Паролата е грешна.";
 $language["MSG_DEL_ALL_PM"]="Ако изберете съобщения, които не са прочетени, те няма да бъдат изтрити.";
 $language["ERR_PM_GUEST"]="Съжаляваме, не можете да изпращате Лични Съобщения на Гост или на себе си!";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

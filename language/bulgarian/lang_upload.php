@@ -25,3 +25,7 @@ $language["ERR_MOVING_TORR"]="Грешка при местенето на тор
 $language["ERR_ALREADY_EXIST"]="Този торент вече съществува в нашата база данни.";
 $language["MSG_DOWNLOAD_PID"]="PID системата е активна. Вземете торента от вашия PID";
 $language["MSG_UP_SUCCESS"]="Качването е успешно! Торентът е добавен.";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

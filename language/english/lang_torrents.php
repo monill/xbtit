@@ -33,3 +33,7 @@ $language['RATING']='Rating';
 $language['ERR_NO_VOTE']='You must choose a value to vote.';
 $language['VOTES']='Votes';
 $language['SHOW_HIDE']='Show/Hide Files';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

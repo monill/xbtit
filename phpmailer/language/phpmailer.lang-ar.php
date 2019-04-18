@@ -25,3 +25,7 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP Connect() غير ممكن.';
 $PHPMAILER_LANG['smtp_error']           = 'خطأ على مستوى الخادم SMTP: ';
 $PHPMAILER_LANG['variable_set']         = 'لا يمكن تعيين أو إعادة تعيين متغير: ';
 //$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

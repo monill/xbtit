@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Poll Settings</h4>
   </div>
   <div class="panel-body" align="center">
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <tag:poll_script />
 <form action="<tag:frm_action />" method="post">
   <if:show_poller>
@@ -55,8 +58,13 @@
     </tr>
     <loop:polls>
     <tr id="option<tag:polls[].key />">
+<<<<<<< HEAD
       <td class="lista" align="center"><input type="text" maxlength="255" size="50" name="existing_pollOption[<tag:polls[].key />]" value="<tag:polls[].option_0 />" /></td>
       <td class="lista" align="center"><tag:polls[].votes /><input type="hidden" id="existing_pollOrder[<tag:polls[].key />]" name="existing_pollOrder[<tag:polls[].key />]" value="<tag:polls[].option_1 />" /></td>
+=======
+      <td class="lista" align="center"><input type="text" maxlength="255" size="50" name="existing_pollOption<tag:polls[].key />" value="<tag:polls[].option_0 />" /></td>
+      <td class="lista" align="center"><tag:polls[].votes /><input type="hidden" id="existing_pollOrder<tag:polls[].key />" name="existing_pollOrder<tag:polls[].key />" value="<tag:polls[].option_1 />" /></td>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
       <td class="lista" align="center"><a href="#down" onclick="moveDown('<tag:polls[].key />');return false"><tag:language.POLL_MOVE /></a></td>
     </tr>
     </loop:polls>
@@ -110,6 +118,10 @@
   </table>
   </if:new_poll>
   </if:show_poller>
+<<<<<<< HEAD
 </form>
     </div>
   </div>
+=======
+</form>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

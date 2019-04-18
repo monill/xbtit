@@ -20,3 +20,7 @@ $language["BLOCK_MAINUSERTOOLBAR"]="Felhasználói Eszköztá";
 $language["WELCOME_LASTUSER"]="Köszöntelek az oldalon";
 $language["BLOCK_MINCLASSVIEW"]="Minimális jogosultság";
 $language["BLOCK_MAXCLASSVIEW"]="Maximális jogosultság";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

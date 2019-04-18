@@ -7,3 +7,7 @@ $language['PEER_PORT']='端口';
 $language['PEER_STATUS']='状态';
 $language['PEER_CLIENT']='客户端版本';
 $language['NO_PEERS']='无上传者...';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

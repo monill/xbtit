@@ -9,6 +9,11 @@ function update_cat(newimage)
      document.cat_image.src = "";
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 var anb=new sack();
 
 function show_wait()
@@ -39,11 +44,14 @@ function Show_News()
 
 //-->
 </script>
+<<<<<<< HEAD
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4><i class="fa fa-fw fa-users"></i>Admin Panel</h4>
     </div>
     <div class="panel-body">
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <b><tag:language.ADMINCP_NOTES /></b>
 <table border="0" class="lista" align="center" width="100%">
 <tr>
@@ -61,6 +69,7 @@ function Show_News()
        </tr>
      </table>
   </td>
+<<<<<<< HEAD
   <td valign="top" width="250">
     <table border="0" class="lista" align="center" width="100%">
            <tr><td class="block" align="center"><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -76,6 +85,10 @@ function Show_News()
                    </form>
                </td></tr>
            <tr><td class="lista" align="center">Please feel free to donate to btiteam to help ongoing support development of XBTIT</td></tr><br />
+=======
+  <td valign="top" width="250"><br />
+    <table border="0" class="lista" align="center" width="100%">
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
            <tr><td class="block" align="center"><b>Some statistic/system info:</b></td></tr>
            <tr><td class="lista"><tag:admin.lastsanity /></td></tr>
            <tr><td class="lista"><tag:admin.lastscrape /></td></tr>
@@ -90,6 +103,9 @@ function Show_News()
   </td>
   </tr>
 </table>
+<<<<<<< HEAD
  </div>
     </div>
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <script type="text/javascript">Show_News();</script>

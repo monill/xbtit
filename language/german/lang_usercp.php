@@ -11,3 +11,7 @@ $language["MUST_ENTER_PASSWORD"]="<br /><font color='#FF0000'><strong>Zum änder
 $language["ERR_PASS_WRONG"]="Falsches oder kein Passwort, kann Profil nicht ändern.";
 $language["MSG_DEL_ALL_PM"]="Ungelesene PM's werden nicht gelöscht";
 $language["ERR_PM_GUEST"]="Tschuldigung, Du kannst Dir oder einem Gast keine PM's schicken!";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -27,3 +27,7 @@ $language['ERR_MOVING_TORR']='移动种子发生错误...';
 $language['ERR_ALREADY_EXIST']='此种子可能已经存在于本站数据库.';
 $language['MSG_DOWNLOAD_PID']='PID 系统动态获取了你的种子和你的 PID';
 $language['MSG_UP_SUCCESS']='上传成功! 种子已被加入列表中.';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -24,3 +24,7 @@ $language['BLOCK_MAINUSERTOOLBAR']='Hlavní User Toolbar';
 $language['WELCOME_LASTUSER']=' Vítejte na The Trackeru ';
 $language['BLOCK_MINCLASSVIEW']='Minimumální hodnost, která může vidět';
 $language['BLOCK_MAXCLASSVIEW']='Maximální hodnost, která může vidět';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

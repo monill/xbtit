@@ -33,3 +33,7 @@ $language["RATING"]="Βαθμολογία";
 $language["ERR_NO_VOTE"]="Πρέπει να βάλεις ψήφο.";
 $language["VOTES"]="Ψήφοι";
 $language["SHOW_HIDE"]="Φανέρωσε/κρύψε αρχεία";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

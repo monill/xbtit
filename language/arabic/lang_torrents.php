@@ -33,3 +33,7 @@ $language['RATING']='تقييم';
 $language['ERR_NO_VOTE']='عليك اختيار قيمة للتصويت';
 $language['VOTES']='الاصوات';
 $language['SHOW_HIDE']='إظهار/اخفاء الملفات';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

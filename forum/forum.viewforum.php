@@ -3,7 +3,11 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
+<<<<<<< HEAD
 // Copyright (C) 2004 - 2016  Btiteam
+=======
+// Copyright (C) 2004 - 2019  Btiteam
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -220,3 +224,7 @@ $forumtpl->set('can_create', $user_can_create, true);
 unset($topics);
 unset($topicarr);
 ((mysqli_free_result($topicsres) || (is_object($topicsres) && (get_class($topicsres) == 'mysqli_result'))) ? true : false);
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

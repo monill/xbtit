@@ -33,3 +33,7 @@ $language['RATING']='Değerlendirme';
 $language['ERR_NO_VOTE']='Oylama için bir değer seçmelisniz.';
 $language['VOTES']='Oy';
 $language['SHOW_HIDE']='Dosyaları Göster/Gizle';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

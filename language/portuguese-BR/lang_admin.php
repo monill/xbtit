@@ -269,3 +269,7 @@ $language["HACK_SOLUTION"]="Solução";
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="Você não pode excluir o usuário Guest ou você mesmo!";
 $language["USER_NOT_EDIT"]="Você não pode editar o usuário Guest ou você mesmo!";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

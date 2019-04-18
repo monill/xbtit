@@ -268,3 +268,7 @@ $language["HACK_UNINSTALLED_OK"]="Hack απεγκαταστάθηκε επιτυ
 // USERS TOOLS
 $language["USER_NOT_DELETE"]="Δεν μπορείτε να διαγράψετε τον Επισκέπτη ή τον Εαυτό σας!";
 $language["USER_NOT_EDIT"]="Δεν μπορείτε να επεξεργαστείτε τον Επισκέπτη ή τον ευατό σας!";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

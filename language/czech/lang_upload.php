@@ -25,3 +25,7 @@ $language['ERR_MOVING_TORR']='Chyby přesouvání torrentu...';
 $language['ERR_ALREADY_EXIST']='Tento torrent se již nachází v databázi.';
 $language['MSG_DOWNLOAD_PID']='PID system je aktivní. Stáhněte torrent s vaším PID';
 $language['MSG_UP_SUCCESS']='Nahrání úspěšné! Torrent byl přidán.';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

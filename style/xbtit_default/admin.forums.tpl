@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Forum Settings</h4>
   </div>
   <div class="panel-body">
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <if:read>
 <table class="lista" width="100%" align="center">
   <tr>
@@ -78,6 +81,10 @@
     </tr>
   </table>
 </form>
+<<<<<<< HEAD
 </if:read>
     </div>
   </div>
+=======
+</if:read>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

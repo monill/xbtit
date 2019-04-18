@@ -23,3 +23,7 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'Verbindung zum SMTP-Server fehlgeschl
 $PHPMAILER_LANG['smtp_error']           = 'Fehler vom SMTP-Server: ';
 $PHPMAILER_LANG['variable_set']         = 'Kann Variable nicht setzen oder zurücksetzen: ';
 $PHPMAILER_LANG['extension_missing']    = 'Fehlende Erweiterung: ';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -13,11 +13,14 @@ function form_control()
    return true;
   }
 </script>
+<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Add/Edit News</h4>
   </div>
   <div class="panel-body" align="center">
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <if:ADD_EDIT>
 <div align="center">
   <form action="<tag:news.action />" name="news" method="post" onsubmit="return form_control()">
@@ -40,5 +43,8 @@ function form_control()
   </form>
 </div>
 </if:ADD_EDIT>
+<<<<<<< HEAD
     </div>
   </div>
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

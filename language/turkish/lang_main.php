@@ -504,3 +504,7 @@ $language['TORRENT_COMMENTS']="Torrent Yorumları";
 $language['TORRENT_DETAILS']="Torrent Detayları";
 $language['FORUM_SETTINGS']="Forum Ayarları";
 $language['FORUMS']='Forumlar';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

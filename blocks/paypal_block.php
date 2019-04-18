@@ -2,7 +2,11 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
+<<<<<<< HEAD
 // Copyright (C) 2004 - 2016  Btiteam
+=======
+// Copyright (C) 2004 - 2019  Btiteam
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -30,7 +34,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 block_begin('Donate');
+=======
+block_begin("Donate");
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 ?>
 <table width="100%" align="center" border="0" cellspacing="1" cellpadding="4">
 <tr>

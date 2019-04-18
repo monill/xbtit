@@ -2,7 +2,11 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
+<<<<<<< HEAD
 // Copyright (C) 2004 - 2007  DPWS Media LTD
+=======
+// Copyright (C) 2004 - 2019  btiteam
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -146,3 +150,7 @@ $install_lang["ipb_err_4a"]             = "IPB İngilizce dil dosyası (<b>";
 $install_lang["ipb_err_4b"]             = "</b>) mevcut değil, devam edilemez.<br /><br />Bir önceki sayfaya dönmek için <a href=\"javascript: history.go(-1);\">buraya</a> tıklayın.";
 $install_lang["ipb_err_5"]             = "IPB Yapılandırma dosyasına yazma başarısız (<b>";
 $install_lang["ipb_err_6"]             = "İzleyici Yapılandırma dosyasına yazma başarısız (<b>";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

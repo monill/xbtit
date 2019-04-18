@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-users"></i><tag:language.MNU_MEMBERS /></h4>
@@ -5,6 +6,9 @@
   <div class="panel-body">
 
   <div align="center">
+=======
+<div align="center">
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
   <form action="index.php" name="ricerca" method="get">
   <input type="hidden" name="page" value="users" />
     <table border="0" class="lista">
@@ -58,6 +62,10 @@
       </if:no_users>
     </table>
 </div>
+<<<<<<< HEAD
     <br />
 </div>
   </div>
+=======
+<br />
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

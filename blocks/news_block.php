@@ -1,9 +1,16 @@
 <?php
+<<<<<<< HEAD
 
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
 // Copyright (C) 2004 - 2016  Btiteam
+=======
+/////////////////////////////////////////////////////////////////////////////////////
+// xbtit - Bittorrent tracker/frontend
+//
+// Copyright (C) 2004 - 2019  Btiteam
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -31,16 +38,25 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 require_once 'include/blocks.php';
 if (!isset($CURUSER)) {
     global $CURUSER;
 }
 if (!$CURUSER || $CURUSER['view_news'] == 'no') {
     //err_msg(ERROR,NOT_AUTH_VIEW_NEWS."!");
+=======
+require_once ("include/blocks.php");
+if (!isset($CURUSER)) global $CURUSER;
+if (!$CURUSER || $CURUSER["view_news"]=="no")
+   {
+       //err_msg(ERROR,NOT_AUTH_VIEW_NEWS."!");
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
        //stdfoot();
        //exit;
        // modified 1.2
        // do nothing - the exit terminate the script, not really good
+<<<<<<< HEAD
 } else {
     global $USERLANG,$THIS_BASEPATH,$BASEURL;
     $limit = $GLOBALS['block_newslimit'];
@@ -48,3 +64,14 @@ if (!$CURUSER || $CURUSER['view_news'] == 'no') {
     require "$root_path/viewnews.php";
     echo $viewnewstpl->fetch(load_template('viewnews.tpl'));
 }
+=======
+}
+else{
+    global $USERLANG,$THIS_BASEPATH,$BASEURL;
+    $limit=$GLOBALS["block_newslimit"];
+    $root_path=realpath(dirname(__FILE__)."/../");
+    require("$root_path/viewnews.php");
+    echo $viewnewstpl->fetch(load_template("viewnews.tpl"));
+}
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

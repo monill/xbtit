@@ -34,3 +34,7 @@ $language['RATING']='Betyg';
 $language['ERR_NO_VOTE']='Du måste välja hur många stjärnor den ska få för att röst.';
 $language['VOTES']='Röster';
 $language['SHOW_HIDE']='Visa/göm filer';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -395,3 +395,7 @@ $language["STYLE_TYPE"]="Style Type";
 $language["CLA_STYLE"]="xbtit classic style system";
 $language["ATM_STYLE"]="atmoner's style system";
 $language["PET_STYLE"]="Petr1fied's style system";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

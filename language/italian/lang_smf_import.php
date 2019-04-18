@@ -36,3 +36,7 @@ $lang[30]="<center><u><strong><font size='4' face='Arial'>Stage 4: Importing the
 $lang[31]="<center>Questa è la fase finale del forum import, , questo farà da ponte al forum di XBTI a SMF,<br />e saranno importati in una nuova categoria denominata \"My BTI import\",<br />prego <a href='".$_SERVER["PHP_SELF"]."?act=import_forum&confirm=yes'>premi qui</a> per procedere</center>";
 $lang[32]="<center><u><strong><font size='4' face='Arial'>Import Completo</font></strong></u></center><br />";
 $lang[33]="<center><font face='Arial' size=2>Ti preghiamo <a target='_new' href='smf/index.php?action=login'>di accedere al tuo Forum SMF</a> usando i parametri del tuo Tracker<br />, poi vai in <strong>Administration Center</strong> e seleziona <strong>Forum Maintenance</strong> dopo esegui<br /><strong>Find and repair any errors.</strong> seguito da <strong>Recount all forum totals<br />and statistics.</strong> per riordinare l'importazione e fissare il numero dei messaggi ecc .<br /><br /><strong><font color='#0000FF'>Il tuo Forum SMF integrato è pronto all'uso!!</font></strong></font></center>";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

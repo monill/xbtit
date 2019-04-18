@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-user"></i><tag:userdetail_username /><tag:userdetail_send_pm /><tag:userdetail_edit /><tag:userdetail_delete /></h4>
@@ -11,6 +12,15 @@
    <td width="20%" class="header"></td>
 
     <td width="80%" class="lista"></td>
+=======
+<table class="lista" width="100%">
+
+  <tr>
+
+    <td width="20%" class="header"><tag:language.USERNAME /></td>
+
+    <td width="80%" class="lista"><tag:userdetail_username /><tag:userdetail_send_pm /><tag:userdetail_edit /><tag:userdetail_delete /></td>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 
     <if:userdetail_has_avatar>
 
@@ -26,9 +36,15 @@
 
   <tr>
 
+<<<<<<< HEAD
     <td width="20%" class="header"><tag:language.EMAIL /></td>
 
     <td width="80%" class="lista"><tag:userdetail_email /></td>
+=======
+    <td class="header"><tag:language.EMAIL /></td>
+
+    <td class="lista"><tag:userdetail_email /></td>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 
   </tr>
 
@@ -344,8 +360,14 @@
 
 <br />
 
+<<<<<<< HEAD
 <div style="text-align: center;"><tag:userdetail_back /></div>
 
 <br />
     </div>
   </div>
+=======
+<center><tag:userdetail_back /></center>
+
+<br />
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

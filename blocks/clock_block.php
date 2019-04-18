@@ -1,9 +1,16 @@
 <?php
+<<<<<<< HEAD
 
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
 // Copyright (C) 2004 - 2016  Btiteam
+=======
+/////////////////////////////////////////////////////////////////////////////////////
+// xbtit - Bittorrent tracker/frontend
+//
+// Copyright (C) 2004 - 2019  Btiteam
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -31,8 +38,17 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 $clocktype = $GLOBALS['clocktype'];
 require_once 'addons/clock/clock.php';
 block_begin('Clock', 1, 'center');
 clock_display($clocktype);
 block_end();
+=======
+$clocktype = $GLOBALS["clocktype"];
+require_once("addons/clock/clock.php");
+block_begin("Clock",1,"center");
+clock_display($clocktype);
+block_end();
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

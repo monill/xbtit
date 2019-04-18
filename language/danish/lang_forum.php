@@ -33,3 +33,7 @@ $language['POST']='Post';
 $language['SEARCH_AGAIN']='Søg igen';
 $language['SEARCH_HELP']='Indtast et eller flere ord der skal søges efter.<br />Almindelige ord og ord med mindre end 3 bogstaver ignoreres.';
 $language['SEARCHED_FOR']='Søgte efter';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -24,3 +24,7 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP провален connect().';
 $PHPMAILER_LANG['smtp_error']           = 'SMTP сървърна грешка: ';
 $PHPMAILER_LANG['variable_set']         = 'Не може да се установи или възстанови променлива: ';
 $PHPMAILER_LANG['extension_missing']    = 'Липсва разширение: ';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

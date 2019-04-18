@@ -2,7 +2,11 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
+<<<<<<< HEAD
 // Copyright (C) 2004 - 2015  DPWS Media LTD
+=======
+// Copyright (C) 2004 - 2019  btiteam
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 //
 //    This file is part of xbtit.
 //
@@ -145,3 +149,7 @@ $install_lang["ipb_err_4a"]             = "Angielski plik językowy IPB (<b>";
 $install_lang["ipb_err_4b"]             = "</b>) nie instnieje, nie można kontynuować.<br /><br />Kliknij <a href=\"javascript: history.go(-1);\">tutaj</a>, aby powrócić do poprzedniej strony.";
 $install_lang["ipb_err_5"]             = "Nie można zapisać do pliku konfiguracyjnego IPB(<b>";
 $install_lang["ipb_err_6"]             = "Nie można zapisać do pliku konfiguracyjnego trackera(<b>";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

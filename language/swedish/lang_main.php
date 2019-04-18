@@ -430,3 +430,7 @@ $language['MODULE_UNACTIVE'] = 'Modulen är inte aktiverad!';
 $language['MODULE_NOT_PRESENT'] = 'Modulen är inte installerad!';
 $language['MODULE_LOAD_ERROR'] = 'den modul som begärdes verkar ha ett fel i sig!';
 $language['SIGNATURE'] = 'Forum Signatur';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

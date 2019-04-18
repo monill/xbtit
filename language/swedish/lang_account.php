@@ -20,3 +20,7 @@ $language['WEEK'] = 'Svagt';
 $language['MEDIUM'] = 'Medium';
 $language['SAFE'] = 'Säkert Lösenord';
 $language['STRONG'] = 'Starkt Lösenord';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

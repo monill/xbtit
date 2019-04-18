@@ -33,3 +33,7 @@ $language["POST"]="Poste";
 $language["SEARCH_AGAIN"]="Continuer la recherche";
 $language["SEARCH_HELP"]="Saisissez un mot ou plus à rechercher.<br />Les mots de moins de 3 lettres sont ignorés.";
 $language["SEARCHED_FOR"]="Recherche sur";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

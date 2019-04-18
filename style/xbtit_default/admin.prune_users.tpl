@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Prune Users</h4>
   </div>
   <div class="panel-body" align="center">
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <if:pruned_done>
 <div align="center" style="font-size:12pt"><tag:prune_done_msg /></div>
 <else:pruned_done>
@@ -67,6 +70,10 @@
   </div>
 </form>
 </if:prune_list>
+<<<<<<< HEAD
 </if:pruned_done>
     </div>
   </div>
+=======
+</if:pruned_done>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

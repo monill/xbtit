@@ -34,3 +34,7 @@ $language['POST']='meddelande';
 $language['SEARCH_AGAIN']='sök igen';
 $language['SEARCH_HELP']='skriv in ett eller flera ord.<br />ofta använda ord med mindre en 3 tecken kommer att ignoreras.';
 $language['SEARCHED_FOR']='Sök efter';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

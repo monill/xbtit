@@ -24,3 +24,7 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP susijungimo klaida';
 $PHPMAILER_LANG['smtp_error']           = 'SMTP stoties klaida: ';
 $PHPMAILER_LANG['variable_set']         = 'Nepavyko priskirti reikšmės kintamajam: ';
 //$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -34,7 +34,11 @@
 </table>
 <br />
 </if:results>
+<<<<<<< HEAD
 <div style="text-align: center;">
+=======
+<center>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <form method="get" action="index.php" name="search">
   <input type="hidden" name="page" value="forum" />
   <input type="hidden" name="action" value="search" />
@@ -43,13 +47,21 @@
       <td class="header"><tag:language.KEYWORDS /></td>
       <td class="lista" align="left"><input type="text" size="55" name="keywords" value="<tag:search_keywords />" />
       <br />
+<<<<<<< HEAD
       <span class="small" style="font-size: smaller; "><tag:language.SEARCH_HELP /></span></td>
+=======
+      <font class="small" size="-1"><tag:language.SEARCH_HELP /></font></td>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
     </tr>
     <tr>
       <td class="lista" align="center" colspan="2"><input type="submit" value="<tag:language.SEARCH />" class="btn" /></td>
     </tr>
   </table>
 </form>
+<<<<<<< HEAD
 </div>
+=======
+</center>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <br />
 

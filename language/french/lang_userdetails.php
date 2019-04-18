@@ -33,3 +33,7 @@ $language["DELETE"]             = "Supprimer";
 $language["PM"]                 = "MP";
 $language["BACK"]               = "Retour";
 $language["NO_HISTORY"]         = "Aucun historique à afficher...";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

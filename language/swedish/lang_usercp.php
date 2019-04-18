@@ -12,3 +12,7 @@ $language['MUST_ENTER_PASSWORD'] = '<br/><font color="#FF0000"><strong>Du måste 
 $language['ERR_PASS_WRONG'] = 'Lösenord saknades eller fel uppstod. Inga ändringar genomfördes.';
 $language['MSG_DEL_ALL_PM'] = 'Om du väljer pm som inte är lästa, kommer de inte bli raderade';
 $language['ERR_PM_GUEST'] = 'Du kan inte skicka PM till dig själv!';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

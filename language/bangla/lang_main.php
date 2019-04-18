@@ -441,3 +441,7 @@ $language['ADMIN_ACCESS']='এডমিন অপশন';
 $language['STAFF_ACCESS']='সদস্যগণ';
 $language['UPLOAD_LINK']='টোরেন্ট Upload';
 # End
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

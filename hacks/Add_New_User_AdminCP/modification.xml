@@ -1,0 +1,72 @@
+<hack>
+  <title>Add New Users in AdminCP</title>
+  <author>Lupin &amp; Petr1fied</author>
+  <version>1.2 (r689)</version>
+  # add case in index
+  <file>
+    <name>"$DEFAULT_ROOT/admin/admin.index.php"</name>
+    <operation>
+      <search><![CDATA[switch ($do)
+    {]]></search>
+      <action>"add"</action>
+      <data><![CDATA[
+
+case 'newuser':
+       include("$ADMIN_PATH/admin.users.new.php");
+       $tpl->set(main_content,set_block($language[ACP_ADD_USER],"center",$admintpl->fetch(load_template("admin.users.new.tpl"))));
+       break;
+
+    case 'ipb_new_member':
+       include("$ADMIN_PATH/admin.ipb_new_member.php");
+       break;]]></data>
+      <where>"after"</where>
+    </operation>
+  </file>
+
+  # add menu in user's tool
+  <file>
+    <name>"$DEFAULT_ROOT/admin/admin.menu.php"</name>
+    <operation>
+      <search><![CDATA[3=>array(
+                    "url"=>"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=searchdiff" ,
+                    "description"=>$language["ACP_SEARCH_DIFF"])]]></search>
+      <action>"replace"</action>
+      <data><![CDATA[3=>array(
+                    "url"=>"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=searchdiff" ,
+                    "description"=>$language["ACP_SEARCH_DIFF"]),
+		     4=>array(
+                    "url"=>"index.php?page=admin&amp;user=".$CURUSER["uid"]."&amp;code=".$CURUSER["random"]."&amp;do=newuser" ,
+                    "description"=>$language["ACP_ADD_USER"])]]></data>
+    </operation>
+  </file>
+
+  
+  # language
+  <file>
+    <name>"$DEFAULT_LANGUAGE_PATH/lang_admin.php"</name>
+    <operation>
+      <search><![CDATA[?>]]></search>
+      <action>"add"</action>
+      <data><![CDATA[
+//Add New Users in AdminCP
+$language["ACP_ADD_USER"]='Add New User';
+$language["NEW_USER_EMAIL"]='Send an email to new user with password';
+$language["NEW_USER_EMAIL_TEXT"]='
+Hi %s,
+
+You\'ve just be added at %s,
+username: %s
+password: %s
+
+Hope you\'ll enjoy staying with us
+Greetings
+The Staff';
+
+]]></data>
+      <where>"before"</where>
+    </operation>
+  </file>
+
+
+ 
+</hack>

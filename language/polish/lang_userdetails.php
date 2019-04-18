@@ -19,17 +19,24 @@ $language["POSTS_PER_DAY"]      = "%s postów na dzień";
 $language["TORRENTS"]           = "torrenty";
 $language["FILE"]               = "Plik";
 $language["ADDED"]              = "Dodany";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 $language["SIZE"]               = "Rozmiar";
 $language["SHORT_S"]            = "S";
 $language["SHORT_L"]            = "L";
 $language["SHORT_C"]            = "C";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 $language["NO_TORR_UP_USER"]    = "Użytkownik nie przesłał jeszcze żadnych torrentów!";
 $language["ACTIVE_TORRENT"]     = "Aktywne torrenty";
 $language["PEER_STATUS"]        = "Status";
 $language["NO_ACTIVE_TORR"]     = "Brak aktywnych torrentów";
 $language["PEER_CLIENT"]        = "Klient";
+<<<<<<< HEAD
 
 $language["EDIT"]               = "Edytuj";
 $language["DELETE"]             = "Usuń";
@@ -41,3 +48,12 @@ $language["PM"]                 = "PM";
 $language["BACK"]               = "Wstecz";
 $language["NO_HISTORY"]         = "Brak historii do wyświetlenia...";
 $language["GUEST_DETAILS"]      = "Nie można przeglądać danych niezarejestrowanych użytkowników!";
+=======
+$language["EDIT"]               = "Edytuj";
+$language["DELETE"]             = "Usuń";
+$language["PM"]                 = "PM";
+$language["BACK"]               = "Wstecz";
+$language["NO_HISTORY"]         = "Brak historii do wyświetlenia...";
+$language["GUEST_DETAILS"]      = "Nie można przeglądać danych niezarejestrowanych użytkowników!";
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

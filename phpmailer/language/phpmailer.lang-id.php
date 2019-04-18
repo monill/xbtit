@@ -24,3 +24,7 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP Connect() gagal.';
 $PHPMAILER_LANG['smtp_error']           = 'Kesalahan peladen SMTP : ';
 $PHPMAILER_LANG['variable_set']         = 'Tidak berhasil mengatur atau mengatur ulang variable : ';
 //$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -33,3 +33,7 @@ $language["RATING"]="Рейтинг";
 $language["ERR_NO_VOTE"]="трябва да изберете рейтинг, за да гласувате.";
 $language["VOTES"]="Гласове";
 $language["SHOW_HIDE"]="Покажи/Скрий файловете";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4><i class="fa fa-fw fa-cogs"></i>Database Utilities</h4>
     </div>
     <div class="panel-body">
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <if:db_status>
 <script type="text/javascript">
 <!--
@@ -83,6 +86,10 @@
   </loop:results>
 </table>
 </if:table_result>
+<<<<<<< HEAD
 </if:db_status>
         </div>
     </div>
+=======
+</if:db_status>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

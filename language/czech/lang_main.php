@@ -497,3 +497,7 @@ $language["LOGS_COOLY_PATHS"]="Doporučené:";
 $language["LOGS_COOLY_NOTE"]="<b>Jestliže změníte cestu k jinému doc root složce, ujistět se, že jste zkopírovali .htaccess do nové složky.</b>";
 $language["LOGS_COOLY_LIST"]="Seznam starých logů ve složce.";
 $language["LOGS_COOLY_FLUSH"]="Smazat</a> staré logy";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

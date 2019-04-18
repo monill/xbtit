@@ -20,3 +20,7 @@ $language["BLOCK_MAINUSERTOOLBAR"]="	Barra de ferramentas principal usuário";
 $language["WELCOME_LASTUSER"]=" Bem-vindo ao nosso Tracker ";
 $language["BLOCK_MINCLASSVIEW"]="Rank mínimo que pode visualizar";
 $language["BLOCK_MAXCLASSVIEW"]="Rank máximo que pode visualizar";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

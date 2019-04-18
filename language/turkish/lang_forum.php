@@ -33,3 +33,7 @@ $language['POST']='Mesaj';
 $language['SEARCH_AGAIN']='Tekrar Ara';
 $language['SEARCH_HELP']='Arama yapmak için bir veya birkaç keliem girin.<br />3 karakterden az olan ve sık tekrar eden kelimeler göz ardı edilir';
 $language['SEARCHED_FOR']='Arama sonuçları:';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

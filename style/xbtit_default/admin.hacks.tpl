@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-cogs"></i>Hack Settings</h4>
   </div>
   <div class="panel-body" align="center">
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <if:ftp>
 <form name="ftp_data" action="<tag:form_action />" method="post">
 <input type="hidden" name="add_hack_folder" value="<tag:hack_folder />" />
@@ -146,6 +149,10 @@ function valid_folder(value) {
 </if:manual_install>
 
 </if:test>
+<<<<<<< HEAD
 </if:ftp>
     </div>
   </div>
+=======
+</if:ftp>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -17,3 +17,7 @@ $language["EDIT"]            = "Verander";
 $language["DELETE"]          = "Verwijder";
 $language["NO_USERS_FOUND"]  = "Geen leden gevonden!";
 $language["UNKNOWN"]         = "Onbekend";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

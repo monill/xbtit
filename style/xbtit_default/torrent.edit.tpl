@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><i class="fa fa-fw fa-files-o"></i>Edit Torrent</h4>
   </div>
   <div class="panel-body">
+=======
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 <div align="center">
   <form action="<tag:torrent.link />" method="post" name="edit">
     <table class="lista">

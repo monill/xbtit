@@ -33,3 +33,7 @@ $language["POST"]="Пост";
 $language["SEARCH_AGAIN"]="Търси отново";
 $language["SEARCH_HELP"]="Напишете една или повече думи, за да търсите.<br /> Думи с по-малко от 3 символа се игнорират.";
 $language["SEARCHED_FOR"]="Търсене за";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

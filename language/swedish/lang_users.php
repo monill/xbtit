@@ -15,3 +15,7 @@ $language['EDIT'] = 'Editera';
 $language['DELETE'] = 'Radera';
 $language['NO_USERS_FOUND'] = 'Inga användare hittades!';
 $language['UNKNOWN'] = 'Okänd';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

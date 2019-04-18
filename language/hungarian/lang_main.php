@@ -428,3 +428,7 @@ $language["FIRST_UNREAD"]="Ugrás az első olvasatlan hozzászóláshoz";
 $language["MODULE_UNACTIVE"]="A modul nem aktív!";
 $language["MODULE_NOT_PRESENT"]="Nincs ilyen modul!";
 $language["MODULE_LOAD_ERROR"]="A modul nem, vagy rosszül mükődik!";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

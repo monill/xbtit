@@ -24,3 +24,7 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP Connect() misslyckades.';
 $PHPMAILER_LANG['smtp_error']           = 'SMTP server fel: ';
 $PHPMAILER_LANG['variable_set']         = 'Kunde inte definiera eller återställa variabel: ';
 $PHPMAILER_LANG['extension_missing']    = 'Tillägg ej tillgängligt: ';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

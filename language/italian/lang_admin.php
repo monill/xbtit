@@ -294,3 +294,7 @@ $language['MHI_IT'] = 'esso';
 $language['MHI_REPLACE'] = 'Sostituire con';
 $language['MHI_COPY'] = 'Copia';
 $language['MHI_AS'] = 'come';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php
+=======
+?><?php
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
 /**
  * Norwegian PHPMailer language file: refer to English translation for definitive list
  * @package PHPMailer
@@ -23,3 +27,7 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP Connect() feilet.';
 $PHPMAILER_LANG['smtp_error']           = 'SMTP-serverfeil: ';
 $PHPMAILER_LANG['variable_set']         = 'Kan ikke sette eller resette variabelen: ';
 //$PHPMAILER_LANG['extension_missing']    = 'Extension missing: ';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

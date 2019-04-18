@@ -448,3 +448,7 @@ $language['UPLOAD_LINK']='上传种子';
 # 追加语言定义 (HACKS)
 $language["SIGNATURE"]="论坛签名";//HACK:Signature on (Internal) Forum
 # 追加结束
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

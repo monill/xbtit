@@ -41,3 +41,7 @@ $lang[35]='</body>'."\n".'</html>'."\n";
 $lang[36]='<center>لم نتمكن من الكتابة الى:<br /><br /><b>';
 $lang[37]='</b><br /><br />الرجاء التاكد من انه يمكن الكتابة على الملف ثم اعد الكرة</center>';
 $lang[38]='<center><br /><font color="red" size="4"><b>منع الوصول</b></font></center>';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

@@ -32,3 +32,7 @@ $language["BLOCK_BIRTHDAY"]="sinh nh&#7853;t h&#244;m nay";
 $language["BLOCK_NO_BIRTHDAY"]="h&#244;m nay kh&#244;ng c&#243; ai sinh nh&#7853;t";
 $language["CLIENT"]="ph&#7847;n m&#7873;m n&#234;n d&#249;ng";
 $language["BLOCK_FEATURED"]="torrent m&#7899;i";
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

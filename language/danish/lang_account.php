@@ -40,3 +40,7 @@ $language['INVITE_EMAIL_SENT3']='En email er sendt til den ønskede adresse';
 $language['INVITE_EMAIL_SENT4']='<br />Du kan nu <a href="index.php?page=login">logge ind</a>. Held og lykke og hav et godt ophold hos '.$SITENAME.'!';
 $language['INVALID_INVITATION']='Din brugte invitationskode er ugyldig.';
 $language['ERR_INVITATION']='<br />Bed om en ny invitation fra din ven.';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b

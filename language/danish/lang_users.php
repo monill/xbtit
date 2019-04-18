@@ -17,3 +17,7 @@ $language['EDIT']            = 'Rediger';
 $language['DELETE']          = 'Slet';
 $language['NO_USERS_FOUND']  = 'Ingen brugere fundet!';
 $language['UNKNOWN']         = 'Ukendt';
+<<<<<<< HEAD
+=======
+?>
+>>>>>>> 862946f1c9960b40ff7f0dacd8283178fbbbab2b
