@@ -52,7 +52,7 @@ INSERT INTO `{$db_prefix}blocks` (`blockid`, `content`, `position`, `sortid`, `s
 (10, 'toptorrents', 'c', 5, 1, 'BLOCK_TOPTORRENTS', 'no', 3, 8),
 (11, 'lasttorrents', 'c', 4, 1, 'BLOCK_LASTTORRENTS', 'no', 3, 8),
 (12, 'news', 'c', 1, 1, 'BLOCK_NEWS', 'no', 1, 8),
-(13, 'mainmenu', 'e', 1, 1, 'BLOCK_MENU', 'no', 1, 8),
+(13, 'mainmenu', 't', 1, 1, 'BLOCK_MENU', 'no', 1, 8),
 (14, 'maintrackertoolbar', 't', 2, 1, 'BLOCK_MAINTRACKERTOOLBAR', 'no', 3, 8),
 (15, 'mainusertoolbar', 't', 2, 1, 'BLOCK_MAINUSERTOOLBAR', 'no', 1, 8),
 (16, 'serverload', 'c', 8, 0, 'BLOCK_SERVERLOAD', 'no', 8, 8),
