@@ -66,12 +66,12 @@ if (!empty($_SESSION['CURUSER']['language_path'])) {
 $btit_url_last = '';
 $btit_url_rss = '';
 
-if (get_remote_file('http://www.btiteam.org')) {
-    $btit_url_rss = 'http://www.btiteam.org/smf/index.php?type=rss;action=.xml;board=83;sa=news';
-    $btit_url_last = 'http://www.btiteam.org/last_version.txt';
+if (get_remote_file('http://www.btiteam.eu')) {
+    $btit_url_rss = 'http://www.btiteam.eu/index.php?type=rss;action=.xml;board=83;sa=news';
+    $btit_url_last = 'http://www.btiteam.eu/last_version.txt';
 }
 
-// check last version on btiteam.org site
+// check last version on btiteam.eu site
 if ($btit_url_last != '') {
     $btit_last = get_remote_file($btit_url_last);
     if (!$btit_last) {
@@ -90,7 +90,7 @@ $your_version = '';
 if ((implode(' ', $current_version) != implode(' ', $last_version))) {
     $your_version .= '<table width="100%"><tr><td align="left">Installed version:</td><td align="left">'.implode(' ', $current_version)."</td></tr>\n";
     $your_version .= '<tr><td align="left">Current version:</td><td align="left">'.implode(' ', $last_version)."</td></tr>\n";
-    $your_version .= "<tr><td colspan=\"2\" align=\"center\">Get Latest Release <a href=\"http://www.btiteam.org\" target=\"_blank\">here</a>!</td></tr>\n</table>";
+    $your_version .= "<tr><td colspan=\"2\" align=\"center\">Get Latest Release <a href=\"http://www.btiteam.eu\" target=\"_blank\">here</a>!</td></tr>\n</table>";
 } else {
     $your_version .= "You have the latest xBtit version installed.($tracker_version)";
 }
