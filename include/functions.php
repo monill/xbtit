@@ -1226,7 +1226,8 @@ function format_comment($text, $strip_html = true)
 
     $smilies = array_merge($smilies, $privatesmilies);
     reset($smilies);
-    while (list($code, $url) = each($smilies)) {
+
+    foreach ($smilies as $code => $url) {
         $text = str_replace($code, '<img border="0" src="'.$BASEURL.'/images/smilies/'.$url.'" alt="'.$url.'" />', $text);
     }
 
