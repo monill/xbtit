@@ -8,7 +8,7 @@
 class bTemplate
 {
     // Configuration variables
-    public $base_path = '';
+    public $base_path  = '';
     public $reset_vars = true;
 
     // Delimeters for regular tags
@@ -23,11 +23,11 @@ class bTemplate
     public $EAldelim = '</';
     public $EArdelim = '>';
 
-    // Internal variables
-    public $scalars = [];
-    public $arrays  = [];
-    public $carrays = [];
-    public $ifs     = [];
+	// Internal variables
+	var $scalars = array();
+	var $arrays  = array();
+	var $carrays = array();
+	var $ifs     = array();
 
     /*--------------------------------------------------------------*\
         Method: bTemplate()
@@ -77,21 +77,23 @@ class bTemplate
         Method: reset_vars()
         Resets the template variables.
     \*--------------------------------------------------------------*/
-    public function reset_vars($scalars, $arrays, $carrays, $ifs)
-    {
-        if ($scalars) {
-            $this->scalars = [];
+	function reset_vars($scalars, $arrays, $carrays, $ifs) {
+		if ($scalars) {
+            $this->scalars = array();
         }
-        if ($arrays) {
-            $this->arrays  = [];
+
+		if ($arrays) {
+            $this->arrays = array();
         }
-        if ($carrays) {
-            $this->carrays = [];
+
+		if ($carrays) {
+            $this->carrays = array();
         }
-        if ($ifs) {
-            $this->ifs     = [];
+
+		if ($ifs) {
+            $this->ifs = array();
         }
-    }
+	}
 
     /*--------------------------------------------------------------*\
         Method: get_tags()
@@ -255,7 +257,7 @@ class bTemplate
 
         // Set up the cases
         $array['cases'][] = 'default';
-        $case_content = [];
+        $case_content = array();
         $parsed = null;
 
         // Get the case strings
