@@ -44,13 +44,13 @@ class ocr_captcha
 
     public function __construct($long = 6, $lx = 120, $ly = 30, $nb_noise = 25)
     {
-        $this->key = md5('A nice little private text used to generate private keys.');
+        $this->key = md5('rujK9TLFsmypTj4gMqB9SYeVkcgsUAYb'); #Random 32 chars string
         $this->long = $long;
         $this->lx = $lx;
         $this->ly = $ly;
         $this->nb_noise = $nb_noise;
         // generate public key with entropy
-        $this->public_key = substr(md5(uniqid(rand(), true)), 0, $this->long);
+        $this->public_key = substr(md5(uniqid(mt_rand(), true)), 0, $this->long);
     }
 
     public function get_filename($public = '')
@@ -89,38 +89,38 @@ class ocr_captcha
     {
         $private_key = $this->generate_private();
         $image = imagecreatetruecolor($this->lx, $this->ly);
-        $back = imagecolorallocate($image, rand(224, 255), rand(224, 255), rand(224, 255));
+        $back = imagecolorallocate($image, mt_rand(224, 255), mt_rand(224, 255), mt_rand(224, 255));
         imagefilledrectangle($image, 0, 0, $this->lx, $this->ly, $back);
         if ($noise) { // rand characters in background with random position, angle, color
             for ($i = 0; $i < $this->nb_noise; $i++) {
-                $size = rand(6, 14);
-                $angle = rand(0, 360);
-                $x = rand(10, $this->lx - 10);
-                $y = rand(0, $this->ly - 5);
-                $color = imagecolorallocate($image, rand(160, 224), rand(160, 224), rand(160, 224));
-                $text = chr(rand(45, 127));
+                $size = mt_rand(6, 14);
+                $angle = mt_rand(0, 360);
+                $x = mt_rand(10, $this->lx - 10);
+                $y = mt_rand(0, $this->ly - 5);
+                $color = imagecolorallocate($image, mt_rand(160, 224), mt_rand(160, 224), mt_rand(160, 224));
+                $text = chr(mt_rand(45, 127));
                 imagettftext($image, $size, $angle, $x, $y, $color, $this->font_file, $text);
             }
         } else {
             // random grid color
             for ($i = 0; $i < $this->lx; $i += 10) {
-                $color = imagecolorallocate($image, rand(160, 224), rand(160, 224), rand(160, 224));
+                $color = imagecolorallocate($image, mt_rand(160, 224), mt_rand(160, 224), mt_rand(160, 224));
                 imageline($image, $i, 0, $i, $this->ly, $color);
             }
             for ($i = 0; $i < $this->ly; $i += 10) {
-                $color = imagecolorallocate($image, ((int) rand(160, 224)), ((int) rand(160, 224)), ((int) rand(160, 224)));
+                $color = imagecolorallocate($image, ((int) mt_rand(160, 224)), ((int) mt_rand(160, 224)), ((int) mt_rand(160, 224)));
                 imageline($image, 0, $i, $this->lx, $i, $color);
             }
         }
         // private text to read
         for ($i = 0,$x = 5; $i < $this->long; $i++) {
-            $r = rand(0, 128);
-            $g = rand(0, 128);
-            $b = rand(0, 128);
+            $r = mt_rand(0, 128);
+            $g = mt_rand(0, 128);
+            $b = mt_rand(0, 128);
             $color = imagecolorallocate($image, $r, $g, $b);
             $shadow = imagecolorallocate($image, $r + 128, $g + 128, $b + 128);
-            $size = rand(12, 17);
-            $angle = rand(-30, 30);
+            $size = mt_rand(12, 17);
+            $angle = mt_rand(-30, 30);
             $text = strtoupper(substr($private_key, $i, 1));
             imagettftext($image, $size, $angle, $x + 2, 26, $shadow, $this->font_file, $text);
             imagettftext($image, $size, $angle, $x, 24, $color, $this->font_file, $text);
