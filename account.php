@@ -338,7 +338,7 @@ function tabella($action, $dati = [])
                 $private = $p->generate_private();
             } else {
                 include "$THIS_BASEPATH/include/security_code.php";
-                $scode_index = rand(0, count($security_code) - 1);
+                $scode_index = mt_rand(0, count($security_code) - 1);
                 $scode = "<input type=\"hidden\" name=\"security_index\" value=\"$scode_index\" />\n";
                 $scode .= $security_code[$scode_index]['question'];
                 $tpl_account->set('scode_question', $scode);
@@ -346,7 +346,7 @@ function tabella($action, $dati = [])
             }
         } else {
             include "$THIS_BASEPATH/include/security_code.php";
-            $scode_index = rand(0, count($security_code) - 1);
+            $scode_index = mt_rand(0, count($security_code) - 1);
             $scode = "<input type=\"hidden\" name=\"security_index\" value=\"$scode_index\" />\n";
             $scode .= $security_code[$scode_index]['question'];
             $tpl_account->set('scode_question', $scode);
@@ -354,7 +354,7 @@ function tabella($action, $dati = [])
         }
     } elseif ($action != 'mod') {
         include "$THIS_BASEPATH/include/security_code.php";
-        $scode_index = rand(0, count($security_code) - 1);
+        $scode_index = mt_rand(0, count($security_code) - 1);
         $scode = "<input type=\"hidden\" name=\"security_index\" value=\"$scode_index\" />\n";
         $scode .= $security_code[$scode_index]['question'];
         $tpl_account->set('scode_question', $scode);
