@@ -62,13 +62,16 @@ function smile() {
   global $smilies, $count;
   reset($smilies);
 
-  while ((list($code, $url) = each($smilies)) && $count<16) {
+  $count = 0;
+  foreach ($smilies as $code => $url) {
         print("\n<td><a href=\"javascript: SmileIT('".str_replace("'","\'",$code)."')\">
                <img border=\"0\" src=\"images/smilies/$url\" alt=\"$code\" /></a></td>");
+
+        if (++$count == 16)
+            break;
                
-        $count++;
+       // $count++;
   }
-  
   print "</tr></table></div>";
 
 }
