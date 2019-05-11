@@ -30,6 +30,7 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 ////////////////////////////////////////////////////////////////////////////////////
+if(!@rename ("install.lock", "install.unlock"))
 $dbfile = 'database.sql';
 // declaration of variables
 $INSTALLPATH = dirname(__FILE__);
