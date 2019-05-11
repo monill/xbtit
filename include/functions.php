@@ -497,10 +497,14 @@ function userlogin()
 
     $ip = getip(); //$_SERVER["REMOTE_ADDR"];
     $nip = ip2long($ip);
-    $res = get_result("SELECT * FROM {$TABLE_PREFIX}bannedip WHERE INET_ATON('".$ip."') >= first AND INET_ATON('".$ip."') <= last LIMIT 1;", true, $btit_settings['cache_duration']);
-    if (count($res) > 0) {
+    $res = do_sqlquery("SELECT comment FROM {$TABLE_PREFIX}bannedip WHERE INET_ATON('".$ip."') >= first AND INET_ATON('".$ip."') <= last LIMIT 1;", true, $btit_settings['cache_duration']);
+    if (mysqli_num_rows($res) > 0) {
+        $comment = mysqli_fetch_row($res);
+        $ban_reason = htmlspecialchars($comment[0]);
+
         header('HTTP/1.0 403 Forbidden'); ?>
-        <html><body><h1>403 Forbidden</h1>Unauthorized IP address.</body></html>
+        <html><body><h1>403 Forbidden</h1>Unauthorized IP address.</h1>
+        <p>Reason: <b><?php echo $ban_reason; ?></b></p></body></html>
         <?php
         die();
     }
@@ -1449,9 +1453,12 @@ function textbbcode($form, $name, $content = '')
     $count = 0;
     reset($smilies);
     $tbbcode .= '<tr>';
-    while ((list($code, $url) = each($smilies)) && $count < 16) {
+    foreach ($smilies as $code => $url) {
         $tbbcode .= "\n<td><a href=\"javascript: SmileIT('".str_replace("'", "\'", $code)."',document.forms.$form.$name);\"><img border=\"0\" src=\"images/smilies/$url\" alt=\"$url\" /></a></td>";
-        $count++;
+
+        if (++$count == 16)
+            break;
+        #$count++;
     }
     $tbbcode .= "\n</tr>\n</table>";
     $tpl_bbcode->set('smilies_table', $tbbcode);
