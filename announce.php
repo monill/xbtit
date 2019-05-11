@@ -138,7 +138,8 @@ if (get_magic_quotes_gpc()) {
     $peer_id = bin2hex($_GET['peer_id']);
 }
 
-$iscompact = (isset($_GET['compact']) ? $_GET['compact'] == '1' : false);
+$sp_compact = isset($_GET['compact']) ? true : false;
+$iscompact = $sp_compact ? (bool)(0 + $_GET['compact'] == '1') : false;
 
 // controll if client can handle gzip
 if ($GZIP_ENABLED) {
@@ -162,7 +163,7 @@ header('Pragma: no-cache');
 $agent = mysqli_real_escape_string($GLOBALS['conn'], $_SERVER['HTTP_USER_AGENT']);
 // Deny access made with a browser...
 
-if (preg_match('/^Mozilla|^Opera|^Links|^Lynx/i', $agent)) {
+if (stripos($agent, 'Mozilla') !== false || stripos($agent, 'Opera') !== false || stripos($agent, 'Links') !== false || stripos($agent, 'Lynx') !== false || stripos($agent, 'Wget') !== false || strpos($peer_id, 'OP') === 0) {
     header('HTTP/1.0 500 Bad Request');
     die("This a a bittorrent application and can't be loaded into a browser");
 }
@@ -172,7 +173,7 @@ if (!isset($_GET['port']) || !isset($_GET['downloaded']) || !isset($_GET['upload
     show_error('Invalid information received from BitTorrent client');
 }
 
-$port = $_GET['port'];
+$port = isset($_GET['port']) ? 0 + (int)$_GET['port'] : 0;
 $ip = getip();
 
 // IP Banned ??
