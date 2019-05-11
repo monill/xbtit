@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 // xbtit - Bittorrent tracker/frontend
 //
-// Copyright (C) 2004 - 2016  Btiteam
+// Copyright (C) 2004 - 2019  Btiteam
 //
 //    This file is part of xbtit.
 //
@@ -30,7 +30,6 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 ////////////////////////////////////////////////////////////////////////////////////
-if(!@rename ("install.lock", "install.unlock"))
 $dbfile = 'database.sql';
 // declaration of variables
 $INSTALLPATH = dirname(__FILE__);
