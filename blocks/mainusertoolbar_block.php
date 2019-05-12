@@ -114,8 +114,12 @@ print("</select></td>");
 }
 else
 {
-    session_name("xbtit");
-    session_start();
+    session_id("xbtit");
+
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+
     $_SESSION=array();
     setcookie("xbtit", "", time()-3600, "/");
     session_destroy();
