@@ -260,7 +260,7 @@ function check_online($session_id, $location)
 {
     global $TABLE_PREFIX, $CURUSER;
 
-    session_name('xbtit');
+    session_id('xbtit');
 
     $overOneMinute = (((isset($_SESSION['ONLINE_EXPIRE']) && time() > $_SESSION['ONLINE_EXPIRE']) || !isset($_SESSION['ONLINE_EXPIRE'])) ? true : false);
     $locationHasChanged = (((isset($_SESSION['ONLINE_LOCATION']) && $_SESSION['ONLINE_LOCATION'] != $location) || !isset($_SESSION['ONLINE_LOCATION'])) ? true : false);
@@ -493,7 +493,7 @@ function userlogin()
 
     unset($GLOBALS['CURUSER']);
 
-    session_name('xbtit');
+    session_id('xbtit');
 
     $ip = getip(); //$_SERVER["REMOTE_ADDR"];
     $nip = ip2long($ip);
