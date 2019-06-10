@@ -69,7 +69,7 @@ $pm = true;
 $ratio = 0;
 $pick = 0;
 $msg = '';
-$l_users = '';
+$l_users=array();
 $flevel = 0;
 $tlevel = 0;
 // Actual Code Start
